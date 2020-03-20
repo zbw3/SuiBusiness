@@ -146,19 +146,3 @@ if __name__ == '__main__':
     print(str2hump('wd_hit_714', big_hump=False))
     print(str2hump('wd_hit_714', big_hump=True))
     print(check_real('莫载斌', '斌--莫'))
-
-    # def assert_n(number, d, pre):
-    #     print('%s --> %s' % (number, round5up(number, d)))
-    #     assert round5up(number, d) == pre
-    #
-    #
-    # assert_n(2.135, 2, 2.14)
-    # assert_n(2.625, 2, 2.63)
-    # assert_n(2.625, 6, 2.625)
-    # assert_n(-0.235, 2, -0.24)
-    # assert_n(2.699, 2, 2.7)
-    # assert_n(2.02499, 2, 2.02)
-    # assert_n(2.42599, 0, 2)
-    # assert_n(2.99599, 0, 3)
-    # assert_n(2.60599, 0, 3)
-    # assert_n(666, 2, 666)

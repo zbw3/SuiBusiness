@@ -4,6 +4,8 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/12/23 16:51
+
+import os
 import json
 from collections import namedtuple
 from json import JSONDecodeError
@@ -21,6 +23,11 @@ class ApiBase(Logger):
 
     def __init__(self, print_results=True):
         self.print_results = print_results
+        self.env = None
+        try:
+            self.env = os.environ["env"]
+        except KeyError:
+            self.env = "test"
 
     @staticmethod
     def _print(data):
@@ -38,12 +45,12 @@ class ApiBase(Logger):
         """
         :return: requests.response object but with data property
         """
-        self.logger.debug('请求方法：%s', method)
-        self.logger.debug('请求参数：%s', kwargs.get('params') or kwargs.get('data') or kwargs.get('json'))
+        self.logger.info('请求方法：%s', method)
+        self.logger.info('请求参数：%s', kwargs.get('params') or kwargs.get('data') or kwargs.get('json'))
         response = requests.request(method, url, **kwargs)
-        self.logger.debug('请求 URL：%s', response.request.url)
-        self.logger.debug('HTTP状态码：%s', response.status_code)
-        self.logger.debug('请求消耗时间：%s s', response.elapsed.total_seconds())
+        self.logger.info('请求 URL：%s', response.request.url)
+        self.logger.info('HTTP状态码：%s', response.status_code)
+        self.logger.info('请求消耗时间：%s s', response.elapsed.total_seconds())
         try:
             data = response.json()
         except JSONDecodeError:

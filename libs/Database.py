@@ -129,6 +129,31 @@ class DBdsjmessage0(DBConnect):
     PASSWD = '#2H0dbb_25607ee57d6df37be3eH'
 
 
+class TokenRedis:
+
+    def __init__(self):
+        self.pool = redis.ConnectionPool(host='172.22.23.112', port=6379, db=1, password="")
+        self.r = redis.Redis(connection_pool=self.pool)
+
+    def set_redis_token(self, token_name="", new_token=""):
+        try:
+            if new_token != "":
+                self.r.set(token_name, new_token, 36000)
+        except Exception as e:
+            print(e)
+
+    def get_redis_token(self, token_name=""):
+        token = None
+        try:
+            result = self.r.get(token_name)
+            if isinstance(result, bytes):
+                token = result.decode("utf8")
+                print(f"redis中获取{token_name}: {token}")
+        except Exception as e:
+            print(e)
+        return token
+
+
 def test_redis(db_number):
     """测试环境redis"""
     return redis.Redis(host='10.201.3.18', port=6379, password='kntest%pw_@dk2', db=int(db_number),
@@ -174,8 +199,11 @@ def test_maimai():
 
 
 if __name__ == '__main__':
-    conn = DBkn0(Name.socialsecurity).conn  # 获取Connect连接对象
-    db = DBkn0(Name.socialsecurity).db
+    # conn = DBkn0(Name.socialsecurity).conn  # 获取Connect连接对象
+    # db = DBkn0(Name.socialsecurity).db
     # results = db.fetchall("SELECT * FROM social_security_account limit 2", print_affected=True)
     # print(results)
 
+    token_redis = TokenRedis()
+    token_redis.set_redis_token(token_name="cesh", new_token="h")
+    print(token_redis.get_redis_token(token_name="cesh"))

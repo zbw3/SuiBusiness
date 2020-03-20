@@ -31,3 +31,4 @@ class Logger:
 class Project:
     # 项目根目录
     path = os.path.abspath(os.path.dirname(__file__) + '/..')
+
