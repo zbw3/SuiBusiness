@@ -21,6 +21,10 @@
 项目分 `master` 和 `develop` 分支，平时我们在 `develop` 编写、修改自己的脚本，
 当一个需求发版，且测试用例稳定后再合并到 `master` 分支，作为常规用例维护
 
+### 随手记生意场景业务线
+
+- 零售 | Store
+- 零售web | StoreWeb | store_web
 
 
 
