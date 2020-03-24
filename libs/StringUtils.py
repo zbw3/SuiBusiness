@@ -24,7 +24,7 @@ def str2hump(string, big_hump=True):
 
 
 def phone_format(_phone: str):
-    """运营商手机号格式化清洗"""
+    """运营商手机号格式化清洗，按开发的逻辑写"""
     phone = _phone.replace("-", "").replace(" ", "").replace("+", "")
     if phone.startswith('0086'):
         phone = phone.replace("0086", "", 1)

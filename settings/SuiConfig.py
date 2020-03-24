@@ -5,7 +5,6 @@
 # @Date : 2020/3/19
 # @Desc :
 
-
 class SuiConfig:
     HEADERS = {
         "Client-Key": "C18191004B04494491C24EA8551C9D42",
@@ -14,11 +13,6 @@ class SuiConfig:
         "Device": "{'platform': 'Android', 'device_id': 'deviceId-358022020240216', 'model': 'SM-N9005', 'product_version': '10.6.1.5', 'locale': 'zh_CN', 'product_name': 'MyMoney For Feidee', 'os_version': '4.4.2'}",
         "Minor-Version": "1",
         "User-Agent": "MyMoney/10.6.1.5 (samsung/SM-N9005; Android/4.4.2; feidee)",
-        "Cache-Control": "no-cache, max-age=43200",
-        "Host": "bizbook.feidee.cn",
-        "Connection": "Keep-Alive",
-        "Accept-Encoding": "gzip",
-        "Authorization": "Bearer ee5977fe-e856-4a75-ada0-35f3dbd078b4"
     }
 
     PASSWORD = {

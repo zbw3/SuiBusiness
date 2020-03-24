@@ -129,6 +129,18 @@ class DBdsjmessage0(DBConnect):
     PASSWD = '#2H0dbb_25607ee57d6df37be3eH'
 
 
+class Redis(redis.Redis):
+    def __init__(self, host='172.22.23.112', port=6379, db=0, password=None, decode_responses=True, **kwargs):
+        """Redis 构造方法会自动添加连接池"""
+        super().__init__(host=host, port=port, db=db, password=password, decode_responses=decode_responses, **kwargs)
+
+    def set_token(self, username, token, expire=36000):
+        return self.set(f'token:{username}', token, ex=expire)
+
+    def get_token(self, username):
+        return self.get(f'token:{username}')
+
+
 class TokenRedis:
 
     def __init__(self):

@@ -1,4 +1,10 @@
-from peewee import *
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @File   : StoreWeb.py
+# @Author : mocobk
+# @Email  : mailmzb@qq.com
+# @Time   : 2020/3/24 12:17
+
 from playhouse.shortcuts import model_to_dict
 
 database = MySQLDatabase('test_money_3_business',

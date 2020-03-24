@@ -3,6 +3,11 @@
 # auth  : mocobk
 # email : mailmzb@qq.com
 # time  : '2018/8/8 11:04'
+"""
+因 pycrypto 库不再更新，更换为 pycryptodome 库
+key iv都必须传byte类型字符串
+"""
+
 import base64
 import json
 import string
@@ -11,11 +16,6 @@ from binascii import b2a_hex, a2b_hex
 from Crypto.Cipher import AES
 from Crypto.Cipher import Blowfish
 from Crypto.Random.random import sample
-
-"""
-因 pycrypto 库不再更新，更换为 pycryptodome 库
-key iv都必须传byte类型字符串
-"""
 
 
 class Crypto:
@@ -381,7 +381,6 @@ if __name__ == '__main__':
     # print(C.yys_aes_hex_encrypt('13580000000'))
     # print(C.yys_aes_decrypt('SsgSAAH7xNlcXVRLWB4PHw=='))
 
-
     # # web h5 解密
     # print(C.web_h5_decrypt("2zLyZeIzq1djhRgXowus+A=="))
     #
@@ -409,8 +408,3 @@ if __name__ == '__main__':
     #
     # print(C.kn_aes_hex_decrypt('04bd441588b7d27a632702179623e49fb53035347ee21df4680a7ece2faf87a792159b4e5c5808d6744c42ab81e24bc1'))
     #
-
-
-
-
-

@@ -15,7 +15,7 @@ class LoginApi(ApiBase):
 
     def __init__(self, *args, **kwargs):
         super(LoginApi, self).__init__(*args, **kwargs)
-        self.base_url = SuiConfig.SYSTEM_ARGS[self.env]["login_url"]
+        self.base_url = SuiConfig.SYSTEM_ARGS[self.env.value]["login_url"]
         self.headers = SuiConfig.HEADERS
         self.headers["Host"] = self.base_url.split("//")[-1].split("/")[0]
 
@@ -34,7 +34,6 @@ class LoginApi(ApiBase):
                     "password": SuiConfig.PASSWORD[password]
                 }
                 response = self.request(url=url, method=method, params=params, headers=self.headers)
-
                 if response is not None and response.status_code == 200:
                     token = response.data["access_token"]
                     TokenRedis().set_redis_token(f"{username}_token", new_token=token)

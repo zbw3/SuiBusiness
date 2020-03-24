@@ -19,6 +19,7 @@ ilogger = "*"
 redis = "*"
 parameterized = "*"
 testfilter = "*"
+ddt = "*"
 
 [dev-packages]
 

@@ -16,7 +16,7 @@ class V1StoreApi(LoginApi):
 
     def __init__(self, trading_entity="3604098", username="", password="", *args, **kwargs):
         super(V1StoreApi, self).__init__(*args, **kwargs)
-        self.base_url = SuiConfig.SYSTEM_ARGS[self.env]["business_base_url"]
+        self.base_url = SuiConfig.SYSTEM_ARGS[self.env.value]["business_base_url"]
         self.headers = SuiConfig.HEADERS
         self.headers["Host"] = self.base_url.split("//")[-1].split("/")[0]
         token = self.login(username=username, password=password)
