@@ -31,4 +31,4 @@ class Project:
 
 
 # Api 默认日志级别
-API_LOGGER_LEVEL = Logger.INFO
+API_LOGGER_LEVEL = Logger.DEBUG

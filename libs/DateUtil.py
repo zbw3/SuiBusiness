@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @File   : DateTime.py
+# @File   : DateUtil.py
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/3/25 19:42
@@ -11,7 +11,7 @@ from dateutil.parser import parse
 
 def str2timestamp(timestr: str):
     """
-    :param timestr: 任意的时间格式
+    :param timestr: 任意的时间格式 eg 2020-3-4  2020.3.4 12:00
     :return: 秒时间戳
     """
     return round(parse(timestr).timestamp())
@@ -19,7 +19,7 @@ def str2timestamp(timestr: str):
 
 def str2timestamp_ms(timestr: str):
     """
-    :param timestr: 任意的时间格式
+    :param timestr: 任意的时间格式 eg 2020-3-4  2020.3.4 12:00
     :return: 毫秒时间戳
     """
     return str2timestamp(timestr) * 1000

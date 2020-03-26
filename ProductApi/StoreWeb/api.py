@@ -11,13 +11,13 @@ from ProductApi.base import ApiBase
 
 class StoreWebApi(ApiBase):
 
-    def __init__(self, username, password, trading_entity="3604098"):
+    def __init__(self, username, password, trading_entity="3604098", print_results=False):
         """
         :param username: 用户名
         :param password: 密码
         :param trading_entity: 账本 ID
         """
-        super().__init__()
+        super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
         self.headers = Sui(username, password).authorized_hearders()
         self.headers["Trading-Entity"] = trading_entity
@@ -47,6 +47,6 @@ class StoreWebApi(ApiBase):
 
 
 if __name__ == '__main__':
-    api = StoreWebApi(username="119@kd.ssj", password="123456")
-    print(api.v1_store_products_categorys_get().data)
-    print(api.v1_store_products_categorys_post({'name': ''}).data)
+    api = StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
+    res1 = api.v1_store_products_categorys_get().data
+    res2 = api.v1_store_products_categorys_post({'name': ''}).data
