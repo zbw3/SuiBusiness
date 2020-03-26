@@ -54,7 +54,21 @@
 
 
 
+### 域名：
+（1）生意账本域名：
 
+    测试环境：bizbook.feidee.cn
+    生产环境：bizbook.feidee.net
+    
+（2）收单模块域名：
+
+    测试环境：acquiring.test.sui.internal
+    生产环境：acquiring.produce.sui.internal
+
+（3）对外收款设备API域名：
+
+    测试环境：bizapi.feidee.cn
+    生产环境：bizapi.feidee.com
 
 
 

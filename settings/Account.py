@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @File   : account.py
+# @File   : Account.py
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
-# @Time   : 2020/3/25 19:34
+# @Time   : 2020/3/26 15:14
+
 """随手记账号信息"""
 from collections import namedtuple
 
