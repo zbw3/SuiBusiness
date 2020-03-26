@@ -1,23 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @File   : network_operator.py
+# @File   : api.py
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/1/22 9:53
 from ProductApi.StoreWeb import config
 from ProductApi.Sui.api import Sui
 from ProductApi.base import ApiBase
-from settings.BaseConfig import SuiConfig
 
 
 class StoreWebApi(ApiBase):
 
     def __init__(self, username, password, trading_entity="3604098"):
+        """
+        :param username: 用户名
+        :param password: 密码
+        :param trading_entity: 账本 ID
+        """
         super().__init__()
         self.config: config.Test = getattr(config, self.env.name)
-        self.sui = Sui(username, password)
-        self.headers = SuiConfig.HEADERS
-        self.headers["Authorization"] = f"Bearer {self.sui.token}"
+        self.headers = Sui(username, password).authorized_hearders()
         self.headers["Trading-Entity"] = trading_entity
 
     def v1_store_products_categorys_get(self):

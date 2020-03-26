@@ -36,7 +36,7 @@ class Sui(ApiBase):
         }
         url = self.config.Url.v2_oauth2_authorize
         response = self.request(url=url, method='GET', params=params, headers=headers)
-        return response.json()
+        return response.data
 
     def get_token(self, update_token=False):
         redis = Redis()
@@ -44,14 +44,20 @@ class Sui(ApiBase):
         if not token or update_token:
             self.logger.info('更新 token 中...')
             token = self.login().get('access_token')
-            redis.set_token(self.username, token, expire=36000)
+            redis.set_token(self.username, token, expire=3 * 24 * 3600)
             return token
         return token
+
+    def authorized_hearders(self):
+        """已加入鉴权信息的请求头  'token_type': 'Bearer'"""
+        headers = SuiConfig.HEADERS
+        headers["Authorization"] = f"Bearer {self.token}"
+        return headers
 
 
 if __name__ == "__main__":
     sui = Sui(username="119@kd.ssj", password="123456")
     login_res = sui.login()
-    _token = sui.get_token()
+    _token = sui.get_token(True)
     print(login_res)
     print(_token)
