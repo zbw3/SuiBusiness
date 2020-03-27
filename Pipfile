@@ -21,6 +21,7 @@ parameterized = "*"
 testfilter = "*"
 ddt = "*"
 python-dateutil = "*"
+pytest = "*"
 
 [dev-packages]
 

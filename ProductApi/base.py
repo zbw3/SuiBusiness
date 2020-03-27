@@ -13,13 +13,7 @@ from json import JSONDecodeError
 import requests
 from requests import Response as _Response
 
-from settings.BaseConfig import Logger, API_LOGGER_LEVEL
-
-
-class Env(Enum):
-    Test = 'test'
-    Uat = 'uat'
-    Production = 'production'
+from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env
 
 
 class Response(_Response): data = None
@@ -33,7 +27,7 @@ class ApiBase(Logger):
 
     @property
     def env(self):
-        return Env(os.getenv('env', 'test'))
+        return Env().cur_env
 
     def request(self, method, url,
                 params=None, data=None, json=None, headers=None, cookies=None, files=None,

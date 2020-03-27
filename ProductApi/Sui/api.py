@@ -44,7 +44,7 @@ class Sui(ApiBase):
         if not token or update_token:
             self.logger.info('更新 token 中...')
             token = self.login().get('access_token')
-            redis.set_token(self.username, token, expire=3 * 24 * 3600)
+            redis.set_token(self.username, token, expire=2 * 3600)
             return token
         return token
 

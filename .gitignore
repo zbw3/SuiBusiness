@@ -1,10 +1,10 @@
 .idea/
 .ipynb_checkpoints/
 *.cache
-Pipfile.lock
 report/
 __pycache__/
 doc/
 test_cases/report
 Z-MyLab/
 Logs/
+*.pytest_cache

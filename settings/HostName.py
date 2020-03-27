@@ -8,8 +8,8 @@
 
 class SuiAuth:
     """随手记鉴权域名"""
-    TEST = 'https://https://auth.feidee.cn'
-    PROD = 'https://https://auth.feidee.net'
+    TEST = 'https://auth.feidee.cn'
+    PROD = 'https://auth.feidee.net'
 
 
 class BizBook:

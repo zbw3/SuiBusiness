@@ -5,6 +5,8 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/12/23 14:21
 import os
+from enum import Enum
+
 from libs.logger import Logger
 
 
@@ -25,10 +27,34 @@ class SuiConfig:
     }
 
 
-class Project:
-    # 项目根目录
-    path = os.path.abspath(os.path.dirname(__file__) + '/..')
+class EnvType(Enum):
+    Test = 'test'
+    Uat = 'uat'
+    Production = 'production'
 
+
+class Env:
+    """运行环境判断"""
+
+    @property
+    def cur_env(self):
+        return EnvType(os.getenv('env', 'test'))
+
+    @property
+    def is_test(self):
+        return self.cur_env == EnvType.Test
+
+    @property
+    def is_uat(self):
+        return self.cur_env == EnvType.Uat
+
+    @property
+    def is_production(self):
+        return self.cur_env == EnvType.Production
+
+
+# 项目根目录
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__) + '/..')
 
 # Api 默认日志级别
-API_LOGGER_LEVEL = Logger.DEBUG
+API_LOGGER_LEVEL = Logger.INFO
