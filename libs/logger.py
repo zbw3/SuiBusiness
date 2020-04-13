@@ -10,7 +10,7 @@ import logging.handlers
 
 def _stream_handler():
     # 创建一个stream_handler，用于输出到控制台
-    handler = logging.StreamHandler(stream=sys.stdout)
+    handler = logging.StreamHandler(stream=sys.stderr)
     formatter = logging.Formatter('[%(asctime)s] %(levelname)6s: %(message)s')
     handler.setFormatter(formatter)
     return handler

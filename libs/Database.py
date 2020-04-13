@@ -95,6 +95,9 @@ class Name:
     online_loan = 'online_loan'
     chsi = 'chsi'
     cardniu_bridge = 'cardniu_bridge'
+    # 随手记生意场景数据库
+    test_money_3_business = 'test_money_3_business'
+
 
 
 class DBkn0(DBConnect):
@@ -127,6 +130,14 @@ class DBdsjmessage0(DBConnect):
     PORT = 3306
     USER = 'SQ_app_user'
     PASSWD = '#2H0dbb_25607ee57d6df37be3eH'
+
+
+class SSJ0(DBConnect):
+    """实验室 mysql"""
+    HOST = 'ssj0.testfeideedba.com'
+    PORT = 3232
+    USER = 'SSJ_feidee'
+    PASSWD = 'Hf#df_6c#b7,d8d#2ee6_fe85H3d'
 
 
 class Redis(redis.Redis):
@@ -210,12 +221,22 @@ def test_maimai():
     return DBkn0(Name.test_maimai).db
 
 
+def test_money_3_business():
+    return SSJ0(Name.test_money_3_business).db
+
+
+
 if __name__ == '__main__':
     # conn = DBkn0(Name.socialsecurity).conn  # 获取Connect连接对象
     # db = DBkn0(Name.socialsecurity).db
     # results = db.fetchall("SELECT * FROM social_security_account limit 2", print_affected=True)
     # print(results)
 
-    token_redis = TokenRedis()
-    token_redis.set_redis_token(token_name="cesh", new_token="h")
-    print(token_redis.get_redis_token(token_name="cesh"))
+    # token_redis = TokenRedis()
+    # token_redis.set_redis_token(token_name="cesh", new_token="h")
+    # print(token_redis.get_redis_token(token_name="cesh"))
+    ssj0 = SSJ0(Name.test_money_3_business)
+    db = ssj0.db
+    res = db.fetchall('select * from')
+
+
