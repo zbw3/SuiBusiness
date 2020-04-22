@@ -4,7 +4,7 @@
 # @Author: zy
 # @Date  : 2020/4/3
 import pymysql
-from test_cases.store_web.report import timestamp
+from test_cases.store_web.MMDS_6136 import timestamp
 
 
 class do_mysql:

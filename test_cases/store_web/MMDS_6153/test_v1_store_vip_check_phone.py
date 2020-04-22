@@ -9,7 +9,8 @@ from ProductApi.StoreWeb import api
 
 
 def for_resp(params: dict):
-    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
+    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", trading_entity="3604098", Minor_Version="2",
+                           print_results=True)
     resp = api1.v1_store_vip_check_phone(params=params)
     resp.encoding = 'etf-8'
     return resp

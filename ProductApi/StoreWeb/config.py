@@ -18,6 +18,10 @@ class Test:
         v1_store_vip_orders_page = 'https://bizbook.feidee.cn/v1/store/vip/orders_page'
         v1_store_vip_check_phone = 'https://bizbook.feidee.cn/v1/store/vip/check_phone'
         v1_store_vip_member_detail = 'https://bizbook.feidee.cn/v1/store/vip/members'
+        v1_acquiring_account_cancel = 'https://bizbook.feidee.cn/v1/acquiring/open_acount/cancel'
+        v1_acquiring_open_account_status = 'https://bizbook.feidee.cn/v1/acquiring/open_account/status'
+        v1_acquiring_open_account_info = 'https://bizbook.feidee.cn/v1/acquiring/open_account/info'
+        v3_acquiring_open_account_status = 'https://bizbook.feidee.cn/v3/acquiring/open_account/status'
 
 
 class Production:

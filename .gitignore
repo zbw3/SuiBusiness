@@ -8,3 +8,4 @@ test_cases/report
 Z-MyLab/
 Logs/
 *.pytest_cache
+Zcode/

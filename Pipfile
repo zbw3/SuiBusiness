@@ -25,6 +25,7 @@ pytest = "*"
 jpype1 = "*"
 
 [dev-packages]
+mitmproxy = "*"
 
 [requires]
 python_version = "3.7"
