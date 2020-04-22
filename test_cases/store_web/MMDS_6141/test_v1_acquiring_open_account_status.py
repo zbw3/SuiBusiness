@@ -63,7 +63,7 @@ class Test(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    Test(unittest.TestCase)
+    unittest.main()
 
 # 插叙账本的开户状态，增加新版本Minor-Version=4，是测之前的旧版本是否兼容
 
