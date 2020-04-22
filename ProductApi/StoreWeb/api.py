@@ -154,3 +154,6 @@ if __name__ == '__main__':
     api = StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
     res1 = api.v1_store_products_categorys_get().data
     res2 = api.v1_store_products_categorys_post({'name': ''}).data
+
+
+
