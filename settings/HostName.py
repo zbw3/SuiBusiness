@@ -12,11 +12,34 @@ class SuiAuth:
     PROD = 'https://auth.feidee.net'
 
 
+class SuiUserApi:
+    """随手记用户域名"""
+    TEST = 'https://userapi.feidee.cn'
+    PROD = 'https://userapi.feidee.net'
+
+
+class SuiLogin:
+    """随手记登录鉴权域名"""
+    TEST = 'https://login.feidee.cn'
+    PROD = 'https://login.sui.com'
+
+
 class BizBook:
     """生意账本域名"""
     TEST = 'https://bizbook.feidee.cn'
     PROD = 'https://bizbook.feidee.net'
 
+
+# class BizBook:
+#     """生意账本域名"""
+#     TEST = 'http://10.201.3.176:8168'
+#     PROD = 'https://bizbook.feidee.net'
+
+# class BizBook:
+#     """生意账本域名"""
+#     TEST = 'http://10.201.3.177:8168'
+#     PROD = 'https://bizbook.feidee.net'
+#
 
 class Acquiring:
     """收单模块域名"""

@@ -24,6 +24,7 @@ class ApiBase(Logger):
     def __init__(self, print_results=False):
         self.print_results = print_results
         super().__init__(logger_name='ApiLogger', level=API_LOGGER_LEVEL)
+        self.session = requests.Session()
 
     @property
     def env(self):
@@ -37,10 +38,10 @@ class ApiBase(Logger):
         :return: requests.response object but with data property
         """
 
-        response = requests.request(method=method, url=url, params=params, data=data, json=json, headers=headers,
-                                    cookies=cookies, files=files,
-                                    auth=auth, timeout=timeout, allow_redirects=allow_redirects, proxies=proxies,
-                                    hooks=hooks, stream=stream, verify=verify, cert=cert)
+        response = self.session.request(method=method, url=url, params=params, data=data, json=json, headers=headers,
+                                        cookies=cookies, files=files,
+                                        auth=auth, timeout=timeout, allow_redirects=allow_redirects, proxies=proxies,
+                                        hooks=hooks, stream=stream, verify=verify, cert=cert)
 
         self.logger.debug('%s %s', response.request.method, response.request.url)
         self.logger.debug('请求参数：%s', params or data or json)
