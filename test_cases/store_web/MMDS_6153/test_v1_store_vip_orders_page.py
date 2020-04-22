@@ -7,10 +7,13 @@ import unittest
 import ddt
 from ProductApi.StoreWeb import api
 import json
+from test_cases.store_web.data import account_data
 
 
 def for_resp(params: dict):
-    api1 = api.StoreWebApi(username="18702612890", password="a123456", trading_entity="36756947", Minor_Version="2",
+    username = account_data.data()["username"]
+    password = account_data.data()["password"]
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity="36756947", Minor_Version="2",
                            print_results=True)
     resp = api1.v1_store_vip_orders_page(params=params)
     resp.encoding = 'etf-8'

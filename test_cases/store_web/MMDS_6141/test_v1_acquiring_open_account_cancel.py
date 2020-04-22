@@ -5,10 +5,13 @@
 # @Date  : 2020/4/13
 from ProductApi.StoreWeb import api
 import unittest
+from test_cases.store_web.data import account_data
 
 
 def for_resp(params, params1):
-    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", trading_entity=params, Minor_Version=params1,
+    username = account_data.data()["username"]
+    password = account_data.data()["password"]
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity=params, Minor_Version=params1,
                            print_results=True)
     resp = api1.v1_acquiring_open_account_cancel()
     resp.encoding = 'etf-8'

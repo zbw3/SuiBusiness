@@ -9,10 +9,13 @@ import ddt
 
 from ProductApi.StoreWeb import api
 import unittest
+from test_cases.store_web.data import account_data
 
 
 def for_resp(params):
-    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", trading_entity="3672790", Minor_Version="2",
+    username = account_data.data()["username"]
+    password = account_data.data()["password"]
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity="3672790", Minor_Version="2",
                            print_results=True)
     resp = api1.v1_acquiring_open_account_info(params)
     resp.encoding = 'etf-8'

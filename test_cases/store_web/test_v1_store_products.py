@@ -28,7 +28,7 @@ class TestV1StoreApi(unittest.TestCase):
     @data(*DataV1StroeApi.data_post_v1_store_products_categorys())
     @unpack
     def test_post_v1_store_products_categorys(self, case_no, case_info, case_data, check_data):
-        response = self.api.v1_store_products_categorys_post(case_data)
+        response = self.api
         self.assertIsNotNone(response)
         self.assertEqual(response.status_code, check_data["status_code"])
         if response.data is not None:
