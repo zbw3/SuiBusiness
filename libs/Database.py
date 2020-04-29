@@ -13,19 +13,23 @@ import redis
 
 
 class DB:
-    def __init__(self, host, port, user, passwd):
+    def __init__(self, host: str, port: int, user: str, passwd: str, dict_format: bool = False):
+        """
+        :param dict_format: returns results as a dictionary
+        """
         self.host = host
         self.port = port
         self.user = user
         self.passwd = passwd
         self.cursor = None
         self.conn = None
+        self.dict_format = dict_format
 
     def connect(self, _db, use_unicode=True, charset='utf8', **kwargs):
         self.conn = pymysql.connect(host=self.host, port=int(self.port), user=self.user, passwd=self.passwd, db=_db,
                                     use_unicode=use_unicode,
                                     charset=charset, **kwargs)
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor() if not self.dict_format else self.conn.cursor(pymysql.cursors.DictCursor)
 
     def execute(self, query, args=None, print_affected=False):
         """excute a sql"""
@@ -73,8 +77,8 @@ class DBConnect:
     PASSWD = None
     NAME = None
 
-    def __init__(self, _db):
-        self.db = DB(self.HOST, self.PORT, self.USER, self.PASSWD)
+    def __init__(self, _db, dict_format: bool = False):
+        self.db = DB(self.HOST, self.PORT, self.USER, self.PASSWD, dict_format=dict_format)
         self.db.connect(_db)
         self.cursor = self.db.cursor
         self.conn = self.db.conn
@@ -97,7 +101,6 @@ class Name:
     cardniu_bridge = 'cardniu_bridge'
     # 随手记生意场景数据库
     test_money_3_business = 'test_money_3_business'
-
 
 
 class DBkn0(DBConnect):
@@ -225,18 +228,15 @@ def test_money_3_business():
     return SSJ0(Name.test_money_3_business).db
 
 
-
 if __name__ == '__main__':
     # conn = DBkn0(Name.socialsecurity).conn  # 获取Connect连接对象
-    # db = DBkn0(Name.socialsecurity).db
-    # results = db.fetchall("SELECT * FROM social_security_account limit 2", print_affected=True)
-    # print(results)
+    db = DBkn0(Name.socialsecurity, dict_format=True).db
+    results = db.fetchall("SELECT * FROM social_security_account limit 2", print_affected=True)
+    print(results)
 
     # token_redis = TokenRedis()
     # token_redis.set_redis_token(token_name="cesh", new_token="h")
     # print(token_redis.get_redis_token(token_name="cesh"))
-    ssj0 = SSJ0(Name.test_money_3_business)
-    db = ssj0.db
-    res = db.fetchall('select * from')
-
-
+    # ssj0 = SSJ0(Name.test_money_3_business)
+    # db = ssj0.db
+    # res = db.fetchall('select * from')
