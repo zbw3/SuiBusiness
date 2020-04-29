@@ -16,7 +16,7 @@ def for_resp(params, params1):
     api1 = api.StoreWebApi(username=username, password=password, trading_entity=params, Minor_Version=params1,
                            print_results=True)
     resp = api1.v1_acquiring_open_account_status()
-    resp.encoding = 'etf-8'
+    resp.encoding = 'utf-8'
     return resp
 
 
