@@ -96,7 +96,7 @@ class Sui(ApiBase):
             redis.set_token(self.username, token, expire=3000)
         return token
 
-    def authorized_hearders(self):
+    def authorized_headers(self):
         """已加入鉴权信息的请求头  'token_type': 'Bearer'"""
         headers = SuiConfig.HEADERS
         headers["Authorization"] = f"Bearer {self.token}"

@@ -13,7 +13,7 @@ from ProductApi.base import ApiBase
 
 class StoreWebApi(ApiBase):
 
-    def __init__(self, username, password, trading_entity, Minor_Version, print_results=False):
+    def __init__(self, username, password, trading_entity, Minor_Version='1', print_results=False):
         """
         :param username: 用户名
         :param password: 密码
@@ -21,7 +21,7 @@ class StoreWebApi(ApiBase):
         """
         super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
-        self.headers = Sui(username, password).authorized_hearders()
+        self.headers = Sui(username, password).authorized_headers()
         self.headers["Minor-Version"] = Minor_Version
         self.headers["Trading-Entity"] = trading_entity
         self.headers["Content-Type"] = "application/json"
@@ -140,7 +140,7 @@ class StoreWebApi(ApiBase):
         response = self.request(url=url, method='GET', headers=self.headers, params=params)
         return response
 
-    def v1_store_vip_vip_member_detail(self, params: dict):
+    def v1_store_vip_member_detail(self, params: dict):
         """
                   Name: 订单页面
                   DocUrl: None

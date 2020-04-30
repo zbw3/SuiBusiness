@@ -8,8 +8,8 @@ from settings.BaseConfig import Env
 
 def data():
     account = {
-        'username': '119@kd.ssj' if Env().is_test else '',
-        'password': '123456' if Env().is_test else ''
+        'username': '119@kd.ssj' if Env().is_test else 'js003@me.com',
+        'password': '123456' if Env().is_test else 'a123456'
     }
     return account
 
