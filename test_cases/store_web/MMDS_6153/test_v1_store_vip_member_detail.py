@@ -4,18 +4,16 @@
 # @Author: zy
 # @Date  : 2020/4/8
 import json
-import unittest
-import ddt
 from ProductApi.StoreWeb import api
 from test_cases.store_web.data import account_data
 
 
-def for_resp(params: dict):
+def get_resp(params: dict):
     username = account_data.data()["username"]
     password = account_data.data()["password"]
     api1 = api.StoreWebApi(username=username, password=password, trading_entity="3604098", Minor_Version="2",
                            print_results=True)
-    resp = api1.v1_store_vip_vip_member_detail(params=params)
+    resp = api1.v1_store_vip_member_detail(params=params)
     resp.encoding = 'etf-8'
     return resp
 
@@ -53,18 +51,17 @@ param2 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
-    @ddt.data(param1)
-    def test_1(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_1():
+    params = param1
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
-    @ddt.data(param2)
-    def test_2(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+
+def test_2():
+    params = param2
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
 
 if __name__ == '__main__':
-    unittest.main()
+    test_1()

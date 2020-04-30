@@ -4,22 +4,18 @@
 # @Author: zy
 # @Date  : 2020/3/26
 import json
-
-import ddt
-
 from ProductApi.StoreWeb import api
-import unittest
 from test_cases.store_web.MMDS_6136 import timestamp
 from test_cases.store_web.data import account_data
 
 
-def for_resp(params: dict):
+def get_resp(params: dict):
     username = account_data.data()["username"]
     password = account_data.data()["password"]
     api1 = api.StoreWebApi(username=username, password=password, trading_entity="3604098", Minor_Version="2",
                            print_results=True)
     resp = api1.v4_trade_orders_pages_get(params=params)
-    resp.encoding = 'etf-8'
+    # resp.encoding = 'utf-8'
     return resp
 
 
@@ -75,33 +71,35 @@ params_5 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
-    @ddt.data(params_1)
-    def test_1(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_1():
+    params = params_1
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
-    @ddt.data(params_2)
-    def test_2(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
 
-    @ddt.data(params_3)
-    def test_3(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_2():
+    params = params_2
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
-    @ddt.data(params_4)
-    def test_4(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
 
-    @ddt.data(params_5)
-    def test_5(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_3():
+    params = params_3
+    resp = get_resp(params)
+    assert resp.status_code == 200
+
+
+def test_4():
+    params = params_4
+    resp = get_resp(params)
+    assert resp.status_code == 200
+
+
+def test_5():
+    params = params_5
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
 
 if __name__ == '__main__':
-    unittest.main()
+    test_1()

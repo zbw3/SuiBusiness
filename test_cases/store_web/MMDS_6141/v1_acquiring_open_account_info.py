@@ -3,22 +3,17 @@
 # @File  : v1_acquiring_open_account_info.py
 # @Author: zy
 # @Date  : 2020/4/13
-import json
-
-import ddt
-
 from ProductApi.StoreWeb import api
-import unittest
 from test_cases.store_web.data import account_data
 
 
-def for_resp(params):
+def get_resp(params):
     username = account_data.data()["username"]
     password = account_data.data()["password"]
-    api1 = api.StoreWebApi(username=username, password=password, trading_entity="3672790", Minor_Version="2",
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity="370059118", Minor_Version="2",
                            print_results=True)
     resp = api1.v1_acquiring_open_account_info(params)
-    resp.encoding = 'etf-8'
+    # resp.encoding = 'utf-8'
     return resp
 
 
@@ -40,12 +35,11 @@ params1 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
-    @ddt.data(params1)
-    def test_1(self, params):
-        resp = for_resp(params)
+def test_1():
+    get_resp(params1)
 
 
 if __name__ == '__main__':
-    unittest.main()
+    test_1()
+
+# 370059118的账本名字是12345

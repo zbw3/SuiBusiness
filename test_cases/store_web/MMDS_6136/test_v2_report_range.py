@@ -88,6 +88,7 @@ class Test(unittest.TestCase):
         result = jmespath.search('sale_amount', dict_1)
         print(result)
 
-
-if __name__ == '__main__':
-    unittest.main()
+#
+# if __name__ == '__main__':
+#     Test(unittest.TestCase)
+#     unittest.main()
