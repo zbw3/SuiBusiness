@@ -4,6 +4,9 @@
 # @Author: zy
 # @Date  : 2020/4/8
 import json
+
+import pytest
+
 from ProductApi.StoreWeb import api
 from test_cases.store_web.data import account_data
 
@@ -33,4 +36,4 @@ def test_1():
 
 
 if __name__ == '__main__':
-    test_1()
+    pytest.main()

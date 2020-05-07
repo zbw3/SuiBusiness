@@ -5,6 +5,8 @@
 # @Date  : 2020/3/26
 import json
 import ddt
+import pytest
+
 from ProductApi.StoreWeb import api
 import unittest
 from test_cases.store_web.MMDS_6136 import timestamp
@@ -63,32 +65,33 @@ params_4 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
-    @ddt.data(params_1)
-    def test_1(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_1():
+    params = params_1
+    resp = for_resp(params)
+    assert resp.status_code, 200
 
-    @ddt.data(params_2)
-    def test_2(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
 
-    @ddt.data(params_3)
-    def test_3(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_2():
+    params = params_2
+    resp = for_resp(params)
+    assert resp.status_code, 200
 
-    @ddt.data(params_4)
-    def test_4(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        dict_1 = json.loads(resp.text)
-        result = jmespath.search('sale_amount', dict_1)
-        print(result)
 
-#
-# if __name__ == '__main__':
-#     Test(unittest.TestCase)
-#     unittest.main()
+def test_3():
+    params = params_3
+    resp = for_resp(params)
+    assert resp.status_code, 200
+
+
+def test_4():
+    params = params_4
+    resp = for_resp(params)
+    assert resp.status_code, 200
+    dict_1 = json.loads(resp.text)
+    result = jmespath.search('sale_amount', dict_1)
+    print(result)
+
+
+if __name__ == '__main__':
+    pytest.main()
+

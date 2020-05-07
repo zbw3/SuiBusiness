@@ -4,6 +4,7 @@
 # @Author: zy
 # @Date  : 2020/3/26
 import warnings
+import pytest
 from ProductApi.StoreWeb import api
 from test_cases.store_web.MMDS_6136 import timestamp
 from test_cases.store_web.MMDS_6136.mysql_month import V2ReportMonthMysql
@@ -126,7 +127,7 @@ def test_5():
 
 
 if __name__ == '__main__':
-    test_1()
+    pytest.main(["-s", "test_v2_report_month.py"])
 
 
 '''

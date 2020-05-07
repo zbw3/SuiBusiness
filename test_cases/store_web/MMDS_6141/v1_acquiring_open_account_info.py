@@ -3,6 +3,8 @@
 # @File  : v1_acquiring_open_account_info.py
 # @Author: zy
 # @Date  : 2020/4/13
+import pytest
+
 from ProductApi.StoreWeb import api
 from test_cases.store_web.data import account_data
 
@@ -40,6 +42,6 @@ def test_1():
 
 
 if __name__ == '__main__':
-    test_1()
+    pytest.main()
 
 # 370059118的账本名字是12345

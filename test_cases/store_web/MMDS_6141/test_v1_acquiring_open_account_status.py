@@ -3,6 +3,8 @@
 # @File  : test_v1_acquiring_open_account_status.py
 # @Author: zy
 # @Date  : 2020/4/13
+import pytest
+
 from ProductApi.StoreWeb import api
 from test_cases.store_web.data import account_data
 
@@ -73,7 +75,7 @@ def test_6():
 
 
 if __name__ == '__main__':
-    test_1()
+    pytest.main()
 
 # 插叙账本的开户状态，增加新版本Minor-Version=4，是测之前的旧版本是否兼容
 

@@ -3,6 +3,8 @@
 # @File  : test_v1_acquiring_open_account_cancel.py
 # @Author: zy
 # @Date  : 2020/4/13
+import pytest
+
 from ProductApi.StoreWeb import api
 from test_cases.store_web.data import account_data
 
@@ -25,6 +27,6 @@ def test_1():
 
 
 if __name__ == '__main__':
-    test_1()
+    pytest.main()
 # 1、待审核中可以撤回申请，使用该接口
 # 2、审核失败重新提交也是用到了该接口，撤回申请
