@@ -23,8 +23,12 @@ ddt = "*"
 python-dateutil = "*"
 pytest = "*"
 jpype1 = "*"
+pytest-html = "*"
+allure-pytest = "*"
 
 [dev-packages]
+pillow = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.7"

@@ -5,6 +5,6 @@ report/
 __pycache__/
 doc/
 test_cases/report
-Z-MyLab/
+ZMyLab/
 Logs/
 *.pytest_cache

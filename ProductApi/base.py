@@ -5,9 +5,6 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/12/23 16:51
 
-import json
-import os
-from enum import Enum
 from json import JSONDecodeError
 
 import requests
@@ -16,7 +13,8 @@ from requests import Response as _Response
 from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env
 
 
-class Response(_Response): data = None
+class Response(_Response):
+    data = None
 
 
 class ApiBase(Logger):
