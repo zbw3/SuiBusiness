@@ -175,6 +175,12 @@ class StoreWebApi(ApiBase):
         response = self.request(url=url, method='GET', headers=self.headers, params=params)
         return response
 
+    def v2_store_products_batch(self, params: dict):
+        """删除商品"""
+        url = self.config.Url.v2_store_products_batch
+        response = self.request(url=url, method='DELETE', headers=self.headers, json=params)
+        return response
+
 if __name__ == '__main__':
     api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
     # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
@@ -182,6 +188,7 @@ if __name__ == '__main__':
     # res = api.v2_store_products_spec_get() #查询店铺所有规格
     #res = api.v2_store_products_spec_value_post({"spec_name_id": "5", "spec_value": "超大"}) #添加商品规格值
     # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询店铺商品
+    res = api.v2_store_products_batch({"product_id_list": [43357]}) #删除商品
 
     # print(res)
 

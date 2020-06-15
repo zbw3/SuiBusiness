@@ -22,6 +22,7 @@ class Test:
         v2_store_products_specs = BizBook.TEST + '/v2/store/products/specs'
         v2_store_products_spec_value = BizBook.TEST +'/v2/store/products/spec_value'
         v2_store_products_goods = BizBook.TEST + '/v2/store/products/goods'
+        v2_store_products_batch = BizBook.TEST + '/v2/store/products/batch'
 
 class Production:
     class Url:
