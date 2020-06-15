@@ -106,7 +106,7 @@ class Sui(ApiBase):
 if __name__ == "__main__":
     import os
     os.environ['env'] = 'test'
-    sui = Sui(username="119@kd.ssj", password="123456")
+    sui = Sui(username="13085060818", password="123456")
     _token = sui.get_token(True)
     print('token: ', _token)
     print(sui.user_profile())

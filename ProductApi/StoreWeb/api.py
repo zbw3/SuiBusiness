@@ -11,7 +11,7 @@ from ProductApi.base import ApiBase
 
 class StoreWebApi(ApiBase):
 
-    def __init__(self, username, password, trading_entity="3604098", print_results=False):
+    def __init__(self, username, password, version='1', trading_entity="3604098", print_results=False):
         """
         :param username: 用户名
         :param password: 密码
@@ -20,7 +20,7 @@ class StoreWebApi(ApiBase):
         super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
         self.headers = Sui(username, password).authorized_hearders()
-        self.headers["Minor-Version"] = '2'
+        self.headers["Minor-Version"] = version
         self.headers["Trading-Entity"] = trading_entity
 
     def v1_store_products_categorys_get(self):
@@ -150,10 +150,39 @@ class StoreWebApi(ApiBase):
         return response
 
 
-if __name__ == '__main__':
-    api = StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
-    res1 = api.v1_store_products_categorys_get().data
-    res2 = api.v1_store_products_categorys_post({'name': ''}).data
+    def v2_store_products_spec_name_post(self, params: dict):
+        """"添加商品规格名"""
+        url = self.config.Url.v2_store_products_spec_name
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
 
+
+    def v2_store_products_spec_get(self, **params: dict):
+        """"获取店铺规格"""
+        url = self.config.Url.v2_store_products_specs
+        response = self.request(url=url, method='GET', headers=self.headers, json=params)
+        return response
+
+    def v2_store_products_spec_value_post(self, params: dict):
+        """添加商品规格值"""
+        url = self.config.Url.v2_store_products_spec_value
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v2_store_products_goods_get(self, params: dict):
+        """"查询商品"""
+        url = self.config.Url.v2_store_products_goods
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+if __name__ == '__main__':
+    api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
+    # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
+    # res = api.v2_store_products_spec_get(spec_name='尺寸') #指定查询某个规格
+    # res = api.v2_store_products_spec_get() #查询店铺所有规格
+    #res = api.v2_store_products_spec_value_post({"spec_name_id": "5", "spec_value": "超大"}) #添加商品规格值
+    # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询店铺商品
+
+    # print(res)
 
 

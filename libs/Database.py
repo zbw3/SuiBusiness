@@ -237,6 +237,10 @@ if __name__ == '__main__':
     # token_redis = TokenRedis()
     # token_redis.set_redis_token(token_name="cesh", new_token="h")
     # print(token_redis.get_redis_token(token_name="cesh"))
-    # ssj0 = SSJ0(Name.test_money_3_business)
-    # db = ssj0.db
-    # res = db.fetchall('select * from')
+    ssj0 = SSJ0(Name.test_money_3_business)
+    db = ssj0.db
+    res = db.fetchall('select * from biz_order where order_number = "12012006113543040409623"')
+    # cur.execute("select * from biz_order where order_number = '12012006113543040409623'")
+    # data1 = cur.fetchall()
+    print(res)
+

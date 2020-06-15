@@ -18,7 +18,10 @@ class Test:
         v1_store_vip_orders_page = BizBook.TEST + '/v1/store/vip/orders_page'
         v1_store_vip_check_phone = BizBook.TEST + '/v1/store/vip/check_phone'
         v1_store_vip_member_detail = BizBook.TEST + '/v1/store/vip/members'
-
+        v2_store_products_spec_name = BizBook.TEST + '/v2/store/products/spec_name'
+        v2_store_products_specs = BizBook.TEST + '/v2/store/products/specs'
+        v2_store_products_spec_value = BizBook.TEST +'/v2/store/products/spec_value'
+        v2_store_products_goods = BizBook.TEST + '/v2/store/products/goods'
 
 class Production:
     class Url:
