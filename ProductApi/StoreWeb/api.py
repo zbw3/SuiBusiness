@@ -7,7 +7,7 @@
 from ProductApi.StoreWeb import config
 from ProductApi.Sui.api import Sui
 from ProductApi.base import ApiBase
-
+import time
 
 class StoreWebApi(ApiBase):
 
@@ -175,11 +175,32 @@ class StoreWebApi(ApiBase):
         response = self.request(url=url, method='GET', headers=self.headers, params=params)
         return response
 
-    def v2_store_products_batch(self, params: dict):
+    def v2_store_products_batch_delete(self, params: dict):
         """删除商品"""
         url = self.config.Url.v2_store_products_batch
         response = self.request(url=url, method='DELETE', headers=self.headers, json=params)
         return response
+
+    def v2_store_products_goods_item_get(self, params: dict):
+        """查询单品"""
+        url = self.config.Url.v2_store_products_goods_item
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+    def v1_store_storehouse_post(self, params: dict):
+        """管店-仓库进货"""
+        url = self.config.Url.v1_store_storehouse
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_storehouse_statistics_get(self, params: dict):
+        """管店-仓库统计"""
+        url = self.config.Url.v1_store_storehouse_statistics
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+
+
 
 if __name__ == '__main__':
     api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
@@ -188,8 +209,11 @@ if __name__ == '__main__':
     # res = api.v2_store_products_spec_get() #查询店铺所有规格
     #res = api.v2_store_products_spec_value_post({"spec_name_id": "5", "spec_value": "超大"}) #添加商品规格值
     # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询店铺商品
-    res = api.v2_store_products_batch({"product_id_list": [43357]}) #删除商品
+    # res = api.v2_store_products_batch_delete({"product_id_list": [43357]}) #删除商品
+    # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询单品
+    # res = api.v1_store_storehouse_post({'date':1592214039914,"supplier_id": 352,"remark": "","goods_list":[{"item_id": 59844,"price": "4.00","quantity": "5"}]})  # 仓库进货
+    # print(time.time())
+    res = api.v1_store_storehouse_statistics_get({'begin_date': 1590940800000, 'end_date': 1593532799999})  # 仓库统计
 
-    # print(res)
 
 
