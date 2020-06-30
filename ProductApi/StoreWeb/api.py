@@ -225,6 +225,38 @@ class StoreWebApi(ApiBase):
         return response
 
 
+    def v1_store_vip_levels_post(self, params: dict):
+        """添加会员等级"""
+        url = self.config.Url.v1_store_vip_levels
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_levels_delete(self, level_id='2656'):
+        """删除会员等级"""
+        url = self.config.Url.v1_store_vip_levels + "/" + level_id
+        response = self.request(url=url, method='DELETE', headers=self.headers)
+        return response
+
+    def v1_store_vip_levels_put(self, params: dict):
+        """编辑会员等级"""
+        url = self.config.Url.v1_store_vip_levels
+        response = self.request(url=url, method='PUT', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_levels_get(self):
+        """查询等级"""
+        url = self.config.Url.v1_store_vip_levels
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_vip_menmbers_level_get(self, number='13085060818'):
+        """查询会员等级信息"""
+        url = self.config.Url.v1_store_vip_member_detail + '/' + number + '/level'
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+
+
 if __name__ == '__main__':
     api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
     # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
@@ -240,6 +272,9 @@ if __name__ == '__main__':
     # res = api.v1_store_suppliers_get()             # 查询供应商列表
     # res = api.v1_store_suppliers_post({"phone": "13098760098", "remark": "一个咖啡店", "supplier_id": 305204312207360, "supplier_name": "lost cafe", "contact_person": "kun", "create_time": 1593482857377})  # 新增供应商
     # res = api.v1_store_suppliers_put({"phone": "19905421365", "remark": "接口测试", "supplier_id": 355, "supplier_name": "9894", "contact_person": "小王", "create_time": 1592552035000})   #修改供应商
-    res = api.v1_store_suppliers_delete('355')   # 删除供应商
-
-
+    # res = api.v1_store_suppliers_delete('355')   # 删除供应商
+    # res = api.v1_store_vip_levels_post({"level_name": "黄金", "upgrade_condition": "1", "upgrade_exponent": "150"})   #添加会员等级
+    # res = api.v1_store_vip_levels_delete('388266689622016')  #删除会员等级
+    # res = api.v1_store_vip_levels_put({"level_id": 802, "level_name": "a卡nh", "upgrade_condition": 1, "upgrade_exponent": 100}) #编辑会员等级
+    # res = api.v1_store_vip_levels_get()  # 查询等级
+    res = api.v1_store_vip_menmbers_level_get()   # 查询会员等级信息
