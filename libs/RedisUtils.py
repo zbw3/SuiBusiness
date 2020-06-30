@@ -110,7 +110,7 @@ class ResicUtils(object):
 
 if __name__ == "__main__":
     opr = ResicUtils()
-    # print(opr.getKey('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:2'))
-    # print(opr.delete('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:2'))
-    opr.getKey('BUSINESS_BOOK:BOOK_OWNER_USER_ID:3604098')
+    # print(opr.fuzzGet('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:1'))
+    print(opr.fuzzDel('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:1:1'))
+    # opr.getKey('BUSINESS_BOOK:BOOK_OWNER_USER_ID:3604098')
     # opr.hasKey('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:2')

@@ -200,6 +200,29 @@ class StoreWebApi(ApiBase):
         return response
 
 
+    def v1_store_suppliers_get(self):
+        """供应商-查询供应商列表"""
+        url = self.config.Url.v1_store_suppliers
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_suppliers_post(self, params: dict):
+        """供应商-新增供应商"""
+        url = self.config.Url.v1_store_suppliers
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_suppliers_put(self, params: dict):
+        """供应商-修改供应商"""
+        url = self.config.Url.v1_store_suppliers
+        response = self.request(url=url, method='PUT', headers=self.headers, json=params)
+        return response
+
+    def v1_store_suppliers_delete(self, supplier_id='393'):
+        """供应商-删除供应商"""
+        url = self.config.Url.v1_store_suppliers + '/' + supplier_id
+        response = self.request(url=url, method='DELETE', headers=self.headers)
+        return response
 
 
 if __name__ == '__main__':
@@ -213,7 +236,10 @@ if __name__ == '__main__':
     # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询单品
     # res = api.v1_store_storehouse_post({'date':1592214039914,"supplier_id": 352,"remark": "","goods_list":[{"item_id": 59844,"price": "4.00","quantity": "5"}]})  # 仓库进货
     # print(time.time())
-    res = api.v1_store_storehouse_statistics_get({'begin_date': 1590940800000, 'end_date': 1593532799999})  # 仓库统计
-
+    # res = api.v1_store_storehouse_statistics_get({'begin_date': 1590940800000, 'end_date': 1593532799999})  # 仓库统计
+    # res = api.v1_store_suppliers_get()             # 查询供应商列表
+    # res = api.v1_store_suppliers_post({"phone": "13098760098", "remark": "一个咖啡店", "supplier_id": 305204312207360, "supplier_name": "lost cafe", "contact_person": "kun", "create_time": 1593482857377})  # 新增供应商
+    # res = api.v1_store_suppliers_put({"phone": "19905421365", "remark": "接口测试", "supplier_id": 355, "supplier_name": "9894", "contact_person": "小王", "create_time": 1592552035000})   #修改供应商
+    res = api.v1_store_suppliers_delete('355')   # 删除供应商
 
 
