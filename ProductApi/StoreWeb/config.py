@@ -28,6 +28,9 @@ class Test:
         v1_store_storehouse_statistics = BizBook.TEST + '/v1/store/storehouse/statistics'
         v1_store_suppliers = BizBook.TEST + '/v1/store/suppliers'
         v1_store_vip_levels = BizBook.TEST + '/v1/store/vip/levels'
+        v1_store_coupon_batches = BizBook.TEST + '/v1/store/coupon_batches'
+        v1_store_coupon_batches_coupons = BizBook.TEST + '/v1/store/coupon_batches/coupons'
+        v1_store_coupon_batches_info = BizBook.TEST + '/v1/store/coupon_batches/info'
 
 
 class Production:

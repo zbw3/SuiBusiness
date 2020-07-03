@@ -255,6 +255,44 @@ class StoreWebApi(ApiBase):
         response = self.request(url=url, method='GET', headers=self.headers)
         return response
 
+    def v1_store_coupon_batches_post(self, params: dict):
+        """添加卡券批次"""
+        return
+
+    def v1_store_coupon_batches_coupon_batch_id_get(self, coupon_batch_id='467467734634'):
+        """获取卡券批次"""
+        return
+
+    def v1_store_coupon_batches_get(self):
+        """获取卡券批次列表"""
+        return
+
+    def v1_store_coupon_batches_coupon_batch_id_coupons_get(self, coupon_batch_id='467467734634'):
+        """获取卡券批次下的卡券列表"""
+        return
+
+    def v1_store_coupon_batches_coupon_batch_id_vip_coupons_post(self, params: dict, coupon_batch_id='467467734634'):
+        """批量发券"""
+        return
+
+    def v1_store_coupon_batches_coupon_batch_id_status_put(self, coupon_batch_id='467467734634'):
+        """停用卡券批次"""
+        return
+
+    def v1_store_coupon_batches_coupon_batch_id_export_get(self, coupon_batch_id='467467734634'):
+        """导出卡券"""
+        return
+
+    def v1_store_coupon_batches_coupons_code_get(self, code='626562'):
+        """卡券编号查询卡券信息"""
+        return
+
+    def v1_store_coupon_batches_info_get(self, trading_entity='37017996', coupon_batch_id='45481575154'):
+        """获取优惠券详细信息"""
+        return
+
+
+
 
 
 if __name__ == '__main__':
