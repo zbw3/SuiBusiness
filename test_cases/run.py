@@ -28,16 +28,16 @@ def discover(start_dir='./', pattern='test*.py'):
     return unittest.defaultTestLoader.discover(start_dir, pattern)
 
 
-def yu_xin_suites():
+def store_web_suites():
     suites = unittest.TestSuite()
-    suites.addTests(discover('network_operator'))
+    suites.addTests(discover('store_web'))
     return suites
 
 
 if __name__ == '__main__':
-    # 设置当前运行环境 test or production
+    # 设置当前运行环境 test or productionff
     os.environ['env'] = 'test'
-    test_suites = yu_xin_suites()
+    test_suites = store_web_suites()
     print_discover_cases(test_suites)
     result = BeautifulReport(test_suites)
     result.report(filename='驭信接口测试报告', description='驭信接口', report_dir='report')
