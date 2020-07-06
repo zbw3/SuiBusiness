@@ -40,6 +40,9 @@ class Test:
         v1_trading_entity_logistics_type = BizBook.TEST + '/v1/trading_entity/logistics'
         online_logistic_book_store = BizBook.TEST + 'online/logistic/book_store'
         v1_trading_entity_logistics = BizBook.TEST + '/v1/trading_entity/logistics'
+        v1_store_coupon_batches = BizBook.TEST + '/v1/store/coupon_batches'
+        v1_store_coupon_batches_coupons = BizBook.TEST + '/v1/store/coupon_batches/coupons'
+        v1_store_coupon_batches_info = BizBook.TEST + '/v1/store/coupon_batches/info'
 
 
 class Production:

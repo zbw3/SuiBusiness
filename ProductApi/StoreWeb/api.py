@@ -327,6 +327,63 @@ class StoreWebApi(ApiBase):
         response = self.request(url=url, method='GET', headers=self.headers)
         return response
 
+    def v1_store_coupon_batches_post(self, params: dict):
+        """添加卡券批次"""
+        url = self.config.Url.v1_store_coupon_batches
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_coupon_batches_coupon_batch_id_get(self, params: dict, coupon_batch_id='1428'):
+        """获取卡券批次"""
+        url = self.config.Url.v1_store_coupon_batches + '/' + coupon_batch_id +'/coupons'
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+    def v1_store_coupon_batches_get(self, params: dict):
+        """获取卡券批次列表"""
+        url = self.config.Url.v1_store_coupon_batches
+        response = self.request(url=url, method='GET', headers=self.headers,params=params)
+        return response
+
+    def v1_store_coupon_batches_coupon_batch_id_coupons_get(self, params: dict, coupon_batch_id='1418'):
+        """获取卡券批次下的卡券列表"""
+        url = self.config.Url.v1_store_coupon_batches + '/' + coupon_batch_id + '/coupons'
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+    def v1_store_coupon_batches_coupon_batch_id_vip_coupons_post(self, params: dict, coupon_batch_id='467467734634'):
+        """批量发券"""
+        url = self.config.Url.v1_store_coupon_batches + '/' + coupon_batch_id + '/vip_coupons'
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_coupon_batches_coupon_batch_id_status_put(self, coupon_batch_id='1429'):
+        """停用卡券批次"""
+        url = self.config.Url.v1_store_coupon_batches + '/' + coupon_batch_id + '/status'
+        response = self.request(url=url, method='PUT', headers=self.headers)
+        return response
+
+    def v1_store_coupon_batches_coupon_batch_id_export_get(self, coupon_batch_id='467467734634'):
+        """导出卡券"""
+        url = self.config.Url.v1_store_coupon_batches + '/' + coupon_batch_id + '/export'
+        response = self.request(url=url, method='GET', headers=self.headers)
+        print(type(response))
+        return response
+
+    def v1_store_coupon_batches_coupons_code_get(self, code='20750246990848'):
+        """卡券编号查询卡券信息(具体的卡券码)"""
+        url = self.config.Url.v1_store_coupon_batches_coupons + '/' + code
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_coupon_batches_info_get(self, trading_entity='37017996', coupon_batch_id='1429'):
+        """获取优惠券详细信息"""
+        url = self.config.Url.v1_store_coupon_batches_info + '/' + trading_entity + '/' + coupon_batch_id
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+
+
 
 
 if __name__ == '__main__':
@@ -401,3 +458,16 @@ if __name__ == '__main__':
 
 
 
+
+    # res = api.v1_store_vip_menmbers_level_get()   # 查询会员等级信息
+    # res = api.v1_store_coupon_batches_get({'page_number': 1, 'page_size': 30})   # 获取卡券批次列表
+    # res = api.v1_store_coupon_batches_coupon_batch_id_get({'page_number': 1, 'page_size': 30}, '1428')    # 获取卡券批次
+    # res = api.v1_store_coupon_batches_post({"amount": 0.0, "amount_limit": 50.0, "begin_time": 1593705600000, "discount": 80, "end_time": 1596470399999,
+    #  "coupon_batch_id": "", "name": "测试卡", "quantity": 5, "use_remark": "不退换、不折现", "status": 1, "surplus_quantity": 0,
+    #  "type": 1})
+    # res = api.v1_store_coupon_batches_info_get()   # 获取优惠券详细信息
+    # res = api.v1_store_coupon_batches_coupons_code_get('20750246990848')   # 卡券编号查询卡券信息
+    # res = api.v1_store_coupon_batches_coupon_batch_id_status_put()  # 停用卡券批次
+    # res = api.v1_store_coupon_batches_coupon_batch_id_vip_coupons_post({"tag_ids": [], "vip_ids": [8667, 8663]}, '1452')   # 批量发券
+    # res = api.v1_store_coupon_batches_coupon_batch_id_coupons_get({'page_number': 1, 'page_size': 30}, '1418')    # 获取卡券批次下的卡券列表
+    res = api.v1_store_coupon_batches_coupon_batch_id_export_get('1418')  # 导出卡券
