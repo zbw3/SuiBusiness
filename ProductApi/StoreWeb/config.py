@@ -31,6 +31,11 @@ class Test:
         v1_store_coupon_batches = BizBook.TEST + '/v1/store/coupon_batches'
         v1_store_coupon_batches_coupons = BizBook.TEST + '/v1/store/coupon_batches/coupons'
         v1_store_coupon_batches_info = BizBook.TEST + '/v1/store/coupon_batches/info'
+        """会员标签"""
+        v1_store_vip_tags = BizBook.TEST + '/v1/store/vip/tags'
+        v1_store_vip_tag_only = BizBook.TEST + '/v1/store/vip/tag_only'
+
+
 
 
 class Production:
