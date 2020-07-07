@@ -342,7 +342,7 @@ class StoreWebApi(ApiBase):
     def v1_store_coupon_batches_get(self, params: dict):
         """获取卡券批次列表"""
         url = self.config.Url.v1_store_coupon_batches
-        response = self.request(url=url, method='GET', headers=self.headers,params=params)
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
         return response
 
     def v1_store_coupon_batches_coupon_batch_id_coupons_get(self, params: dict, coupon_batch_id='1418'):
@@ -381,6 +381,62 @@ class StoreWebApi(ApiBase):
         url = self.config.Url.v1_store_coupon_batches_info + '/' + trading_entity + '/' + coupon_batch_id
         response = self.request(url=url, method='GET', headers=self.headers)
         return response
+
+    def v1_store_vip_tags_post(self, params: dict):
+        """新建标签"""
+        # {"tag_name": "测试", "tag_icon": "tag_zuanshi", "member_id": "8667"}
+        url = self.config.Url.v1_store_vip_tags
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_tags_tag_id_delete(self, tag_id='134'):
+        """删除标签"""
+        url = self.config.Url.v1_store_vip_tags + '/' + tag_id
+        response = self.request(url=url, method='DELETE', headers=self.headers)
+        return response
+
+    def v1_store_vip_tags_put(self, params: dict):
+        """修改标签"""
+        # {"tag_id": 574, "tag_name": "测试啊啊啊", "tag_icon": "tag_shijian", "member_id": "8667"}
+        url = self.config.Url.v1_store_vip_tags
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_tag_only(self, params: dict):
+        """编辑标签：不传标签会员"""
+        url = self.config.Url.v1_store_vip_tag_only
+        response = self.request(url=url, method='PUT', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_tags_get(self):
+        """查询标签"""
+        url = self.config.Url.v1_store_vip_tags
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_vip_tags_tag_id_members_get(self, params: dict, tag_id='134'):
+        """查询标签会员"""
+        url = self.config.Url.v1_store_vip_tags + '/' + tag_id + + '/' + 'members'
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+    def v1_store_vip_tags_tag_id_members_post(self, params: dict, tag_id='241'):
+        """添加标签会员"""
+        url = self.config.Url.v1_store_vip_tags + '/' + tag_id + '/' + 'members'
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_tags_tag_id_members_delete(self, params: dict, tag_id='241'):
+        """添加标签会员"""
+        url = self.config.Url.v1_store_vip_tags + '/' + tag_id + '/' + 'members'
+        response = self.request(url=url, method='DELETE', headers=self.headers, json=params)
+        return response
+
+
+
+
+
+
 
 
 
