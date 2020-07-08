@@ -46,6 +46,10 @@ class Test:
         """会员标签"""
         v1_store_vip_tags = BizBook.TEST + '/v1/store/vip/tags'
         v1_store_vip_tag_only = BizBook.TEST + '/v1/store/vip/tag_only'
+        """会员充值"""
+        v1_store_vip_recharges = BizBook.TEST + '/v1/store/vip/recharges'
+        v1_store_vip_recharges_save = BizBook.TEST + '/v1/store/vip/recharges/save'
+        v1_store_vip_orders_page = BizBook.TEST + '/v1/store/vip/orders_page'
 
 
 

@@ -433,6 +433,53 @@ class StoreWebApi(ApiBase):
         return response
 
 
+    def v1_store_vip_rechrages_get(self):
+        """获取充值列表"""
+        url = self.config.Url.v1_store_vip_recharges
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_vip_recharges_fid_get(self, fid='273'):
+        """获取充值优惠详情"""
+        url = self.config.Url.v1_store_vip_recharges + '/' + fid
+        response = self.request(url=url, method='GET', headers=self.headers)
+        return response
+
+    def v1_store_vip_rechrages_fid_put(self, params: dict, fid='273'):
+        """修改充值优惠记录"""
+        url = self.config.Url.v1_store_vip_recharges + '/' + fid
+        response = self.request(url=url, method='PUT', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_rechrages_post(self, params: dict):
+        """增加优惠充值记录"""
+        url = self.config.Url.v1_store_vip_recharges
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_rechrages_fid_delete(self, params: dict, fid='273'):
+        """删除充值优惠记录"""
+        url = self.config.Url.v1_store_vip_recharges + '/' + fid
+        response = self.request(url=url, method='DELETE', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_rechrages_save(self, params: dict):
+        """批量修改会员充值优惠"""
+        url = self.config.Url.v1_store_vip_recharges_save
+        response = self.request(url=url, method='POST', headers=self.headers, json=params)
+        return response
+
+    def v1_store_vip_order_page(self, params: dict):
+        """会员充值列表"""
+        url = self.config.Url.v1_store_vip_orders_page
+        response = self.request(url=url, method='GET', headers=self.headers, params=params)
+        return response
+
+
+
+
+
+
 
 
 
@@ -444,6 +491,8 @@ class StoreWebApi(ApiBase):
 
 if __name__ == '__main__':
     api = StoreWebApi(username="zzx@kd.ssj", password="123456", version='1', trading_entity="36734911", print_results=True)
+    api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
+
     # api = StoreWebApi(username="al1@kd.ssj", password="a12345678", version='1', trading_entity="36056917", print_results=True)
     # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
     # res = api.v2_store_products_spec_get(spec_name='尺寸') #指定查询某个规格
@@ -492,23 +541,23 @@ if __name__ == '__main__':
     # })
     # res = api.v1_trading_entity_logistics_bound_supported_get({"logistic_type":'1',"delivery_id":"DADA","province":"辽宁省","city":"沈阳市"})  # 商铺地址是否在公司配送范围内
 
-    res = api.v1_trading_entity_logistics_type_post(
-     {
-        "business":1,
-        "city":"深圳市",
-        "address":"车公庙地铁站B出口",
-        "county":"福田区",
-        "email":"5656@qq.com",
-        "delivery_fee":2,
-        "delivery_begin":"03:00",
-        "delivery_end":"21:00",
-        "delivery_range":"高新园地铁站附近",
-        "phone":"15314567854",
-        "province":"广东省",
-        "active":1,
-        "third_delivery_open":1,
-        "address_no":'518000'
-    }) # 更新商户配送信息
+    # res = api.v1_trading_entity_logistics_type_post(
+    #  {
+    #     "business":1,
+    #     "city":"深圳市",
+    #     "address":"车公庙地铁站B出口",
+    #     "county":"福田区",
+    #     "email":"5656@qq.com",
+    #     "delivery_fee":2,
+    #     "delivery_begin":"03:00",
+    #     "delivery_end":"21:00",
+    #     "delivery_range":"高新园地铁站附近",
+    #     "phone":"15314567854",
+    #     "province":"广东省",
+    #     "active":1,
+    #     "third_delivery_open":1,
+    #     "address_no":'518000'
+    # }) # 更新商户配送信息
     # res = api.online_logistic_book_store_get() #查询商户配送信息(小程序端)
     # res = api.v1_trading_entity_logistics_get()  #查询商户配送信息
 
@@ -526,4 +575,11 @@ if __name__ == '__main__':
     # res = api.v1_store_coupon_batches_coupon_batch_id_status_put()  # 停用卡券批次
     # res = api.v1_store_coupon_batches_coupon_batch_id_vip_coupons_post({"tag_ids": [], "vip_ids": [8667, 8663]}, '1452')   # 批量发券
     # res = api.v1_store_coupon_batches_coupon_batch_id_coupons_get({'page_number': 1, 'page_size': 30}, '1418')    # 获取卡券批次下的卡券列表
-    res = api.v1_store_coupon_batches_coupon_batch_id_export_get('1418')  # 导出卡券
+    # res = api.v1_store_coupon_batches_coupon_batch_id_export_get('1418')  # 导出卡券
+    # res = api.v1_store_vip_rechrages_get()  # 获取充值列表
+    # res = api.v1_store_vip_recharges_fid_get() # 获取充值优惠详情
+    # res = api.v1_store_vip_rechrages_fid_put({"recharge_amount":"300.00","donation_amount":"50.00"})  # 修改充值优惠记录
+    # res = api.v1_store_vip_rechrages_post({"recharge_amount": 50.0, "donation_amount": 5.0})  # 新建充值记录
+    # res = api.v1_store_vip_rechrages_save([{"recharge_amount": "100", "donation_amount": "10"}, {"recharge_amount": "200", "donation_amount": "30"}])
+    res = api.v1_store_vip_order_page({'query': '{"order_code":"","vip_member_no":"","vip_nick_name":"","status":"","vip_phone":"","begin_date":1591632000000,"end_date":1594223999999,"page_number":1,"page_size":30}'})
+# {"order_code":"","vip_member_no":"","vip_nick_name":"","status":"","vip_phone":"","begin_date":1591632000000,"end_date":1594223999999,"page_number":1,"page_size":30}
