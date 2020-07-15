@@ -51,3 +51,9 @@ class BizApi:
     """对外收款设备API域名"""
     TEST = 'https://bizapi.feidee.cn'
     PROD = 'https://bizapi.feidee.com'
+
+class MiniProgramForm:
+    """小程序群报数域名"""
+    TEST = 'https://form.feidee.cn'
+    UAT = 'https://uatform.feidee.net'
+    PROD = 'https://form.feidee.net'
