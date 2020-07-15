@@ -5,11 +5,17 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/14 13:57
 import json
+import time
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import List, Union
 
 from ProductApi.MiniProgramForm.api import FormApi
+
+
+class FormType(Enum):
+    SHOPPING = '团购'
+    ACTIVITY = '活动'
 
 
 class ContentType(Enum):
@@ -100,7 +106,7 @@ class Catalog:
 
 
 class Form:
-    TYPE = None
+    TYPE: FormType = None
 
     ContentType = ContentType
     RoleType = RoleType
@@ -111,7 +117,7 @@ class Form:
 
     def __init__(self):
         self.COVER = 'https://resources.sui.com/fed/wechat/statistics-tools/templates/bg_banner.png?v1'
-        self.TITLE = '未填写标题'
+        self.TITLE = f'[{self.TYPE.value}]-测试表单-{time.strftime("%T")}'
         self.CONTENTS = []
         self.CATALOGS = []
         self.CONFIG = {}
@@ -124,13 +130,13 @@ class Form:
 
     @property
     def data(self):
-        if self.TYPE == 'SHOPPING':
+        if self.TYPE == FormType.SHOPPING:
             goods_catalog = filter(lambda catalog: catalog['catalogType'] == CatalogType.GOODS.value, self.CATALOGS)
             if len(list(goods_catalog)) < 1:
                 raise ValueError('团购表单，至少需要添加一个商品')
 
         return {
-            "type": self.TYPE,
+            "type": self.TYPE.name,
             "cover": self.COVER,
             "title": self.TITLE,
             "contents": self.CONTENTS,
@@ -142,10 +148,11 @@ class Form:
     def json(self):
         return json.dumps(self.data, ensure_ascii=False)
 
-    def add_title(self, title):
-        self.TITLE = title
+    def set_title(self, title):
+        if title:
+            self.TITLE = f'[{self.TYPE.value}]-{title}-{time.strftime("%T")}'
 
-    def add_cover(self, img_url):
+    def set_cover(self, img_url):
         self.COVER = img_url
 
     def add_text(self, text: str):
@@ -188,6 +195,18 @@ class Form:
             'actEndTime': end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
         }
 
+    def clear_contents(self):
+        """清空表单内容项 文字 大图 小图"""
+        self.CONTENTS = []
+
+    def clear_goods(self):
+        """清空商品项"""
+        self.CATALOGS = [catalog for catalog in self.CATALOGS if catalog['catalogType'] != CatalogType.GOODS.value]
+
+    def clear_questions(self):
+        """"清空填写项"""
+        self.CATALOGS = [catalog for catalog in self.CATALOGS if catalog['catalogType'] != CatalogType.QUESTION.value]
+
     def _add_content(self, content: Content):
         self.CONTENTS.append(content.value)
 
@@ -206,11 +225,11 @@ class Form:
 
 
 class CreateActivityForm(Form):
-    TYPE = 'ACTIVITY'
+    TYPE = FormType.ACTIVITY
 
 
 class CreateShoppingForm(Form):
-    TYPE = 'SHOPPING'
+    TYPE = FormType.SHOPPING
 
     def add_goods(self, title, price='', image=''):
         if image != '':
@@ -253,7 +272,7 @@ if __name__ == '__main__':
 
     form = CreateShoppingForm()
     # 添加标题
-    form.add_title('团购表单测试')
+    form.set_title('团购表单测试')
     # 添加文字
     form.add_text('这是一个文字描述')
     # 添加大图

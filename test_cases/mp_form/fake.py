@@ -4,7 +4,6 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/15 15:11
-import time
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import CreateActivityForm, CreateShoppingForm
@@ -17,6 +16,7 @@ class FakeForm:
         :param fuid: 用户群报数 id, 不传则使用配置中默认的
         """
         self.api = FormApi(fuid=fuid)
+        self.api.set_logger_level(self.api.INFO)
 
     def generate_default_form(self, title=None, is_shopping=False):
         """
@@ -24,9 +24,9 @@ class FakeForm:
         :param is_shopping: 是否是团购接龙，目前不是团购就是活动
         :return:
         """
-        form, form_type = (CreateShoppingForm(), '团购') if is_shopping else (CreateActivityForm(), '活动')
+        form = CreateShoppingForm() if is_shopping else CreateActivityForm()
         # 添加标题
-        form.add_title(f'[{form_type}]-{title or "测试表单"}-{time.strftime("%T")}')
+        form.set_title(title)
         # 添加文字
         form.add_text('这是一段文字描述：周末去爬山，记得买水果')
         # 添加大图
@@ -52,7 +52,7 @@ class FakeForm:
     def post_form(self, form):
         res = self.api.v1_form(form.data)
         if res.status_code == 204:
-            self.api.logger.info(f'表单已创建成功: {form.TITLE}')
+            self.api.logger.info(f'已创建表单: {form.TITLE}')
             self.api.logger.info(form.json)
         else:
             self.api.logger.error('表单创建失败')
@@ -66,7 +66,13 @@ class FakeForm:
     def create_no_question_activity_form(self):
         """无填写项表单"""
         form = self.generate_default_form(title='无填写项表单', is_shopping=False)
-        form.CATALOGS = []
+        form.clear_questions()
+        self.post_form(form)
+
+    def create_just_title_activity_form(self):
+        """仅含标题表单"""
+        form = CreateActivityForm()
+        form.set_title('仅含标题表单')
         self.post_form(form)
 
     def run_create_all(self):
