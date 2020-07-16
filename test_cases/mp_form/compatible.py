@@ -281,3 +281,7 @@ class FakeForm:
 if __name__ == '__main__':
     fake = FakeForm(FormApi.USER.zhou_ying1)
     fake.create_have_options_form()
+
+'''
+创建了未开启、进行中、已结束的表单，表单又分为有填选项和没有填选项
+'''
