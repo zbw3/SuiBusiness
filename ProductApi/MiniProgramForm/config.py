@@ -11,6 +11,7 @@ from settings.BaseConfig import Env
 
 from settings.HostName import MiniProgramForm
 
+
 class _Fuid:
     def __init__(self, test, uat, prodution=None):
         self._test = test
@@ -27,9 +28,11 @@ class _Fuid:
         else:
             return self._prodution
 
+
 class UserFuid:
     mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid
     moco = _Fuid(test='1027047761280765954', uat='').fuid
+    zhou_ying1 = _Fuid(test='1027314905029545986', uat='').fuid
 
 
 class Test:
@@ -60,4 +63,3 @@ class Uat:
 
 class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
-
