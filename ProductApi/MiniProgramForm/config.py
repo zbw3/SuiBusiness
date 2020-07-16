@@ -27,9 +27,9 @@ class _Fuid:
         else:
             return self._prodution
 
-class FormUser:
-    mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154')
-    moco = _Fuid(test='1027047761280765954', uat='')
+class UserFuid:
+    mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid
+    moco = _Fuid(test='1027047761280765954', uat='').fuid
 
 
 class Test:
