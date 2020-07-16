@@ -275,5 +275,5 @@ class FakeForm:
 
 
 if __name__ == '__main__':
-    fake = FakeForm(FormApi.USER.zhou_ying)
+    fake = FakeForm(FormApi.USER.zhou_ying1)
     fake.run_create_all()
