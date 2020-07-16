@@ -3,13 +3,17 @@
 # @File  : v1_store_vip_add_member.py
 # @Author: zy
 # @Date  : 2020/4/8
-import unittest
-import ddt
+import pytest
+
 from ProductApi.StoreWeb import api
+from test_cases.store_web.data import account_data
 
 
-def for_resp(params: dict):
-    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
+def get_resp(params: dict):
+    username = account_data.data()["username"]
+    password = account_data.data()["password"]
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity="3604098", Minor_Version="2",
+                           print_results=True)
     resp = api1.v1_store_vip_add_member(params=params)
     resp.encoding = 'etf-8'
     return resp
@@ -24,13 +28,11 @@ param1 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
-    @ddt.data(param1)
-    def test_1(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
+def test_1():
+    params = param1
+    resp = get_resp(params)
+    assert resp.status_code == 200
 
 
 if __name__ == '__main__':
-    Test(unittest.TestCase)
+    pytest.main()

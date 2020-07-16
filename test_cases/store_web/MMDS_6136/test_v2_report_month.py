@@ -3,18 +3,19 @@
 # @File  : test_v2_report_month.py
 # @Author: zy
 # @Date  : 2020/3/26
-import decimal
-import json
-import ddt
-
+import warnings
+import pytest
 from ProductApi.StoreWeb import api
-import unittest
-from test_cases.store_web.report import timestamp
-from test_cases.store_web.report.mysql_month import do_mysql
+from test_cases.store_web.MMDS_6136 import timestamp
+from test_cases.store_web.MMDS_6136.mysql_month import V2ReportMonthMysql
+from test_cases.store_web.data import account_data
 
 
-def for_resp(params: dict):
-    api1 = api.StoreWebApi(username="119@kd.ssj", password="123456", print_results=True)
+def get_resp(params: dict):
+    username = account_data.data()["username"]
+    password = account_data.data()["password"]
+    api1 = api.StoreWebApi(username=username, password=password, trading_entity="3604098", Minor_Version="2",
+                           print_results=True)
     resp = api1.v2_report_month_get(params=params)
     resp.encoding = 'etf-8'
     return resp
@@ -63,74 +64,77 @@ params_5 = {
 }
 
 
-@ddt.ddt
-class Test(unittest.TestCase):
+# 忽略ResourceWarning的警告
+def setUpClass():
+    warnings.simplefilter('ignore', ResourceWarning)
 
-    @ddt.data(params_1)
-    def test_1(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        do = do_mysql(params)
-        result = do.channel_have
-        do.conn_close()
-        if result[0][0] is None:
-            self.assertEqual(
-                str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
-        else:
-            self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
 
-    @ddt.data(params_2)
-    def test_2(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        do = do_mysql(params)
-        result = do.channel_have
-        do.conn_close()
-        if result[0][0] is None:
-            self.assertEqual(
-                str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
-        else:
-            self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
+def test_1():
+    params = params_1
+    resp = get_resp(params)
+    assert resp.status_code == 200
+    mysql_object = V2ReportMonthMysql(params)
+    result = mysql_object.channel_have
+    pre = result.get("trade_amount").to_eng_string() if result.get("trade_amount") else '0.00'
+    assert pre == resp.json()['trade_amount']
+    mysql_object.conn_close()
+    import decimal
+    decimal.Decimal('0.00').to_eng_string()
 
-    @ddt.data(params_3)
-    def test_3(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        do = do_mysql(params)
-        result = do.channel_have
-        do.conn_close()
-        if result[0][0] is None:
-            self.assertEqual(
-                str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
-        else:
-            self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
 
-    @ddt.data(params_4)
-    def test_4(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        do = do_mysql(params)
-        result = do.channel_have
-        do.conn_close()
-        if result[0][0] is None:
-            self.assertEqual(
-                str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
-        else:
-            self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
+def test_2():
+    params = params_2
+    resp = get_resp(params)
+    assert resp.status_code == 200
+    mysql_object = V2ReportMonthMysql(params)
+    result = mysql_object.channel_have
+    pre = result.get("trade_amount").to_eng_string() if result.get("trade_amount") else '0.00'
+    assert pre == resp.json()['trade_amount']
+    mysql_object.conn_close()
 
-    @ddt.data(params_5)
-    def test_5(self, params):
-        resp = for_resp(params)
-        self.assertEqual(resp.status_code, 200)
-        do = do_mysql(params)
-        result = do.channel_have
-        do.conn_close()
-        if result[0][0] is None:
-            self.assertEqual(
-                str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
-        else:
-            self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
+
+def test_3():
+    params = params_3
+    resp = get_resp(params)
+    assert resp.status_code == 200
+    mysql_object = V2ReportMonthMysql(params)
+    result = mysql_object.channel_have
+    pre = result.get("trade_amount").to_eng_string() if result.get("trade_amount") else '0.00'
+    assert pre == resp.json()['trade_amount']
+    mysql_object.conn_close()
+
+
+def test_4():
+    params = params_4
+    resp = get_resp(params)
+    assert resp.status_code == 200
+    mysql_object = V2ReportMonthMysql(params)
+    result = mysql_object.channel_have
+    pre = result.get("trade_amount").to_eng_string() if result.get("trade_amount") else '0.00'
+    assert pre == resp.json()['trade_amount']
+    mysql_object.conn_close()
+
+
+def test_5():
+    params = params_5
+    resp = get_resp(params)
+    assert resp.status_code == 200
+    mysql_object = V2ReportMonthMysql(params)
+    result = mysql_object.channel_have
+    pre = result.get("trade_amount").to_eng_string() if result.get("trade_amount") else '0.00'
+    assert pre == resp.json()['trade_amount']
+    mysql_object.conn_close()
 
 
 if __name__ == '__main__':
-    Test(unittest.TestCase)
+    pytest.main(["-s", "test_v2_report_month.py"])
+
+
+'''
+if result[0][0] is None:
+    self.assertEqual(
+        str(decimal.Decimal("0.00").quantize(decimal.Decimal("0.00"))), json.loads(resp.text)['trade_amount'])
+else:
+    self.assertEqual(str(result[0][0]), json.loads(resp.text)['trade_amount'])
+'''
+
