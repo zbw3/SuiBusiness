@@ -26,7 +26,7 @@ class FormApi(ApiBase):
 
     def get_authorized_hearders(self) -> dict:
         """
-        TODO: 待实现, 登录失败直接抛出异常
+        登录鉴权
         """
         url = self.config.HOSTNAME + self.config.Url.v1_login_test
         data = {

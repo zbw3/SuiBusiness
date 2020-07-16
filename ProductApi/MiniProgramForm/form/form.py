@@ -123,6 +123,8 @@ class Form:
         self.CONFIG = {}
 
         self.now = datetime.now()
+        self.now_offset = lambda days=0, hours=0, seconds=0: (
+                    self.now + timedelta(days, hours=hours, seconds=seconds)).strftime('%Y-%m-%d %T')
         self.CONFIG = {
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')

@@ -189,11 +189,9 @@ class FakeForm:
 
         return form
 
-    '''
-        这是结束的表单二，有标题、图片、文字、填选项的表单
-    '''
     def generate_stop_two_form(self, title=None, is_shopping=False):
         """
+        这是结束的表单二，有标题、图片、文字、填选项的表单
         :param title:
         :param is_shopping:
         :return:
@@ -220,10 +218,16 @@ class FakeForm:
         form.add_text_question('年龄', overt=False)
         form.add_image_question('请上传你的图片')
 
+        # form.set_duration_time(
+        #     start=(datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %T"),
+        #     end=(datetime.datetime.now() + datetime.timedelta(days=-1)).strftime("%Y-%m-%d %T")
+        # )
+
         form.set_duration_time(
-            start=(datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %T"),
-            end=(datetime.datetime.now() + datetime.timedelta(days=-1)).strftime("%Y-%m-%d %T")
+            start=form.now_offset(days=-2),
+            end=form.now_offset(days=-1)
         )
+        print(form.CONFIG)
 
         return form
 
@@ -279,8 +283,9 @@ class FakeForm:
 
 
 if __name__ == '__main__':
-    fake = FakeForm(FormApi.USER.zhou_ying1)
-    fake.create_have_options_form()
+    fake = FakeForm(FormApi.USER.mocobk)
+    # fake.run_create_all()
+    fake.create_stop_two_form()
 
 '''
 创建了未开启、进行中、已结束的表单，表单又分为有填选项和没有填选项
