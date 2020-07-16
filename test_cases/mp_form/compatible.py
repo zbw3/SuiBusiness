@@ -36,7 +36,7 @@ class FakeForm:
         # 添加大图
         form.add_large_img('https://picsum.photos/500')
         # 添加小图
-        form.add_small_imgs(['https://picsum.photos/100'] * 5)
+        form.add_small_imgs(['https://picsum.photos/100'] * 3)
 
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
@@ -45,7 +45,10 @@ class FakeForm:
             form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
             form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
 
-        form.set_duration_time(start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %H:%M"))
+        form.set_duration_time(
+            start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %T"),
+            end=(datetime.datetime.now() + datetime.timedelta(days=+30)).strftime("%Y-%m-%d %T")
+        )
 
         return form
 
@@ -82,7 +85,9 @@ class FakeForm:
         form.add_image_question('请上传你的图片', must=False)
 
         form.set_duration_time(
-            start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %H:%M"))
+            start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %T"),
+            end=(datetime.datetime.now() + datetime.timedelta(days=+30)).strftime("%Y-%m-%d %T")
+        )
 
         return form
 
@@ -133,14 +138,14 @@ class FakeForm:
         # 添加大图
         form.add_large_img('https://picsum.photos/500')
         # 添加小图
-        form.add_small_imgs(['https://picsum.photos/100'] * 5)
+        form.add_small_imgs(['https://picsum.photos/100'] * 2)
 
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         # 添加填写项
         form.add_text_question('姓名')
@@ -178,7 +183,9 @@ class FakeForm:
             form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
 
         form.set_duration_time(
-            end=(datetime.datetime.now() + datetime.timedelta(minutes=+1)).strftime("%Y-%m-%d %H:%M"))
+            start=(datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %T"),
+            end=(datetime.datetime.now() + datetime.timedelta(days=-1)).strftime("%Y-%m-%d %T")
+        )
 
         return form
 
@@ -199,22 +206,24 @@ class FakeForm:
         # 添加大图
         form.add_large_img('https://picsum.photos/500')
         # 添加小图
-        form.add_small_imgs(['https://picsum.photos/100'] * 5)
+        form.add_small_imgs(['https://picsum.photos/100'] * 2)
 
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         # 添加填写项
         form.add_text_question('姓名')
         form.add_text_question('年龄', overt=False)
-        form.add_image_question('请上传你的图片', must=False)
+        form.add_image_question('请上传你的图片')
 
         form.set_duration_time(
-            end=(datetime.datetime.now() + datetime.timedelta(minutes=+1)).strftime("%Y-%m-%d %H:%M"))
+            start=(datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %T"),
+            end=(datetime.datetime.now() + datetime.timedelta(days=-1)).strftime("%Y-%m-%d %T")
+        )
 
         return form
 
@@ -235,7 +244,6 @@ class FakeForm:
     def create_not_open_two_form(self):
         """未开启的表单二，有填选项"""
         form = self.generate_not_open_two_form(title='未开启的表单二，有填选项', is_shopping=True)
-        form.clear_questions()
         self.post_form(form)
 
     def create_just_title_activity_form(self):
@@ -247,25 +255,21 @@ class FakeForm:
     def create_not_options_form(self):
         """进行中的表单，没有填选项"""
         form = self.generate_not_options_form(title='进行中的表单，没有填选项', is_shopping=True)
-        form.clear_questions()
         self.post_form(form)
 
     def create_have_options_form(self):
         """进行中的表单，有填选项"""
-        form = self.generate_not_options_form(title='进行中的表单，有填选项', is_shopping=True)
-        form.clear_questions()
+        form = self.generate_have_options_form(title='进行中的表单，有填选项', is_shopping=True)
         self.post_form(form)
 
     def create_stop_one_form(self):
-        """结束中的表单，没有填选项"""
-        form = self.generate_not_options_form(title='结束中的表单，没有填选项', is_shopping=True)
-        form.clear_questions()
+        """结束的表单，没有填选项"""
+        form = self.generate_stop_one_form(title='结束的表单，没有填选项', is_shopping=True)
         self.post_form(form)
 
     def create_stop_two_form(self):
-        """结束中的表单，有填选项"""
-        form = self.generate_not_options_form(title='结束中的表单，有填选项', is_shopping=False)
-        form.clear_questions()
+        """结束的表单，有填选项"""
+        form = self.generate_stop_two_form(title='结束的表单，有填选项', is_shopping=True)
         self.post_form(form)
 
     def run_create_all(self):
@@ -276,4 +280,4 @@ class FakeForm:
 
 if __name__ == '__main__':
     fake = FakeForm(FormApi.USER.zhou_ying1)
-    fake.run_create_all()
+    fake.create_have_options_form()
