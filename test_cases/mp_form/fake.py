@@ -6,6 +6,7 @@
 # @Time   : 2020/7/15 15:11
 
 from ProductApi.MiniProgramForm.api import FormApi
+from ProductApi.MiniProgramForm.config import FormUser
 from ProductApi.MiniProgramForm.form import CreateActivityForm, CreateShoppingForm
 
 
@@ -82,5 +83,5 @@ class FakeForm:
 
 
 if __name__ == '__main__':
-    fake = FakeForm()
+    fake = FakeForm(FormApi.mocobk.fuid)
     fake.run_create_all()

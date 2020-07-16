@@ -7,7 +7,29 @@
 """
 http://swagger.sui.work/pass/apidoc/share/show.htm?shareKey=8895efc612db2b171b1b78234060c562
 """
+from settings.BaseConfig import Env
+
 from settings.HostName import MiniProgramForm
+
+class _Fuid:
+    def __init__(self, test, uat, prodution=None):
+        self._test = test
+        self._uat = uat
+        self._prodution = prodution or uat
+
+    @property
+    def fuid(self):
+        env = Env()
+        if env.is_test:
+            return self._test
+        elif env.is_uat:
+            return self._uat
+        else:
+            return self._prodution
+
+class FormUser:
+    mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154')
+    moco = _Fuid(test='1027047761280765954', uat='')
 
 
 class Test:
@@ -36,10 +58,6 @@ class Uat:
         pass
 
 
-class Production:
-    APP_ID = 'wx3f32186d2340171c'
+class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
-    DUFAULT_FUID = '1025186602202501154'
 
-    class Url:
-        pass

@@ -12,7 +12,7 @@ from ProductApi.MiniProgramForm import config
 from ProductApi.base import ApiBase, Response
 
 
-class FormApi(ApiBase):
+class FormApi(ApiBase, config.FormUser):
 
     def __init__(self, fuid=None, print_results=False):
         """
