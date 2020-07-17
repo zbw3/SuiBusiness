@@ -41,12 +41,12 @@ class FakeForm:
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         form.set_duration_time(
-            start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %T"),
+            start=form.now_offset(days=+1),
             end=(datetime.datetime.now() + datetime.timedelta(days=+30)).strftime("%Y-%m-%d %T")
         )
 
@@ -75,9 +75,9 @@ class FakeForm:
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         # 添加填写项
         form.add_text_question('姓名')
@@ -85,7 +85,7 @@ class FakeForm:
         form.add_image_question('请上传你的图片', must=False)
 
         form.set_duration_time(
-            start=(datetime.datetime.now() + datetime.timedelta(days=+1)).strftime("%Y-%m-%d %T"),
+            start=form.now_offset(days=+1),
             end=(datetime.datetime.now() + datetime.timedelta(days=+30)).strftime("%Y-%m-%d %T")
         )
 
@@ -113,9 +113,9 @@ class FakeForm:
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         form.set_duration_time()
 
@@ -178,12 +178,12 @@ class FakeForm:
         if is_shopping:
             form.add_goods('葡萄', '10', 'http://mocobk.test.upcdn.net/image/20200715153304815.jpg')
             form.add_goods('西瓜', '2', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('苹果', '7', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('草莓', '20', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
-            form.add_goods('橘子', '5', 'http://mocobk.test.upcdn.net/image/20200715153409003.jpg')
+            form.add_goods('苹果', '7')
+            form.add_goods('草莓', '20')
+            form.add_goods('橘子', '5')
 
         form.set_duration_time(
-            start=(datetime.datetime.now() + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %T"),
+            start=form.now_offset(days=-2),
             end=(datetime.datetime.now() + datetime.timedelta(days=-1)).strftime("%Y-%m-%d %T")
         )
 
