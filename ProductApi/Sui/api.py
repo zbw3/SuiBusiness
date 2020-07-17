@@ -21,7 +21,7 @@ class Sui(ApiBase):
         self.username = username
         self.password = password
         self.config: config.Test = getattr(config, self.env.name)
-        super().__init__()
+        super().__init__(self.config)
         if not output_log:
             self.logger.setLevel(self.ERROR)
 

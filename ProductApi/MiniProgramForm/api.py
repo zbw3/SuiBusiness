@@ -15,7 +15,7 @@ from ProductApi.base import ApiBase, Response
 class FormApi(ApiBase):
     USER = config.UserFuid
 
-    def __init__(self, fuid=None, print_results=False):
+    def __init__(self, fuid=config.UserFuid.mocobk, print_results=False):
         """
         :param fuid: 用户群报数 id, 不传则使用配置中默认的
         """
@@ -28,14 +28,13 @@ class FormApi(ApiBase):
         """
         登录鉴权
         """
-        url = self.config.HOSTNAME + self.config.Url.v1_login_test
         data = {
             "appId": self.config.APP_ID,
             "fuid": self.fuid
         }
         self.set_logger_off()
         self.logger.info('正在登陆...')
-        response = super().request(url=url, method='POST', json=data)
+        response = super().request(url=self.config.Url.v1_login_test, method='POST', json=data)
         self.set_logger_on()
 
         if response.status_code != 200:
@@ -50,11 +49,6 @@ class FormApi(ApiBase):
         need_auth:  是否需要鉴权， 服务端这边对于不需要鉴权的但传
         :return:
         """
-        if isinstance(url, str):
-            url = self.config.HOSTNAME + url
-        elif isinstance(url, (tuple, list)):
-            url = ''.join(url)
-
         headers = {**headers, **self.authorized_hearders} if headers else self.authorized_hearders
         response = super().request(method, url, params, data, json, headers, cookies, files, auth, timeout,
                                    allow_redirects, proxies, hooks, stream, verify, cert)
@@ -115,7 +109,7 @@ class FormApi(ApiBase):
 if __name__ == '__main__':
     import os
 
-    os.environ['env'] = 'production'
+    os.environ['env'] = 'test'
     api = FormApi(fuid='1026957780256297009', print_results=True)
     api.v1_creation_forms(params={'pageNo': 1, 'pageSize': 50})
     api.v1_examples()

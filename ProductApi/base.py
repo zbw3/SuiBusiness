@@ -6,6 +6,7 @@
 # @Time   : 2019/12/23 16:51
 
 from json import JSONDecodeError
+from urllib.parse import urljoin
 
 import requests
 from requests import Response as _Response
@@ -19,7 +20,8 @@ class Response(_Response):
 
 class ApiBase(Logger):
 
-    def __init__(self, print_results=False):
+    def __init__(self, config, print_results=False):
+        self.config = config
         self.print_results = print_results
         super().__init__(logger_name='ApiLogger', level=API_LOGGER_LEVEL)
         self.session = requests.Session()
@@ -35,6 +37,9 @@ class ApiBase(Logger):
         """
         :return: requests.response object but with data property
         """
+        # url 如果是 path ，则加上 HOSTNAME
+        if isinstance(url, str) and not url.startswith('http'):
+            url = urljoin(self.config.HOSTNAME, url)
 
         response = self.session.request(method=method, url=url, params=params, data=data, json=json, headers=headers,
                                         cookies=cookies, files=files,
