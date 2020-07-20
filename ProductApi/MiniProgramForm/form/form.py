@@ -121,6 +121,7 @@ class Form:
         self.CONTENTS = []
         self.CATALOGS = []
         self.CONFIG = {}
+        self.form_api = FormApi()
 
         self.now = datetime.now()
         self.now_offset = lambda days=0, hours=0, seconds=0: (
@@ -216,10 +217,9 @@ class Form:
         self.CATALOGS.append(catalog.value)
 
     def _get_img_url(self, image):
-        api = FormApi()
-        api.set_logger_level(api.INFO)
-        api.logger.info('图片上传中...')
-        res = api.v1_image(image)
+        self.form_api.set_logger_level(self.form_api.INFO)
+        self.form_api.logger.info('图片上传中...')
+        res = self.form_api.v1_image(image)
         if res.status_code == 200:
             return res.data.get('data')
         else:
@@ -272,22 +272,50 @@ if __name__ == '__main__':
     # api = FormApi(fuid='1026957780256297009', print_results=True)
     # api.v1_form(form.data)
 
+    """
+    创建多图
+    """
     form = CreateShoppingForm()
     # 添加标题
-    form.set_title('团购表单测试')
+    form.set_title('多图表单(大图10 + 小图 90 + 商品 20)')
     # 添加文字
     form.add_text('这是一个文字描述')
     # 添加大图
-    form.add_large_img('https://picsum.photos/200')
+    for i in range(10):
+        form.add_large_img('https://picsum.photos/1000')
+
+    form.add_small_imgs(['https://picsum.photos/800'] * 90)
 
     # 添加商品
-    form.add_goods('苹果', price='2.5', image='https://picsum.photos/50')
-    form.add_goods('香蕉', price='5', image='https://picsum.photos/50')
+    for i in range(1, 21):
+        form.add_goods(str(i), price='2.5', image='https://picsum.photos/500')
+    # form.add_goods('香蕉', price='5', image='https://picsum.photos/50')
 
     # 添加填写项
     form.add_text_question('你选的水果是？')
 
     print(form.json)
 
-    api = FormApi()
+    api = form.form_api
     api.v1_form(form.data)
+
+    """
+    创建多商品问题
+    """
+    # form = CreateShoppingForm()
+    # # 添加标题
+    # form.set_title('多商品（25）无图片测试')
+    # # 添加文字
+    # form.add_text('这是一个文字描述')
+    #
+    # for i in range(1, 26):
+    #     form.add_goods(str(i) + '我的商品铺子里的物品我的商品铺子里的物品我的商品铺子里的物品我的商品铺子里', price='2.5', image='')
+    # # form.add_goods('香蕉', price='5', image='https://picsum.photos/50')
+    #
+    # # 添加填写项
+    # form.add_text_question('你选的水果是？')
+    #
+    # print(form.json)
+    #
+    # api = form.form_api
+    # api.v1_form(form.data)

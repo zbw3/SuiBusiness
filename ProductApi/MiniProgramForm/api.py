@@ -60,8 +60,6 @@ class FormApi(ApiBase):
                 response = super().request(method, url, params, data, json, headers, cookies, files, auth, timeout,
                                            allow_redirects, proxies, hooks, stream, verify, cert)
 
-        if response.elapsed.total_seconds() > 5:
-            raise Exception('接口请求响应时间超过 5s 了，请及时检查')
         return response
 
     def v1_creation_forms(self, params):
@@ -87,7 +85,12 @@ class FormApi(ApiBase):
         """
         url = self.config.Url.v1_image
         if image.startswith('http'):
-            res = requests.get(image, stream=True)
+            try:
+                res = requests.get(image, timeout=120)
+            except Exception as e:
+                self.logger.warning(f'{e} \n重试中...')
+                self.v1_image(image)
+                return
             fp = res.content
             name = 'image.jpg'
             content_type = res.headers.get('Content-Type', 'image/jpeg')
