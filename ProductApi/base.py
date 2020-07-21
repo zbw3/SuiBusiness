@@ -11,7 +11,7 @@ from urllib.parse import urljoin
 import requests
 from requests import Response as _Response
 
-from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env
+from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env, REQUEST_PROXIES
 
 
 class Response(_Response):
@@ -32,8 +32,8 @@ class ApiBase(Logger):
 
     def request(self, method, url,
                 params=None, data=None, json=None, headers=None, cookies=None, files=None,
-                auth=None, timeout=None, allow_redirects=True, proxies=None,
-                hooks=None, stream=None, verify=None, cert=None) -> Response:
+                auth=None, timeout=None, allow_redirects=True, proxies=REQUEST_PROXIES, verify=False,
+                hooks=None, stream=None, cert=None) -> Response:
         """
         :return: requests.response object but with data property
         """
@@ -43,8 +43,11 @@ class ApiBase(Logger):
 
         response = self.session.request(method=method, url=url, params=params, data=data, json=json, headers=headers,
                                         cookies=cookies, files=files,
-                                        auth=auth, timeout=timeout, allow_redirects=allow_redirects, proxies=proxies,
-                                        hooks=hooks, stream=stream, verify=verify, cert=cert)
+                                        auth=auth, timeout=timeout, allow_redirects=allow_redirects,
+                                        hooks=hooks, stream=stream,  cert=cert,
+                                        proxies=proxies,
+                                        verify=verify
+                                        )
 
         self.logger.debug('%s %s', response.request.method, response.request.url)
         self.logger.debug('请求参数：%s', params or data or json)

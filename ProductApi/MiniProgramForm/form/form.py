@@ -23,6 +23,7 @@ class ContentType(Enum):
     NUMBER = 'NUMBER'  # 添加商品用到
     IMAGE = 'IMAGE'
     THUMBNAIL = 'THUMBNAIL'
+    NUMBER_FLOAT = 'NUMBER_FLOAT'
 
 
 class RoleType(Enum):
@@ -186,6 +187,16 @@ class Form:
         self._add_catalog(
             Catalog(
                 type_=ContentType.IMAGE,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
+    def add_number_question(self, title, must=True, overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.NUMBER_FLOAT,
                 must=must,
                 overt=overt,
                 form_catalogs=[FormCatalog(title)]

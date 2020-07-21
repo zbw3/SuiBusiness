@@ -76,7 +76,8 @@ class PushApi(ApiBase):
         """
         url = self.config.Url.v1_push_staff_image
         response = self.request(url=url, method='POST', data={'image_type': params['image_type']},
-                                files={'image_file': params['image_file']}, headers=self.headers)
+                                files={'image_file': params['image_file']}, headers=self.headers
+                                )
         return response
 
 

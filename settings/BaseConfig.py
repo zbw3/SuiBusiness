@@ -58,3 +58,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__) + '/..')
 
 # Api 默认日志级别
 API_LOGGER_LEVEL = Logger.DEBUG
+
+# 配置 api 请求是否都走代理
+REQUEST_PROXIES = None
+# REQUEST_PROXIES = {'http': '127.0.0.1:8888', 'https': '127.0.0.1:8888'}
