@@ -33,12 +33,15 @@ class UserFuid:
     mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid
     moco = _Fuid(test='1027047761280765954', uat='').fuid
     zhou_ying1 = _Fuid(test='1027314905029545986', uat='').fuid
+    # mocobk2 = _Fuid(test='1053828831317590037', uat='1025186602202501154').fuid  # 已废弃的 UAT 用户
 
 
 class Test:
     APP_ID = 'wx1e766c9a00355017'
     HOSTNAME = MiniProgramForm.TEST
     DUFAULT_FUID = '1026957780256297009'
+    # APP_ID = 'wxc67f6d90678e1fe4'  # 已废弃的 UAT
+    # DUFAULT_FUID = '1053828831317590037'  # 已废弃的 UAT 用户
 
     class Url:
         """
@@ -50,6 +53,7 @@ class Test:
         v1_examples = '/v1/examples'
         v1_image = '/v1/image'
         v1_form = '/v1/form'
+        v1_form_form_id = '/v1/form/{formId}'
 
 
 class Uat:

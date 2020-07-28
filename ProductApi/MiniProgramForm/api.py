@@ -4,15 +4,38 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/1/22 9:53
+import os
 import mimetypes
+import threading
 
+import jmespath
 import requests
 
 from ProductApi.MiniProgramForm import config
 from ProductApi.base import ApiBase, Response
 
 
-class FormApi(ApiBase):
+class SingletonMetaClass(type):
+    _instance_lock = threading.Lock()  # 支持多线程的单例模式
+    _instance = {}
+
+    def __call__(cls, *args, **kwargs):
+        """"
+        元类实现 FormApi 单例模式，避免同一个账号被实例化多次，导致多次请求登录接口
+        没有用 def __new__(cls, *args, **kwargs) 方式实现单例，因为 __new__ 不返回一个对象,
+        它返回一个在其后调用__init__的单元化对象，即虽然是单例，但每次都会调用 __init__,如下：
+        a = A() 实际上是 a = A.__new__(A) 和 a.__init__()
+        """
+        fuid = args[0] if args else kwargs.get('fuid') or config.UserFuid.mocobk
+        if not cls._instance.get(fuid):
+            with cls._instance_lock:
+                if not cls._instance.get(fuid):
+                    cls._instance[fuid] = super().__call__(*args, **kwargs)
+
+        return cls._instance[fuid]
+
+
+class FormApi(ApiBase, metaclass=SingletonMetaClass):
     USER = config.UserFuid
 
     def __init__(self, fuid=config.UserFuid.mocobk, print_results=False):
@@ -103,15 +126,25 @@ class FormApi(ApiBase):
         response = self.request(url=url, method='POST', files=files)
         return response
 
-    def v1_form(self, data):
+    def v1_form(self, data, return_form_id=False):
+        """创建表单接口不支持返回新创建的表单 id， 这里通过获取创建表单列表拿到最新创建的表单 id"""
         url = self.config.Url.v1_form
         response = self.request(url=url, method='POST', json=data)
+        if return_form_id:
+            creation_forms = self.v1_creation_forms({'pageNo': 1, 'pageSize': 5})
+            if creation_forms.status_code != 200:
+                raise Exception('创建表单后获取表单 id 失败')
+            form_ids = jmespath.search('@.data.creations.*[*].formId[]', creation_forms.data)
+            response.form_id = form_ids[0]
+        return response
+
+    def v1_form_form_id_get(self, form_id):
+        url = self.config.Url.v1_form_form_id.format(formId=form_id)
+        response = self.request(url=url, method='GET')
         return response
 
 
 if __name__ == '__main__':
-    import os
-
     os.environ['env'] = 'test'
     api = FormApi(fuid='1026957780256297009', print_results=True)
     api.v1_creation_forms(params={'pageNo': 1, 'pageSize': 50})

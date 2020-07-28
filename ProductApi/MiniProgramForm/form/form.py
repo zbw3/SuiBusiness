@@ -5,7 +5,9 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/14 13:57
 import json
+import os
 import time
+from random import randint
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import List, Union
@@ -16,6 +18,7 @@ from ProductApi.MiniProgramForm.api import FormApi
 class FormType(Enum):
     SHOPPING = '团购'
     ACTIVITY = '活动'
+    ACTIVITY_V2 = '活动(&question)'
 
 
 class ContentType(Enum):
@@ -106,6 +109,16 @@ class Catalog:
         self.form_catalogs.append(form_catalog)
 
 
+class RandomImageUrl:
+    @property
+    def large(self):
+        return f'https://picsum.photos/{randint(1000, 1500)}/{randint(1000, 1500)}'
+
+    @property
+    def small(self):
+        return f'https://picsum.photos/{randint(500, 800)}/{randint(500, 800)}'
+
+
 class Form:
     TYPE: FormType = None
 
@@ -115,6 +128,7 @@ class Form:
     Content = Content
     Catalog = Catalog
     FormCatalog = FormCatalog
+    RandomImage = RandomImageUrl()
 
     def __init__(self):
         self.COVER = 'https://resources.sui.com/fed/wechat/statistics-tools/templates/bg_banner.png?v1'
@@ -126,11 +140,12 @@ class Form:
 
         self.now = datetime.now()
         self.now_offset = lambda days=0, hours=0, seconds=0: (
-                    self.now + timedelta(days, hours=hours, seconds=seconds)).strftime('%Y-%m-%d %T')
+                self.now + timedelta(days, hours=hours, seconds=seconds)).strftime('%Y-%m-%d %T')
         self.CONFIG = {
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
         }
+        self._cache = os.path.join(os.path.dirname(__file__), './cache.json')
 
     @property
     def data(self):
@@ -140,7 +155,8 @@ class Form:
                 raise ValueError('团购表单，至少需要添加一个商品')
 
         return {
-            "type": self.TYPE.name,
+            # 有填写项 TYPE = ACTIVITY_V2
+            "type": self.TYPE.name if not self.is_activity_v2() else FormType.ACTIVITY_V2.name,
             "cover": self.COVER,
             "title": self.TITLE,
             "contents": self.CONTENTS,
@@ -221,6 +237,13 @@ class Form:
         """"清空填写项"""
         self.CATALOGS = [catalog for catalog in self.CATALOGS if catalog['catalogType'] != CatalogType.QUESTION.value]
 
+    def is_activity_v2(self):
+        if self.TYPE == FormType.ACTIVITY:
+            for catalog in self.CATALOGS:
+                if catalog['catalogType'] == CatalogType.QUESTION.value:
+                    return True
+        return False
+
     def _add_content(self, content: Content):
         self.CONTENTS.append(content.value)
 
@@ -228,11 +251,26 @@ class Form:
         self.CATALOGS.append(catalog.value)
 
     def _get_img_url(self, image):
+        """
+        :param image: 图片地址，支持本地路径，网络url（如果已是 feidee域 名下的 url 则直接返回）
+        :return: str
+        """
+        with open(self._cache, 'r') as fp:
+            cache = json.load(fp)
+        if cache.get(image):
+            return cache[image]
+
+        if image.startswith('https://oss.feidee'):
+            return image
         self.form_api.set_logger_level(self.form_api.INFO)
         self.form_api.logger.info('图片上传中...')
         res = self.form_api.v1_image(image)
         if res.status_code == 200:
-            return res.data.get('data')
+            url = res.data.get('data')
+            cache[image] = url
+            with open(self._cache, 'w') as fp:
+                json.dump(cache, fp)
+            return url
         else:
             raise Exception(f'图片上传失败: {res.text}')
 
