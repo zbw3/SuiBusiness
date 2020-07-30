@@ -47,6 +47,7 @@ class Logger:
 
     def __init__(self, logger_name, level=INFO, handler=(StreamHandler,)):
         # 创建一个logger
+        self.handlers = None
         self.logger = logging.getLogger(logger_name)
         self.logger.setLevel(level)
 
@@ -55,6 +56,17 @@ class Logger:
 
         if 'FileHandler' in handler:
             self.logger.addHandler(file_handler)
+
+    def set_logger_level(self, level):
+        for handler in self.logger.handlers:
+            handler.setLevel(level)
+
+    def set_logger_off(self):
+        self.handlers = self.logger.handlers[::]
+        self.logger.handlers = []
+
+    def set_logger_on(self):
+        self.logger.handlers = self.handlers[::]
 
 
 if __name__ == '__main__':

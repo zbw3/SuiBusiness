@@ -8,6 +8,8 @@ from settings.HostName import SuiAuth, SuiLogin, SuiUserApi
 
 
 class Test:
+    HOSTNAME = SuiAuth.TEST
+
     class Url:
         v2_oauth2_authorize = SuiAuth.TEST + '/v2/oauth2/authorize'
         login_do = SuiLogin.TEST + '/login.do'
@@ -26,6 +28,8 @@ class Test:
 
 
 class Production:
+    HOSTNAME = SuiAuth.PROD
+
     class Url:
         v2_oauth2_authorize = SuiAuth.PROD + '/v2/oauth2/authorize'
         login_do = SuiLogin.PROD + '/login.do'

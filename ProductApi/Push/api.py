@@ -19,7 +19,7 @@ class PushApi(ApiBase):
         """
         super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
-        self.headers = Sui(username, password).authorized_hearders()
+        self.headers = Sui(username, password).authorized_headers()
         self.headers["Trading-Entity"] = trading_entity
 
     def v1_push_staff_info_get(self):
@@ -76,7 +76,8 @@ class PushApi(ApiBase):
         """
         url = self.config.Url.v1_push_staff_image
         response = self.request(url=url, method='POST', data={'image_type': params['image_type']},
-                                files={'image_file': params['image_file']}, headers=self.headers)
+                                files={'image_file': params['image_file']}, headers=self.headers
+                                )
         return response
 
 

@@ -17,9 +17,9 @@ class StoreWebApi(ApiBase):
         :param password: 密码
         :param trading_entity: 账本 ID
         """
-        super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
-        self.headers = Sui(username, password).authorized_hearders()
+        super().__init__(self.config, print_results)
+        self.headers = Sui(username, password).authorized_headers()
         self.headers["Minor-Version"] = version
         self.headers["Trading-Entity"] = trading_entity
 
@@ -494,7 +494,7 @@ if __name__ == '__main__':
     api = StoreWebApi(username="13085060818", password="123456", version='1', trading_entity="37017996", print_results=True)
 
     # api = StoreWebApi(username="al1@kd.ssj", password="a12345678", version='1', trading_entity="36056917", print_results=True)
-    # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
+    res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
     # res = api.v2_store_products_spec_get(spec_name='尺寸') #指定查询某个规格
     # res = api.v2_store_products_spec_get() #查询店铺所有规格
     #res = api.v2_store_products_spec_value_post({"spec_name_id": "5", "spec_value": "超大"}) #添加商品规格值

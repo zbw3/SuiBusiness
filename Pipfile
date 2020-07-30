@@ -29,6 +29,8 @@ allure-pytest = "*"
 [dev-packages]
 pillow = "*"
 pymongo = "*"
+mitmproxy = "*"
+
 
 [requires]
 python_version = "3.7"
