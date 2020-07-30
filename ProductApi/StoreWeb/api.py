@@ -576,10 +576,10 @@ if __name__ == '__main__':
     # res = api.v1_store_coupon_batches_coupon_batch_id_vip_coupons_post({"tag_ids": [], "vip_ids": [8667, 8663]}, '1452')   # 批量发券
     # res = api.v1_store_coupon_batches_coupon_batch_id_coupons_get({'page_number': 1, 'page_size': 30}, '1418')    # 获取卡券批次下的卡券列表
     # res = api.v1_store_coupon_batches_coupon_batch_id_export_get('1418')  # 导出卡券
-    # res = api.v1_store_vip_rechrages_get()  # 获取充值列表
+    res = api.v1_store_vip_rechrages_get()  # 获取充值列表
     # res = api.v1_store_vip_recharges_fid_get() # 获取充值优惠详情
     # res = api.v1_store_vip_rechrages_fid_put({"recharge_amount":"300.00","donation_amount":"50.00"})  # 修改充值优惠记录
     # res = api.v1_store_vip_rechrages_post({"recharge_amount": 50.0, "donation_amount": 5.0})  # 新建充值记录
     # res = api.v1_store_vip_rechrages_save([{"recharge_amount": "100", "donation_amount": "10"}, {"recharge_amount": "200", "donation_amount": "30"}])
-    res = api.v1_store_vip_order_page({'query': '{"order_code":"","vip_member_no":"","vip_nick_name":"","status":"","vip_phone":"","begin_date":1591632000000,"end_date":1594223999999,"page_number":1,"page_size":30}'})
+    # res = api.v1_store_vip_order_page({'query': '{"order_code":"","vip_member_no":"","vip_nick_name":"","status":"","vip_phone":"","begin_date":1591632000000,"end_date":1594223999999,"page_number":1,"page_size":30}'})
 # {"order_code":"","vip_member_no":"","vip_nick_name":"","status":"","vip_phone":"","begin_date":1591632000000,"end_date":1594223999999,"page_number":1,"page_size":30}
