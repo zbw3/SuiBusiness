@@ -52,6 +52,24 @@ class Test:
         v1_store_vip_recharges = '/v1/store/vip/recharges'
         v1_store_vip_recharges_save = '/v1/store/vip/recharges/save'
 
+        "网店商品分组"
+        """
+        新增接口：
+1、GET /v1/store/products/tags 查询店铺商品分组
+2、POST /v1/store/products/tags 添加商品分组
+3、PUT /v1/store/products/tags 修改商品分组
+4、DELETE /v1/store/products/tags/batch 批量删除商品分组
+5、POST /v1/store/products/tags/add_product_channels 分组添加渠道商品
+6、DELETE /v1/store/products/tags/delete_product_channels 分组移除渠道商品
+7、PUT /v1/store/products/tags/reweight_product_channels 修改分组里渠道商品的权重
+        """
+        v1_store_products_tags = '/v1/store/products/tags'
+        v1_store_products_tags_batch = "/v1/store/products/tags/batch"
+        v1_store_products_tags_add_product_channels = '/v1/store/products/tags/add_product_channels'
+        v1_store_products_tags_delete_product_channels = '/v1/store/products/tags/delete_product_channels'
+        v1_store_products_tags_reweight_product_channels = '/v1/store/products/tags/reweight_product_channels'
+
+
 
 class Production:
     HOSTNAME = BizBook.PROD
