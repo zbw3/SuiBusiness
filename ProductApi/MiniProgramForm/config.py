@@ -30,8 +30,8 @@ class _Fuid:
 
 
 class UserFuid:
-    mocobk = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid
-    moco = _Fuid(test='1027047761280765954', uat='').fuid
+    user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
+    user2 = _Fuid(test='1027047761280765954', uat='').fuid  # moco
     zhou_ying1 = _Fuid(test='1027314905029545986', uat='').fuid
     # mocobk2 = _Fuid(test='1053828831317590037', uat='1025186602202501154').fuid  # 已废弃的 UAT 用户
 
@@ -54,6 +54,8 @@ class Test:
         v1_image = '/v1/image'
         v1_form = '/v1/form'
         v1_form_form_id = '/v1/form/{formId}'
+        v1_form_id_form_data = '/v1/{formId}/form_data'
+        v1_form_id_status = '/v1/form/{formId}/status'
 
 
 class Uat:

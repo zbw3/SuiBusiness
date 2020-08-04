@@ -4,12 +4,11 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2019/1/22 9:53
-import os
 import mimetypes
+import os
 import threading
 
 import jmespath
-import requests
 
 from ProductApi.MiniProgramForm import config
 from ProductApi.base import ApiBase, Response
@@ -22,11 +21,11 @@ class SingletonMetaClass(type):
     def __call__(cls, *args, **kwargs):
         """"
         元类实现 FormApi 单例模式，避免同一个账号被实例化多次，导致多次请求登录接口
-        没有用 def __new__(cls, *args, **kwargs) 方式实现单例，因为 __new__ 不返回一个对象,
+        没有用 def __new__(cls, *args, **kwargs) 方式实现单例，因为 __new__ 不返回一个已实例化的对象,
         它返回一个在其后调用__init__的单元化对象，即虽然是单例，但每次都会调用 __init__,如下：
         a = A() 实际上是 a = A.__new__(A) 和 a.__init__()
         """
-        fuid = args[0] if args else kwargs.get('fuid') or config.UserFuid.mocobk
+        fuid = args[0] if args else kwargs.get('fuid') or config.UserFuid.user1
         if not cls._instance.get(fuid):
             with cls._instance_lock:
                 if not cls._instance.get(fuid):
@@ -38,7 +37,7 @@ class SingletonMetaClass(type):
 class FormApi(ApiBase, metaclass=SingletonMetaClass):
     USER = config.UserFuid
 
-    def __init__(self, fuid=config.UserFuid.mocobk, print_results=False):
+    def __init__(self, fuid=config.UserFuid.user1, print_results=False):
         """
         :param fuid: 用户群报数 id, 不传则使用配置中默认的
         """
@@ -64,24 +63,26 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
             raise Exception('登陆失败！请检查环境和账号')
         return {'Authorization': response.data.get('data', {}).get('token', '')}
 
-    def request(self, method, url,
-                params=None, data=None, json=None, headers: dict = None, cookies=None, files=None,
-                auth=None, timeout=None, allow_redirects=True, proxies=None,
-                hooks=None, stream=None, verify=None, cert=None, need_auth=True) -> Response:
+    def request(self, url, method,
+                params=None, data=None, json=None, headers=None, cookies=None, files=None,
+                auth=None, timeout=None, allow_redirects=True, hooks=None, stream=None, **kwargs) -> Response:
         """
         need_auth:  是否需要鉴权， 服务端这边对于不需要鉴权的但传
         :return:
         """
         headers = {**headers, **self.authorized_hearders} if headers else self.authorized_hearders
-        response = super().request(method, url, params, data, json, headers, cookies, files, auth, timeout,
-                                   allow_redirects, proxies, hooks, stream, verify, cert)
+        response = super().request(url, method,
+                                   params, data, json, headers, cookies, files,
+                                   auth, timeout, allow_redirects, hooks, stream, **kwargs)
+
         if response.status_code == 401:
             self.logger.info('登录 token 过期，重新登录中...')
             self.authorized_hearders = self.get_authorized_hearders()
             if self.authorized_hearders:
                 self.logger.info(f'登录中成功，重试请求：{response.request.url}')
-                response = super().request(method, url, params, data, json, headers, cookies, files, auth, timeout,
-                                           allow_redirects, proxies, hooks, stream, verify, cert)
+                response = self.request(url, method,
+                                        params, data, json, headers, cookies, files,
+                                        auth, timeout, allow_redirects, hooks, stream, **kwargs)
 
         return response
 
@@ -109,7 +110,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_image
         if image.startswith('http'):
             try:
-                res = requests.get(image, timeout=120)
+                res = self.request(url=image, method='GET', timeout=120)
             except Exception as e:
                 self.logger.warning(f'{e} \n重试中...')
                 self.v1_image(image)
@@ -141,6 +142,26 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
     def v1_form_form_id_get(self, form_id):
         url = self.config.Url.v1_form_form_id.format(formId=form_id)
         response = self.request(url=url, method='GET')
+        return response
+
+    def v1_form_id_form_data_get(self, form_id):
+        url = self.config.Url.v1_form_id_form_data.format(formId=form_id)
+        response = self.request(url=url, method='GET')
+        return response
+
+    def v1_form_id_form_data_post(self, form_id, data):
+        url = self.config.Url.v1_form_id_form_data.format(formId=form_id)
+        response = self.request(url=url, method='POST', json=data)
+        return response
+
+    def v1_form_id_form_data_put(self, form_id, data):
+        url = self.config.Url.v1_form_id_form_data.format(formId=form_id)
+        response = self.request(url=url, method='PUT', json=data)
+        return response
+
+    def v1_form_id_status_put(self, form_id, status):
+        url = self.config.Url.v1_form_id_status.format(formId=form_id)
+        response = self.request(url=url, method='PUT', params={'status': status})
         return response
 
 

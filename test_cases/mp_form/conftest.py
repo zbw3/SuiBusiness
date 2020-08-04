@@ -5,21 +5,23 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/27 14:55
 
-import pytest
-from ProductApi.MiniProgramForm.api import FormApi
-from ProductApi.MiniProgramForm.form import CreateShoppingForm, CreateActivityForm
-from test_cases.mp_form.poetry_and_future import POETRY_1, POETRY_2
 from os.path import abspath
 
+import pytest
+
+from ProductApi.MiniProgramForm.api import FormApi
+from ProductApi.MiniProgramForm.form import CreateShoppingForm, CreateActivityForm
+from ProductApi.MiniProgramForm.form.poetry_and_future import POETRY_1, POETRY_2
+
 
 @pytest.fixture(scope='session')
-def mocobk():
-    return FormApi(fuid=FormApi.USER.mocobk)
+def user1():
+    return FormApi(fuid=FormApi.USER.user1)
 
 
 @pytest.fixture(scope='session')
-def moco():
-    return FormApi(fuid=FormApi.USER.moco)
+def user2():
+    return FormApi(fuid=FormApi.USER.user2)
 
 
 @pytest.fixture(scope='session')
@@ -62,9 +64,11 @@ def generate_default_form(title=None, is_shopping=False):
         form.add_goods('草莓', '8', abspath('./images/strawberry.jpg'))
 
     # 添加填写项
-    form.add_text_question('你喜欢什么？', overt=False)
+    form.add_text_question('你喜欢什么？')
     form.add_number_question('请输入你的手机号', must=False)
-    form.add_image_question('请上传你的图片')
+    form.add_image_question('请上传你的图片', must=False)
+    form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
+    form.add_checkbox_question('你想吃的水果', ['🍎苹果', '🍌香蕉', '🍉西瓜', '🍇葡萄'])
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()

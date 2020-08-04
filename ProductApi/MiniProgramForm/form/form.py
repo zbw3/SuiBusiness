@@ -9,35 +9,11 @@ import os
 import time
 from random import randint
 from datetime import datetime, timedelta
-from enum import Enum
 from typing import List, Union
 
+from ProductApi.MiniProgramForm.form.enum import ContentType, RoleType, CatalogType, FormType
 from ProductApi.MiniProgramForm.api import FormApi
-
-
-class FormType(Enum):
-    SHOPPING = '团购'
-    ACTIVITY = '活动'
-    ACTIVITY_V2 = '活动(&question)'
-
-
-class ContentType(Enum):
-    WORD = 'WORD'
-    NUMBER = 'NUMBER'  # 添加商品用到
-    IMAGE = 'IMAGE'
-    THUMBNAIL = 'THUMBNAIL'
-    NUMBER_FLOAT = 'NUMBER_FLOAT'
-
-
-class RoleType(Enum):
-    TITLE = 'TITLE'
-    IMAGE = 'IMAGE'  # 添加商品用到
-    PRICE = 'PRICE'  # 添加商品用到
-
-
-class CatalogType(Enum):
-    QUESTION = 'QUESTION'
-    GOODS = 'GOODS'
+from ProductApi.MiniProgramForm.form.utils import get_img_url, RandomImageUrl
 
 
 class Content:
@@ -57,13 +33,15 @@ class FormCatalog:
             content: str,
             role: RoleType = RoleType.TITLE,
             type_: ContentType = ContentType.WORD,
-            title: str = ""
+            title: str = "",
+            status: int = 1
     ):
         self.value = {
             "title": title,
             "content": content,
             "role": role.value,
-            "type": type_.value
+            "type": type_.value,
+            "status": status
         }
 
 
@@ -89,8 +67,8 @@ class Catalog:
 
     @property
     def value(self):
-        if self.catalog_type == CatalogType.QUESTION and len(self.form_catalogs) != 1:
-            raise ValueError('填写项 form_catalogs 长度必须为 1')
+        if self.catalog_type == CatalogType.QUESTION and len(self.form_catalogs) < 1:
+            raise ValueError('填写项 form_catalogs 长度必须大于 1')
         if self.catalog_type == CatalogType.GOODS and len(self.form_catalogs) != 3:
             raise ValueError('商品项 form_catalogs 长度必须为 3')
         diff = {
@@ -107,16 +85,6 @@ class Catalog:
 
     def add_form_catalog(self, form_catalog: FormCatalog):
         self.form_catalogs.append(form_catalog)
-
-
-class RandomImageUrl:
-    @property
-    def large(self):
-        return f'https://picsum.photos/{randint(1000, 1500)}/{randint(1000, 1500)}'
-
-    @property
-    def small(self):
-        return f'https://picsum.photos/{randint(500, 800)}/{randint(500, 800)}'
 
 
 class Form:
@@ -145,7 +113,6 @@ class Form:
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
         }
-        self._cache = os.path.join(os.path.dirname(__file__), './cache.json')
 
     @property
     def data(self):
@@ -182,12 +149,12 @@ class Form:
 
     def add_large_img(self, image: str):
         self._add_content(
-            Content(ContentType.IMAGE, self._get_img_url(image))
+            Content(ContentType.IMAGE, get_img_url(image))
         )
 
     def add_small_imgs(self, images: list):
         self._add_content(
-            Content(ContentType.THUMBNAIL, [self._get_img_url(image) for image in images])
+            Content(ContentType.THUMBNAIL, [get_img_url(image) for image in images])
         )
 
     def add_text_question(self, title, must=True, overt=True):
@@ -216,6 +183,30 @@ class Form:
                 must=must,
                 overt=overt,
                 form_catalogs=[FormCatalog(title)]
+            )
+        )
+
+    def add_radio_question(self, title, options: List[str], must=True, overt=True):
+        if len(options) < 2:
+            raise Exception('单选的选项不能少于 2 条')
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.RADIO,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option, RoleType.OPTION) for option in options]
+            )
+        )
+
+    def add_checkbox_question(self, title, options: List[str], must=True, overt=True):
+        if len(options) < 2:
+            raise Exception('多选的选项不能少于 2 条')
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.CHECKBOX,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option, RoleType.OPTION) for option in options]
             )
         )
 
@@ -250,30 +241,6 @@ class Form:
     def _add_catalog(self, catalog: Catalog):
         self.CATALOGS.append(catalog.value)
 
-    def _get_img_url(self, image):
-        """
-        :param image: 图片地址，支持本地路径，网络url（如果已是 feidee域 名下的 url 则直接返回）
-        :return: str
-        """
-        with open(self._cache, 'r') as fp:
-            cache = json.load(fp)
-        if cache.get(image):
-            return cache[image]
-
-        if image.startswith('https://oss.feidee'):
-            return image
-        self.form_api.set_logger_level(self.form_api.INFO)
-        self.form_api.logger.info('图片上传中...')
-        res = self.form_api.v1_image(image)
-        if res.status_code == 200:
-            url = res.data.get('data')
-            cache[image] = url
-            with open(self._cache, 'w') as fp:
-                json.dump(cache, fp)
-            return url
-        else:
-            raise Exception(f'图片上传失败: {res.text}')
-
 
 class CreateActivityForm(Form):
     TYPE = FormType.ACTIVITY
@@ -284,7 +251,7 @@ class CreateShoppingForm(Form):
 
     def add_goods(self, title, price='', image=''):
         if image != '':
-            image = self._get_img_url(image)
+            image = get_img_url(image)
         self._add_catalog(
             Catalog(
                 type_=ContentType.NUMBER,

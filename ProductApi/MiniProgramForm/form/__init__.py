@@ -5,8 +5,14 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/15 14:58
 from .form import CreateActivityForm, CreateShoppingForm
+from .form_data import PostFormData, PutFormData
+
 
 __all__ = [
+    'CreateActivityForm',
     'CreateShoppingForm',
-    'CreateActivityForm'
+    'PostFormData',
+    'PutFormData',
 ]
+
+

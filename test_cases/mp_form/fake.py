@@ -82,5 +82,5 @@ class FakeForm:
 
 
 if __name__ == '__main__':
-    fake = FakeForm(FormApi.USER.mocobk)
+    fake = FakeForm(FormApi.USER.user1)
     fake.run_create_all()

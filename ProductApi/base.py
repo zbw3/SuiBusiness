@@ -16,6 +16,7 @@ from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env, REQUEST_PROXIES
 
 class Response(_Response):
     data = None
+    form_id = None
 
 
 class ApiBase(Logger):
@@ -30,10 +31,10 @@ class ApiBase(Logger):
     def env(self):
         return Env().cur_env
 
-    def request(self, method, url,
+    def request(self, url, method,
                 params=None, data=None, json=None, headers=None, cookies=None, files=None,
-                auth=None, timeout=None, allow_redirects=True, proxies=REQUEST_PROXIES, verify=False,
-                hooks=None, stream=None, cert=None) -> Response:
+                auth=None, timeout=None, allow_redirects=True, hooks=None, stream=None, proxies=REQUEST_PROXIES,
+                verify=False, cert=None) -> Response:
         """
         :return: requests.response object but with data property
         """
@@ -44,7 +45,7 @@ class ApiBase(Logger):
         response = self.session.request(method=method, url=url, params=params, data=data, json=json, headers=headers,
                                         cookies=cookies, files=files,
                                         auth=auth, timeout=timeout, allow_redirects=allow_redirects,
-                                        hooks=hooks, stream=stream,  cert=cert,
+                                        hooks=hooks, stream=stream, cert=cert,
                                         proxies=proxies,
                                         verify=verify
                                         )

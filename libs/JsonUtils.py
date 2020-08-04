@@ -16,6 +16,11 @@ def json_diff(left: Union[list, dict], right: Union[list, dict]) -> list:
     """
     json_paths = jsonpath(left, '$..*', result_type='PATH')
     result = []
+    if json_paths is False:  # left equal {} or []
+        if left != right:
+            return [{'path': '$', 'left_value': left, 'right_value': right}]
+        return result
+
     for path in json_paths:
         left_value = jsonpath(left, path, result_type='VALUE')[0]
         if isinstance(left_value, (list, dict)):
