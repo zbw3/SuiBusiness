@@ -90,6 +90,7 @@ class Catalog:
 class Form:
     TYPE: FormType = None
 
+    FormType = FormType
     ContentType = ContentType
     RoleType = RoleType
     CatalogType = CatalogType
@@ -98,9 +99,12 @@ class Form:
     FormCatalog = FormCatalog
     RandomImage = RandomImageUrl()
 
-    def __init__(self):
+    def __init__(self, _type: FormType = None):
+        if _type:
+            self.TYPE = _type
+
         self.COVER = 'https://resources.sui.com/fed/wechat/statistics-tools/templates/bg_banner.png?v1'
-        self.TITLE = f'[{self.TYPE.value}]-测试表单-{time.strftime("%T")}'
+        self.TITLE = None
         self.CONTENTS = []
         self.CATALOGS = []
         self.CONFIG = {}
@@ -125,7 +129,7 @@ class Form:
             # 有填写项 TYPE = ACTIVITY_V2
             "type": self.TYPE.name if not self.is_activity_v2() else FormType.ACTIVITY_V2.name,
             "cover": self.COVER,
-            "title": self.TITLE,
+            "title": self.TITLE or f'[{self.TYPE.value}]-测试表单-{time.strftime("%T")}',
             "contents": self.CONTENTS,
             "catalogs": self.CATALOGS,
             "config": self.CONFIG

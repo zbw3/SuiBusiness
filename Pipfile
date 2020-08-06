@@ -24,12 +24,14 @@ python-dateutil = "*"
 pytest = "*"
 jpype1 = "*"
 pytest-html = "*"
-allure-pytest = "*"
 
 [dev-packages]
 pillow = "*"
 pymongo = "*"
 mitmproxy = "*"
+pandas = "*"
+openpyxl = "*"
+allure-pytest = "*"
 
 
 [requires]

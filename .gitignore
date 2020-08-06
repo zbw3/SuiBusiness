@@ -4,7 +4,7 @@
 report/
 __pycache__/
 doc/
-test_cases/report
+test_cases/reports
 ZMyLab/
 Logs/
 *.pytest_cache

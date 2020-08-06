@@ -7,6 +7,7 @@
 from typing import Union
 from jsonpath import jsonpath
 
+
 def json_diff(left: Union[list, dict], right: Union[list, dict]) -> list:
     """
     json 对象比较，以 left 对象为基准
@@ -25,8 +26,11 @@ def json_diff(left: Union[list, dict], right: Union[list, dict]) -> list:
         left_value = jsonpath(left, path, result_type='VALUE')[0]
         if isinstance(left_value, (list, dict)):
             continue
-        right_value = jsonpath(right, path, result_type='VALUE')[0]
-        if left_value != right_value:
-            result.append({'path': path, 'left_value': left_value, 'right_value': right_value})
+        right_values = jsonpath(right, path, result_type='VALUE')  # 可能出现左边值有右边没有值的情况
+        if isinstance(right_values, list):
+            right_value = right_values[0]
+            if left_value != right_value:
+                result.append({'path': path, 'left_value': left_value, 'right_value': right_value})
+        else:
+            result.append({'path': path, 'left_value': left_value, 'right_value': '<JsonPathNotFound>'})
     return result
-

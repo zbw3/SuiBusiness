@@ -43,6 +43,9 @@ class FormStatus(Enum):
     DELETED = -3
     OPENED = 2
 
+class FormDataStatus(Enum):
+    CANCELED = -1
+
 
 class CatalogStatus(Enum):
     NORMAL = 0

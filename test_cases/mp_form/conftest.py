@@ -4,14 +4,15 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/27 14:55
-
-from os.path import abspath
+import os
 
 import pytest
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import CreateShoppingForm, CreateActivityForm
 from ProductApi.MiniProgramForm.form.poetry_and_future import POETRY_1, POETRY_2
+
+abspath = lambda relpath: os.path.join(os.path.dirname(__file__), relpath)
 
 
 @pytest.fixture(scope='session')
@@ -36,6 +37,8 @@ def default_shopping_form():
 
 def generate_default_form(title=None, is_shopping=False):
     """
+    ver: 1.5.0
+    update time: 2020/8/4
     :param title:  可以指定表单标题，以区分，也可以使用默认标题 [xx]-测试表单-16:00
     :param is_shopping: 是否是团购接龙，目前不是团购就是活动
     :return: form object

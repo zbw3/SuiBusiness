@@ -32,15 +32,11 @@ class PostFormData:
     RandomImage = RandomImageUrl()
 
     def __init__(self, form_api: FormApi, form_id):
-        self.form_detail_data = form_api.v1_form_form_id_get(form_id).data['data']
+        self.form_detail_data = form_api.v1_form_form_id(form_id).data['data']
 
     @property
     def version(self):
         return self.form_detail_data['version']
-
-    @property
-    def _catalogs_data(self):
-        return self.form_detail_data['catalogs']
 
     @property
     def _catalogs(self) -> CatalogsData:
@@ -71,10 +67,6 @@ class PostFormData:
             for item in selected_goods:
                 data.append({'type': item['type'], 'cid': item['cid'], 'value': random.randint(1, 5)})
 
-        if catalogs.BUYER_REMARKS:
-            item = catalogs.BUYER_REMARKS
-            data.append({'type': item['type'], 'cid': item['cid'], 'value': f'买家留言{random.randint(1000, 9000)}'})
-
         for item in catalogs.QUESTION.WORD:
             data.append({'type': item['type'], 'cid': item['cid'], 'value': f'文本填写项回答{random.randint(1000, 9000)}'})
 
@@ -95,6 +87,14 @@ class PostFormData:
                                                   RoleType(form_catalog['role']) == RoleType.OPTION], 2)
 
             data.append({'type': item['type'], 'cid': item['cid'], 'value': selected_option_cids})
+
+        if catalogs.BUYER_REMARKS:
+            item = catalogs.BUYER_REMARKS
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': f'买家留言{random.randint(1000, 9000)}'})
+
+        # 还原 catalogs 原有的排序
+        sort_by_cid_dict = {item['cid']: index for index, item in enumerate(self.form_detail_data['catalogs'])}
+        data.sort(key=lambda item: sort_by_cid_dict[item['cid']])
         return data
 
     @property
@@ -106,17 +106,12 @@ class PutFormData(PostFormData):
 
     def __init__(self, form_api: FormApi, form_id):
         super().__init__(form_api, form_id)
-        self.form_data = form_api.v1_form_id_form_data_get(form_id).data.get('data')
+        self.form_data = form_api.v1_form_id_form_data(form_id).data.get('data')
         if self.form_data:
             self.fid = self.form_data[0]['fid']
         else:
             raise Exception('表单暂无报名数据')
 
     @property
-    def _catalogs_data(self):
-        return self.form_data[0]['catalogs']
-
-    @property
     def data(self):
-        catalogs = self._form_data_catalogs
-        return {'fid': self.fid, 'catalogs': catalogs, 'formVersion': self.version}
+        return {'fid': self.fid, 'catalogs': self._form_data_catalogs, 'formVersion': self.version}

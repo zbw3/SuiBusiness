@@ -16,10 +16,12 @@ from settings.BaseConfig import Logger, API_LOGGER_LEVEL, Env, REQUEST_PROXIES
 
 class Response(_Response):
     data = None
-    form_id = None
-
 
 class ApiBase(Logger):
+    GET = 'GET'
+    POST = 'POST'
+    PUT = 'PUT'
+    DELETE = 'DELETE'
 
     def __init__(self, config, print_results=False):
         self.config = config

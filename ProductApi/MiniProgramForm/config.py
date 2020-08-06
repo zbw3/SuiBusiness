@@ -50,12 +50,17 @@ class Test:
         """
         v1_login_test = '/v1/login_test'
         v1_creation_forms = '/v1/creation_forms'
+        v1_participation_forms = '/v1/participation_forms'
         v1_examples = '/v1/examples'
         v1_image = '/v1/image'
         v1_form = '/v1/form'
         v1_form_form_id = '/v1/form/{formId}'
         v1_form_id_form_data = '/v1/{formId}/form_data'
         v1_form_id_status = '/v1/form/{formId}/status'
+        v1_order_list_form_id = '/v1/order/list/{formId}'
+        v1_order_form_id_order_id = '/v1/order/{formId}/{orderId}'
+        v1_order_query_form_id_fuid = '/v1/order/query/{formId}/{fuid}'
+        v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
 
 
 class Uat:
