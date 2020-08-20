@@ -4,11 +4,14 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/15 15:11
+import random
+
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData, PutFormData
 from ProductApi.MiniProgramForm.form.enum import CatalogType, FormType, FormDataStatus
 from ProductApi.MiniProgramForm.form.form import Form, CreateActivityForm
 from libs.JsonUtils import json_diff
+from typing import Union, List
 
 
 def create_form(form_api: FormApi, form: Form) -> str:
@@ -84,6 +87,18 @@ def create_form_data(form_api: FormApi, form_id: str) -> int:
     res = form_api.v1_form_id_form_data(form_id, post_form_data, method=form_api.POST)
     assert res.status_code == 200
     return res.data.get('data', {}).get('sequence')
+
+def create_numerous_form_data(*form_api: FormApi, form_id: str, number: int):
+    """
+    连续创建多个接龙数据
+    :param form_api:
+    :param form_id:
+    :param number:
+    :return:
+    """
+    for _ in range(number):
+        create_form_data(random.choice(form_api), form_id)
+
 
 def get_form_data(form_api: FormApi, form_id: str, index=0) -> dict:
     res = form_api.v1_form_id_form_data(form_id, method=form_api.GET)

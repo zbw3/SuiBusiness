@@ -7,7 +7,11 @@
 import hashlib
 import json
 import os
+import random
 from random import randint
+
+from faker import Faker
+from faker.providers import BaseProvider
 
 from ProductApi.MiniProgramForm.api import FormApi
 from settings.BaseConfig import Env
@@ -64,3 +68,18 @@ def get_img_url(image):
         return url
     else:
         raise Exception(f'图片上传失败: {res.text}')
+
+
+class CustomProvider(BaseProvider):
+    emoji_string = (
+        '😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😚☺😇😐😑😶😏😣😥😮😯😪😫😴😌😛😜😝😒😓😔😕😲😷😖😞😟😤😢😭😦😧😨😬😰😱😳😵😡😠'
+        '👦👧👨👩👴👵👶👱👮👲👳👷👸💂🎅👰👼💆💇🙍🙎🙅🙆💁🙋🙇🙌🙏👤👥🚶🏃👯💃👫👬👭💏💑👪'
+        '💪👈👉☝👆👇✌✋👌👍👎✊👊👋👏👐✍'
+        '🍇🍈🍉🍊🍋🍌🍍🍎🍏🍐🍑🍒🍓🍅🍆🌽🍄🌰🍞🍖🍗🍔🍟🍕🍳🍲🍱🍘🍙🍚🍛🍜🍝🍠🍢🍣🍤🍥🍡🍦🍧🍨🍩🍪🎂🍰🍫🍬🍭🍮🍯🍼☕🍵🍶🍷🍸🍹🍺🍻🍴'
+        '🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕡🕖🕢🕗🕣🕘🕤🕙🕥🕚🕦⌛⏳⌚⏰⏱⏲🕰'
+    )
+
+    def word_with_emoji(self):
+        words = Faker('zh_CN').words() + random.sample(self.emoji_string, k=random.randint(1, 5))
+        random.shuffle(words)
+        return ''.join(words)

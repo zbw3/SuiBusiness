@@ -33,8 +33,10 @@ class SingletonMetaClass(type):
 
         return cls._instance[fuid]
 
+
 class FormResponse(Response):
     form_id = None
+
 
 class FormApi(ApiBase, metaclass=SingletonMetaClass):
     USER = config.UserFuid
@@ -210,7 +212,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
-    def v1_order_form_id_order_id_remarks(self, form_id, order_id, remarks: str=None, method='POST'):
+    def v1_order_form_id_order_id_remarks(self, form_id, order_id, remarks: str = None, method='POST'):
         """
         :param form_id:
         :param order_id:
@@ -219,8 +221,26 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_order_form_id_order_id_remarks.format(formId=form_id, orderId=order_id)
-        headers={'Content-Type': 'application/json'}
+        headers = {'Content-Type': 'application/json'}
         response = self.request(url=url, method=method, data=remarks.encode('utf-8'), headers=headers)
+        return response
+
+    def v1_statistic_analysis_form_id(self, form_id, method='GET'):
+        url = self.config.Url.v1_statistic_analysis_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_statistic_table_form_id(self, form_id, sort_field, sort_type, method='GET'):
+        """
+        :param form_id:
+        :param sort_field: SEQUENCE 序号 | NICKNAME 昵称 | TIME 创建时间 | STATUS 状态 | MONEY 金额 | cid 对应填写项
+        :param sort_type: ASC 升序排列 | DESC 降序排列
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_statistic_table_form_id.format(formId=form_id)
+        params = {'sortField': sort_field, 'sortType': sort_type}
+        response = self.request(url=url, method=method, params=params)
         return response
 
 

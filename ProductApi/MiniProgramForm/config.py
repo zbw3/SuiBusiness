@@ -33,12 +33,13 @@ class UserFuid:
     user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
     user2 = _Fuid(test='1027047761280765954', uat='').fuid  # moco
     zhou_ying1 = _Fuid(test='1027314905029545986', uat='').fuid
-    # mocobk2 = _Fuid(test='1053828831317590037', uat='1025186602202501154').fuid  # 已废弃的 UAT 用户
+    # user1 = _Fuid(test='1053828831317590037', uat='').fuid  # 已废弃的 UAT 用户
+    # user2 = _Fuid(test='1059901948376911929', uat='').fuid  # 已废弃的 UAT 用户
 
 
 class Test:
-    APP_ID = 'wx1e766c9a00355017'
     HOSTNAME = MiniProgramForm.TEST
+    APP_ID = 'wx1e766c9a00355017'
     DUFAULT_FUID = '1026957780256297009'
     # APP_ID = 'wxc67f6d90678e1fe4'  # 已废弃的 UAT
     # DUFAULT_FUID = '1053828831317590037'  # 已废弃的 UAT 用户
@@ -61,6 +62,8 @@ class Test:
         v1_order_form_id_order_id = '/v1/order/{formId}/{orderId}'
         v1_order_query_form_id_fuid = '/v1/order/query/{formId}/{fuid}'
         v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
+        v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
+        v1_statistic_table_form_id = '/v1/statistic/table/{formId}'
 
 
 class Uat:

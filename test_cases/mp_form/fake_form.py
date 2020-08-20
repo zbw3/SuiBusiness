@@ -12,7 +12,7 @@ import random
 import pytest
 
 from ProductApi.MiniProgramForm.form.enum import FormStatus
-from test_cases.mp_form import verify_post_form, create_form, create_form_data
+from test_cases.mp_form import verify_post_form, create_form, create_form_data, create_numerous_form_data
 
 
 def test_create_normal_activity_form(user1, default_activity_form):
@@ -94,12 +94,12 @@ def test_create_finished_shopping_form(user1, default_shopping_form):
 =================================================================================================
 """
 
-def test_create_many_order_shopping_form(user1, user2, default_shopping_form):
+def test_create_many_order_shopping_form(user1, user2, default_shopping_form, number=40):
     """创建有多个接龙的 [商品接龙] 表单"""
-    default_shopping_form.set_title('含40个接龙数据')
+    default_shopping_form.set_title(f'测试多个接龙/订单统计（{number}）')
     form_id = verify_post_form(user1, default_shopping_form)
-    for i in range(40):
-        create_form_data(random.choice([user1, user2]), form_id)
+    create_numerous_form_data(user1, user2, form_id=form_id, number=number)
+    print(form_id)
 
 
 if __name__ == '__main__':

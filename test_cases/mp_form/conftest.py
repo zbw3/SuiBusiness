@@ -62,16 +62,19 @@ def generate_default_form(title=None, is_shopping=False):
     ])
 
     if is_shopping:
-        form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
-        form.add_goods('西瓜', '2', abspath('./images/watermelon.jpg'))
-        form.add_goods('草莓', '8', abspath('./images/strawberry.jpg'))
+        form.add_goods('葡萄', 10, abspath('./images/grape.jpg'))
+        form.add_goods('西瓜', 2, abspath('./images/watermelon.jpg'))
+        form.add_goods('草莓', 8, abspath('./images/strawberry.jpg'))
 
     # 添加填写项
-    form.add_text_question('你喜欢什么？')
-    form.add_number_question('请输入你的手机号', must=False)
-    form.add_image_question('请上传你的图片', must=False)
+    form.add_text_question('姓名')
+    form.add_number_question('手机号', must=False)
+    form.add_number_question('需要数量', must=False)
     form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
     form.add_checkbox_question('你想吃的水果', ['🍎苹果', '🍌香蕉', '🍉西瓜', '🍇葡萄'])
+    form.add_text_question('地址', must=False)
+    form.add_image_question('请上传你的图片', must=False)
+    form.add_text_question('备注', must=False)
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()
