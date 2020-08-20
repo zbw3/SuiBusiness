@@ -14,6 +14,7 @@ from faker import Faker
 from faker.providers import BaseProvider
 
 from ProductApi.MiniProgramForm.api import FormApi
+from ProductApi.MiniProgramForm.config import USE_LOCAL_CACHE_URL
 from settings.BaseConfig import Env
 
 CACHE_PATH = os.path.join(os.path.dirname(__file__), './cache.json')
@@ -45,17 +46,21 @@ def get_img_url(image):
     :param image: 图片地址，支持本地路径，网络url（如果已是 feidee域 名下的 url 则直接返回）
     :return: str
     """
+    if image.startswith('https://oss.feidee'):
+        return image
+
     image_hash = _image_hash(image)
     cache = {}
 
     if os.path.exists(CACHE_PATH):
         with open(CACHE_PATH, 'r') as fp:
             cache = json.load(fp)
+
+        if USE_LOCAL_CACHE_URL:
+            return random.choice(list(cache.values()))
         if cache.get(image_hash):
             return cache[image_hash]
 
-    if image.startswith('https://oss.feidee'):
-        return image
     form_api = FormApi()
     form_api.set_logger_level(form_api.INFO)
     form_api.logger.info('图片上传中...')

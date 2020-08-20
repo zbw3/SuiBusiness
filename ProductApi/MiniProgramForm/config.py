@@ -32,6 +32,7 @@ class _Fuid:
 class UserFuid:
     user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
     user2 = _Fuid(test='1027047761280765954', uat='').fuid  # moco
+    # user1 = _Fuid(test='1056011177739419657', uat='').fuid  # 端
     zhou_ying1 = _Fuid(test='1027314905029545986', uat='').fuid
     # user1 = _Fuid(test='1053828831317590037', uat='').fuid  # 已废弃的 UAT 用户
     # user2 = _Fuid(test='1059901948376911929', uat='').fuid  # 已废弃的 UAT 用户
@@ -41,6 +42,7 @@ class Test:
     HOSTNAME = MiniProgramForm.TEST
     APP_ID = 'wx1e766c9a00355017'
     DUFAULT_FUID = '1026957780256297009'
+
     # APP_ID = 'wxc67f6d90678e1fe4'  # 已废弃的 UAT
     # DUFAULT_FUID = '1053828831317590037'  # 已废弃的 UAT 用户
 
@@ -77,3 +79,7 @@ class Uat:
 
 class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
+
+
+# 上传图片接口是否使用缓存的 URL
+USE_LOCAL_CACHE_URL = True

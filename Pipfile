@@ -24,6 +24,9 @@ python-dateutil = "*"
 pytest = "*"
 jpype1 = "*"
 pytest-html = "*"
+faker = "*"
+mitmdump = "*"
+tabulate = "*"
 
 [dev-packages]
 pillow = "*"
@@ -32,7 +35,8 @@ mitmproxy = "*"
 pandas = "*"
 openpyxl = "*"
 allure-pytest = "*"
-
+py-mini-racer = "*"
+dill = "*"
 
 [requires]
 python_version = "3.7"
