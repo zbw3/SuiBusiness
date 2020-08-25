@@ -89,7 +89,7 @@ class PostFormData:
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
         for item in catalogs.QUESTION.NUMBER_FLOAT:
-            value = self.info.get(self._get_catalog_title(item), self.faker.random_number)()
+            value = self.info.get(self._get_catalog_title(item), str(self.faker.random_number))()  # 防止精度丢失，可字符串 Decimal
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
         for item in catalogs.QUESTION.IMAGE:

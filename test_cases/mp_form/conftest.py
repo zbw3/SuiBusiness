@@ -62,9 +62,9 @@ def generate_default_form(title=None, is_shopping=False):
     ])
 
     if is_shopping:
-        form.add_goods('葡萄', 10, abspath('./images/grape.jpg'))
-        form.add_goods('西瓜', 2, abspath('./images/watermelon.jpg'))
-        form.add_goods('草莓', 8, abspath('./images/strawberry.jpg'))
+        form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
+        form.add_goods('西瓜', '2', abspath('./images/watermelon.jpg'))
+        form.add_goods('草莓', '8', abspath('./images/strawberry.jpg'))
 
     # 添加填写项
     form.add_text_question('姓名')

@@ -56,10 +56,11 @@ def get_img_url(image):
         with open(CACHE_PATH, 'r') as fp:
             cache = json.load(fp)
 
-        if USE_LOCAL_CACHE_URL:
-            return random.choice(list(cache.values()))
         if cache.get(image_hash):
             return cache[image_hash]
+
+        if USE_LOCAL_CACHE_URL:
+            return random.choice(list(cache.values()))
 
     form_api = FormApi()
     form_api.set_logger_level(form_api.INFO)

@@ -94,7 +94,7 @@ def test_create_finished_shopping_form(user1, default_shopping_form):
 =================================================================================================
 """
 
-def test_create_many_order_shopping_form(user1, user2, default_shopping_form, number=47):
+def test_create_many_order_shopping_form(user1, user2, default_shopping_form, number=67):
     """
     创建有多个接龙的 [商品接龙] 表单,
     number： 为接龙数

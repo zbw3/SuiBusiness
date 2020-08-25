@@ -11,5 +11,5 @@
 #     create_numerous_form_data(user1, user2, form_id=form_id, number=number)
 
 def test_statistic_analysis(user1):
-    res = user1.v1_statistic_analysis_form_id('1061367683649376279')
+    res = user1.v1_statistic_analysis_form_id('1063893999267352589')
     print(res.text)
