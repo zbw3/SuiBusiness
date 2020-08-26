@@ -26,6 +26,21 @@ def user2():
 
 
 @pytest.fixture(scope='session')
+def liu_peng_zhong():
+    return FormApi(fuid=FormApi.USER.liu_peng_zhong)
+
+
+@pytest.fixture(scope='session')
+def jiang_duan():
+    return FormApi(fuid=FormApi.USER.jiang_duan)
+
+
+@pytest.fixture(scope='session')
+def zhou_ying():
+    return FormApi(fuid=FormApi.USER.zhou_ying)
+
+
+@pytest.fixture(scope='session')
 def default_activity_form():
     return generate_default_form('果霸轰趴')
 
