@@ -41,6 +41,11 @@ def zhou_ying():
 
 
 @pytest.fixture(scope='session')
+def hu_fei():
+    return FormApi(fuid=FormApi.USER.hu_fei)
+
+
+@pytest.fixture(scope='session')
 def default_activity_form():
     return generate_default_form('果霸轰趴')
 

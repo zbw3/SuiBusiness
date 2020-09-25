@@ -29,6 +29,13 @@ def json_diff(left: Union[list, dict], right: Union[list, dict]) -> list:
         right_values = jsonpath(right, path, result_type='VALUE')  # 可能出现左边值有右边没有值的情况
         if isinstance(right_values, list):
             right_value = right_values[0]
+            # TODO: 因小程序后台会把数值转换成字符串返回，这里不比较类型
+            if isinstance(left_value, (int, float)) and isinstance(right_value, str):
+                try:
+                    right_value = float(right_value)
+                except:
+                    pass
+
             if left_value != right_value:
                 result.append({'path': path, 'left_value': left_value, 'right_value': right_value})
         else:

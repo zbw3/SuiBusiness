@@ -68,7 +68,7 @@ def test_get_order_list(user1, create_order):
 
     data = res.data.get('data')
     predict_amount = user1_data1.amount + user1_data2.amount + user2_data1.amount
-    assert data['amount'] == predict_amount
+    assert float(data['amount']) == predict_amount
 
     order_details_list = data['orderDetails']
     assert len(order_details_list) == 3
