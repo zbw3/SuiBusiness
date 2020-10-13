@@ -30,7 +30,7 @@ class _Fuid:
 
 
 class UserFuid:
-    user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
+    user1 = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
     user2 = _Fuid(test='1027047761280765954', uat='').fuid  # moco
     liu_peng_zhong = _Fuid(test='1021591279563182081', uat='').fuid  # 刘鹏忠
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 端
@@ -66,7 +66,14 @@ class Test:
         v1_order_query_form_id_fuid = '/v1/order/query/{formId}/{fuid}'
         v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
-        v1_statistic_table_form_id = '/v1/statistic/table/{formId}'
+        # v1_statistic_table_form_id = '/v1/statistic/table/{formId}'
+        v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
+
+        v1_operation_forms = '/v1/operation_forms'
+        v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
+        v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
+        v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
+        v1_templates_lit = '/v1/templates/list'
 
 
 class Uat:
