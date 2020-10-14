@@ -13,6 +13,12 @@ class FormType(Enum):
     ACTIVITY_V2 = '活动(&question)'
 
 
+class OperationFormType(Enum):
+    OPERATION = 'OPERATION'
+    NORMAL = 'NORMAL'
+    TEMPLATE = 'TEMPLATE'
+
+
 class ContentType(Enum):
     NUMBER = 'NUMBER'  # 添加商品用到
     WORD = 'WORD'
@@ -43,6 +49,7 @@ class FormStatus(Enum):
     DELETED = -3
     OPENED = 2
 
+
 class FormDataStatus(Enum):
     CANCELED = -1
 
@@ -52,3 +59,11 @@ class CatalogStatus(Enum):
     DELETED = -1
     ADDED = 1
     UPDATED = 2
+
+
+class TemplatesTabId(Enum):
+    STATISTIC = 'STATISTIC'
+    INFORMATION = 'INFORMATION'
+    SHOPPING = 'SHOPPING'
+    SIGN_UP = 'SIGN_UP'
+    QUESTIONNAIRE = 'QUESTIONNAIRE'

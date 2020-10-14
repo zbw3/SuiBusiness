@@ -55,6 +55,7 @@ class ApiBase(Logger):
         self.logger.debug('%s %s', response.request.method, response.request.url)
         self.logger.debug('请求参数：%s', params or data or json)
         self.logger.debug('HTTP状态码：%s', response.status_code)
+        self.logger.debug('HTTP响应：%s', response.text)
         self.logger.debug('请求消耗时间：%s s', response.elapsed.total_seconds())
         if response.elapsed.total_seconds() > 5:
             self.logger.warning(f'接口请求响应时间超过 5s，注意检查: {response.request.url}')
@@ -62,7 +63,7 @@ class ApiBase(Logger):
         if self.print_results:
             if self.logger.level != self.DEBUG:
                 self.logger.info('%s %s', response.request.method, response.request.url)
-            print(response.text)
+                print(response.text)
 
         # 因为大部分接口返回的 Json, 这里为了方便，加入了 data 属性
         try:

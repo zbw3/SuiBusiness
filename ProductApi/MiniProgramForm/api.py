@@ -16,6 +16,7 @@ import urllib3
 
 urllib3.disable_warnings()
 
+
 class SingletonMetaClass(type):
     _instance_lock = threading.Lock()  # 支持多线程的单例模式
     _instance = {}
@@ -48,8 +49,8 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         :param fuid: 用户群报数 id, 不传则使用配置中默认的
         """
-        super().__init__(print_results)
         self.config: config.Test = getattr(config, self.env.name)
+        super().__init__(self.config, print_results)
         self.fuid = fuid or self.config.DUFAULT_FUID
         self.authorized_hearders = self.get_authorized_hearders()
 
@@ -230,7 +231,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
     def v1_statistic_analysis_form_id(self, form_id, method='GET'):
         url = self.config.Url.v1_statistic_analysis_form_id.format(formId=form_id)
         response = self.request(url=url, method=method)
-        print(response.data)
         return response
 
     def v1_statistic_detail_form_id(self, form_id, sort_field, sort_type, method='GET'):
@@ -244,7 +244,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_statistic_detail_form_id.format(formId=form_id)
         params = {'sortField': sort_field, 'sortType': sort_type}
         response = self.request(url=url, method=method, params=params)
-        print(response.data)
         return response
 
     def v1_operation_forms(self, table_id, method='GET'):
@@ -257,7 +256,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_operation_forms
         params = {'tabId': table_id}
         response = self.request(url=url, method=method, params=params)
-        print(response.data)
         return response
 
     def v1_form_operation_operation_operation_form_id(self, form_id, method='GET'):
@@ -271,7 +269,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
-
     def v1_form_operation_form_operation_form_id(self, form_id, method='GET'):
         """
         获取普通表单内容
@@ -281,20 +278,18 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_form_operation_form_operation_form_id.format(operationFormId=form_id)
         response = self.request(url=url, method=method)
-        print(response.data)
         return response
 
-    def v1_templates_lit(self, table_id, method='GET'):
+    def v1_templates_lit(self, tab_id, method='GET'):
         """
         获取模板表单列表
-        :param table_id: STATISTIC：报数统计INFORMATION：信息登记SHOPPING：商品接龙SIGN_UP：活动报名QUESTIONNAIRE：调查问卷
+        :param tab_id: STATISTIC：报数统计INFORMATION：信息登记SHOPPING：商品接龙SIGN_UP：活动报名QUESTIONNAIRE：调查问卷
         :param method:
         :return:
         """
         url = self.config.Url.v1_templates_lit
-        params = {'tabId': table_id}
+        params = {'tabId': tab_id}
         response = self.request(url=url, method=method, params=params)
-        print(response.data)
         return response
 
     def v1_form_operation_template_operation_form_id(self, form_id, method='GET'):
@@ -306,10 +301,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_form_operation_template_operation_form_id.format(operationFormId=form_id)
         response = self.request(url=url, method=method)
-        print(response.data)
         return response
-
-
 
 
 if __name__ == '__main__':
@@ -325,7 +317,3 @@ if __name__ == '__main__':
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
-
-
-
-

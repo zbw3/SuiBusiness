@@ -35,6 +35,10 @@ class UserFuid:
     liu_peng_zhong = _Fuid(test='1021591279563182081', uat='').fuid  # 刘鹏忠
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 端
     zhou_ying = _Fuid(test='1027314905029545986', uat='').fuid  # 周莹
+    hu_fei = _Fuid(test='1021591029641383937', uat='').fuid  # 胡斐
+    hu_fei2 = _Fuid(test='1022245797535678549', uat='').fuid  # 胡斐2
+    liu_peng_zhong = _Fuid(test='1021591279563182081', uat='').fuid  # 刘鹏忠
+    chen_qi_lin = _Fuid(test='1040792416132530202', uat='').fuid  # 陈琦琳
     # user1 = _Fuid(test='1053828831317590037', uat='').fuid  # 已废弃的 UAT 用户
     # user2 = _Fuid(test='1059901948376911929', uat='').fuid  # 已废弃的 UAT 用户
 
@@ -66,7 +70,6 @@ class Test:
         v1_order_query_form_id_fuid = '/v1/order/query/{formId}/{fuid}'
         v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
-        # v1_statistic_table_form_id = '/v1/statistic/table/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
 
         v1_operation_forms = '/v1/operation_forms'
