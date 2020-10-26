@@ -6,13 +6,22 @@
 # @Time   : 2020/7/15 15:11
 import random
 from collections import namedtuple
+from contextlib import contextmanager
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData, PutFormData
 from ProductApi.MiniProgramForm.form.enum import CatalogType, FormDataStatus
 from ProductApi.MiniProgramForm.form.form import Form
 from libs.JsonUtils import json_diff
-from settings.BaseConfig import EnvType, Env
+from settings.BaseConfig import Env
+
+
+@contextmanager
+def no_authorized_hearders(user: FormApi):
+    authorized_hearders = user.authorized_hearders
+    user.authorized_hearders = {}
+    yield
+    user.authorized_hearders = authorized_hearders
 
 
 def create_form(form_api: FormApi, form: Form) -> str:
@@ -156,12 +165,12 @@ def get_invitation_code(releaser: FormApi, form: Form):
     form_id = create_form(releaser, form)
     response = releaser.v1_form_manager_invitation_code(form_id, method=releaser.GET)
     assert response.status_code == 200, response.text
-    assert Env.cur_env == EnvType.Test, '仅支持在测试环境中测试'
-    code_str: str = response.data.get('codeStr')
+    assert Env().is_test, f'仅支持在测试环境中测试，当前环境为：${Env().cur_env.value}'
+    code_str: str = response.data.get('data', {}).get('codeStr')
     assert code_str
     fid, code = code_str.split(',')
-    invitation = namedtuple('invitation', ['response', 'fid', 'code'])
-    return invitation(response, fid, code)
+    invitation = namedtuple('invitation', ['response', 'fid', 'code', 'form_id'])
+    return invitation(response, fid, code, form_id)
 
 
 def is_user_in_managers_list(form_id, releaser: FormApi, user: FormApi):
@@ -174,6 +183,6 @@ def is_user_in_managers_list(form_id, releaser: FormApi, user: FormApi):
     """
     reponse = releaser.v1_form_managers_form_id(form_id)
     assert reponse.status_code == 200, reponse.text
-    data: list = reponse.data.data.get('data', [])
+    data: list = reponse.data.get('data', [])
     is_in_managers_list = list(filter(lambda item: item['fid'] == form_id and item['fuid'] == user.fuid, data))
     return len(is_in_managers_list) == 1
