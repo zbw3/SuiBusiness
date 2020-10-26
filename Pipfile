@@ -1,6 +1,6 @@
 [[source]]
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-verify_ssl = true
+verify_ssl = false
 name = "tuna"
 
 [[source]]
@@ -25,8 +25,9 @@ pytest = "*"
 jpype1 = "*"
 pytest-html = "*"
 faker = "*"
-mitmdump = "*"
+mitmproxy = "*"
 tabulate = "*"
+mitmdump = "*"
 
 [dev-packages]
 pillow = "*"

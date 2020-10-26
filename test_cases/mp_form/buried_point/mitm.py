@@ -14,6 +14,9 @@ from tabulate import tabulate
 from collections import OrderedDict
 from mitmproxy.addonmanager import Loader
 
+import sys
+sys.path.append(r'E:\随手记-客户端\自动化项目\SuiBusiness')
+
 class ShowBuriedPoint:
     BUSINESS_ID = 'behaviour'
     DEPARTMENT_ID = 'minip'
@@ -85,7 +88,7 @@ class ShowBuriedPoint:
                     print(tabulate(
                         [[event.get(key, '<未上报>') for key in self.EVENTS.keys()]],
                         headers=self.EVENTS.keys(),
-                        tablefmt="orgtbl",
+                        tablefmt="grid",
                         stralign='center',
                         numalign='center'
                     ))

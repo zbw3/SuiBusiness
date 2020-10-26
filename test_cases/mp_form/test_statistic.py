@@ -11,7 +11,7 @@ from test_cases.mp_form import verify_post_form, create_numerous_form_data
 def create_many_order_shopping_form(user1, user2, default_shopping_form, number=10):
     """创建有多个接龙的 [商品接龙] 表单"""
     default_shopping_form.set_title(f'测试多个接龙/订单（{number}）')
-    form_id = verify_post_form(user1, default_shopping_form)
+    form_id = verify_post_form(user2, default_shopping_form)
     create_numerous_form_data(user1, user2, form_id=form_id, number=number)
     return form_id
 

@@ -12,6 +12,7 @@ from libs.logger import Logger
 # 全局设置运行环境
 # os.environ['env'] = 'production'
 
+
 class EnvType(Enum):
     Test = 'test'
     Uat = 'uat'
