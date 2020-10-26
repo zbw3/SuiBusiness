@@ -4,15 +4,16 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/8/13 12:29
 import json
-import typing
-from mitmproxy import proxy, options, flowfilter, ctx
-from mitmproxy.http import HTTPFlow
 from base64 import b64decode
-from mitmdump import DumpMaster, Options
-from ilogger import logger
-from tabulate import tabulate
 from collections import OrderedDict
+
+from ilogger import logger
+from mitmdump import DumpMaster, Options
+from mitmproxy import flowfilter, ctx
 from mitmproxy.addonmanager import Loader
+from mitmproxy.http import HTTPFlow
+from tabulate import tabulate
+
 
 import sys
 sys.path.append(r'E:\随手记-客户端\自动化项目\SuiBusiness')
