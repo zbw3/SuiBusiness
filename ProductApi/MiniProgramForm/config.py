@@ -30,10 +30,11 @@ class _Fuid:
 
 
 class UserFuid:
-    user1 = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
-    user2 = _Fuid(test='1027047761280765954', uat='').fuid  # moco
-    liu_peng_zhong = _Fuid(test='1021591279563182081', uat='').fuid  # 刘鹏忠
-    jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 端
+    user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
+    user2 = _Fuid(test='1027047761280765954', uat='1028083468632055816').fuid  # moco
+    user3 = _Fuid(test='1072705375733551112', uat='').fuid  # ksw
+    kong_si_wen = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
+    jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 蒋端
     zhou_ying = _Fuid(test='1027314905029545986', uat='').fuid  # 周莹
     hu_fei = _Fuid(test='1021591029641383937', uat='').fuid  # 胡斐
     hu_fei2 = _Fuid(test='1022245797535678549', uat='').fuid  # 胡斐2
@@ -77,6 +78,8 @@ class Test:
         v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
         v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
         v1_templates_lit = '/v1/templates/list'
+        v1_form_managers_form_id = '/v1/form/managers/{formId}'
+        v1_form_manager_poster = '/v1/form/manager/poster'
 
         v1_form_manager_invitation_code = '/v1/form/manager/invitation_code'
         v1_form_manager = '/v1/form/manager'

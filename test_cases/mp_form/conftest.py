@@ -26,6 +26,11 @@ def user2():
 
 
 @pytest.fixture(scope='session')
+def user3():
+    return FormApi(fuid=FormApi.USER.user3)
+
+
+@pytest.fixture(scope='session')
 def liu_peng_zhong():
     return FormApi(fuid=FormApi.USER.liu_peng_zhong)
 

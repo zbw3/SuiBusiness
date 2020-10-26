@@ -326,6 +326,27 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, json=data)
         return response
 
+    def v1_form_managers_form_id(self, form_id, method='GET'):
+        """
+        获取表单管理员列表
+        :param form_id:
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v1_form_managers_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_manager_poster(self, method='GET'):
+        """
+        获取管理员邀请海报信息
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v1_form_manager_poster
+        response = self.request(url=url, method=method)
+        return response
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
