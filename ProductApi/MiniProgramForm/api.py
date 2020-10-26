@@ -303,6 +303,29 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def v1_form_manager_invitation_code(self, form_id, method='GET'):
+        """
+        生成表单管理员邀请码
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_manager_invitation_code
+        params = {'formId': form_id}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_manager(self, data, method='POST'):
+        """
+        扫码加入管理员
+        :param data:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_manager
+        response = self.request(url=url, method=method, json=data)
+        return response
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
@@ -316,4 +339,6 @@ if __name__ == '__main__':
 
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
-    api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
+    # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
+    # api.v1_form_manager_invitation_code('1086812767165353985')
+    # api.v1_form_manager({"formId": "qGFo6gsBAfq", "code": "qG1WtaHbCAr"})  #  qGFo6gsBAfq,qG1WtaHbCAr
