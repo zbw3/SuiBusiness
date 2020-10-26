@@ -312,12 +312,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_form_managers_form_id.format(formId=form_id)
-        if method == self.GET:
-            response = self.request(url=url, method=method)
-        elif method == self.DELETE and fuid is not None:
-            response = self.request(url=url, method=method, params={'fuid': fuid})
-        else:
-            raise Exception('参数不正确')
+        response = self.request(url=url, method=method, params={'fuid': fuid} if fuid else None)
         return response
 
     def v1_form_manager_poster(self, method='GET'):
