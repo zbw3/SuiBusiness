@@ -303,15 +303,21 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
-    def v1_form_managers_form_id(self, form_id, method='GET'):
+    def v1_form_managers_form_id(self, form_id, fuid=None, method='GET'):
         """
         获取表单管理员列表
-        :param form_id:
-        :param method: GET
+        :param form_id: 表单 ID
+        :param fuid: 用户 ID , DELETE 方法用到
+        :param method: GET | DELETE
         :return:
         """
         url = self.config.Url.v1_form_managers_form_id.format(formId=form_id)
-        response = self.request(url=url, method=method)
+        if method == self.GET:
+            response = self.request(url=url, method=method)
+        elif method == self.DELETE and fuid is not None:
+            response = self.request(url=url, method=method, params={'fuid': fuid})
+        else:
+            raise Exception('参数不正确')
         return response
 
     def v1_form_manager_poster(self, method='GET'):
