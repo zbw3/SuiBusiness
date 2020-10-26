@@ -303,6 +303,34 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def v1_form_manager_invitation_code(self, form_id, method='GET'):
+        """
+        生成表单管理员邀请码
+        :param form_id:
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v1_form_manager_invitation_code
+        params = {'formId': form_id}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_manager(self, form_id, code, method='POST'):
+        """
+        扫码加入管理员
+        :param form_id: 表单ID短链
+        :param code: 邀请码短链
+        :param method: POST
+        :return:
+        """
+        url = self.config.Url.v1_form_manager
+        data = {
+            "formId": form_id,
+            "code": code
+        }
+        response = self.request(url=url, method=method, json=data)
+        return response
+
     def v1_form_managers_form_id(self, form_id, fuid=None, method='GET'):
         """
         获取表单管理员列表
@@ -312,7 +340,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_form_managers_form_id.format(formId=form_id)
-        response = self.request(url=url, method=method, params={'fuid': fuid} if fuid else None)
+        response = self.request(url=url, method=method, params={'fuid': fuid} if method == self.DELETE else None)
         return response
 
     def v1_form_manager_poster(self, method='GET'):
@@ -323,29 +351,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_form_manager_poster
         response = self.request(url=url, method=method)
-        return response
-
-    def v1_form_manager_invitation_code(self, form_id, method='GET'):
-        """
-        生成表单管理员邀请码
-        :param form_id:
-        :param method:
-        :return:
-        """
-        url = self.config.Url.v1_form_manager_invitation_code
-        params = {'formId': form_id}
-        response = self.request(url=url, method=method, params=params)
-        return response
-
-    def v1_form_manager(self, data, method='POST'):
-        """
-        扫码加入管理员
-        :param data:
-        :param method:
-        :return:
-        """
-        url = self.config.Url.v1_form_manager
-        response = self.request(url=url, method=method, json=data)
         return response
 
 
