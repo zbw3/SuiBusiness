@@ -5,13 +5,14 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/15 15:11
 import random
+from collections import namedtuple
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData, PutFormData
-from ProductApi.MiniProgramForm.form.enum import CatalogType, FormType, FormDataStatus
-from ProductApi.MiniProgramForm.form.form import Form, CreateActivityForm
+from ProductApi.MiniProgramForm.form.enum import CatalogType, FormDataStatus
+from ProductApi.MiniProgramForm.form.form import Form
 from libs.JsonUtils import json_diff
-from typing import Union, List
+from settings.BaseConfig import EnvType, Env
 
 
 def create_form(form_api: FormApi, form: Form) -> str:
@@ -88,6 +89,7 @@ def create_form_data(form_api: FormApi, form_id: str) -> int:
     assert res.status_code == 200
     return res.data.get('data', {}).get('sequence')
 
+
 def create_numerous_form_data(*form_api: FormApi, form_id: str, number: int):
     """
     连续创建多个接龙数据
@@ -109,8 +111,8 @@ def get_form_data(form_api: FormApi, form_id: str, index=0) -> dict:
     else:
         return {}
 
-def verify_post_form_data(user1: FormApi, user2: FormApi, form_id: str):
 
+def verify_post_form_data(user1: FormApi, user2: FormApi, form_id: str):
     sequence = create_form_data(user1, form_id)
     assert sequence == 1
 
@@ -143,3 +145,35 @@ def verify_cancel_form_data(form_api: FormApi, form_id: str):
 
     deleted_form_data = get_form_data(form_api, form_id)
     assert FormDataStatus(deleted_form_data['status']) == FormDataStatus.CANCELED
+
+
+def get_invitation_code(releaser: FormApi, form: Form):
+    """
+    :param releaser: 发布者 api
+    :param form: 表单对象
+    :return: namedtuple
+    """
+    form_id = create_form(releaser, form)
+    response = releaser.v1_form_manager_invitation_code(form_id, method=releaser.GET)
+    assert response.status_code == 200, response.text
+    assert Env.cur_env == EnvType.Test, '仅支持在测试环境中测试'
+    code_str: str = response.data.get('codeStr')
+    assert code_str
+    fid, code = code_str.split(',')
+    invitation = namedtuple('invitation', ['response', 'fid', 'code'])
+    return invitation(response, fid, code)
+
+
+def is_user_in_managers_list(form_id, releaser: FormApi, user: FormApi):
+    """
+    判断用户是否在管理员列表中
+    :param form_id: 表单id
+    :param releaser: 发布者 api
+    :param user: 管理员
+    :return: bool
+    """
+    reponse = releaser.v1_form_managers_form_id(form_id)
+    assert reponse.status_code == 200, reponse.text
+    data: list = reponse.data.data.get('data', [])
+    is_in_managers_list = list(filter(lambda item: item['fid'] == form_id and item['fuid'] == user.fuid, data))
+    return len(is_in_managers_list) == 1
