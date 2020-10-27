@@ -18,6 +18,7 @@ from settings.BaseConfig import Env
 
 @contextmanager
 def no_authorized_hearders(user: FormApi):
+    """模拟未登录用户上下文管理器"""
     authorized_hearders = user.authorized_hearders
     user.authorized_hearders = {}
     yield
