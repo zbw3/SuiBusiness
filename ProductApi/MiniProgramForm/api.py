@@ -343,14 +343,15 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params={'fuid': fuid} if method == self.DELETE else None)
         return response
 
-    def v1_form_manager_poster(self, method='GET'):
+    def v1_form_manager_poster(self, form_id, method='GET'):
         """
         获取管理员邀请海报信息
+        :param form_id: 表单ID
         :param method: GET
         :return:
         """
         url = self.config.Url.v1_form_manager_poster
-        response = self.request(url=url, method=method)
+        response = self.request(url=url, params={'formId': form_id}, method=method)
         return response
 
 

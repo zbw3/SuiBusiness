@@ -91,10 +91,15 @@ def test_get_form_manager_poster(user1, user2, user3, default_shopping_form, def
         assert data['formId'] == invitation.form_id
         assert data['title'] == form.TITLE
 
-        # 未登录用户将头请求管理员列表数据
+        # 未登录用户请求邀请海报信息
         with no_authorized_hearders(user3):
-            response = user3.v1_form_managers_form_id(invitation.form_id, user3.GET)
-            assert response.status_code == 400, response.text
+            response = user3.v1_form_manager_poster(invitation.fid, user3.GET)
+            assert response.status_code == 200, response.text
+            data = response.data.get('data')
+            assert data
+            assert data['formId'] == invitation.form_id
+            assert data['title'] == form.TITLE
+
 
 
 if __name__ == '__main__':
