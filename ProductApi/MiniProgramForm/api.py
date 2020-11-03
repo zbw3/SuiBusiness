@@ -335,12 +335,24 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         获取表单管理员列表
         :param form_id: 表单 ID
-        :param fuid: 用户 ID , DELETE 方法用到
-        :param method: GET | DELETE
+        :param fuid: 用户 ID
+        :param method: GET
         :return:
         """
         url = self.config.Url.v1_form_managers_form_id.format(formId=form_id)
-        response = self.request(url=url, method=method, params={'fuid': fuid} if method == self.DELETE else None)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_manager_form_id(self, form_id, fuid=None, method='DELETE'):
+        """
+        删除表单管理员列表，注意与获取表单管理员列表 path 不是同一个
+        :param form_id: 表单 ID
+        :param fuid: 用户 ID
+        :param method: DELETE
+        :return:
+        """
+        url = self.config.Url.v1_form_manager_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method, params={'fuid': fuid})
         return response
 
     def v1_form_manager_poster(self, form_id, method='GET'):

@@ -5,23 +5,42 @@
 # @Time   : 2020/10/26 13:39
 import pytest
 
+from settings.BaseConfig import Env
 from test_cases.mp_form import get_invitation_code, no_authorized_hearders, is_user_in_managers_list
 
 
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
 def test_form_manager_invitation_code(user1, user2, default_activity_form):
     """验证生成管理员邀请码"""
     data = get_invitation_code(user1, default_activity_form)
     assert data.code != "", data.code
 
 
-def test_form_manager(user1, user2, default_activity_form):
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
+def test_post_form_manager(user1, user2, default_activity_form):
     """验证扫码加入管理员"""
     data = get_invitation_code(user1, default_activity_form)
-    if not is_user_in_managers_list(data.form_id, user1, user2):
-        res = user2.v1_form_manager(data.fid, data.code)
-        assert res.status_code == 200, res.data
+    res = user2.v1_form_manager(data.fid, data.code)
+    assert res.status_code == 200, res.data
+    assert is_user_in_managers_list(data.form_id, releaser=user1, user=user2), res.text
 
 
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
+def test_delete_form_manager(user1, user2, default_shopping_form, default_activity_form):
+    """验证删除管理员"""
+    default_shopping_form.set_title('测试删除管理员')
+    default_activity_form.set_title('测试删除管理员')
+    for form in [default_shopping_form, default_activity_form]:
+        invitation = get_invitation_code(user1, form)
+        response = user2.v1_form_manager(invitation.fid, invitation.code, user2.POST)
+        assert response.status_code == 200
+        assert is_user_in_managers_list(invitation.form_id, releaser=user1, user=user2)
+        response = user1.v1_form_manager_form_id(invitation.form_id, fuid=user2.fuid, method=user1.DELETE)
+        assert response.status_code == 200
+        assert not is_user_in_managers_list(invitation.form_id, releaser=user1, user=user2), response.text
+
+
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
 def test_get_form_managers(user1, user2, user3, default_shopping_form, default_activity_form):
     """验证获取表单管理员列表"""
     default_shopping_form.set_title('测试获取表单管理员列表')
@@ -41,6 +60,7 @@ def test_get_form_managers(user1, user2, user3, default_shopping_form, default_a
         assert len(data) == 2, reponse1.text
 
 
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
 def test_get_form_managers_by_other(user1, user2, user3, default_shopping_form, default_activity_form):
     """验证非发布者（管理员/参与者）请求正确的表单管理员列表数据，响应约定的错误码"""
     default_shopping_form.set_title('测试非发布者获取表单管理员列表')
@@ -65,6 +85,7 @@ def test_get_form_managers_by_other(user1, user2, user3, default_shopping_form, 
             assert response.status_code == 400, response.text
 
 
+@pytest.mark.skipif(not Env().is_test, reason='该用例只能在测试服运行')
 def test_get_form_manager_poster(user1, user2, user3, default_shopping_form, default_activity_form):
     """"验证获取管理员邀请海报信息"""
     default_shopping_form.set_title('测试获取管理员邀请海报信息')
@@ -99,7 +120,6 @@ def test_get_form_manager_poster(user1, user2, user3, default_shopping_form, def
             assert data
             assert data['formId'] == invitation.form_id
             assert data['title'] == form.TITLE
-
 
 
 if __name__ == '__main__':

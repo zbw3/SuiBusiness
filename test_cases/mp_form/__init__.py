@@ -185,5 +185,5 @@ def is_user_in_managers_list(form_id, releaser: FormApi, user: FormApi):
     reponse = releaser.v1_form_managers_form_id(form_id)
     assert reponse.status_code == 200, reponse.text
     data: list = reponse.data.get('data', [])
-    is_in_managers_list = list(filter(lambda item: item['fid'] == form_id and item['fuid'] == user.fuid, data))
+    is_in_managers_list = list(filter(lambda item: item['fuid'] == user.fuid, data))
     return len(is_in_managers_list) == 1

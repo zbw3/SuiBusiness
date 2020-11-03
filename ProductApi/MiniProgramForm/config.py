@@ -81,6 +81,7 @@ class Test:
 
         v1_form_manager_invitation_code = '/v1/form/manager/invitation_code'
         v1_form_manager = '/v1/form/manager'
+        v1_form_manager_form_id = '/v1/form/manager/{formId}'
         v1_form_managers_form_id = '/v1/form/managers/{formId}'
         v1_form_manager_poster = '/v1/form/manager/poster'
 
