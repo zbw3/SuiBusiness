@@ -11,6 +11,7 @@ from ProductApi.MiniProgramForm.form.enum import CatalogType, RoleType, CatalogS
 from ProductApi.MiniProgramForm.form.utils import RandomImageUrl, CustomProvider
 from faker import Faker
 
+
 class QuestionsData:
     def __init__(self):
         self.WORD = []
@@ -18,6 +19,11 @@ class QuestionsData:
         self.NUMBER_FLOAT = []
         self.RADIO = []
         self.CHECKBOX = []
+        self.RADIO_V2 = []
+        self.CHECKBOX_V2 = []
+        self.TELEPHONE = []
+        self.ID_CARD = []
+        self.DATE = []
 
 
 class CatalogsData:
@@ -93,8 +99,18 @@ class PostFormData:
             value = self.info.get(self._get_catalog_title(item), self.faker.random_number)()
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
+        for item in catalogs.QUESTION.TELEPHONE:
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': self.faker.phone_number()})
+
+        for item in catalogs.QUESTION.ID_CARD:
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': self.faker.ssn()})
+
+        for item in catalogs.QUESTION.DATE:
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': self.faker.date()})
+
         for item in catalogs.QUESTION.IMAGE:
-            data.append({'type': item['type'], 'cid': item['cid'], 'value': [self.RandomImage.small for _ in range(random.randint(1, 3))]})
+            data.append({'type': item['type'], 'cid': item['cid'],
+                         'value': [self.RandomImage.small for _ in range(random.randint(1, 3))]})
 
         for item in catalogs.QUESTION.RADIO:
             selected_option_cid = random.choice([form_catalog['cid'] for form_catalog in item['formCatalogs'] if
@@ -102,11 +118,25 @@ class PostFormData:
 
             data.append({'type': item['type'], 'cid': item['cid'], 'value': selected_option_cid})
 
+        for item in catalogs.QUESTION.RADIO_V2:
+            selected_option = random.choice([form_catalog for form_catalog in item['formCatalogs'] if
+                                             RoleType(form_catalog['role']) == RoleType.OPTION])
+            value = {'cid': selected_option['cid'], 'custom': self.faker.word()} \
+                if selected_option['custom'] else {'cid': selected_option['cid']}
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
+
         for item in catalogs.QUESTION.CHECKBOX:
             selected_option_cids = random.sample([form_catalog['cid'] for form_catalog in item['formCatalogs'] if
                                                   RoleType(form_catalog['role']) == RoleType.OPTION], 2)
 
             data.append({'type': item['type'], 'cid': item['cid'], 'value': selected_option_cids})
+
+        for item in catalogs.QUESTION.CHECKBOX_V2:
+            selected_options = random.sample([form_catalog for form_catalog in item['formCatalogs'] if
+                                              RoleType(form_catalog['role']) == RoleType.OPTION], 2)
+            value = [{'cid': option['cid'], 'custom': self.faker.word()} if option['custom'] else {'cid': option['cid']}
+                     for option in selected_options]
+            data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
         if catalogs.BUYER_REMARKS:
             item = catalogs.BUYER_REMARKS

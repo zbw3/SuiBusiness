@@ -34,15 +34,25 @@ class FormCatalog:
             role: RoleType = RoleType.TITLE,
             type_: ContentType = ContentType.WORD,
             title: str = "",
-            status: int = 1
+            status: int = 1,
+            **kwargs
     ):
         self.value = {
             "title": title,
             "content": content,
             "role": role.value,
             "type": type_.value,
-            "status": status
+            "status": status,
+            **kwargs
         }
+
+class Option:
+    """
+    RADIO_V2 CHECKBOX_V2 的 option 需要指定是否可自定义
+    """
+    def __init__(self, title: str, custom: bool):
+        self.title = title
+        self.custom = custom
 
 
 class Catalog:
@@ -190,6 +200,36 @@ class Form:
             )
         )
 
+    def add_telephone_question(self, title, must=True, overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.TELEPHONE,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
+    def add_id_card_question(self, title, must=True, overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.ID_CARD,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
+    def add_date_question(self, title, must=True, overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.DATE,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
     def add_radio_question(self, title, options: List[str], must=True, overt=True):
         if len(options) < 2:
             raise Exception('单选的选项不能少于 2 条')
@@ -202,6 +242,19 @@ class Form:
             )
         )
 
+    def add_radio_v2_question(self, title, options: List[Option], must=True, overt=True):
+        """选项中增加自定义的项"""
+        if len(options) < 2:
+            raise Exception('单选的选项不能少于 2 条')
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.RADIO_V2,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom) for option in options]
+            )
+        )
+
     def add_checkbox_question(self, title, options: List[str], must=True, overt=True):
         if len(options) < 2:
             raise Exception('多选的选项不能少于 2 条')
@@ -211,6 +264,18 @@ class Form:
                 must=must,
                 overt=overt,
                 form_catalogs=[FormCatalog(title)] + [FormCatalog(option, RoleType.OPTION) for option in options]
+            )
+        )
+
+    def add_checkbox_v2_question(self, title, options: List[Option], must=True, overt=True):
+        if len(options) < 2:
+            raise Exception('多选的选项不能少于 2 条')
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.CHECKBOX_V2,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom) for option in options]
             )
         )
 

@@ -27,6 +27,11 @@ class ContentType(Enum):
     NUMBER_FLOAT = 'NUMBER_FLOAT'
     RADIO = 'RADIO'
     CHECKBOX = 'CHECKBOX'
+    RADIO_V2 = 'RADIO_V2'
+    CHECKBOX_V2 = 'CHECKBOX_V2'
+    TELEPHONE = 'TELEPHONE'
+    ID_CARD = 'ID_CARD'
+    DATE = 'DATE'
 
 
 class RoleType(Enum):
