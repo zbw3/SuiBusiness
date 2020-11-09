@@ -5,14 +5,12 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/14 13:57
 import json
-import os
 import time
-from random import randint
 from datetime import datetime, timedelta
 from typing import List, Union
 
-from ProductApi.MiniProgramForm.form.enum import ContentType, RoleType, CatalogType, FormType
 from ProductApi.MiniProgramForm.api import FormApi
+from ProductApi.MiniProgramForm.form.enum import ContentType, RoleType, CatalogType, FormType
 from ProductApi.MiniProgramForm.form.utils import get_img_url, RandomImageUrl
 
 

@@ -1,4 +1,6 @@
 ## Faker 可用方法
+https://www.jianshu.com/p/6bd6869631d9
+
 add_provider
 address
 am_pm

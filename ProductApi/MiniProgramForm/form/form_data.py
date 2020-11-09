@@ -121,7 +121,7 @@ class PostFormData:
         for item in catalogs.QUESTION.RADIO_V2:
             selected_option = random.choice([form_catalog for form_catalog in item['formCatalogs'] if
                                              RoleType(form_catalog['role']) == RoleType.OPTION])
-            value = {'cid': selected_option['cid'], 'custom': self.faker.word()} \
+            value = {'cid': selected_option['cid'], 'customValue': self.faker.word()} \
                 if selected_option['custom'] else {'cid': selected_option['cid']}
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
@@ -134,7 +134,7 @@ class PostFormData:
         for item in catalogs.QUESTION.CHECKBOX_V2:
             selected_options = random.sample([form_catalog for form_catalog in item['formCatalogs'] if
                                               RoleType(form_catalog['role']) == RoleType.OPTION], 2)
-            value = [{'cid': option['cid'], 'custom': self.faker.word()} if option['custom'] else {'cid': option['cid']}
+            value = [{'cid': option['cid'], 'customValue': self.faker.word()} if option['custom'] else {'cid': option['cid']}
                      for option in selected_options]
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 

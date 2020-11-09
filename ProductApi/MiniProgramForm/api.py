@@ -331,11 +331,10 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, json=data)
         return response
 
-    def v1_form_managers_form_id(self, form_id, fuid=None, method='GET'):
+    def v1_form_managers_form_id(self, form_id, method='GET'):
         """
         获取表单管理员列表
         :param form_id: 表单 ID
-        :param fuid: 用户 ID
         :param method: GET
         :return:
         """
