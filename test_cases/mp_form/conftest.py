@@ -108,4 +108,6 @@ def generate_default_form(title=None, is_shopping=False):
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()
+    form.set_limit("5")
+    form.set_per_limit("3")
     return form

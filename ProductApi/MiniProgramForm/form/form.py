@@ -115,7 +115,6 @@ class Form:
         self.TITLE = None
         self.CONTENTS = []
         self.CATALOGS = []
-        self.CONFIG = {}
         self.form_api = FormApi()
 
         self.now = datetime.now()
@@ -123,7 +122,9 @@ class Form:
                 self.now + timedelta(days, hours=hours, seconds=seconds)).strftime('%Y-%m-%d %T')
         self.CONFIG = {
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
-            'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
+            'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
+            'limit': "-1",
+            "preLimit": "-1"
         }
 
     @property
@@ -282,6 +283,13 @@ class Form:
             'actBeginTime': start or self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
         }
+
+    def set_limit(self, limit):
+        self.CONFIG['limit'] = limit
+        # self.CONFIG = {**self.CONFIG, 'limit': limit}
+
+    def set_per_limit(self, per_limit):
+        self.CONFIG['perLimit'] = per_limit
 
     def clear_contents(self):
         """清空表单内容项 文字 大图 小图"""
