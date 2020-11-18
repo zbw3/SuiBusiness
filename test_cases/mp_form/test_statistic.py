@@ -19,13 +19,13 @@ def create_many_order_shopping_form(user1, user2, default_shopping_form, number=
 def test_statistic_detail(user1, user2, default_shopping_form, number=10):
     form_id = create_many_order_shopping_form(user1, user2, default_shopping_form, number)
     res = user1.v1_statistic_detail_form_id(form_id, 'SEQUENCE', 'ASC')
-    assert res.status_code == 200
+    assert res.status_code == 200, res.text
 
 
 def test_statistic_analysis(user1, user2, default_shopping_form, number=10):
     form_id = create_many_order_shopping_form(user1, user2, default_shopping_form, number)
     res = user1.v1_statistic_analysis_form_id(form_id)
-    assert res.status_code == 200
+    assert res.status_code == 200, res.text
 
 
 if __name__ == '__main__':

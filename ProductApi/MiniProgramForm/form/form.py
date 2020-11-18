@@ -44,10 +44,12 @@ class FormCatalog:
             **kwargs
         }
 
+
 class Option:
     """
     RADIO_V2 CHECKBOX_V2 的 option 需要指定是否可自定义
     """
+
     def __init__(self, title: str, custom: bool):
         self.title = title
         self.custom = custom
@@ -124,7 +126,7 @@ class Form:
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
             'limit': -1,
-            "preLimit": -1
+            "perLimit": -1
         }
 
     @property
@@ -250,7 +252,8 @@ class Form:
                 type_=ContentType.RADIO_V2,
                 must=must,
                 overt=overt,
-                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom) for option in options]
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom)
+                                                      for option in options]
             )
         )
 
@@ -274,15 +277,14 @@ class Form:
                 type_=ContentType.CHECKBOX_V2,
                 must=must,
                 overt=overt,
-                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom) for option in options]
+                form_catalogs=[FormCatalog(title)] + [FormCatalog(option.title, RoleType.OPTION, custom=option.custom)
+                                                      for option in options]
             )
         )
 
     def set_duration_time(self, start=None, end=None):
-        self.CONFIG = {
-            'actBeginTime': start or self.now.strftime('%Y-%m-%d %T'),
-            'actEndTime': end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
-        }
+        self.CONFIG['actBeginTime'] = start or self.now.strftime('%Y-%m-%d %T')
+        self.CONFIG['actEndTime'] = end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
 
     def set_limit(self, limit: int):
         self.CONFIG['limit'] = limit
