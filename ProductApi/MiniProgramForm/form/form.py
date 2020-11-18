@@ -123,8 +123,8 @@ class Form:
         self.CONFIG = {
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
-            'limit': "-1",
-            "preLimit": "-1"
+            'limit': -1,
+            "preLimit": -1
         }
 
     @property
@@ -284,11 +284,10 @@ class Form:
             'actEndTime': end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
         }
 
-    def set_limit(self, limit):
+    def set_limit(self, limit: int):
         self.CONFIG['limit'] = limit
-        # self.CONFIG = {**self.CONFIG, 'limit': limit}
 
-    def set_per_limit(self, per_limit):
+    def set_per_limit(self, per_limit: int):
         self.CONFIG['perLimit'] = per_limit
 
     def clear_contents(self):

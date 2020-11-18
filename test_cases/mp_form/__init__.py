@@ -50,6 +50,9 @@ def verify_post_form(form_api: FormApi, form: Form) -> str:
     assert data.get('type') == form_data['type']
     assert data.get('title') == form_data['title']
     assert data.get('contents') == form_data['contents']
+    assert data.get('config')['limit'] == int(form_data['config']['limit'])
+    assert data.get('config')['perLimit'] == int(form_data['config']['perLimit'])
+
     # catalog['status'] 0：正常，-1：删除，1：新增（临时），2：更新（临时）
     for catalog in form_data['catalogs']:
         for form_catalog in catalog['formCatalogs']:
@@ -85,6 +88,7 @@ def verify_put_form(form_api: FormApi, form: Form) -> str:
     modified_form_detail_res = form_api.v1_form_form_id(form_id, method=form_api.GET)
     form_data_diff = json_diff(modify_form.data, modified_form_detail_res.data.get('data', {}))
     assert form_data_diff == [], form_data_diff
+
     return form_id
 
 
