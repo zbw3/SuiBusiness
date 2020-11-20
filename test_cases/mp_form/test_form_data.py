@@ -4,7 +4,6 @@
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/27 14:56
-
 import pytest
 
 from ProductApi.MiniProgramForm.api import FormApi
@@ -24,7 +23,13 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     default_shopping_form.set_limit(3)
     default_activity_form.set_per_limit(2)
     default_shopping_form.set_per_limit(2)
-    return create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
+    form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
+    # 还原sesion类实例
+    default_activity_form.set_limit(-1)
+    default_shopping_form.set_limit(-1)
+    default_activity_form.set_per_limit(-1)
+    default_shopping_form.set_per_limit(-1)
+    return form_ids
 
 
 def post_form_data(form_api: FormApi, form_id: str):
