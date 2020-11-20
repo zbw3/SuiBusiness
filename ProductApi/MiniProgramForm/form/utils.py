@@ -89,3 +89,8 @@ class CustomProvider(BaseProvider):
         words = Faker('zh_CN').words() + random.sample(self.emoji_string, k=random.randint(1, 5))
         random.shuffle(words)
         return ''.join(words)
+
+
+if __name__ == '__main__':
+    USE_LOCAL_CACHE_URL = False
+    print(get_img_url(f'https://picsum.photos/512/20'))
