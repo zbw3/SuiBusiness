@@ -249,7 +249,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
     def v1_operation_forms(self, table_id, method='GET'):
         """
         首页瀑布流表单
-        :param table_id: TUTORIAL_HELP: 教程帮助CASE_TEMPLATE: 案例模板
+        :param table_id: TUTORIAL_HELP: 教程帮助CASE_TEMPLATE: 案例模板 NO_TAB:首页
         :param method:
         :return:
         """
@@ -363,6 +363,29 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_form_manager_poster
         response = self.request(url=url, params={'formId': form_id}, method=method)
+        return response
+
+    def v1_form_operation_official_account_form_id(self, form_id, method='GET'):
+        """
+        获取公众号文章内容
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_operation_official_account_form_id.format(operationFormId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_operation_position(self, ver, method='GET'):
+        """
+        获取运营位配置相关信息
+        :param ver: 当前版本号，每个版本段占两位数，例如1.1.0版：10100
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_operation_position
+        params = {'ver': ver}
+        response = self.request(url=url, method=method, params=params)
         return response
 
 

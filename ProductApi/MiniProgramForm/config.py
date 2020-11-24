@@ -84,6 +84,9 @@ class Test:
         v1_form_manager_form_id = '/v1/form/manager/{formId}'
         v1_form_managers_form_id = '/v1/form/managers/{formId}'
         v1_form_manager_poster = '/v1/form/manager/poster'
+        v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
+        v1_operation_position = '/v1/operation_position'
+
 
 
 class Uat:
