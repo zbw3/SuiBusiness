@@ -96,6 +96,7 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_text_question('姓名')
     form.add_telephone_question('手机号', must=False)
     form.add_number_question('需要数量', must=False)
+    form.add_text_question('喜欢的句子', must=False)
     # form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
     form.add_radio_v2_question('你的性别', [Option('男', False), Option('女', False), Option('保密', False), ], must=False)
     form.add_radio_v2_question('你的国籍', [Option('中国', False), Option('美国', False), Option('其他', True), ], must=False)

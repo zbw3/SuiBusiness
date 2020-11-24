@@ -91,7 +91,7 @@ class PostFormData:
                 data.append({'type': item['type'], 'cid': item['cid'], 'value': random.randint(1, 5)})
 
         for item in catalogs.QUESTION.WORD:
-            value = self.info.get(self._get_catalog_title(item), self.faker.sentence)()
+            value = self.info.get(self._get_catalog_title(item), lambda: self.faker.sentence(nb_words=25))()
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
         for item in catalogs.QUESTION.NUMBER_FLOAT:
@@ -134,8 +134,9 @@ class PostFormData:
         for item in catalogs.QUESTION.CHECKBOX_V2:
             selected_options = random.sample([form_catalog for form_catalog in item['formCatalogs'] if
                                               RoleType(form_catalog['role']) == RoleType.OPTION], 2)
-            value = [{'cid': option['cid'], 'customValue': self.faker.word()} if option['custom'] else {'cid': option['cid']}
-                     for option in selected_options]
+            value = [
+                {'cid': option['cid'], 'customValue': self.faker.word()} if option['custom'] else {'cid': option['cid']}
+                for option in selected_options]
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
         if catalogs.BUYER_REMARKS:

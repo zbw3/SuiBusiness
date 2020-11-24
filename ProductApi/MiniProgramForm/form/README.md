@@ -1,6 +1,9 @@
 ## Faker 可用方法
-https://www.jianshu.com/p/6bd6869631d9
+官方文档: https://faker.readthedocs.io/en/master/
 
+参考文档：https://www.jianshu.com/p/6bd6869631d9
+
+```
 add_provider
 address
 am_pm
@@ -235,4 +238,4 @@ word
 words
 year
 zip
-
+```
