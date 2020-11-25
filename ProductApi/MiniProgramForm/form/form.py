@@ -126,7 +126,8 @@ class Form:
             'actBeginTime': self.now.strftime('%Y-%m-%d %T'),
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
             'limit': -1,
-            "perLimit": -1
+            "perLimit": -1,
+            'formDataPermission': 1
         }
 
     @property
@@ -291,6 +292,13 @@ class Form:
 
     def set_per_limit(self, per_limit: int):
         self.CONFIG['perLimit'] = per_limit
+
+    def set_form_data_permission(self, permission: int):
+        """
+        :param permission: 1:所有人可见；2:管理员可见
+        :return:
+        """
+        self.CONFIG['formDataPermission'] = permission
 
     def clear_contents(self):
         """清空表单内容项 文字 大图 小图"""

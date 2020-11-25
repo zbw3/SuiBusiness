@@ -187,6 +187,17 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params, json=data)
         return response
 
+    def v2_form_id_form_datas(self, form_id, method='GET'):
+        """
+        获取接龙统计数据
+        :param form_id:
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v2_form_id_form_datas.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
     def v1_form_id_status(self, form_id, status, method='PUT'):
         url = self.config.Url.v1_form_id_status.format(formId=form_id)
         response = self.request(url=url, method=method, params={'status': status})
@@ -367,7 +378,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
     def v1_form_operation_official_account_form_id(self, form_id, method='GET'):
         """
-        获取公众号文章内容
+        获取公众号文章内容（这个接口主要是为了统计入口流量，让前端多调用一次）
         :param form_id:
         :param method:
         :return:
@@ -376,16 +387,24 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
-    def v1_operation_position(self, ver, method='GET'):
+    def v1_operation_position(self, method='GET'):
         """
         获取运营位配置相关信息
-        :param ver: 当前版本号，每个版本段占两位数，例如1.1.0版：10100
         :param method:
         :return:
         """
         url = self.config.Url.v1_operation_position
-        params = {'ver': ver}
-        response = self.request(url=url, method=method, params=params)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_config(self, method='GET'):
+        """
+        获取强制更新及当前域名等配置信息
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_config
+        response = self.request(url=url, method=method)
         return response
 
 

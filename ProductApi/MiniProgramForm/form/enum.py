@@ -17,6 +17,7 @@ class OperationFormType(Enum):
     OPERATION = 'OPERATION'
     NORMAL = 'NORMAL'
     TEMPLATE = 'TEMPLATE'
+    OFFICIAL_ACCOUNT = 'OFFICIAL_ACCOUNT'
 
 
 class ContentType(Enum):
