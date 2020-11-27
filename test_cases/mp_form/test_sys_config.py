@@ -17,7 +17,7 @@ def test_operation_position(user1):
     response = user1.v1_operation_position(method=user1.GET)
     assert response.status_code == 200, response.text
     data = response.data.get('data')
-    if data:
+    if data and data.get('status') != -1:
         assert data.get('image')
         if data.get('linkType') == 'WX_MEDIA_PLATFORM':
             assert data.get('linkUrl')

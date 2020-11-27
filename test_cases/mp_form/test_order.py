@@ -34,7 +34,7 @@ class UserData:
         self.order_id = None
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='function')
 def create_order(user1, user2, default_shopping_form):
     """
     创建 3 个订单，分别 user1 2 个， user2 1 个

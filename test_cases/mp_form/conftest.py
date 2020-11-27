@@ -51,12 +51,12 @@ def hu_fei():
     return FormApi(fuid=FormApi.USER.hu_fei)
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='function')
 def default_activity_form():
     return generate_default_form('果霸轰趴')
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='function')
 def default_shopping_form():
     return generate_default_form('果霸商城', is_shopping=True)
 
