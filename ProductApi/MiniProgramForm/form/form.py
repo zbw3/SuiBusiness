@@ -17,7 +17,7 @@ from ProductApi.MiniProgramForm.form.utils import get_img_url, RandomImageUrl
 class Content:
     """表单 文字 大图 小图 项内容"""
 
-    def __init__(self, type_: ContentType = ContentType.WORD, content: Union[str, list] = '表单文字描述部分'):
+    def __init__(self, type_: ContentType = ContentType.WORD, content: Union[str, list, dict] = '表单文字描述部分'):
         if type_ == ContentType.THUMBNAIL and isinstance(content, str):
             raise ValueError('小图类型 content 值必须为列表')
         self.value = {'type': type_.value, 'content': content}
@@ -42,6 +42,20 @@ class FormCatalog:
             "type": type_.value,
             "status": status,
             **kwargs
+        }
+
+
+class CopyContent:
+    """一键复制区"""
+    def __init__(
+            self,
+            guide: str = "",
+            content: str = "RfbJerOpM2cv6tY"
+
+    ):
+        self.value = {
+            "guide": guide,
+            "content": content
         }
 
 
@@ -171,6 +185,11 @@ class Form:
     def add_small_imgs(self, images: list):
         self._add_content(
             Content(ContentType.THUMBNAIL, [get_img_url(image) for image in images])
+        )
+
+    def add_copy_area(self, copy_guide, copy_content):
+        self._add_content(
+            Content(ContentType.COPY_AREA, content=CopyContent(copy_guide, copy_content).value)
         )
 
     def add_text_question(self, title, must=True, overt=True):

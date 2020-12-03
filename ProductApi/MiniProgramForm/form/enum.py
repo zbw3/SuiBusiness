@@ -33,6 +33,7 @@ class ContentType(Enum):
     TELEPHONE = 'TELEPHONE'
     ID_CARD = 'ID_CARD'
     DATE = 'DATE'
+    COPY_AREA = 'COPY_AREA'
 
 
 class RoleType(Enum):

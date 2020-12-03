@@ -86,6 +86,8 @@ def generate_default_form(title=None, is_shopping=False):
         abspath('./images/730x365.jpg'),
         abspath('./images/757x402.jpg'),
     ])
+    # 添加复制区
+    form.add_copy_area('前10名加威信，送蓝牙耳机，前20名加威信 送飞科剃须刀，速度速度', 'RfbJerOpM2cv6tY')
 
     if is_shopping:
         form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
