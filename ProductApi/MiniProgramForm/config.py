@@ -73,6 +73,7 @@ class Test:
         v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
+        v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
 
         v1_operation_forms = '/v1/operation_forms'
         v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
