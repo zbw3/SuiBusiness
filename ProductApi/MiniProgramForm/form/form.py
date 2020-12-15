@@ -141,7 +141,16 @@ class Form:
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
             'limit': -1,
             "perLimit": -1,
-            'formDataPermission': 1
+            'formDataPermission': 1,
+            'cycle': {
+                'frequency': 127,
+                'effectiveTime': [
+                    {
+                        'startTime': 0,
+                        'endTime': 2359
+                    }
+                ]
+            }
         }
 
     @property
@@ -311,6 +320,12 @@ class Form:
 
     def set_per_limit(self, per_limit: int):
         self.CONFIG['perLimit'] = per_limit
+
+    def set_cycle(self, frequency, start: int, end: int):
+        self.CONFIG['cycle']['frequency'] = frequency
+        self.CONFIG['cycle']['effectiveTime'][0]['startTime'] = start
+        self.CONFIG['cycle']['effectiveTime'][0]['endTime'] = end
+
 
     def set_form_data_permission(self, permission: int):
         """
