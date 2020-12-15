@@ -407,6 +407,11 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def v1_form_id_cycle_form_datas(self, form_id, page_no=1, page_size=20, method='GET'):
+        url = self.config.Url.v1_form_id_cycle_form_datas.format(formId=form_id)
+        params = {'formId':form_id,'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, method=method, params=params)
+        return response
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
