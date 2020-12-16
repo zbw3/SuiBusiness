@@ -20,9 +20,11 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     default_activity_form.set_title('参与接龙测试')
     default_shopping_form.set_title('参与接龙测试')
     default_activity_form.set_limit(3)
-    default_shopping_form.set_limit(3)
+    default_activity_form.set_cycle(127, 800, 900)
     default_activity_form.set_per_limit(2)
+    default_shopping_form.set_limit(3)
     default_shopping_form.set_per_limit(2)
+    default_shopping_form.set_cycle(127, 800, 900)
     form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
     return form_ids
 
@@ -98,6 +100,13 @@ def test_post_form_data_over_limit_and_per_limit(user1, user2, form_ids):
         response = post_form_data(user2, form_id)
         assert response.status_code == 422, response.text
         assert response.data.get('code') == 13426, response.text
+
+def test_post_form_data_not_in_cycle(user1,form_ids):
+    """验证不在循环周期内接龙"""
+    for form_id in form_ids:
+        response = post_form_data(user1, form_id)
+        assert response.status_code == 422, response.text
+
 
 
 if __name__ == '__main__':
