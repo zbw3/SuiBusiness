@@ -101,12 +101,29 @@ def test_post_form_data_over_limit_and_per_limit(user1, user2, form_ids):
         assert response.status_code == 422, response.text
         assert response.data.get('code') == 13426, response.text
 
-def test_post_form_data_not_in_cycle(user1,form_ids):
-    """验证不在循环周期内接龙"""
-    for form_id in form_ids:
-        response = post_form_data(user1, form_id)
-        assert response.status_code == 422, response.text
 
+def test_query_form_id_cycle_form_datas(user1, user2, form_ids):
+    """验证获取今日循环表单的报名数据"""
+    for form_id in form_ids:
+        verify_post_form_data(user1, user2, form_id)
+
+        response = user1.v1_form_id_cycle_form_datas(form_id)
+        assert response.status_code == 200, response.text
+        assert len(response.data.get('data')) == 2
+
+        for i in range(0, len(response.data.get('data'))):
+            assert response.data.get('data')[i].get('status') == 0
+            assert response.data.get('data')[i].get('sequence') == 2-i
+
+
+def test_cancel_form_id_cycle_form_datas(user2, form_ids):
+    """获取取消报名数据"""
+    for form_id in form_ids:
+        verify_cancel_form_data(user2, form_id)
+
+        response = user2.v1_form_id_cycle_form_datas(form_id)
+        assert response.status_code == 200, response.text
+        assert response.data.get('data')[0].get('status') == -1
 
 
 if __name__ == '__main__':

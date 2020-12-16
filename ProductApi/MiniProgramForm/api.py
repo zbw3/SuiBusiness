@@ -409,13 +409,27 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
     def v1_form_id_cycle_form_datas(self, form_id, page_no=1, page_size=20, method='GET'):
         url = self.config.Url.v1_form_id_cycle_form_datas.format(formId=form_id)
-        params = {'formId':form_id,'pageNo': page_no, 'pageSize': page_size}
+        params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size}
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_form_id_cycle_participant(self, form_id, page_no=1, page_size=20, method='GET'):
+        url = self.config.Url.v1_form_id_cycle_participant.format(form_id=form_id)
+        params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_id_cycle_ranking(self, form_id, page_no=1, page_size=20, start_time=None, end_time=None, method='GET'):
+        url = self.config.Url.v1_form_id_cycle_ranking.format(form_id=form_id)
+        params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size, 'startTime': start_time,
+                  'endTime': end_time}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1072705375733551112', print_results=True)
+    api = FormApi(fuid='1103132176129462272', print_results=True)
 
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
