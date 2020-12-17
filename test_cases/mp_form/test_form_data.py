@@ -17,14 +17,14 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     创建活动报名和团购接龙表单，总报接龙次数限制 3， 每人接龙次数限制 2
     :return tuple[form_id]
     """
-    default_activity_form.set_title('参与接龙测试')
-    default_shopping_form.set_title('参与接龙测试')
+    default_activity_form.set_title('普通表单不循环-验证转化用')
+    default_shopping_form.set_title('普通表单不循环-验证转化用')
     default_activity_form.set_limit(3)
-    default_activity_form.set_cycle(127, 800, 900)
+    # default_activity_form.set_cycle(127, 800, 1030)
     default_activity_form.set_per_limit(2)
     default_shopping_form.set_limit(3)
     default_shopping_form.set_per_limit(2)
-    default_shopping_form.set_cycle(127, 800, 900)
+    # default_shopping_form.set_cycle(127, 800, 1030)
     form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
     return form_ids
 
@@ -46,6 +46,8 @@ def post_form_data_twice(user: FormApi, form_id: str):
         response = post_form_data(user, form_id)
         assert response.status_code == 200, response.text
         assert response.data.get('data', {}).get('sequence') == i, response.text
+
+
 
 
 def test_post_form_data(user1, user2, form_ids):
@@ -138,7 +140,28 @@ def test_form_id_cycle_ranking(user1, user2, form_ids):
         assert response.data.get("data")[1].get('fuid') == FormApi.USER.user2 and response.data.get("data")[1].get('days') == 0
 
 
+def test_query_form_id_cycle_form_datas(user1, user2, form_ids):
+    """验证获取今日循环表单的报名数据"""
+    for form_id in form_ids:
+        verify_post_form_data(user1, user2, form_id)
 
+        response = user1.v1_form_id_cycle_form_datas(form_id)
+        assert response.status_code == 200, response.text
+        assert len(response.data.get('data')) == 2
+
+        for i in range(0, len(response.data.get('data'))):
+            assert response.data.get('data')[i].get('status') == 0
+            assert response.data.get('data')[i].get('sequence') == 2-i
+
+
+def test_cancel_form_id_cycle_form_datas(user2, form_ids):
+    """获取取消报名数据"""
+    for form_id in form_ids:
+        verify_cancel_form_data(user2, form_id)
+
+        response = user2.v1_form_id_cycle_form_datas(form_id)
+        assert response.status_code == 200, response.text
+        assert response.data.get('data')[0].get('status') == -1
 
 if __name__ == '__main__':
     pytest.main()

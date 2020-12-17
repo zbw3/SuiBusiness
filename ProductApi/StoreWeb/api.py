@@ -541,7 +541,7 @@ if __name__ == '__main__':
 
     # api = StoreWebApi(username="al1@kd.ssj", password="a12345678", version='1', trading_entity="36056917", print_results=True)
     # res1 = api.v2_store_products_spec_name_post({'spec_name': '尺寸'}).data  #添加商品规格名
-    # res = api.v2_store_products_spec_get(spec_name='尺寸') #指定查询某个规格
+    res = api.v2_store_products_spec_get(spec_name='尺寸') #指定查询某个规格
     # res = api.v2_store_products_spec_get() #查询店铺所有规格
     #res = api.v2_store_products_spec_value_post({"spec_name_id": "5", "spec_value": "超大"}) #添加商品规格值
     # res = api.v2_store_products_goods_get({'page_number': 1, 'page_size': 30}) # 查询店铺商品

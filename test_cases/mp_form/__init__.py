@@ -14,6 +14,7 @@ from ProductApi.MiniProgramForm.form.enum import CatalogType, FormDataStatus
 from ProductApi.MiniProgramForm.form.form import Form
 from libs.JsonUtils import json_diff
 from settings.BaseConfig import Env
+import time
 
 
 @contextmanager
@@ -137,6 +138,7 @@ def verify_post_form_data(user1: FormApi, user2: FormApi, form_id: str):
 def verify_put_form_data(form_api, form_id: str):
     if not get_form_data(form_api, form_id):
         create_form_data(form_api, form_id)
+
 
     put_form_data = PutFormData(form_api, form_id).data
     res = form_api.v1_form_id_form_data(form_id, put_form_data, method=form_api.PUT)

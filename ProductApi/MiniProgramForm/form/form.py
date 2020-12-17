@@ -142,15 +142,15 @@ class Form:
             'limit': -1,
             "perLimit": -1,
             'formDataPermission': 1,
-            'cycle': {
-                'frequency': 127,
-                'effectiveTime': [
-                    {
-                        'startTime': 0,
-                        'endTime': 2359
-                    }
-                ]
-            }
+            # 'cycle': {
+            #     'frequency': 127,
+            #     'effectiveTime': [
+            #         {
+            #             'startTime': 0,
+            #             'endTime': 2359
+            #         }
+            #     ]
+            # }
         }
 
     @property
@@ -163,6 +163,7 @@ class Form:
         return {
             # 有填写项 TYPE = ACTIVITY_V2
             "type": self.TYPE.name if not self.is_activity_v2() else FormType.ACTIVITY_V2.name,
+
             "cover": self.COVER,
             "title": self.TITLE or f'[{self.TYPE.value}]-测试表单-{time.strftime("%T")}',
             "contents": self.CONTENTS,
@@ -384,11 +385,12 @@ class CreateShoppingForm(Form):
 
 
 if __name__ == '__main__':
-    # form = CreateActivityForm()
+    form = CreateActivityForm()
     # # 添加标题
-    # form.add_title('活动表单测试')
-    # # 添加文字
-    # form.add_text('这是一个文字描述')
+    form.set_title('活动表单测试')
+    # 添加文字
+    form.add_text('这是一个文字描述')
+    form.add_copy_area('mombofbm', 'mimfslmg')
     # # 添加大图
     # form.add_large_img('https://picsum.photos/200')
     # # 添加小图
@@ -409,29 +411,29 @@ if __name__ == '__main__':
     """
     创建多图
     """
-    form = CreateShoppingForm()
-    # 添加标题
-    form.set_title('多图表单(大图10 + 小图 90 + 商品 20)')
-    # 添加文字
-    form.add_text('这是一个文字描述')
-    # 添加大图
-    for i in range(10):
-        form.add_large_img('https://picsum.photos/1000')
-
-    form.add_small_imgs(['https://picsum.photos/800'] * 90)
-
-    # 添加商品
-    for i in range(1, 21):
-        form.add_goods(str(i), price='2.5', image='https://picsum.photos/500')
-    # form.add_goods('香蕉', price='5', image='https://picsum.photos/50')
-
-    # 添加填写项
-    form.add_text_question('你选的水果是？')
-
-    print(form.json)
-
-    api = form.form_api
-    api.v1_form(form.data)
+    # form = CreateShoppingForm()
+    # # 添加标题
+    # form.set_title('多图表单(大图10 + 小图 90 + 商品 20)')
+    # # 添加文字
+    # form.add_text('这是一个文字描述')
+    # # 添加大图
+    # for i in range(10):
+    #     form.add_large_img('https://picsum.photos/1000')
+    #
+    # form.add_small_imgs(['https://picsum.photos/800'] * 90)
+    #
+    # # 添加商品
+    # for i in range(1, 21):
+    #     form.add_goods(str(i), price='2.5', image='https://picsum.photos/500')
+    # # form.add_goods('香蕉', price='5', image='https://picsum.photos/50')
+    #
+    # # 添加填写项
+    # form.add_text_question('你选的水果是？')
+    #
+    # print(form.json)
+    #
+    # api = form.form_api
+    # api.v1_form(form.data)
 
     """
     创建多商品问题

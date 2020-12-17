@@ -86,7 +86,7 @@ class Sui(ApiBase):
         data = self.user_profile(token)
         return bool(data.get('uid'))
 
-    def get_token(self, update_token=False):
+    def get_token(self, update_token=True):
         redis = Redis()
         token = redis.get_token(self.username)
         if not token or update_token:

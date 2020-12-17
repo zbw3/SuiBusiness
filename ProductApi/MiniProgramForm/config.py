@@ -30,9 +30,9 @@ class _Fuid:
 
 
 class UserFuid:
-    user1 = _Fuid(test='1026957780256297009', uat='1025186602202501154').fuid  # mocobk
-    user2 = _Fuid(test='1027047761280765954', uat='1028083468632055816').fuid  # moco
-    user3 = _Fuid(test='1072705375733551112', uat='').fuid  # ksw
+    user1 = _Fuid(test='1072705375733551112', uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973
+    user2 = _Fuid(test='1072705609905737732', uat='1028083468632055816').fuid  # moco
+    user3 = _Fuid(test='1072705609905737732', uat='').fuid  # ksw
     kong_si_wen = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 蒋端
     zhou_ying = _Fuid(test='1027314905029545986', uat='').fuid  # 周莹
@@ -92,6 +92,8 @@ class Test:
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_operation_position = '/v1/operation_position'
         v1_config = '/v1/config'
+
+
 
 
 
