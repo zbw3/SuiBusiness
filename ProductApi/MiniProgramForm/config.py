@@ -74,6 +74,9 @@ class Test:
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
         v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
+        v1_form_id_cycle_participant = '/v1/{formId}/cycle/participant'
+        v1_form_id_cycle_ranking='/v1/{formId}/cycle/ranking'
+        v1_form_id_participant_fuid='/v1/{formId}/participant/{fuid}'
 
         v1_operation_forms = '/v1/operation_forms'
         v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
