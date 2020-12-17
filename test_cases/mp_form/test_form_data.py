@@ -119,6 +119,7 @@ def test_query_form_id_cycle_form_datas(user1, user2, form_ids):
 def test_cancel_form_id_cycle_form_datas(user2, form_ids):
     """获取取消报名数据"""
     for form_id in form_ids:
+        verify_post_form_data(user1, user2, form_id)
         verify_cancel_form_data(user2, form_id)
 
         response = user2.v1_form_id_cycle_form_datas(form_id)
