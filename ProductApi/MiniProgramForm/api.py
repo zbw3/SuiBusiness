@@ -408,18 +408,33 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         return response
 
     def v1_form_id_cycle_form_datas(self, form_id, page_no=1, page_size=20, method='GET'):
+        """
+        获取今日循环表单的报名数据
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_form_id_cycle_form_datas.format(formId=form_id)
         params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size}
         response = self.request(url=url, method=method, params=params)
         return response
 
     def v1_form_id_cycle_participant(self, form_id, page_no=1, page_size=20, method='GET'):
+        """
+        获取参与过表单报名，但是今日未报名的用户信息
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_form_id_cycle_participant.format(formId=form_id)
         params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size}
         response = self.request(url=url, method=method, params=params)
         return response
 
     def v1_form_id_cycle_ranking(self, form_id, page_no=1, page_size=20, start_time=None, end_time=None, method='GET'):
+        """
+        获取循环表单用户报名的排行榜信息
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_form_id_cycle_ranking.format(formId=form_id)
         params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size, 'startTime': start_time,
                   'endTime': end_time}
@@ -427,6 +442,11 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         return response
 
     def v1_form_id_participant_fuid(self,form_id,fuid,method='DELETE'):
+        """
+        从报名统计和排行榜中移除用户功能
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_form_id_participant_fuid.format(formId=form_id,fuid=fuid)
         params = {'formId': form_id, 'fuid': fuid}
         response = self.request(url=url,method=method,params=params)
