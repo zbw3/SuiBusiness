@@ -142,15 +142,15 @@ class Form:
             'limit': -1,
             "perLimit": -1,
             'formDataPermission': 1,
-            # 'cycle': {
-            #     'frequency': 127,
-            #     'effectiveTime': [
-            #         {
-            #             'startTime': 0,
-            #             'endTime': 2359
-            #         }
-            #     ]
-            # }
+            'cycle': {
+                'frequency': 0,
+                'effectiveTime': [
+                    {
+                        'startTime': 0,
+                        'endTime': 2359
+                    }
+                ]
+            }
         }
 
     @property
