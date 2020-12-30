@@ -239,21 +239,33 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, data=remarks.encode('utf-8'), headers=headers)
         return response
 
-    def v1_statistic_analysis_form_id(self, form_id, method='GET'):
+    def v1_statistic_analysis_form_id(self, form_id, start, end, method='GET'):
+        """
+        统计分析接口
+        :param form_id:
+        :param start: 开始时间
+        :param end: 结束时间
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_statistic_analysis_form_id.format(formId=form_id)
-        response = self.request(url=url, method=method)
+        params = {'startTime': start, 'endTime': end}
+        response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_statistic_detail_form_id(self, form_id, sort_field, sort_type, method='GET'):
+    def v1_statistic_detail_form_id(self, form_id, sort_field, sort_type, start, end, method='GET'):
         """
+        详细数据接口
         :param form_id:
         :param sort_field: SEQUENCE 序号 | NICKNAME 昵称 | TIME 创建时间 | STATUS 状态 | MONEY 金额 | cid 对应填写项
         :param sort_type: ASC 升序排列 | DESC 降序排列
+        :param start: 开始时间
+        :param end: 借宿时间
         :param method:
         :return:
         """
         url = self.config.Url.v1_statistic_detail_form_id.format(formId=form_id)
-        params = {'sortField': sort_field, 'sortType': sort_type}
+        params = {'sortField': sort_field, 'sortType': sort_type, 'startTime': start, 'endTime': end}
         response = self.request(url=url, method=method, params=params)
         return response
 
