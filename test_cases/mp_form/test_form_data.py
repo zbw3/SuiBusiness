@@ -163,5 +163,35 @@ def test_cancel_form_id_cycle_form_datas(user2, form_ids):
         assert response.status_code == 200, response.text
         assert response.data.get('data')[0].get('status') == -1
 
+
+def test_complaint(user1,form_ids):
+    "举报你三次"
+    for i in range (0,3):
+        reason = i
+        for form_id in form_ids:
+            pictures=['https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg','https://oss.feidee.cn/oss/form_7cbae0658c918533_224X224.jpg']
+            response = user1.v1_complaint(form_id,reason,description="投诉",images=pictures,contact="abc123")
+            assert response.status_code == 200
+            assert response.data.get("code")== 0
+
+    "验证获取投诉原因枚举"
+    reason_reponse = user1.v1_comlpaint_reason()
+    reason_value = ["其他","新冠肺炎疫情相关","色情","诱导","骚扰","欺诈","恶意营销","与服务类目不符","违法犯罪","侵权（冒名、诽谤、抄袭）","不实信息","隐私信息收集"]
+    for id in range (0,len(reason_value)):
+        if id == 0:
+            assert reason_reponse.status_code == 200
+            assert reason_reponse.data.get("data")[11].get("key")=="0"
+            assert reason_reponse.data.get("data")[11].get("value")==reason_value[0]
+            pass
+        else:
+            assert reason_reponse.status_code == 200
+            assert reason_reponse.data.get("data")[id-1].get("key") == str(id)
+            assert reason_reponse.data.get("data")[id-1].get("value") == reason_value[id]
+
+
+
+
+
+
 if __name__ == '__main__':
     pytest.main()

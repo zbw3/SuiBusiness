@@ -92,7 +92,8 @@ class Test:
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_operation_position = '/v1/operation_position'
         v1_config = '/v1/config'
-
+        v1_complaint='/v1/complaint'
+        v1_comlpaint_reason='/v1/complaint/reason'
 
 
 
