@@ -464,6 +464,39 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url,method=method,params=params)
         return response
 
+    def v1_complaint(self, form_id,reason=None,description=None,images=None,contact=None,method='POST'):
+        """
+        提交投诉表单
+        :param form_id:
+        :param reason: 投诉原因的key（必填）
+        :param description: 投诉描述（必填）
+        :param images: 截图证据（选填）
+        :param contact: 联系方式（选填）
+        :param method:
+        :return:
+        """
+        url= self.config.Url.v1_complaint
+        data={
+                'formId': form_id,
+                'reason':reason,
+                'description':description,
+                'images':images,
+                'contact':contact
+        }
+        response=self.request(url=url,method=method,json=data)
+        return response
+
+    def v1_comlpaint_reason(self,method='GET'):
+        """
+        获取投诉原因列表
+        :param method:
+        :return:
+        """
+        url= self.config.Url.v1_comlpaint_reason
+        response=self.request(url=url,method=method)
+        return response
+
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
@@ -471,7 +504,7 @@ if __name__ == '__main__':
 
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
-
+    # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg"],contact='123121')
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
 
