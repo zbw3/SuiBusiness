@@ -182,7 +182,6 @@ def test_complaint(user1,form_ids):
             assert reason_reponse.status_code == 200
             assert reason_reponse.data.get("data")[11].get("key")=="0"
             assert reason_reponse.data.get("data")[11].get("value")==reason_value[0]
-            pass
         else:
             assert reason_reponse.status_code == 200
             assert reason_reponse.data.get("data")[id-1].get("key") == str(id)
