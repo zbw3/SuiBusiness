@@ -24,7 +24,9 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     default_activity_form.set_per_limit(2)
     default_shopping_form.set_limit(3)
     default_shopping_form.set_per_limit(2)
-    # default_shopping_form.set_cycle(127, 800, 1030)
+    default_activity_form.set_cycle(127, 800, 2300)
+    default_shopping_form.set_cycle(127, 800, 2300)
+    default_shopping_form.set_allow_modify(True)
     form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
     return form_ids
 

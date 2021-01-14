@@ -65,7 +65,7 @@ class Test:
         v1_form = '/v1/form'
         v1_form_form_id = '/v1/form/{formId}'
         v1_form_id_form_data = '/v1/{formId}/form_data'
-        v2_form_id_form_datas = '/v2/{formId}/form_datas'
+        v3_form_id_form_datas = '/v3/{formId}/form_datas'
         v1_form_id_status = '/v1/form/{formId}/status'
         v1_order_list_form_id = '/v1/order/list/{formId}'
         v1_order_form_id_order_id = '/v1/order/{formId}/{orderId}'

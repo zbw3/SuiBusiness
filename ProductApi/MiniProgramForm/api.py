@@ -187,14 +187,14 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params, json=data)
         return response
 
-    def v2_form_id_form_datas(self, form_id, method='GET'):
+    def v3_form_id_form_datas(self, form_id, method='GET'):
         """
         获取接龙统计数据
         :param form_id:
         :param method: GET
         :return:
         """
-        url = self.config.Url.v2_form_id_form_datas.format(formId=form_id)
+        url = self.config.Url.v3_form_id_form_datas.format(formId=form_id)
         response = self.request(url=url, method=method)
         return response
 

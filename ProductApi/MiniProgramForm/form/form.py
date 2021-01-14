@@ -141,6 +141,7 @@ class Form:
             'actEndTime': (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T'),
             'limit': -1,
             "perLimit": -1,
+            'allowModify': True,
             'formDataPermission': 1,
             'cycle': {
                 'frequency': 0,
@@ -327,6 +328,8 @@ class Form:
         self.CONFIG['cycle']['effectiveTime'][0]['startTime'] = start
         self.CONFIG['cycle']['effectiveTime'][0]['endTime'] = end
 
+    def set_allow_modify(self, allow_modify: bool):
+        self.CONFIG['allowModify'] = allow_modify
 
     def set_form_data_permission(self, permission: int):
         """
