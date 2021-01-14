@@ -75,15 +75,14 @@ class Test:
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
         v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
         v1_form_id_cycle_participant = '/v1/{formId}/cycle/participant'
-        v1_form_id_cycle_ranking='/v1/{formId}/cycle/ranking'
-        v1_form_id_participant_fuid='/v1/{formId}/participant/{fuid}'
+        v1_form_id_cycle_ranking = '/v1/{formId}/cycle/ranking'
+        v1_form_id_participant_fuid = '/v1/{formId}/participant/{fuid}'
 
         v1_operation_forms = '/v1/operation_forms'
         v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
         v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
         v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
         v1_templates_lit = '/v1/templates/list'
-
         v1_form_manager_invitation_code = '/v1/form/manager/invitation_code'
         v1_form_manager = '/v1/form/manager'
         v1_form_manager_form_id = '/v1/form/manager/{formId}'
@@ -92,10 +91,9 @@ class Test:
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_operation_position = '/v1/operation_position'
         v1_config = '/v1/config'
-        v1_complaint='/v1/complaint'
-        v1_comlpaint_reason='/v1/complaint/reason'
-
-
+        v1_complaint = '/v1/complaint'
+        v1_comlpaint_reason = '/v1/complaint/reason'
+        v1_map_location_info = 'v1/map/location_info'
 
 
 class Uat:

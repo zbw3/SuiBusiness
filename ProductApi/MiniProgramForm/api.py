@@ -453,18 +453,18 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_form_id_participant_fuid(self,form_id,fuid,method='DELETE'):
+    def v1_form_id_participant_fuid(self, form_id, fuid, method='DELETE'):
         """
         从报名统计和排行榜中移除用户功能
         :param method:
         :return:
         """
-        url = self.config.Url.v1_form_id_participant_fuid.format(formId=form_id,fuid=fuid)
+        url = self.config.Url.v1_form_id_participant_fuid.format(formId=form_id, fuid=fuid)
         params = {'formId': form_id, 'fuid': fuid}
-        response = self.request(url=url,method=method,params=params)
+        response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_complaint(self, form_id,reason=None,description=None,images=None,contact=None,method='POST'):
+    def v1_complaint(self, form_id, reason=None, description=None, images=None, contact=None, method='POST'):
         """
         提交投诉表单
         :param form_id:
@@ -475,27 +475,39 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
-        url= self.config.Url.v1_complaint
-        data={
-                'formId': form_id,
-                'reason':reason,
-                'description':description,
-                'images':images,
-                'contact':contact
+        url = self.config.Url.v1_complaint
+        data = {
+            'formId': form_id,
+            'reason': reason,
+            'description': description,
+            'images': images,
+            'contact': contact
         }
-        response=self.request(url=url,method=method,json=data)
+        response = self.request(url=url, method=method, json=data)
         return response
 
-    def v1_comlpaint_reason(self,method='GET'):
+    def v1_comlpaint_reason(self, method='GET'):
         """
         获取投诉原因列表
         :param method:
         :return:
         """
-        url= self.config.Url.v1_comlpaint_reason
-        response=self.request(url=url,method=method)
+        url = self.config.Url.v1_comlpaint_reason
+        response = self.request(url=url, method=method)
         return response
 
+    def v1_map_location_info(self, lat, lng, method='GET'):
+        """
+        获取附近地图位置
+        :param lat:纬度
+        :param lng:经度
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_map_location_info
+        params = {'lat': lat, 'lng': lng}
+        response = self.request(url=url, method=method, params=params)
+        return response
 
 
 if __name__ == '__main__':
