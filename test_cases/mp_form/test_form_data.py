@@ -24,9 +24,9 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     default_activity_form.set_per_limit(2)
     default_shopping_form.set_limit(3)
     default_shopping_form.set_per_limit(2)
-    default_activity_form.set_cycle(127, 800, 2300)
-    default_shopping_form.set_cycle(127, 800, 2300)
-    default_shopping_form.set_allow_modify(True)
+    # default_activity_form.set_cycle(127, 800, 2300)
+    # default_shopping_form.set_cycle(127, 800, 2300)
+    # default_shopping_form.set_allow_modify(True)
     form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
     return form_ids
 
@@ -120,7 +120,7 @@ def test_query_form_id_cycle_form_datas(user1, user2, form_ids):
             assert response.data.get('data')[i].get('sequence') == 2-i
 
 
-def test_cancel_form_id_cycle_form_datas(user2, form_ids):
+def test_cancel_form_id_cycle_form_datas(user1,user2, form_ids):
     """获取取消报名数据"""
     for form_id in form_ids:
         verify_post_form_data(user1, user2, form_id)
