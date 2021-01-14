@@ -48,6 +48,7 @@ class CatalogType(Enum):
     GOODS = 'GOODS'
     BUYER_REMARKS = 'BUYER_REMARKS'
     SELLER_REMARKS = 'SELLER_REMARKS'
+    DEFAULT_REMARKS = 'DEFAULT_REMARKS'
 
 
 class FormStatus(Enum):
