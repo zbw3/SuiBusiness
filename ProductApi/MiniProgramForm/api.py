@@ -512,14 +512,14 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1103132176129462272', print_results=True)
-
+    api = FormApi(fuid='1103132409269846016', print_results=True)
+    # Huan:1103132409269846016
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
-    # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg"],contact='123121')
+    # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
-
+    api.v3_form_id_form_datas(form_id='1116127305559703552')
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
@@ -528,5 +528,5 @@ if __name__ == '__main__':
     # api.v1_form_managers_form_id('1088295026292690945')
     # api.v1_form_operation_official_account_form_id('1098016190908858368')
     # api.v1_operation_position(10140)
-    # data = {"fid":"1106302560832061441","catalogs":[{"type":"NUMBER","cid":"1106304990726590464","value":5},{"type":"NUMBER","cid":"1106304990672060416","value":3},{"type":"NUMBER","cid":"1106304990806282240","value":1},{"type":"WORD","cid":"1106304991926161408","value":"张想"},{"type":"TELEPHONE","cid":"1106304992035209216","value":"15321657856"},{"type":"NUMBER_FLOAT","cid":"1106304992043601920","value":"3"},{"type":"WORD","cid":"1106304992194592768","value":"责任威望更多具有支持技术更多只是科技应用密码什么地方单位这样成为可是."},{"type":"RADIO_V2","cid":"1106304992244928512","value":{"cid":"1106304992194596864","customValue":""}},{"type":"RADIO_V2","cid":"1106304992425283584","value":{"cid":"1106304992467226624","customValue":""}},{"type":"CHECKBOX_V2","cid":"1106304992437866496","value":[{"cid":"1106304992785989632","customValue":""},{"cid":"1106304992760823809","customValue":""}]},{"type":"CHECKBOX_V2","cid":"1106304992823738368","value":[{"cid":"1106304992949571584","customValue":"各种"},{"cid":"1106304992781795328","customValue":""}]},{"type":"DATE","cid":"1106304993004093440","value":"2012-12-11"},{"type":"WORD","cid":"1106304993117339648","value":"北京市玲县丰都海口街E座 542182"},{"type":"ID_CARD","cid":"1106304992974733312","value":"522728198610163793"},{"type":"IMAGE","cid":"1106304993108955136","value":["https://oss.feidee.cn/oss/form_8654db0ea685e6c9_528X506.jpg","https://oss.feidee.cn/oss/form_9e10255d0e198a_777X754.jpg","https://oss.feidee.cn/oss/form_41b9532394e0e8e7_512X542.jpg"]},{"type":"WORD","cid":"1106304993205420032","value":"😀地方🕛的人🕥工具😜"},{"type":"WORD","cid":"1106304993155092480","value":"买家留言2000"}],"formVersion":1}
-    # api.v1_form_id_form_data('1106304990554624000', data, '1106302560832061441', 'DELETE')
+    # data = {"fid":"","catalogs":[{"type":"IMAGE","cid":"1108938171552370688","value":["https://oss.feidee.cn/oss/form_7f6e187cc2487381_750X1334.jpg","https://oss.feidee.cn/oss/form_a1603bd4869b6699_750X1334.jpg","https://oss.feidee.cn/oss/form_86b27c686e0a7d6b_750X1334.jpg"]}],"formVersion":3}
+    # api.v1_form_id_form_data(form_id='1108938171535593472', data=data, method='POST')

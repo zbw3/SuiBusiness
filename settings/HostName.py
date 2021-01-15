@@ -57,3 +57,4 @@ class MiniProgramForm:
     TEST = 'https://form.feidee.cn'
     UAT = 'https://uatform.feidee.net'
     PROD = 'https://form.feidee.net'
+#https://form.feidee.cn

@@ -17,16 +17,15 @@ def form_ids(user1, default_activity_form, default_shopping_form):
     创建活动报名和团购接龙表单，总报接龙次数限制 3， 每人接龙次数限制 2
     :return tuple[form_id]
     """
-    default_activity_form.set_title('普通表单不循环-验证转化用')
-    default_shopping_form.set_title('普通表单不循环-验证转化用')
+    default_activity_form.set_title('参与接龙测试')
+    default_shopping_form.set_title('参与接龙测试')
     default_activity_form.set_limit(3)
-    # default_activity_form.set_cycle(127, 800, 1030)
-    default_activity_form.set_per_limit(2)
     default_shopping_form.set_limit(3)
+    default_activity_form.set_per_limit(2)
     default_shopping_form.set_per_limit(2)
     # default_activity_form.set_cycle(127, 800, 2300)
     # default_shopping_form.set_cycle(127, 800, 2300)
-    # default_shopping_form.set_allow_modify(True)
+    default_shopping_form.set_allow_modify(True)
     form_ids = create_form(user1, default_activity_form), create_form(user1, default_shopping_form)
     return form_ids
 

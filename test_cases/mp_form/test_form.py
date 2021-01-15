@@ -16,6 +16,7 @@ def test_post_form(user1, default_activity_form, default_shopping_form):
     for form in [default_activity_form, default_shopping_form]:
         verify_post_form(user1, form)
 
+
 def test_post_form_with_admin_permission(user1, default_activity_form, default_shopping_form):
     for form in [default_activity_form, default_shopping_form]:
         form.set_form_data_permission(permission=2)
@@ -24,6 +25,7 @@ def test_post_form_with_admin_permission(user1, default_activity_form, default_s
         assert res.status_code == 200, res.text
         data = res.data.get('data', {})
         assert data.get('config')['formDataPermission'] == 2
+
 
 def test_post_form_with_error_permission(user1, default_activity_form, default_shopping_form):
     for form in [default_activity_form, default_shopping_form]:

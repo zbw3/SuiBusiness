@@ -99,13 +99,14 @@ def test_create_finished_shopping_form(user1, default_shopping_form):
 =================================================================================================
 """
 
-def test_create_many_order_shopping_form(user1, user2, default_shopping_form, number=6):
+def test_create_many_order_shopping_form(user1, user2,default_shopping_form, number=111):
     """
     创建有多个接龙的 [商品接龙] 表单,
     number： 为接龙数
     user: 可以添加多个，会随机选择接龙
     """
     default_shopping_form.set_title(f'测试多个接龙/订单统计分析（{number}）')
+    default_shopping_form.set_cycle(127, 800, 2300)
     form_id = verify_post_form(user1, default_shopping_form)    #  default_activity_form    default_shopping_form
     create_numerous_form_data(user1, user2, form_id=form_id, number=number)
     print(form_id)

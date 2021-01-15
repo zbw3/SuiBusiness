@@ -37,6 +37,18 @@ def create_form(form_api: FormApi, form: Form) -> str:
     return res.form_id
 
 
+
+def create_cycle_form(form_api: FormApi, form: Form) -> str:
+    """
+    :param form_api:
+    :param form:
+    :return: form_id
+    """
+    res = form_api.v1_form(form.data, return_form_id=True, method=form_api.POST)
+    assert res.status_code == 204
+    return res.form_id
+
+
 def verify_post_form(form_api: FormApi, form: Form) -> str:
     """
     :param form_api: FormApi Object
