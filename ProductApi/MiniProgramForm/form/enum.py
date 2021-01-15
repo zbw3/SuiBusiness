@@ -34,6 +34,7 @@ class ContentType(Enum):
     ID_CARD = 'ID_CARD'
     DATE = 'DATE'
     COPY_AREA = 'COPY_AREA'
+    LOCATION = 'LOCATION'
 
 
 class RoleType(Enum):

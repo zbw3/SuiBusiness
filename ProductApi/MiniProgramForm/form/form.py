@@ -313,6 +313,16 @@ class Form:
             )
         )
 
+    def add_map_location(self,title,must=False,overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.LOCATION,
+                must=must,
+                overt=overt,
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
     def set_duration_time(self, start=None, end=None):
         self.CONFIG['actBeginTime'] = start or self.now.strftime('%Y-%m-%d %T')
         self.CONFIG['actEndTime'] = end or (self.now + timedelta(days=30)).strftime('%Y-%m-%d %T')
