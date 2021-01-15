@@ -140,6 +140,21 @@ class PostFormData:
                 for option in selected_options]
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
+        for item in catalogs.QUESTION.LOCATION:
+            data.append({'type': item['type'], 'cid': item['cid'], "value": {
+                "address": self.faker.address(),
+                "title": self.faker.address(),
+                "location": {
+                    "type": "Point",
+                    "coordinates": [
+                        round(random.uniform(0, 90), 2),
+                        round(random.uniform(0, 90), 2)
+
+                    ]
+                }
+            }
+                         })
+
         if catalogs.BUYER_REMARKS:
             item = catalogs.BUYER_REMARKS
             data.append({'type': item['type'], 'cid': item['cid'], 'value': f'买家留言{random.randint(1000, 9000)}'})
