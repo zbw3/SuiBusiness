@@ -24,6 +24,7 @@ class QuestionsData:
         self.TELEPHONE = []
         self.ID_CARD = []
         self.DATE = []
+        self.LOCATION = []
 
 
 class CatalogsData:
