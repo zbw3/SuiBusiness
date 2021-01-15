@@ -110,6 +110,7 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_id_card_question('身份证', must=False)
     form.add_image_question('请上传你的图片', must=False)
     form.add_text_question('备注', must=False)
+    form.add_map_location('你所在的位置', must=False)
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()
