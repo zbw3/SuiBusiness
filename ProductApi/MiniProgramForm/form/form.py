@@ -47,6 +47,7 @@ class FormCatalog:
 
 class CopyContent:
     """一键复制区"""
+
     def __init__(
             self,
             guide: str = "",
