@@ -95,6 +95,8 @@ class PostFormData:
             value = self.info.get(self._get_catalog_title(item), lambda: self.faker.sentence(nb_words=25))()
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
+
+
         for item in catalogs.QUESTION.NUMBER_FLOAT:
             # 防止精度丢失，后端所有数值返回改成字符串 Decimal 了，前端传参类型不变
             value = self.info.get(self._get_catalog_title(item), self.faker.random_number)()
@@ -154,6 +156,9 @@ class PostFormData:
                 }
             }
                          })
+
+
+
 
         if catalogs.BUYER_REMARKS:
             item = catalogs.BUYER_REMARKS

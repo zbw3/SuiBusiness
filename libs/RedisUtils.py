@@ -13,7 +13,7 @@ class ResicUtils(object):
     def __init__(self):
         self.__pool = None
         self.currentConn = None
-        self.__pool = redis.ConnectionPool(host='ssjredis1.testfeideedba.com', port=9201, password='SJ_codis_PWD', db=15)
+        self.__pool = redis.ConnectionPool(host='ssjredis1.testfeideedba.com', port=9201, password='SJ_codis_PWD', db=3)
         self.currentConn = redis.Redis(connection_pool=self.__pool)
 
     def getKey(self, keyName):
@@ -111,6 +111,7 @@ class ResicUtils(object):
 if __name__ == "__main__":
     opr = ResicUtils()
     # print(opr.fuzzGet('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:1'))
-    print(opr.fuzzDel('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:1:1'))
+    # //db3.registerUserCount,db3.registerCount,db1.formRegisters,db1.seq            db3.form,db1.form,db1.sform
+    print(opr.fuzzDel('form'))
     # opr.getKey('BUSINESS_BOOK:BOOK_OWNER_USER_ID:3604098')
     # opr.hasKey('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:2')

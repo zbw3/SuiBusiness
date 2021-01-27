@@ -37,6 +37,7 @@ class ContentType(Enum):
     LOCATION = 'LOCATION'
 
 
+
 class RoleType(Enum):
     TITLE = 'TITLE'
     OPTION = 'OPTION'

@@ -145,7 +145,7 @@ class Form:
             'allowModify': True,
             'formDataPermission': 1,
             'cycle': {
-                'frequency': 0,
+                'frequency': 127,
                 'effectiveTime': [
                     {
                         'startTime': 0,
