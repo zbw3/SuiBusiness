@@ -94,8 +94,10 @@ class Test:
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
-        v1_name_list='/v1/name_list'
-        v1_namelist='/v1/name_list/{nlid}'
+        v1_name_list = '/v1/name_list'
+        v1_namelist = '/v1/name_list/{nlid}'
+        v1_export_url_name_list_nlid = '/v1/export_url/name_list/{nlid}'
+        v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
 
 class Uat:
     APP_ID = 'wx3f32186d2340171c'

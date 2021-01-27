@@ -528,12 +528,38 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
     def v1_namelist(self, nlid, method='GET'):
         """
         获取预设名单
-        :param nlid:
+        :param nlid:预设名单ID
         :param method:
         :return:
         """
         url = self.config.Url.v1_namelist.format(nlid=nlid)
-        params = {'nlid': nlid}
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_export_url_name_list_nlid(self, nlid, startTime=None, endTime=None, method='GET'):
+        """
+        获取导出预设名单链接地址
+        :param nlid:预设名单ID
+        :param method:
+        :param startTime:开始时间
+        :param endTime:结束时间
+        :return:
+        """
+        url = self.config.Url.v1_export_url_name_list_nlid.format(nlid=nlid)
+        params = {'startTime': startTime, 'endTime': endTime}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_export_name_list_nlid_ticket(self, nlid, ticket, method='GET'):
+        """
+        导出预设名单接口
+        :param nlid:预设名单ID
+        :param ticket:导出凭证
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_export_name_list_nlid_ticket.format(nlid=nlid)
+        params = {'ticket': ticket}
         response = self.request(url=url, method=method, params=params)
         return response
 
