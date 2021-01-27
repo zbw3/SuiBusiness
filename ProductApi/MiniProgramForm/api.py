@@ -509,6 +509,34 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_name_list(self, form_id=None, value=None, method='POST'):
+        """
+        提交预设名单
+        :param form_id:表单id，新建表单时不传，修改表单时传
+        :param value:名单数组
+        :param method:请求方式：POST:创建预设名单，PUT：修改预设名单
+        :return:
+        """
+        url = self.config.Url.v1_name_list
+        data = {
+            'formId': form_id,
+            'value': value
+        }
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_namelist(self, nlid, method='GET'):
+        """
+        获取预设名单
+        :param nlid:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list
+        params = {'nlid': nlid}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'

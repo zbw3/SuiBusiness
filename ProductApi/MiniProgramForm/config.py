@@ -94,6 +94,7 @@ class Test:
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
+        v1_name_list='/v1/name_list'
 
 
 class Uat:
