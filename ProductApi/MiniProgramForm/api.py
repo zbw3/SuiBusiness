@@ -532,7 +532,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
-        url = self.config.Url.v1_name_list
+        url = self.config.Url.v1_namelist.format(nlid=nlid)
         params = {'nlid': nlid}
         response = self.request(url=url, method=method, params=params)
         return response
@@ -547,7 +547,7 @@ if __name__ == '__main__':
     # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
-    api.v3_form_id_form_datas(form_id='1116127305559703552')
+    # api.v3_form_id_form_datas(form_id='1116127305559703552')
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
