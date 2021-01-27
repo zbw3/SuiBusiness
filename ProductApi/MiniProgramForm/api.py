@@ -550,7 +550,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_export_name_list_nlid_ticket(self, nlid, ticket, method='GET'):
+    def v1_export_name_list_nlid_ticket(self, nlid, ticket, startTime=None, endTime=None, method='GET'):
         """
         导出预设名单接口
         :param nlid:预设名单ID
@@ -559,7 +559,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_export_name_list_nlid_ticket.format(nlid=nlid)
-        params = {'ticket': ticket}
+        params = {'ticket': ticket, 'startTime': startTime, 'endTime': endTime}
         response = self.request(url=url, method=method, params=params)
         return response
 
