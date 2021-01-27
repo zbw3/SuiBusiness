@@ -80,7 +80,8 @@ class Catalog:
             must: bool = True,
             overt: bool = True,
             used: bool = False,
-            status: int = 1
+            status: int = 1,
+            config={"NAME_LIST": {"active": True, "content": None}}
     ):
         self.type_ = type_
         self.must = must
@@ -89,6 +90,8 @@ class Catalog:
         self.status = status
         self.used = used
         self.form_catalogs = form_catalogs or [FormCatalog('填写项标题')]
+        # {"NAME_LIST": {"active": True, "content": self.get_nlid()}}
+        self.config = config
 
     @property
     def value(self):
@@ -314,7 +317,7 @@ class Form:
             )
         )
 
-    def add_map_location(self,title,must=False,overt=True):
+    def add_map_location(self, title, must=False, overt=True):
         self._add_catalog(
             Catalog(
                 type_=ContentType.LOCATION,
@@ -323,6 +326,21 @@ class Form:
                 form_catalogs=[FormCatalog(title)]
             )
         )
+
+    def add_name_list(self, title, must=False, overt=True):
+        self._add_catalog(
+            Catalog(
+                type_=ContentType.WORD,
+                must=must,
+                overt=overt,
+                config={"NAME_LIST": {"active": True, "content": self.get_nlid()}},
+                form_catalogs=[FormCatalog(title)]
+            )
+        )
+
+    def get_nlid(self, user=FormApi.USER.user1):
+        response = FormApi(user).v1_name_list(value=[{"name": "张三"}, {"name": "李四"}])
+        return response.data.get('data')["nlid"]
 
     def set_duration_time(self, start=None, end=None):
         self.CONFIG['actBeginTime'] = start or self.now.strftime('%Y-%m-%d %T')
