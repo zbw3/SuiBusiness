@@ -146,6 +146,7 @@ class Form:
             'limit': -1,
             "perLimit": -1,
             'allowModify': True,
+            'relay': 0,
             'formDataPermission': 1,
             'cycle': {
                 'frequency': 127,
@@ -359,6 +360,9 @@ class Form:
 
     def set_allow_modify(self, allow_modify: bool):
         self.CONFIG['allowModify'] = allow_modify
+
+    def set_relay(self, relay: int):
+        self.CONFIG['relay'] = relay
 
     def set_form_data_permission(self, permission: int):
         """
