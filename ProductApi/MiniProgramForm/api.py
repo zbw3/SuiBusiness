@@ -563,6 +563,29 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_form_id_sign_up(self, form_id, method='GET'):
+        """
+        签到详情接口
+        :param form_id: 表单ID
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v1_form_id_sign_up.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_id_sign_up_form_data_id(self, form_id, form_data_id, method='GET'):
+        """
+        签到接口
+        :param form_id:表单ID
+        :param form_data_id:签到详细接口返回list中的fid
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_sign_up_form_data_id.format(formId=form_id, formDataId=form_data_id)
+        response = self.request(url=url, method=method)
+        return response
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'

@@ -98,6 +98,9 @@ class Test:
         v1_namelist = '/v1/name_list/{nlid}'
         v1_export_url_name_list_nlid = '/v1/export_url/name_list/{nlid}'
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
+        v1_form_id_sign_up = '/v1/{formId}/sign_up'
+        v1_form_id_sign_up_form_data_id = '/v1/{formId}/sign_up/{formDataId}'
+
 
 class Uat:
     APP_ID = 'wx3f32186d2340171c'
