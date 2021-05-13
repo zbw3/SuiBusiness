@@ -60,6 +60,20 @@ class CopyContent:
         }
 
 
+class LinkContent:
+    ''' 公众号链接 '''
+
+    def __init__(
+            self,
+            title: str = "公众号文章",
+            link: str = ""
+    ):
+        self.value = {
+            "title": title,
+            "link": link
+        }
+
+
 class Option:
     """
     RADIO_V2 CHECKBOX_V2 的 option 需要指定是否可自定义
@@ -156,6 +170,10 @@ class Form:
                         'endTime': 2359
                     }
                 ]
+            },
+            "submitBtnName": {
+                "type": "PREDEFINED",
+                "content": "0"
             }
         }
 
@@ -206,6 +224,11 @@ class Form:
     def add_copy_area(self, copy_guide, copy_content):
         self._add_content(
             Content(ContentType.COPY_AREA, content=CopyContent(copy_guide, copy_content).value)
+        )
+
+    def add_article_link(self, article_title, article_link):
+        self._add_content(
+            Content(ContentType.MP_LINK, content=LinkContent(article_title, article_link).value)
         )
 
     def add_text_question(self, title, must=True, overt=True):

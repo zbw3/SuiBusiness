@@ -111,7 +111,8 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_image_question('请上传你的图片', must=False)
     form.add_text_question('备注', must=False)
     form.add_map_location('你所在的位置', must=False)
-    form.add_name_list("预设姓名", must=False)
+    form.add_article_link('公众号链接','https://mp.weixin.qq.com/s/yjfVz1iYpkjHVYT089yL0w')
+    # form.add_name_list("预设姓名", must=False)
 
 
     # 设置活动时间(不设置默认为当前时间到30天后)

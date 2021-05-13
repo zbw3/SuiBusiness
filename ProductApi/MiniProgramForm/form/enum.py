@@ -35,6 +35,9 @@ class ContentType(Enum):
     DATE = 'DATE'
     COPY_AREA = 'COPY_AREA'
     LOCATION = 'LOCATION'
+    FORM_PAGE = 'FORM_PAGE'
+    MP_LINK = 'MP_LINK'
+
 
 
 
