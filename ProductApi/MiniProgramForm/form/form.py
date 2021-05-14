@@ -173,7 +173,7 @@ class Form:
             },
             "submitBtnName": {
                 "type": "PREDEFINED",
-                "content": "0"
+                "content": "FILL_IN"
             }
         }
 
