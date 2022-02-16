@@ -8,8 +8,9 @@
 该用例主要是为了快速构造旧版本的表单数据，以便观察是否有数据兼容问题出现
 """
 import random
-
+import time
 import pytest
+
 
 from ProductApi.MiniProgramForm.form.enum import FormStatus
 from test_cases.mp_form import verify_post_form, create_form, create_form_data, create_numerous_form_data
@@ -17,7 +18,7 @@ from test_cases.mp_form import verify_post_form, create_form, create_form_data, 
 
 def test_create_normal_activity_form(user1, default_activity_form):
     """创建正常进行中的 [活动接龙] 表单"""
-    default_activity_form.set_title('进行中-含填写项')
+    default_activity_form.set_title('进行中-含填写项11')
     # default_activity_form.set_duration_time("2020-11-21 14:39:00", "2020-12-21 14:39:00")
     #
     # default_activity_form.set_limit("90")
@@ -99,16 +100,17 @@ def test_create_finished_shopping_form(user1, default_shopping_form):
 =================================================================================================
 """
 
-def test_create_many_order_shopping_form(user1, user2,default_shopping_form, number=111):
+def test_create_many_order_shopping_form(user1, user2,user3,default_activity_form , number=200):
     """
     创建有多个接龙的 [商品接龙] 表单,
     number： 为接龙数
     user: 可以添加多个，会随机选择接龙
     """
-    default_shopping_form.set_title(f'测试多个接龙/订单统计分析（{number}）')
-    default_shopping_form.set_cycle(127, 800, 2300)
-    form_id = verify_post_form(user1, default_shopping_form)    #  default_activity_form    default_shopping_form
-    create_numerous_form_data(user1, user2, form_id=form_id, number=number)
+    default_activity_form .set_title(f'测试多个接龙/订单统计分析2（{number}）')
+    default_activity_form .set_cycle(127, 800, 2300)
+    time.sleep(200)
+    form_id = verify_post_form(user1, default_activity_form )    #  default_activity_form    default_shopping_form
+    create_numerous_form_data(user1, user2, user3, form_id=form_id, number=number)
     print(form_id)
 
 

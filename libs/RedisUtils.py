@@ -110,8 +110,8 @@ class ResicUtils(object):
 
 if __name__ == "__main__":
     opr = ResicUtils()
-    # print(opr.fuzzGet('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:1'))
-    # //db3.registerUserCount,db3.registerCount,db1.formRegisters,db1.seq            db3.form,db1.form,db1.sform
+    # print(opr.fuzzGet('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:1'))     # 修改用户的导出命名免费次数：修改user_free
+    # //db3.registerUserCount,db3.registerCount,db1.formRegisters,db1.seq            db3.form,db1.form,db1.sform     绑定手机号缓存：db3.form.dbUser+db1.form.session
     print(opr.fuzzDel('form'))
     # opr.getKey('BUSINESS_BOOK:BOOK_OWNER_USER_ID:3604098')
     # opr.hasKey('BUSINESS_BOOK:SCENE_VERSION_PERMISSION:2:2')

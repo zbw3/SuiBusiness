@@ -81,7 +81,7 @@ class Catalog:
             overt: bool = True,
             used: bool = False,
             status: int = 1,
-            config={"NAME_LIST": {"active": True, "content": None}}
+            config=None
     ):
         self.type_ = type_
         self.must = must
@@ -327,16 +327,18 @@ class Form:
             )
         )
 
-    def add_name_list(self, title, must=False, overt=True):
+    def add_name_list(self, title, config,must=False, overt=True):
         self._add_catalog(
             Catalog(
                 type_=ContentType.WORD,
                 must=must,
                 overt=overt,
-                config={"NAME_LIST": {"active": True, "content": self.get_nlid()}},
+                config=config,
+                # config={"NAME_LIST": {"active": True, "content": self.get_nlid()}},
                 form_catalogs=[FormCatalog(title)]
             )
         )
+
 
     def get_nlid(self, user=FormApi.USER.user1):
         response = FormApi(user).v1_name_list(value=[{"name": "张三"}, {"name": "李四"}])
@@ -417,12 +419,16 @@ class CreateShoppingForm(Form):
 
 
 if __name__ == '__main__':
-    form = CreateActivityForm()
-    # # 添加标题
-    form.set_title('活动表单测试')
-    # 添加文字
-    form.add_text('这是一个文字描述')
-    form.add_copy_area('mombofbm', 'mimfslmg')
+    # user = FormApi(FormApi.USER.user1)
+    Form().get_nlid()
+    #     user = FormApi.USER.user1
+    #     Form.get_nlid(user)
+    # form = CreateActivityForm()
+    # # # 添加标题
+    # form.set_title('活动表单测试')
+    # # 添加文字
+    # form.add_text('这是一个文字描述')
+    # form.add_copy_area('mombofbm', 'mimfslmg')
     # # 添加大图
     # form.add_large_img('https://picsum.photos/200')
     # # 添加小图

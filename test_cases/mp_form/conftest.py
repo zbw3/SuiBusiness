@@ -61,6 +61,11 @@ def default_shopping_form():
     return generate_default_form('果霸商城', is_shopping=True)
 
 
+def get_nlid(user=FormApi.USER.user1):
+    response = FormApi(user).v1_name_list(value=[{"name": "张三"}, {"name": "李四"}])
+    return response.data.get('data')["nlid"]
+
+
 def generate_default_form(title=None, is_shopping=False):
     """
     ver: 1.5.0
@@ -99,20 +104,19 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_telephone_question('手机号', must=False)
     form.add_number_question('需要数量', must=False)
     form.add_text_question('喜欢的句子', must=False)
-    form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
+    # form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
     form.add_radio_v2_question('你的性别', [Option('男', False), Option('女', False), Option('保密', False), ], must=False)
-    form.add_radio_v2_question('你的国籍', [Option('中国', False), Option('美国', False), Option('其他', True), ], must=False)
+    # form.add_radio_v2_question('你的国籍', [Option('中国', False), Option('美国', False), Option('其他', True), ], must=False)
     # form.add_checkbox_question('你想吃的水果', ['🍎苹果', '🍌香蕉', '🍉西瓜', '🍇葡萄'])
     form.add_checkbox_v2_question('你想吃的水果', [Option('🍎苹果', False), Option('🍌香蕉', False), Option('🍉西瓜', False)])
-    form.add_checkbox_v2_question('喜欢的运动', [Option('篮球', False), Option('羽毛球', False), Option('其他', True)])
+    # form.add_checkbox_v2_question('喜欢的运动', [Option('篮球', False), Option('羽毛球', False), Option('其他', True)])
     form.add_date_question('出生日期', must=False)
     form.add_text_question('地址', must=False)
     form.add_id_card_question('身份证', must=False)
     form.add_image_question('请上传你的图片', must=False)
     form.add_text_question('备注', must=False)
     form.add_map_location('你所在的位置', must=False)
-    form.add_name_list("预设姓名", must=False)
-
+    # form.add_name_list("预设姓名", config={"NAME_LIST": {"active": True, "content": get_nlid()}}, must=False)
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()

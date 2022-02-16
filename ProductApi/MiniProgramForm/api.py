@@ -566,14 +566,18 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1103132176129462272', print_results=True)
+    api = FormApi(fuid='1072705375733551112', print_results=True)
+    # api.v1_name_list(value=[{'name':"张三"}])
+    api.v1_namelist(1121872786575331328)
+    # api.v1_export_url_name_list_nlid(1121272233252093952)
+    # api.v1_export_name_list_nlid_ticket(1121272233252093952, 'ee3c299311804d7ba63f421c4f3b32be')
 
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
     # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
-    api.v3_form_id_form_datas(form_id='1116127305559703552')
+    # api.v3_form_id_form_datas(form_id='1116127305559703552')
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')

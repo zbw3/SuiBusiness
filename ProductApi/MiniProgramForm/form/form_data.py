@@ -42,10 +42,12 @@ class PostFormData:
         self.form_detail_data = form_api.v1_form_form_id(form_id).data['data']
         self.faker = Faker('zh_CN')
         self.faker.add_provider(CustomProvider)
+        # self.address = "深圳市南山区金蝶大厦"
         self.info = {
             '姓名': self.faker.name,
             '手机号': self.faker.phone_number,
             '地址': self.faker.address,
+            # '地址': self.address,
             '公司': self.faker.company,
             '备注': self.faker.word_with_emoji,
         }
@@ -113,7 +115,7 @@ class PostFormData:
 
         for item in catalogs.QUESTION.IMAGE:
             data.append({'type': item['type'], 'cid': item['cid'],
-                         'value': [self.RandomImage.small for _ in range(random.randint(1, 3))]})
+                         'value': [self.RandomImage.small for _ in range(random.randint(0, 1))]})
 
         for item in catalogs.QUESTION.RADIO:
             selected_option_cid = random.choice([form_catalog['cid'] for form_catalog in item['formCatalogs'] if

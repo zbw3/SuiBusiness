@@ -113,7 +113,8 @@ def create_form_data(form_api: FormApi, form_id: str) -> int:
     """
     post_form_data = PostFormData(form_api, form_id).data
     res = form_api.v1_form_id_form_data(form_id, post_form_data, method=form_api.POST)
-    assert res.status_code == 200
+    # assert res.status_code == 200
+    print(res)
     return res.data.get('data', {}).get('sequence')
 
 
