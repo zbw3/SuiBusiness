@@ -114,5 +114,17 @@ def test_create_many_order_shopping_form(user1, user2,user3,default_activity_for
     print(form_id)
 
 
+def test_add_form_data(user1, user2,user3,user4,user5,user6,user7,default_activity_form , number=200,form_id = 1283253971457634305):
+    """
+    对指定表单添加多条接龙，
+    form_id:为需要增加接龙的表单
+    :param number: 为接龙数目
+    :return:
+    """
+    create_numerous_form_data(user1,user2, user3,user4,user5,user6,user7, form_id=form_id, number=number)
+
+
+
+
 if __name__ == '__main__':
     pytest.main()

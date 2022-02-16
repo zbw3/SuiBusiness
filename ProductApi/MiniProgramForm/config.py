@@ -34,6 +34,14 @@ class UserFuid:
                   uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973  唯一：1200620269652152320
     user2 = _Fuid(test='1200620269652152320', uat='').fuid  # moco
     user3 = _Fuid(test='1157859306612195328', uat='').fuid  # ksw
+    user4 = _Fuid(test='1021944794521276417', uat='').fuid
+    user5 = _Fuid(test='1026957780256297009', uat='').fuid
+    user6 = _Fuid(test='1027047761280765954', uat='').fuid
+    user7 = _Fuid(test='1027314905029545986', uat='').fuid
+    # user8 = _Fuid(test='1053828831317590028', uat='').fuid
+    # user9 = _Fuid(test='1056011177739419657', uat='').fuid
+    # user10 = _Fuid(test='1057393978590105644', uat='').fuid
+    # user11 = _Fuid(test='1021591279563182081', uat='').fuid
     kong_si_wen = _Fuid(test='1072705375733551112',
                         uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 蒋端

@@ -30,6 +30,29 @@ def user2():
 def user3():
     return FormApi(fuid=FormApi.USER.user3)
 
+@pytest.fixture(scope='session')
+def user4():
+    return FormApi(fuid=FormApi.USER.user4)
+
+@pytest.fixture(scope='session')
+def user5():
+    return FormApi(fuid=FormApi.USER.user5)
+
+@pytest.fixture(scope='session')
+def user6():
+    return FormApi(fuid=FormApi.USER.user6)
+
+@pytest.fixture(scope='session')
+def user7():
+    return FormApi(fuid=FormApi.USER.user7)
+
+@pytest.fixture(scope='session')
+def user8():
+    return FormApi(fuid=FormApi.USER.user8)
+
+@pytest.fixture(scope='session')
+def user9():
+    return FormApi(fuid=FormApi.USER.user9)
 
 @pytest.fixture(scope='session')
 def liu_peng_zhong():
