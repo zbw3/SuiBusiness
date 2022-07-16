@@ -106,6 +106,8 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_large_img(abspath('./images/2340x1463.jpg'))
     # 添加文字
     form.add_text(POETRY_2)
+    # for i in range(100):
+    #     form.add_text(str(i) +""+ POETRY_2)
     # 添加大图
     form.add_large_img(abspath('./images/2560x1600.jpg'))
     # 添加小图

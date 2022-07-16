@@ -170,7 +170,7 @@ def test_complaint(user1,form_ids):
     for i in range (0,3):
         reason = i
         for form_id in form_ids:
-            pictures=['https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg','https://oss.feidee.cn/oss/form_7cbae0658c918533_224X224.jpg']
+            pictures=['https://qun-oss1.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://qun-oss1.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://qun-oss1.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg','https://qun-oss1.feidee.cn/oss/form_7cbae0658c918533_224X224.jpg']
             response = user1.v1_complaint(form_id,reason,description="投诉",images=pictures,contact="abc123")
             assert response.status_code == 200
             assert response.data.get("code")== 0

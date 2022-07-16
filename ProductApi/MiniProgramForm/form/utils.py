@@ -46,7 +46,7 @@ def get_img_url(image):
     :param image: 图片地址，支持本地路径，网络url（如果已是 feidee域 名下的 url 则直接返回）
     :return: str
     """
-    if image.startswith('https://oss.feidee'):
+    if image.startswith('https://qun-oss1.feidee.cn'):
         return image
 
     image_hash = _image_hash(image)

@@ -100,13 +100,13 @@ def test_create_finished_shopping_form(user1, default_shopping_form):
 =================================================================================================
 """
 
-def test_create_many_order_shopping_form(user1, user2,user3,default_activity_form , number=200):
+def test_create_many_order_shopping_form(user1, user2,user3,default_activity_form , number=1):
     """
     创建有多个接龙的 [商品接龙] 表单,
     number： 为接龙数
     user: 可以添加多个，会随机选择接龙
     """
-    default_activity_form .set_title(f'测试多个接龙/订单统计分析2（{number}）')
+    default_activity_form .set_title(f'附件下载测试多个接龙/订单统计分析-多张图片（{number}）')
     default_activity_form .set_cycle(127, 800, 2300)
     time.sleep(200)
     form_id = verify_post_form(user1, default_activity_form )    #  default_activity_form    default_shopping_form
@@ -114,7 +114,7 @@ def test_create_many_order_shopping_form(user1, user2,user3,default_activity_for
     print(form_id)
 
 
-def test_add_form_data(user1, user2,user3,user4,user5,user6,user7,default_activity_form , number=200,form_id = 1283253971457634305):
+def test_add_form_data(user1, user2,user3,user4,user5,user6,user7,default_activity_form , number=15,form_id = 1314045825962156033):
     """
     对指定表单添加多条接龙，
     form_id:为需要增加接龙的表单
