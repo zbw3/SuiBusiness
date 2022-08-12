@@ -184,6 +184,7 @@ class Form:
         if title:
             self.TITLE = f'[{self.TYPE.value}]-{title}-{time.strftime("%T")}'
 
+
     def set_cover(self, img_url):
         self.COVER = img_url
 

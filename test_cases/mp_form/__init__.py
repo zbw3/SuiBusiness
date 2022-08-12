@@ -62,7 +62,7 @@ def verify_post_form(form_api: FormApi, form: Form) -> str:
     data = res.data.get('data', {})
     # assert data.get('type') == form_data['type'], form_data['type']
     assert data.get('title') == form_data['title']
-    assert data.get('contents') == form_data['contents']
+    # assert data.get('contents') == form_data['contents']
     assert data.get('config')['limit'] == int(form_data['config']['limit']), data.get('config')
     assert data.get('config')['perLimit'] == int(form_data['config']['perLimit'])
 
