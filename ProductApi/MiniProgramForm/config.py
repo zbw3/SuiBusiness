@@ -60,10 +60,11 @@ class Test:
         v1_login_test = '/v1/login_test'
         v1_creation_forms = '/v1/creation_forms'
         v1_participation_forms = '/v1/participation_forms'
-        v1_examples = '/v1/examples'
+        # v1_examples = '/v1/examples'   已废弃
         v1_image = '/v1/image'
         v1_form = '/v1/form'
-        v1_form_form_id = '/v1/form/{formId}'
+        v1_form_form_id = '/v1/form/{formId}'  # 已弃用
+        v3_form_form_id = '/v1/form/{formId}'
         v1_form_id_form_data = '/v1/{formId}/form_data'
         v3_form_id_form_datas = '/v3/{formId}/form_datas'
         v1_form_id_status = '/v1/form/{formId}/status'
@@ -100,6 +101,10 @@ class Test:
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
         v1_form_id_sign_up = '/v1/{formId}/sign_up'
         v1_form_id_sign_up_form_data_id = '/v1/{formId}/sign_up/{formDataId}'
+
+        v1_form_profile = '/v1/form/{formId}/profile'
+        v1_form_catalog = 'v1/form/{formId}/catalog'
+        v1_manager_forms = '/v1/manager_forms'
 
 
 class Uat:

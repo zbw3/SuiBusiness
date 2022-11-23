@@ -110,13 +110,24 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_examples(self, method='GET'):
+    def v1_manager_froms(self, params, method='GET'):
         """
-        Name: 我创建的表单列表
+        Name: 我管理的表单列表
+        :param params:
+        :param method:
+        :return:
         """
-        url = self.config.Url.v1_examples
-        response = self.request(url=url, method=method)
+        url = self.config.Url.v1_manager_forms
+        response = self.request(url=url, method=method, params=params)
         return response
+
+    # def v1_examples(self, method='GET'):
+    #     """
+    #     Name: 我创建的表单列表(已废弃)
+    #     """
+    #     url = self.config.Url.v1_examples
+    #     response = self.request(url=url, method=method)
+    #     return response
 
     def v1_image(self, image: str, method='POST'):
         """
@@ -170,6 +181,42 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_form_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v3_form_form_id(self, form_id, data=None, method='GET'):
+        """
+        获取表单详情--版本兼容、更新表单
+        :param form_id:
+        :param data:
+        :param method: GET | PUT
+        :return:
+        """
+        url = self.config.Url.v3_form_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_profile(self, form_id, data=None, method='GET'):
+        """
+        获取表单详情--剔除问题项
+        :param form_id:
+        :param data:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_profile.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_from_catalog(self, form_id, data=None, method='GET'):
+        """
+        表单问题项接口
+        :param from_id:
+        :param data:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_catalog.format(formId=form_id)
         response = self.request(url=url, method=method, json=data)
         return response
 
@@ -596,7 +643,9 @@ if __name__ == '__main__':
     # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
-    api.v3_form_id_form_datas(form_id='1116127305559703552')
+    # api.v3_form_id_form_datas(form_id='1116127305559703552')
+    # api.v1_from_catalog('1384304617603624961')
+    api.v1_manager_froms(params={"pageNo":'1', "pageSize":'20'})
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
