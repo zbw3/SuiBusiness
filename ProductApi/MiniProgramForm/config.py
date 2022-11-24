@@ -65,7 +65,7 @@ class Test:
         v1_form = '/v1/form'
         v1_form_form_id = '/v1/form/{formId}'  # 已弃用
         v3_form_form_id = '/v1/form/{formId}'
-        v1_form_id_form_data = '/v1/{formId}/form_data'
+        v2_form_id_form_data = '/v2/{formId}/form_data'
         v3_form_id_form_datas = '/v3/{formId}/form_datas'
         v1_form_id_status = '/v1/form/{formId}/status'
         v1_order_list_form_id = '/v1/order/list/{formId}'
@@ -75,8 +75,8 @@ class Test:
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
         v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
-        v1_form_id_cycle_participant = '/v1/{formId}/cycle/participant'
-        v1_form_id_cycle_ranking = '/v1/{formId}/cycle/ranking'
+        v2_form_id_cycle_participant = '/v2/{formId}/cycle/participant'
+        v2_form_id_cycle_ranking = '/v2/{formId}/cycle/ranking'
         v1_form_id_participant_fuid = '/v1/{formId}/participant/{fuid}'
 
         v1_operation_forms = '/v1/operation_forms'
@@ -105,6 +105,13 @@ class Test:
         v1_form_profile = '/v1/form/{formId}/profile'
         v1_form_catalog = 'v1/form/{formId}/catalog'
         v1_manager_forms = '/v1/manager_forms'
+        v1_from_inform = '/v1/{formId}/inform'
+        v1_form_id_remind = '/v1/remind/{formId}'
+        v1_form_data_last = '/v1/{formId}/form_data/last'
+        v1_form_data_owener = '/v1/{formId}/form_data/owner'
+
+
+
 
 
 class Uat:
