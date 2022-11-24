@@ -7,6 +7,7 @@
 import mimetypes
 import os
 import threading
+import time
 
 import jmespath
 
@@ -489,9 +490,13 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
+        params = {
+            "t": str(time.time()).split(".")[0]
+        }
         url = self.config.Url.v1_config
-        response = self.request(url=url, method=method)
+        response = self.request(url=url, method=method,params=params, verify=False)
         return response
+
 
     def v1_form_id_cycle_form_datas(self, form_id, page_no=1, page_size=20, method='GET'):
         """

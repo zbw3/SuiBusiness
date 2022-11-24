@@ -91,7 +91,8 @@ class Test:
         v1_form_manager_poster = '/v1/form/manager/poster'
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_operation_position = '/v1/operation_position'
-        v1_config = '/v1/config'
+        # v1_config = '/v1/config'
+        v1_config = 'https://qun-oss1.feidee.cn/TCNF/config.json'
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
@@ -101,7 +102,6 @@ class Test:
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
         v1_form_id_sign_up = '/v1/{formId}/sign_up'
         v1_form_id_sign_up_form_data_id = '/v1/{formId}/sign_up/{formDataId}'
-
         v1_form_profile = '/v1/form/{formId}/profile'
         v1_form_catalog = 'v1/form/{formId}/catalog'
         v1_manager_forms = '/v1/manager_forms'
@@ -125,6 +125,9 @@ class Uat:
 
 class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
+
+    class Url:
+        v1_config = 'https://qunoss1.qun100.con/PCNF/config.json'
 
 
 # 上传图片接口是否使用缓存的 URL
