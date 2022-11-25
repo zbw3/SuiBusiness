@@ -60,6 +60,20 @@ class CopyContent:
         }
 
 
+class LinkContent:
+    ''' 公众号链接 '''
+
+    def __init__(
+            self,
+            title: str = "公众号文章",
+            link: str = ""
+    ):
+        self.value = {
+            "title": title,
+            "link": link
+        }
+
+
 class Option:
     """
     RADIO_V2 CHECKBOX_V2 的 option 需要指定是否可自定义
@@ -146,6 +160,7 @@ class Form:
             'limit': -1,
             "perLimit": -1,
             'allowModify': True,
+            'relay': 0,
             'formDataPermission': 1,
             'cycle': {
                 'frequency': 127,
@@ -155,6 +170,10 @@ class Form:
                         'endTime': 2359
                     }
                 ]
+            },
+            "submitBtnName": {
+                "type": "PREDEFINED",
+                "content": "FILL_IN"
             }
         }
 
@@ -206,6 +225,11 @@ class Form:
     def add_copy_area(self, copy_guide, copy_content):
         self._add_content(
             Content(ContentType.COPY_AREA, content=CopyContent(copy_guide, copy_content).value)
+        )
+
+    def add_article_link(self, article_title, article_link):
+        self._add_content(
+            Content(ContentType.MP_LINK, content=LinkContent(article_title, article_link).value)
         )
 
     def add_text_question(self, title, must=True, overt=True):
@@ -362,6 +386,9 @@ class Form:
 
     def set_allow_modify(self, allow_modify: bool):
         self.CONFIG['allowModify'] = allow_modify
+
+    def set_relay(self, relay: int):
+        self.CONFIG['relay'] = relay
 
     def set_form_data_permission(self, permission: int):
         """

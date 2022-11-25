@@ -7,6 +7,7 @@
 import mimetypes
 import os
 import threading
+import time
 
 import jmespath
 
@@ -110,13 +111,24 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_examples(self, method='GET'):
+    def v1_manager_froms(self, params, method='GET'):
         """
-        Name: 我创建的表单列表
+        Name: 我管理的表单列表
+        :param params:
+        :param method:
+        :return:
         """
-        url = self.config.Url.v1_examples
-        response = self.request(url=url, method=method)
+        url = self.config.Url.v1_manager_forms
+        response = self.request(url=url, method=method, params=params)
         return response
+
+    # def v1_examples(self, method='GET'):
+    #     """
+    #     Name: 我创建的表单列表(已废弃)
+    #     """
+    #     url = self.config.Url.v1_examples
+    #     response = self.request(url=url, method=method)
+    #     return response
 
     def v1_image(self, image: str, method='POST'):
         """
@@ -173,7 +185,43 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, json=data)
         return response
 
-    def v1_form_id_form_data(self, form_id, data=None, form_data_id=None, method='GET'):
+    def v3_form_form_id(self, form_id, data=None, method='GET'):
+        """
+        获取表单详情--版本兼容、更新表单
+        :param form_id:
+        :param data:
+        :param method: GET | PUT
+        :return:
+        """
+        url = self.config.Url.v3_form_form_id.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_profile(self, form_id, data=None, method='GET'):
+        """
+        获取表单详情--剔除问题项
+        :param form_id:
+        :param data:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_profile.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_from_catalog(self, form_id, data=None, method='GET'):
+        """
+        表单问题项接口
+        :param from_id:
+        :param data:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_catalog.format(formId=form_id)
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v2_form_id_form_data(self, form_id, data=None, form_data_id=None, method='GET'):
         """
         获取我的接龙、提交接龙、修改接龙、取消接龙
         :param form_id:
@@ -182,7 +230,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method: GET | POST | PUT | DELETE
         :return:
         """
-        url = self.config.Url.v1_form_id_form_data.format(formId=form_id)
+        url = self.config.Url.v2_form_id_form_data.format(formId=form_id)
         params = {'formDataId': form_data_id} if form_data_id else None
         response = self.request(url=url, method=method, params=params, json=data)
         return response
@@ -196,6 +244,17 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v3_form_id_form_datas.format(formId=form_id)
         response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_data_last(self,form_id,method='GET'):
+        """
+        我的报名最新一条
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_data_last.format(formId=form_id)
+        response = self.request(url=url, method='GET')
         return response
 
     def v1_form_id_status(self, form_id, status, method='PUT'):
@@ -266,6 +325,22 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_statistic_detail_form_id.format(formId=form_id)
         params = {'sortField': sort_field, 'sortType': sort_type, 'startTime': start, 'endTime': end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_data_owner(self, form_id, pageNo, pageSize,method='GET'):
+        """
+        详细数据接口
+        :param form_id:
+        :param sort_field: SEQUENCE 序号 | NICKNAME 昵称 | TIME 创建时间 | STATUS 状态 | MONEY 金额 | cid 对应填写项
+        :param sort_type: ASC 升序排列 | DESC 降序排列
+        :param start: 开始时间
+        :param end: 借宿时间
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_data_owener.format(formId=form_id)
+        params = {'pageNo': pageNo, 'pageSize': pageSize, }
         response = self.request(url=url, method=method, params=params)
         return response
 
@@ -415,9 +490,13 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
+        params = {
+            "t": str(time.time()).split(".")[0]
+        }
         url = self.config.Url.v1_config
-        response = self.request(url=url, method=method)
+        response = self.request(url=url, method=method,params=params, verify=False)
         return response
+
 
     def v1_form_id_cycle_form_datas(self, form_id, page_no=1, page_size=20, method='GET'):
         """
@@ -430,18 +509,18 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_form_id_cycle_participant(self, form_id, page_no=1, page_size=20, method='GET'):
+    def v2_form_id_cycle_participant(self, form_id, page_no=1, page_size=20, method='GET'):
         """
         获取参与过表单报名，但是今日未报名的用户信息
         :param method:
         :return:
         """
-        url = self.config.Url.v1_form_id_cycle_participant.format(formId=form_id)
+        url = self.config.Url.v2_form_id_cycle_participant.format(formId=form_id)
         params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size}
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_form_id_cycle_ranking(self, form_id, page_no=1, page_size=20, start_time=None, end_time=None, method='GET'):
+    def v2_form_id_cycle_ranking(self, form_id, page_no=1, page_size=20, start_time=None, end_time=None, method='GET'):
         """
         获取循环表单用户报名的排行榜信息
         :param method:
@@ -563,14 +642,82 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_form_id_sign_up(self, form_id, method='GET'):
+        """
+        签到详情接口
+        :param form_id: 表单ID
+        :param method: GET
+        :return:
+        """
+        url = self.config.Url.v1_form_id_sign_up.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_id_sign_up_form_data_id(self, form_id, form_data_id, method='GET'):
+        """
+        签到接口
+        :param form_id:表单ID
+        :param form_data_id:签到详细接口返回list中的fid
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_sign_up_form_data_id.format(formId=form_id, formDataId=form_data_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_inform(self, form_id, config, method='PUT'):
+        """
+        配置表单公众号通知，仅发布者和管理员可以配置
+        :param form_id:
+        :param config:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_from_inform.format(formId=form_id)
+        # params = {'config': config}
+        response = self.request(url=url, method=method, json=config)
+        return response
+
+    def v1_form_inform_get(self, form_id, method='GET'):
+        """
+        获取表单公众号通知配置
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_from_inform.format(formId=form_id)
+        response = self.request(url=url, method='GET')
+        return response
+
+    def v1_form_remind(self, form_id, config, method='PUT'):
+        """
+        配置表单公众号通知，仅发布者和管理员可以配置
+        :param form_id:
+        :param config:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_remind.format(formId=form_id)
+        # params = {'config': config}
+        response = self.request(url=url, method=method, json=config)
+        return response
+
+    def v1_form_remind_get(self, form_id, method='GET'):
+        """
+        获取表单公众号通知配置
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_remind.format(formId=form_id)
+        response = self.request(url=url, method='GET')
+        return response
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1072705375733551112', print_results=True)
-    # api.v1_name_list(value=[{'name':"张三"}])
-    api.v1_namelist(1121872786575331328)
-    # api.v1_export_url_name_list_nlid(1121272233252093952)
-    # api.v1_export_name_list_nlid_ticket(1121272233252093952, 'ee3c299311804d7ba63f421c4f3b32be')
+    api = FormApi(fuid='1072705609905737732', print_results=True)
+    api.v1_form_data_owner('1384304617603624961','1','20')
 
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
@@ -578,6 +725,30 @@ if __name__ == '__main__':
     # api.v1_templates_lit("STATISTIC")
     # api.v1_form_operation_template_operation_form_id(1082098651125252096)
     # api.v3_form_id_form_datas(form_id='1116127305559703552')
+    # api.v1_from_catalog('1384304617603624961')
+    # api.v1_manager_froms(params={"pageNo":'1', "pageSize":'20'})
+    data ={
+  "addition": "true",
+  "modify": "true",
+  "cancel": "true",
+  "comment": "true"
+}
+    config={
+  "active": "true",
+  "sunday": "1",
+  "monday": "1",
+  "tuesday": "1",
+  "wednesday": "1",
+  "thursday": "1",
+  "friday": "1",
+  "saturday": "1",
+  "timeOfDay": "1"
+}
+    # api.v1_form_inform(form_id='1382804799016534017', config=data)
+    # api.v1_form_inform_get(form_id='1382804799016534017')
+    # v1_form_remind
+    # api.v1_form_remind(form_id='1382804799016534017', config=config)
+    # api.v1_form_remind_get(form_id='1382804799016534017')
     # api.v1_form_operation_operation_operation_form_id(1070883234922893333)
     # api.v1_statistic_analysis_form_id(1076668355504508928)
     # api.v1_statistic_detail_form_id(1076668355504508928, 'SEQUENCE', 'ASC')
@@ -587,4 +758,4 @@ if __name__ == '__main__':
     # api.v1_form_operation_official_account_form_id('1098016190908858368')
     # api.v1_operation_position(10140)
     # data = {"fid":"","catalogs":[{"type":"IMAGE","cid":"1108938171552370688","value":["https://oss.feidee.cn/oss/form_7f6e187cc2487381_750X1334.jpg","https://oss.feidee.cn/oss/form_a1603bd4869b6699_750X1334.jpg","https://oss.feidee.cn/oss/form_86b27c686e0a7d6b_750X1334.jpg"]}],"formVersion":3}
-    # api.v1_form_id_form_data(form_id='1108938171535593472', data=data, method='POST')
+    # api.v2_form_id_form_data(form_id='1108938171535593472', data=data, method='POST')

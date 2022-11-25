@@ -30,20 +30,10 @@ class _Fuid:
 
 
 class UserFuid:
-    user1 = _Fuid(test='1158967843388129280',      # 黄青：1336886755661418496    1158967843388129280
-                  uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973  唯一：1200620269652152320
-    # user2 = _Fuid(test='1072705609905737732', uat='').fuid  # moco
-    user3 = _Fuid(test='1158967843388129280', uat='').fuid  # ksw
-    user4 = _Fuid(test='1021944794521276417', uat='').fuid
-    user5 = _Fuid(test='1026957780256297009', uat='').fuid
-    user6 = _Fuid(test='1027047761280765954', uat='').fuid
-    user7 = _Fuid(test='1027314905029545986', uat='').fuid
-    # user8 = _Fuid(test='1053828831317590028', uat='').fuid
-    # user9 = _Fuid(test='1056011177739419657', uat='').fuid
-    # user10 = _Fuid(test='1057393978590105644', uat='').fuid
-    # user11 = _Fuid(test='1021591279563182081', uat='').fuid
-    kong_si_wen = _Fuid(test='1072705375733551112',
-                        uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
+    user1 = _Fuid(test='1072705609905737732', uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973
+    user2 = _Fuid(test='1072705609905737732', uat='1028083468632055816').fuid  # moco
+    user3 = _Fuid(test='1072705609905737732', uat='').fuid  # ksw
+    kong_si_wen = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 蒋端
     zhou_ying = _Fuid(test='1027314905029545986', uat='').fuid  # 周莹
     hu_fei = _Fuid(test='1021591029641383937', uat='').fuid  # 胡斐
@@ -70,11 +60,12 @@ class Test:
         v1_login_test = '/v1/login_test'
         v1_creation_forms = '/v1/creation_forms'
         v1_participation_forms = '/v1/participation_forms'
-        v1_examples = '/v1/examples'
+        # v1_examples = '/v1/examples'   已废弃
         v1_image = '/v1/image'
         v1_form = '/v1/form'
-        v1_form_form_id = '/v1/form/{formId}'
-        v1_form_id_form_data = '/v1/{formId}/form_data'
+        v1_form_form_id = '/v1/form/{formId}'  # 已弃用
+        v3_form_form_id = '/v1/form/{formId}'
+        v2_form_id_form_data = '/v2/{formId}/form_data'
         v3_form_id_form_datas = '/v3/{formId}/form_datas'
         v1_form_id_status = '/v1/form/{formId}/status'
         v1_order_list_form_id = '/v1/order/list/{formId}'
@@ -84,8 +75,8 @@ class Test:
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
         v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
-        v1_form_id_cycle_participant = '/v1/{formId}/cycle/participant'
-        v1_form_id_cycle_ranking = '/v1/{formId}/cycle/ranking'
+        v2_form_id_cycle_participant = '/v2/{formId}/cycle/participant'
+        v2_form_id_cycle_ranking = '/v2/{formId}/cycle/ranking'
         v1_form_id_participant_fuid = '/v1/{formId}/participant/{fuid}'
 
         v1_operation_forms = '/v1/operation_forms'
@@ -100,7 +91,8 @@ class Test:
         v1_form_manager_poster = '/v1/form/manager/poster'
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_operation_position = '/v1/operation_position'
-        v1_config = '/v1/config'
+        # v1_config = '/v1/config'
+        v1_config = 'https://qun-oss1.feidee.cn/TCNF/config.json'
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
@@ -108,6 +100,19 @@ class Test:
         v1_namelist = '/v1/name_list/{nlid}'
         v1_export_url_name_list_nlid = '/v1/export_url/name_list/{nlid}'
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
+        v1_form_id_sign_up = '/v1/{formId}/sign_up'
+        v1_form_id_sign_up_form_data_id = '/v1/{formId}/sign_up/{formDataId}'
+        v1_form_profile = '/v1/form/{formId}/profile'
+        v1_form_catalog = 'v1/form/{formId}/catalog'
+        v1_manager_forms = '/v1/manager_forms'
+        v1_from_inform = '/v1/{formId}/inform'
+        v1_form_id_remind = '/v1/remind/{formId}'
+        v1_form_data_last = '/v1/{formId}/form_data/last'
+        v1_form_data_owener = '/v1/{formId}/form_data/owner'
+
+
+
+
 
 class Uat:
     APP_ID = 'wx3f32186d2340171c'
@@ -120,6 +125,9 @@ class Uat:
 
 class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
+
+    class Url:
+        v1_config = 'https://qunoss1.qun100.con/PCNF/config.json'
 
 
 # 上传图片接口是否使用缓存的 URL
