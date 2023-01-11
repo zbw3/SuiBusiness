@@ -110,6 +110,22 @@ class Test:
         v1_form_data_last = '/v1/{formId}/form_data/last'
         v1_form_data_owener = '/v1/{formId}/form_data/owner'
 
+        v3_form_id_patch_status = '/v3/form/{formId}/patch/status'
+        v3_form_id_patched_times = '/v3/form/{formId}/patched/times'
+        v1_finish_page_banner = '/v1/finish_page_banner'
+        v1_end_forms = '/v1/delete/forms/end'
+        v1_end_forms_delete = '/v1/delete/forms/end'
+        v1_delete_forms = '/v1/delete/forms'
+        v1_form_id_participant_check = '/v1/form/{formId}/participation/check'
+        v1_form_id_vote_cid = '/v1/form/{formId}/vote/{cid}'
+        v1_form_id_page_style = '/v1/{formId}/pageStyle'
+        v1_form_id_sign_up_delete = '/v1/{formId}/sign_up/{formDataId}'
+        v2_export_excel_url = '/v2/export_excel_url/form/{formId}'
+        v2_export_form_ticket = '/v2/export/form/{formId}'
+        v1_export_attachment_url = '/v1/export_attachment_url/form/{formId}'
+        v1_export_attachment_ticket = '/v1/export/attachment/form/{formId}'
+        v1_export_excel = '/v1/export/{form_id}/excel'
+
 
 
 
