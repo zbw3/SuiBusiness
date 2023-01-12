@@ -870,20 +870,107 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_export_attachment_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end= None, method='GET'):
+    def v1_export_attachment_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end=None, method='GET'):
         """
         导出附件接口
         :param form_id:
-        :param ticket:
-        :param start:
-        :param end:
-        :param r_start:
-        :param r_end:
+        :param ticket:导出凭证
+        :param start:开始日期
+        :param end:结束日期
+        :param r_start:预约开始日期
+        :param r_end:预约结束日期
         :param method:
         :return:
         """
         url = self.config.Url.v1_export_attachment_ticket.format(formId=form_id)
         params = {'ticket': ticket, 'startTime': start, 'endTime': end, 'rStartTime': r_start, 'rEndTime': r_end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def user_export_times(self, form_id, user_id, export_type, method='GET'):
+        """
+        校验用户是否拥有导出次数
+        :param form_id: 表单ID
+        :param user_id: 用户ID
+        :param export_type: 导出类型（带图excel:1;纯文本excel：2；附件包：3）
+        :param method:
+        :return:
+        """
+        url = self.config.Url.user_export_times
+        params = {'formId': form_id, 'userId': user_id, 'exportType': export_type}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def user_add_export_times(self, form_id, user_id, export_type, method='POST'):
+        """
+        每日新增额外导出次数
+        :param form_id: 表单id
+        :param user_id: 用户id
+        :param export_type: 导出类型（(带图excel:1;纯文本excel：2；附件包：3）
+        :param method:
+        :return:
+        """
+        url = self.config.Url.user_add_export_times
+        data = {'formId': form_id, 'userId': user_id, 'exportType': export_type}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def user_get_export_times(self, form_id, method='GET'):
+        """
+        获取用户所有类型的导出剩余次数
+        :param form_id:表单id
+        :return:
+        """
+        url = self.config.Url.user_get_export_times
+        params = {'formId': form_id}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_like(self, form_id, form_data_id, like, method='PUT'):
+        """
+        报名数据点赞/取消点赞
+        :param form_id: 表单id
+        :param form_data_id: 报名数据id
+        :param like:1: 点赞, 0: 取消点赞
+        :return:
+        """
+        url = self.config.Url.v1_form_like.format(formId=form_id, formDataId=form_data_id)
+        params = {'like': like}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_comment_post(self, form_id, form_data_id, author='年', type='TEXT', value='22223333', method='POST'):
+        """
+        新增评论
+        :param form_id:表单id
+        :param form_data_id:报名数据id
+        :param author:评论人
+        :param type:TEXT
+        :param value:评论内容
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_post.format(formId=form_id, formDataId=form_data_id)
+        data = {
+            "authorName": author,
+            "content": [{
+                "type": type,
+                "value": value
+            }]
+        }
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_comment_delete(self,form_id, form_data_id, fid, method='DELETE'):
+        """
+        删除报名评论数据
+        :param form_id:
+        :param form_data_id:
+        :param fid 评论id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_delete.format(formId=form_id, formDataId=form_data_id)
+        params = {'fid': fid}
         response = self.request(url=url, method=method, params=params)
         return response
 

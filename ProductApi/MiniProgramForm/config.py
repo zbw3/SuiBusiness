@@ -126,7 +126,12 @@ class Test:
         v1_export_attachment_ticket = '/v1/export/attachment/form/{formId}'
         v1_export_excel = '/v1/export/{form_id}/excel'
 
-
+        user_export_times = '/user/privilege/hasExportTimes'
+        user_add_export_times = '/user/privilege/addExportTimes'
+        user_get_export_times = '/user/privilege/getExportTimes'
+        v1_form_like = '/v1/form/{formId}/like/{formDataId}'
+        v1_form_comment_post = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_comment_delete = '/v1/form/{formId}/comment/{formDataId}'
 
 
 
