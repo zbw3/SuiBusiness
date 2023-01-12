@@ -713,11 +713,184 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method='GET')
         return response
 
+    def v3_form_id_patch_status(self, form_id, date=None, method='GET'):
+        """
+        校验用户在当前表单是否可以补卡
+        :param form_id:
+        :param date: 补卡日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v3_form_id_patch_status.format(formId=form_id)
+        patams = {'date': date}
+        response = self.request(url=url, method='GET', params=patams)
+        return response
+
+    def v3_form_id_patched_times(self, form_id, methods='GET'):
+        """
+        获取用户在当前表单的已补卡次数
+        :param form_id:
+        :param methods:
+        :return:
+        """
+        url = self.config.Url.v3_form_id_patched_times.format(formId=form_id)
+        response = self.request(url=url, method='GET')
+        return response
+
+    def v1_finish_page_banner(self, method='GET'):
+        """
+        提交结束页banner配置
+        :return:
+        """
+        url = self.config.Url.v1_finish_page_banner
+        response = self.request(url=url, method='GET')
+        return response
+
+    def v1_end_forms(self, page_no=1, page_size=20):
+        """
+        获取已结束表单
+        :param page_no:
+        :param page_size:
+        :return:
+        """
+        url = self.config.Url.v1_end_forms
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method='GET')
+        return response
+
+    def v1_end_forms_delete(self, method='DELETE'):
+        """
+        删除所有已结束表单
+        :return:
+        """
+        url = self.config.Url.v1_end_forms_delete
+        response = self.request(url=url, method='DELETE')
+        return response
+
+    def v1_delete_forms(self, forms, method='PUT'):
+        """
+        删除所有已结束表单
+        :return:
+        """
+        url = self.config.Url.v1_delete_forms
+        data = {'formIds': forms}
+        response = self.request(url=url, method='PUT', json=data)
+        return response
+
+    def v1_form_id_participant_check(self, form_id, name, date=None, method='GET'):
+        """
+        根据预设名单名称和日期校验当前用户是够可以报名/补卡
+        :param form_id:
+        :param date:
+        :param name:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_participant_check.format(formId=form_id)
+        params = {'name': name, 'date': date}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_id_vote_cid(self, form_id, cid, method='GET'):
+        """
+        获取投票看板数据
+        :param form_id:
+        :param cid:题目id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_vote_cid.format(formId=form_id, cid=cid)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_id_page_style(self, form_id, show_record_question_title=None, show_flow_status_filter=None,  show_quick_ps_rate_rntrance=None, method='PUT'):
+        """
+        页面样式配置
+        :param form_id:
+        :param showRecordQuestionTitle:已提交列表中是否显示题目标题
+        :param showFlowStatusFilter:是否显示批改状态标签筛选
+        :param showQuickPsRateEntrance:是否显示批图评级按钮
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_id_page_style.format(formId=form_id)
+        data = {'showRecordQuestionTitle': show_record_question_title,
+             'showFlowStatusFilter': show_flow_status_filter,
+             'showQuickPsRateEntrance': show_quick_ps_rate_rntrance}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_id_sign_up_delete(self, form_id, form_data_id, method='DELETE'):
+        url = self.config.Url.v1_form_id_sign_up_delete.format(formId=form_id, formDataId=form_data_id)
+        response = self.request(url=url,method=method)
+        return response
+
+    def v2_export_excel_url(self, form_id, start=None, end=None, r_start=None, r_end=None, method='GET'):
+        """
+        获取导出excel数据链接地址
+        :param form_id:
+        :param start:开始时间
+        :param end:结束时间
+        :param r_start:预约日期筛选开始时间
+        :param r_end:预约日期少选结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v2_export_excel_url.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end, 'rStartTime': r_start, 'rEndTime': r_end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v2_export_form_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end= None, method='GET'):
+        """
+        导出预设名单接口
+        :param form_id:
+        :param ticket:导出凭证
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v2_export_form_ticket.format(formId=form_id)
+        params = {'ticket': ticket, 'startTime': start, 'endTime': end, 'rStartTime': r_start, 'rEndTime':r_end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_export_attachment_url(self, form_id, start=None, end=None, r_start=None, r_end=None, method='GET'):
+        """
+        导出附件链接地址
+        :param form_id:
+        :param start: 开始日期
+        :param end: 结束日期
+        :param r_start: 预约开始日期
+        :param r_end: 预约结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_export_attachment_url.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end, 'rStartTime': r_start, 'rEndTime': r_end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_export_attachment_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end= None, method='GET'):
+        """
+        导出附件接口
+        :param form_id:
+        :param ticket:
+        :param start:
+        :param end:
+        :param r_start:
+        :param r_end:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_export_attachment_ticket.format(formId=form_id)
+        params = {'ticket': ticket, 'startTime': start, 'endTime': end, 'rStartTime': r_start, 'rEndTime': r_end}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1072705609905737732', print_results=True)
-    api.v1_form_data_owner('1384304617603624961','1','20')
 
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
