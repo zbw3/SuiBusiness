@@ -974,6 +974,156 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_form_last_comment(self, form_id, method='GET'):
+        """
+        获取用户对某个表单的最后一条评论
+        :param form_id:
+        :return:
+        """
+        url = self.config.Url.v1_form_last_comment.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_comment_page_get(self, form_id, form_data_id, page_no=1, page_size=20, method='GET'):
+        """
+        分页获取评论数据
+        :param form_id:
+        :param form_data_id:
+        :param page_no: 页码
+        :param page_size: 每页记录数
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_page_get.format(formId=form_id, formDataId=form_data_id)
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v3_like_comment_rate_remark(self, form_id, fid, comment=True, like=True, rate=True, remark=True, method='POST'):
+        """
+        获取点赞评论接口
+        :param form_id:
+        :param form_data_id:
+        :param query:
+        :param mrthod:
+        :return:
+        """
+        url = self.config.Url.v3_like_comment_rate_remark.format(formId=form_id)
+        data = [{'fid': fid, 'comment': comment, 'like': like, 'rate': rate, 'remark': remark}]
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate_config_get(self, form_id, method='GET'):
+        #获取评级配置
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_rate_config_post(self, form_id, rate, method='POST'):
+        """
+        创建评级配置
+        :param form_id:
+        :param rate: 评级配置
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        data = [
+            {"value": rate}]
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate_config_put(self, form_id, version, rid, value, method='PUT'):
+        """
+        修改评级配置
+        :param form_id: 表单id
+        :param version: 版本号
+        :param rid: 配置项id，新增没有不传
+        :param value: 配置值
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        data = {
+            "version": version,
+            "items":
+                [{
+                    "rid": rid,
+                    "value": value
+                }]}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate(self, form_id, form_data_id, rid, version, method='POST'):
+        """
+        对报名数据进行评级
+        :param form_id:
+        :param form_data_id:
+        :param rid:
+        :param version:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate.format(formId=form_id, formDataId=form_data_id)
+        data = {"rid": rid, "version": version}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_overt_form_list(self, page_no=1, method='GET'):
+        """
+        获取首页公开表单列表
+        :param page_no: 分页页号
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_overt_form_list
+        params = {'pageNo': page_no}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_used(self, form_id, date=None, method='GET'):
+        """
+        获取表单预设名单中各名单的报名状态
+        :param form_id: 表单id
+        :param date: 日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_used.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_order_used(self, form_id, date=None, method='GET'):
+        """
+        按预设名单顺序获取表单中开启的预设名单报名状态
+        :param form_id: 表单id
+        :param date:周期id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_order_used.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_form_data_list(self, form_id, name, page_no, page_size, method='GET'):
+        """
+        预设名单详情列表
+        :param form_id:表单id
+        :param name:点击的姓名
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_form_data_list.format(formId=form_id)
+        params = {'name': name, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -987,23 +1137,23 @@ if __name__ == '__main__':
     # api.v3_form_id_form_datas(form_id='1116127305559703552')
     # api.v1_from_catalog('1384304617603624961')
     # api.v1_manager_froms(params={"pageNo":'1', "pageSize":'20'})
-    data ={
-  "addition": "true",
-  "modify": "true",
-  "cancel": "true",
-  "comment": "true"
-}
-    config={
-  "active": "true",
-  "sunday": "1",
-  "monday": "1",
-  "tuesday": "1",
-  "wednesday": "1",
-  "thursday": "1",
-  "friday": "1",
-  "saturday": "1",
-  "timeOfDay": "1"
-}
+#     data ={
+#   "addition": "true",
+#   "modify": "true",
+#   "cancel": "true",
+#   "comment": "true"
+# }
+#     config={
+#   "active": "true",
+#   "sunday": "1",
+#   "monday": "1",
+#   "tuesday": "1",
+#   "wednesday": "1",
+#   "thursday": "1",
+#   "friday": "1",
+#   "saturday": "1",
+#   "timeOfDay": "1"
+# }
     # api.v1_form_inform(form_id='1382804799016534017', config=data)
     # api.v1_form_inform_get(form_id='1382804799016534017')
     # v1_form_remind

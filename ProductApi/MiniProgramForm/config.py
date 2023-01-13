@@ -96,8 +96,8 @@ class Test:
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
-        v1_name_list = '/v1/name_list'
-        v1_namelist = '/v1/name_list/{nlid}'
+        v1_name_list = '/v1/name_list'  #废弃
+        v1_namelist = '/v1/name_list/{nlid}' #废弃
         v1_export_url_name_list_nlid = '/v1/export_url/name_list/{nlid}'
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
         v1_form_id_sign_up = '/v1/{formId}/sign_up'
@@ -132,7 +132,16 @@ class Test:
         v1_form_like = '/v1/form/{formId}/like/{formDataId}'
         v1_form_comment_post = '/v1/form/{formId}/comment/{formDataId}'
         v1_form_comment_delete = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_last_comment = '/v1/form/{formId}/userLastComment'
+        v1_form_comment_page_get = '/v1/form/{formId}/comment/{formDataId}'
+        v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
+        v1_form_rate_config = '/v1/form/{formId}/rateConfig'
+        v1_form_rate = '/v1/form/{formId}/rate/{formDataId}'
+        v1_overt_form_list = '/v1/overt_form/list'
 
+        v1_name_used = '/v1/{formId}/name_list/used'
+        v1_name_order_used = '/v1/{formId}/name_list/ordered_used'
+        v1_name_form_data_list = 'v1/form/{formId}/nameListFormDataList'
 
 
 class Uat:
