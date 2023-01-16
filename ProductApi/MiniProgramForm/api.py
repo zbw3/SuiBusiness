@@ -1013,7 +1013,12 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         return response
 
     def v1_form_rate_config_get(self, form_id, method='GET'):
-        #获取评级配置
+        """
+        获取评级配置
+        :param form_id:
+        :param method:
+        :return:
+        """
         url = self.config.Url.v1_form_rate_config.format(formId=form_id)
         response = self.request(url=url, method=method)
         return response
@@ -1118,6 +1123,78 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_name_form_data_list.format(formId=form_id)
         params = {'name': name, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_form_name_list_template(self, name_list, method='POST'):
+        """
+        保存/更新预设名单模板
+        :param name_list:预设名单
+        :param method:put/post
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        response = self.request(url=url, json=name_list, method=method)
+        return response
+
+    def v1_form_name_list_template_delete(self, nlid, method='DELETE'):
+        """
+        删除预设名单模板
+        :param nlid:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        params = {'nlid': nlid}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_form_name_list_template_get(self, method='GET'):
+        """
+        获取预设名单模板列表
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_name_list_form_datas(self, form_id, name, page_no=1, page_size=10, method='GET'):
+        """
+        根据预设名单名字查询报名数据
+        :param form_id: 表单id
+        :param name: 姓名
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_form_datas.format(formId=form_id)
+        params = {'name': name, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_list_not_filled(self,form_id, date=None, method='GET'):
+        """
+        预设名单未填写名单列表
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_not_filled.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_list_filled_notify(self, form_id, date=None, method='GET'):
+        """
+        一键通知未填人员
+        :param form_id: 表单id
+        :param date: 日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_filled_notify.format(formId=form_id)
+        params = {'date': date}
         response = self.request(url=url, params=params, method=method)
         return response
 

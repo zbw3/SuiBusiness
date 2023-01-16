@@ -142,6 +142,10 @@ class Test:
         v1_name_used = '/v1/{formId}/name_list/used'
         v1_name_order_used = '/v1/{formId}/name_list/ordered_used'
         v1_name_form_data_list = 'v1/form/{formId}/nameListFormDataList'
+        v1_form_name_list_template = '/v1/form/nameListTemplate'
+        v1_name_list_form_datas = '/v1/{formId}/name_list/form_datas'
+        v1_name_list_not_filled = '/v1/{formId}/name_list/not_filled'
+        v1_name_list_filled_notify = '/v1/{formId}/name_list/filled_notify'
 
 
 class Uat:
