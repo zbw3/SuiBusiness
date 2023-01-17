@@ -1198,6 +1198,125 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, params=params, method=method)
         return response
 
+    def v1_storage_space_regular_tips_ack(self, method='PUT'):
+        """
+        老用户空间限制提醒弹窗确认
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_storage_space_regular_tips_ack
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_storage_space_status(self, method='GET'):
+        """
+        获取当前用户的存储空间使用状态
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_storage_space_status
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_data_delete(self, form_id, form_data_id, method='POST'):
+        """
+        报名数据清理
+        :param form_id:表单id
+        :param form_data_id: 报名数据id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_data_delete.format(formId=form_id)
+        data = {"formDataIds": [form_data_id]}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_recycle_forms(self, page_no=1, page_size=20, method='GET'):
+        """
+        回收站列表
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_recycle_forms
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_recycle_form(self, form_id, method='POST'):
+        """
+        删除回收站/恢复回收站
+        :param form_id:
+        :param method:post/put
+        :return:
+        """
+        url = self.config.Url.v1_recycle_form
+        data = {"formIds": [form_id]}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_recycle_form_all(self, method='PUT'):
+        """
+        回收站一键恢复/回收站一键删除
+        :param method:put/delete
+        :return:
+        """
+        url = self.config.Url.v1_recycle_form_all
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_delete_form_data_dete(self, form_id, start, end, method='DELETE'):
+        """
+        按日期批量硬删除报名数据
+        :param form_id:表单id
+        :param start: 开始日期
+        :param end: 结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_delete_form_data_dete.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_date_count(self, form_id, start, end, method='GET'):
+        """
+        按日期查询报名数据条数
+        :param form_id: 表单id
+        :param start: 开始日期
+        :param end: 结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_date_count.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_open_api_sign_up_developer(self, phone, method='POST'):
+        """
+        注册开发者
+        :param phone: 手机号
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_open_api_sign_up_developer
+        data = {"phone": phone}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_developer(self, method='GET'):
+        """
+        获取开发者信息
+        :return:
+        """
+        url = self.config.Url.v1_developer
+        response = self.request(url=url, method=method)
+        return response
+
+
+
 
 
 

@@ -146,6 +146,19 @@ class Test:
         v1_name_list_form_datas = '/v1/{formId}/name_list/form_datas'
         v1_name_list_not_filled = '/v1/{formId}/name_list/not_filled'
         v1_name_list_filled_notify = '/v1/{formId}/name_list/filled_notify'
+        v1_storage_space_regular_tips_ack = '/v1/storage_space/regular_tips_ack'  # 已废弃
+        v1_storage_space_status = '/v1/storage_space/status'  #已废弃
+
+        v1_form_data_delete = '/v1/delete/{formId}/form_data'
+        v1_recycle_forms = '/v1/recycle/forms'
+        v1_recycle_form = '/v1/recycle/form'
+        v1_recycle_form_all = '/v1/recycle/form/all'
+        v1_delete_form_data_dete = '/v1/delete/{formId}/form_data/date'
+        v1_date_count = '/v1/delete/{formId}/form_data/date_count'
+        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'
+        v1_developer = '/openapi/v1/developer'
+
+
 
 
 class Uat:
