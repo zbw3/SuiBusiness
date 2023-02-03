@@ -7,7 +7,7 @@ import random
 
 import pytest
 
-from ProductApi.MiniProgramForm.form.enum import CatalogType, RoleType, FormDataStatus
+from ProductApi.MiniProgramForm.form.enum1 import CatalogType, RoleType, FormDataStatus
 from test_cases.mp_form import create_form, create_form_data, get_form_data
 
 

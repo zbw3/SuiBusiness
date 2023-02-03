@@ -7,7 +7,7 @@
 import random
 
 from ProductApi.MiniProgramForm.api import FormApi
-from ProductApi.MiniProgramForm.form.enum import CatalogType, RoleType, CatalogStatus
+from ProductApi.MiniProgramForm.form.enum1 import CatalogType, RoleType, CatalogStatus
 from ProductApi.MiniProgramForm.form.utils import RandomImageUrl, CustomProvider
 from faker import Faker
 

@@ -11,7 +11,7 @@ import random
 
 import pytest
 
-from ProductApi.MiniProgramForm.form.enum import FormStatus
+from ProductApi.MiniProgramForm.form.enum1 import FormStatus
 from test_cases.mp_form import verify_post_form, create_form, create_form_data, create_numerous_form_data
 
 
@@ -22,6 +22,7 @@ def test_create_normal_activity_form(user1, default_activity_form):
     #
     # default_activity_form.set_limit("90")
     # default_activity_form.set_per_limit("10")
+
     default_activity_form.set_cycle(127, 800, 1800)
     verify_post_form(user1, default_activity_form)
 

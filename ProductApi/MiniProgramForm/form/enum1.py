@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @File   : enum.py
+# @File   : enum1.py
 # @Author : mocobk
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/31 10:42
+# from enum import Enum
 from enum import Enum
 
 
@@ -37,6 +38,12 @@ class ContentType(Enum):
     LOCATION = 'LOCATION'
     FORM_PAGE = 'FORM_PAGE'
     MP_LINK = 'MP_LINK'
+    QUESTION = 'QUESTION'
+    FILE = 'FILE'
+    WS_LINK = 'WS_LINK'
+    APPLET = 'APPLET'
+
+
 
 
 
