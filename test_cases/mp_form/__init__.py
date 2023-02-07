@@ -10,7 +10,7 @@ from contextlib import contextmanager
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData, PutFormData
-from ProductApi.MiniProgramForm.form.enum import CatalogType, FormDataStatus
+from ProductApi.MiniProgramForm.form.enum1 import CatalogType, FormDataStatus
 from ProductApi.MiniProgramForm.form.form import Form
 from libs.JsonUtils import json_diff
 from settings.BaseConfig import Env

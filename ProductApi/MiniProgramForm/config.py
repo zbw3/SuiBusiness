@@ -96,8 +96,8 @@ class Test:
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
-        v1_name_list = '/v1/name_list'
-        v1_namelist = '/v1/name_list/{nlid}'
+        v1_name_list = '/v1/name_list'  #废弃
+        v1_namelist = '/v1/name_list/{nlid}' #废弃
         v1_export_url_name_list_nlid = '/v1/export_url/name_list/{nlid}'
         v1_export_name_list_nlid_ticket = '/v1/export/name_list/{nlid}'
         v1_form_id_sign_up = '/v1/{formId}/sign_up'
@@ -126,6 +126,37 @@ class Test:
         v1_export_attachment_ticket = '/v1/export/attachment/form/{formId}'
         v1_export_excel = '/v1/export/{form_id}/excel'
 
+        user_export_times = '/user/privilege/hasExportTimes'
+        user_add_export_times = '/user/privilege/addExportTimes'
+        user_get_export_times = '/user/privilege/getExportTimes'
+        v1_form_like = '/v1/form/{formId}/like/{formDataId}'
+        v1_form_comment_post = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_comment_delete = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_last_comment = '/v1/form/{formId}/userLastComment'
+        v1_form_comment_page_get = '/v1/form/{formId}/comment/{formDataId}'
+        v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
+        v1_form_rate_config = '/v1/form/{formId}/rateConfig'
+        v1_form_rate = '/v1/form/{formId}/rate/{formDataId}'
+        v1_overt_form_list = '/v1/overt_form/list'
+
+        v1_name_used = '/v1/{formId}/name_list/used'
+        v1_name_order_used = '/v1/{formId}/name_list/ordered_used'
+        v1_name_form_data_list = 'v1/form/{formId}/nameListFormDataList'
+        v1_form_name_list_template = '/v1/form/nameListTemplate'
+        v1_name_list_form_datas = '/v1/{formId}/name_list/form_datas'
+        v1_name_list_not_filled = '/v1/{formId}/name_list/not_filled'
+        v1_name_list_filled_notify = '/v1/{formId}/name_list/filled_notify'
+        v1_storage_space_regular_tips_ack = '/v1/storage_space/regular_tips_ack'  # 已废弃
+        v1_storage_space_status = '/v1/storage_space/status'  #已废弃
+
+        v1_form_data_delete = '/v1/delete/{formId}/form_data'
+        v1_recycle_forms = '/v1/recycle/forms'
+        v1_recycle_form = '/v1/recycle/form'
+        v1_recycle_form_all = '/v1/recycle/form/all'
+        v1_delete_form_data_dete = '/v1/delete/{formId}/form_data/date'
+        v1_date_count = '/v1/delete/{formId}/form_data/date_count'
+        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'
+        v1_developer = '/openapi/v1/developer'
 
 
 

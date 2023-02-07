@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from typing import List, Union
 
 from ProductApi.MiniProgramForm.api import FormApi
-from ProductApi.MiniProgramForm.form.enum import ContentType, RoleType, CatalogType, FormType
+from ProductApi.MiniProgramForm.form.enum1 import ContentType, RoleType, CatalogType, FormType
 from ProductApi.MiniProgramForm.form.utils import get_img_url, RandomImageUrl
 
 
@@ -59,6 +59,78 @@ class CopyContent:
             "content": content
         }
 
+class File:
+    """正文文件"""
+    def __init__(
+            self,
+            fileName: str = '',
+            fileSize: str= "",
+            status: str = "",
+            tag: str = "",
+            uploadTime: str = "",
+            url: str = ""
+    ):
+        self.value = {
+            "fileName": fileName,
+            "fileSize": fileSize,
+            "status": status,
+            "tag": tag,
+            "uploadTime": uploadTime,
+            "url": url
+        }
+
+
+class WS_LINK:
+    """正文视频号"""
+    def __init__(
+            self,
+            button_name: str = "",
+            main_title: str = "",
+            vice_title: str = "",
+            vid: str = "",
+            ws_id: str = ""):
+        self.value = {
+            "buttonName": button_name,
+            "mainTitle": main_title,
+            "viceTitle": vice_title,
+            "vid": vid,
+            "wsId": ws_id
+        }
+
+class APPLET:
+    """正文小程序"""
+    def __init__(
+            self,
+            appid: str = "",
+            btn_name: str = "",
+            main_title: str = "",
+            path: str = "",
+            vice_title: str = ""
+    ):
+        self.value = {
+            "appId": appid,
+            "buttonName": btn_name,
+            "mainTitle": main_title,
+            "path": path,
+            "viceTitle": vice_title
+
+        }
+
+
+class LOCATION:
+    """正文定位"""
+    def __init__(
+            self,
+            address: str = "",
+            lat: int = "",
+            lon: int = ""
+    ):
+        self.value = {
+            "address": address,
+            "latitude": lat,
+            "longitude": lon
+        }
+
 
 class LinkContent:
     ''' 公众号链接 '''
@@ -95,7 +167,7 @@ class Catalog:
             overt: bool = True,
             used: bool = False,
             status: int = 1,
-            config=None
+            config={"NAME_LIST":{"active":False,"content":""},"NOT_ALLOW_REPEAT":{"active":False},"NAME_LIST_FILL_TYPE":{"active":True,"content":"RADIO_CHOOSE"},"AUTO_FILL":{"active":False}}
     ):
         self.type_ = type_
         self.must = must
@@ -203,7 +275,6 @@ class Form:
         if title:
             self.TITLE = f'[{self.TYPE.value}]-{title}-{time.strftime("%T")}'
 
-
     def set_cover(self, img_url):
         self.COVER = img_url
 
@@ -225,6 +296,26 @@ class Form:
     def add_copy_area(self, copy_guide, copy_content):
         self._add_content(
             Content(ContentType.COPY_AREA, content=CopyContent(copy_guide, copy_content).value)
+        )
+
+    def add_file(self, name, size, status, tag, time, url):
+        self._add_content(
+            Content(ContentType.FILE, content=File(name, size, status, tag, time, url).value)
+        )
+
+    def add_video(self, btn_name, main_title,vice_title, vid, ws_id):
+        self._add_content(
+            Content(ContentType.WS_LINK, content=WS_LINK(btn_name, main_title,vice_title, vid, ws_id).value)
+        )
+
+    def add_applet(self, appid, btn_name, main_title, path, vice_title):
+        self._add_content(
+            Content(ContentType.APPLET, content=APPLET(appid, btn_name, main_title, path, vice_title).value)
+        )
+
+    def add_location(self, address, lat, lon):
+        self._add_content(
+            Content(ContentType.LOCATION, content=LOCATION(address, lat, lon).value)
         )
 
     def add_article_link(self, article_title, article_link):
@@ -352,22 +443,25 @@ class Form:
             )
         )
 
-    def add_name_list(self, title, config,must=False, overt=True):
+    """添加预设名单"""
+    def add_name_list(self, title,config, must=False, overt=True):
         self._add_catalog(
             Catalog(
                 type_=ContentType.WORD,
                 must=must,
                 overt=overt,
                 config=config,
-                # config={"NAME_LIST": {"active": True, "content": self.get_nlid()}},
                 form_catalogs=[FormCatalog(title)]
             )
         )
-
-
+    """获取预设名单id"""
     def get_nlid(self, user=FormApi.USER.user1):
-        response = FormApi(user).v1_name_list(value=[{"name": "张三"}, {"name": "李四"}])
+        # response = FormApi(user).v1_name_list(value=[{"name": "张三"}, {"name": "李四"}])
+        response = FormApi(user).v1_form_name_list_template({"templateName":"名单模板测试","originData":"1\n2\n3\n4","value":[{"name":"1"},{"name":"2"},{"name":"3"},{"name":"4"}]})
+        # print(response.data.get('data')["nlid"])
         return response.data.get('data')["nlid"]
+
+
 
     def set_duration_time(self, start=None, end=None):
         self.CONFIG['actBeginTime'] = start or self.now.strftime('%Y-%m-%d %T')
@@ -447,16 +541,18 @@ class CreateShoppingForm(Form):
 
 
 if __name__ == '__main__':
-    # user = FormApi(FormApi.USER.user1)
-    Form().get_nlid()
-    #     user = FormApi.USER.user1
-    #     Form.get_nlid(user)
-    # form = CreateActivityForm()
-    # # # 添加标题
-    # form.set_title('活动表单测试')
-    # # 添加文字
-    # form.add_text('这是一个文字描述')
-    # form.add_copy_area('mombofbm', 'mimfslmg')
+    form = CreateActivityForm()
+    # # 添加标题
+    form.set_title('活动表单测试')
+    # 添加文字
+    form.add_text('这是一个文字描述')
+    form.add_file('打印机安装教程.docx', '505837','1','s90_a120_e150','1675392261105','https://qun-oss1.feidee.cn/YjE4/262d6aaeqSl05C18SHH.docx')
+    form.add_video('点击查看', '帮助视频', '如何导出数据', 'export/UzFfAgtgekIEAQAAAAAAp5gQSgdaAgAAAAstQy6ubaLX4KHWvLEZgBPEwoNISy9LJI2BzNPgMJqp1efnPIuv7liHjPjwehUD','sphXQ1FVHVywsWi')
+    form.add_applet('wx2eec5fb00157a603', '点此查询', '健康码查询', 'fangkongfuwu/pages/healthCode/step_1/index', '国家政务服务平台')
+    form.add_location('广东省深圳市南山区科技南十二路6号', 'l22.535923004150391', '113.95622253417972')
+    # form.add_name_list('22')
+    # form.get_nlid()
+    # form.add_name_list("名单")
     # # 添加大图
     # form.add_large_img('https://picsum.photos/200')
     # # 添加小图

@@ -88,6 +88,15 @@ def generate_default_form(title=None, is_shopping=False):
     ])
     # 添加复制区
     form.add_copy_area('前10名加威信，送蓝牙耳机，前20名加威信 送飞科剃须刀，速度速度', 'RfbJerOpM2cv6tY')
+    form.add_article_link('公众号链接', 'https://mp.weixin.qq.com/s/yjfVz1iYpkjHVYT089yL0w')
+    # form.add_name_list("预设姓名",{"NAME_LIST":{"active":False,"content":""},"NOT_ALLOW_REPEAT":{"active":False},"NAME_LIST_FILL_TYPE":{"active":True,"content":"RADIO_CHOOSE"},"AUTO_FILL":{"active":False}})
+    form.add_file('打印机安装教程.docx', '505837', '1', 's90_a120_e150', '1675392261105',
+                  'https://qun-oss1.feidee.cn/YjE4/262d6aaeqSl05C18SHH.docx')
+    form.add_video('点击查看', '帮助视频', '如何导出数据',
+                   'export/UzFfAgtgekIEAQAAAAAAp5gQSgdaAgAAAAstQy6ubaLX4KHWvLEZgBPEwoNISy9LJI2BzNPgMJqp1efnPIuv7liHjPjwehUD',
+                   'sphXQ1FVHVywsWi')
+    form.add_applet('wx2eec5fb00157a603', '点此查询', '健康码查询', 'fangkongfuwu/pages/healthCode/step_1/index', '国家政务服务平台')
+    form.add_location('广东省深圳市南山区科技南十二路6号', 22.535923004150391, 113.95622253417972)
 
     if is_shopping:
         form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
@@ -99,7 +108,7 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_telephone_question('手机号', must=False)
     form.add_number_question('需要数量', must=False)
     form.add_text_question('喜欢的句子', must=False)
-    form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)
+    # form.add_radio_question('你的性别', ['男', '女', '保密'], overt=False, must=False)     老版本单选组件，已废弃
     form.add_radio_v2_question('你的性别', [Option('男', False), Option('女', False), Option('保密', False), ], must=False)
     form.add_radio_v2_question('你的国籍', [Option('中国', False), Option('美国', False), Option('其他', True), ], must=False)
     # form.add_checkbox_question('你想吃的水果', ['🍎苹果', '🍌香蕉', '🍉西瓜', '🍇葡萄'])
@@ -111,9 +120,6 @@ def generate_default_form(title=None, is_shopping=False):
     form.add_image_question('请上传你的图片', must=False)
     form.add_text_question('备注', must=False)
     form.add_map_location('你所在的位置', must=False)
-    form.add_article_link('公众号链接','https://mp.weixin.qq.com/s/yjfVz1iYpkjHVYT089yL0w')
-    # form.add_name_list("预设姓名", must=False)
-
 
     # 设置活动时间(不设置默认为当前时间到30天后)
     form.set_duration_time()

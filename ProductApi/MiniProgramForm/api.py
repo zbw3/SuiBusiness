@@ -588,32 +588,34 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_name_list(self, form_id=None, value=None, method='POST'):
-        """
-        提交预设名单
-        :param form_id:表单id，新建表单时不传，修改表单时传
-        :param value:名单数组
-        :param method:请求方式：POST:创建预设名单，PUT：修改预设名单
-        :return:
-        """
-        url = self.config.Url.v1_name_list
-        data = {
-            'formId': form_id,
-            'value': value
-        }
-        response = self.request(url=url, method=method, json=data)
-        return response
+    """接口废弃"""
+    # def v1_name_list(self, form_id=None, value=None, method='POST'):
+    #     """
+    #     提交预设名单
+    #     :param form_id:表单id，新建表单时不传，修改表单时传
+    #     :param value:名单数组
+    #     :param method:请求方式：POST:创建预设名单，PUT：修改预设名单
+    #     :return:
+    #     """
+    #     url = self.config.Url.v1_name_list
+    #     data = {
+    #         'formId': form_id,
+    #         'value': value
+    #     }
+    #     response = self.request(url=url, method=method, json=data)
+    #     return response
 
-    def v1_namelist(self, nlid, method='GET'):
-        """
-        获取预设名单
-        :param nlid:预设名单ID
-        :param method:
-        :return:
-        """
-        url = self.config.Url.v1_namelist.format(nlid=nlid)
-        response = self.request(url=url, method=method)
-        return response
+    """接口废弃"""
+    # def v1_namelist(self, nlid, method='GET'):
+    #     """
+    #     获取预设名单
+    #     :param nlid:预设名单ID
+    #     :param method:
+    #     :return:
+    #     """
+    #     url = self.config.Url.v1_namelist.format(nlid=nlid)
+    #     response = self.request(url=url, method=method)
+    #     return response
 
     def v1_export_url_name_list_nlid(self, nlid, startTime=None, endTime=None, method='GET'):
         """
@@ -870,15 +872,15 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_export_attachment_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end= None, method='GET'):
+    def v1_export_attachment_ticket(self, form_id, ticket, start=None, end=None, r_start=None, r_end=None, method='GET'):
         """
         导出附件接口
         :param form_id:
-        :param ticket:
-        :param start:
-        :param end:
-        :param r_start:
-        :param r_end:
+        :param ticket:导出凭证
+        :param start:开始日期
+        :param end:结束日期
+        :param r_start:预约开始日期
+        :param r_end:预约结束日期
         :param method:
         :return:
         """
@@ -887,11 +889,467 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def user_export_times(self, form_id, user_id, export_type, method='GET'):
+        """
+        校验用户是否拥有导出次数
+        :param form_id: 表单ID
+        :param user_id: 用户ID
+        :param export_type: 导出类型（带图excel:1;纯文本excel：2；附件包：3）
+        :param method:
+        :return:
+        """
+        url = self.config.Url.user_export_times
+        params = {'formId': form_id, 'userId': user_id, 'exportType': export_type}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def user_add_export_times(self, form_id, user_id, export_type, method='POST'):
+        """
+        每日新增额外导出次数
+        :param form_id: 表单id
+        :param user_id: 用户id
+        :param export_type: 导出类型（(带图excel:1;纯文本excel：2；附件包：3）
+        :param method:
+        :return:
+        """
+        url = self.config.Url.user_add_export_times
+        data = {'formId': form_id, 'userId': user_id, 'exportType': export_type}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def user_get_export_times(self, form_id, method='GET'):
+        """
+        获取用户所有类型的导出剩余次数
+        :param form_id:表单id
+        :return:
+        """
+        url = self.config.Url.user_get_export_times
+        params = {'formId': form_id}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_like(self, form_id, form_data_id, like, method='PUT'):
+        """
+        报名数据点赞/取消点赞
+        :param form_id: 表单id
+        :param form_data_id: 报名数据id
+        :param like:1: 点赞, 0: 取消点赞
+        :return:
+        """
+        url = self.config.Url.v1_form_like.format(formId=form_id, formDataId=form_data_id)
+        params = {'like': like}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_comment_post(self, form_id, form_data_id, author='年', type='TEXT', value='22223333', method='POST'):
+        """
+        新增评论
+        :param form_id:表单id
+        :param form_data_id:报名数据id
+        :param author:评论人
+        :param type:TEXT
+        :param value:评论内容
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_post.format(formId=form_id, formDataId=form_data_id)
+        data = {
+            "authorName": author,
+            "content": [{
+                "type": type,
+                "value": value
+            }]
+        }
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_comment_delete(self,form_id, form_data_id, fid, method='DELETE'):
+        """
+        删除报名评论数据
+        :param form_id:
+        :param form_data_id:
+        :param fid 评论id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_delete.format(formId=form_id, formDataId=form_data_id)
+        params = {'fid': fid}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v1_form_last_comment(self, form_id, method='GET'):
+        """
+        获取用户对某个表单的最后一条评论
+        :param form_id:
+        :return:
+        """
+        url = self.config.Url.v1_form_last_comment.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_comment_page_get(self, form_id, form_data_id, page_no=1, page_size=20, method='GET'):
+        """
+        分页获取评论数据
+        :param form_id:
+        :param form_data_id:
+        :param page_no: 页码
+        :param page_size: 每页记录数
+        :return:
+        """
+        url = self.config.Url.v1_form_comment_page_get.format(formId=form_id, formDataId=form_data_id)
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
+    def v3_like_comment_rate_remark(self, form_id, fid, comment=True, like=True, rate=True, remark=True, method='POST'):
+        """
+        获取点赞评论接口
+        :param form_id:
+        :param form_data_id:
+        :param query:
+        :param mrthod:
+        :return:
+        """
+        url = self.config.Url.v3_like_comment_rate_remark.format(formId=form_id)
+        data = [{'fid': fid, 'comment': comment, 'like': like, 'rate': rate, 'remark': remark}]
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate_config_get(self, form_id, method='GET'):
+        """
+        获取评级配置
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_rate_config_post(self, form_id, rate, method='POST'):
+        """
+        创建评级配置
+        :param form_id:
+        :param rate: 评级配置
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        data = [
+            {"value": rate}]
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate_config_put(self, form_id, version, rid, value, method='PUT'):
+        """
+        修改评级配置
+        :param form_id: 表单id
+        :param version: 版本号
+        :param rid: 配置项id，新增没有不传
+        :param value: 配置值
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate_config.format(formId=form_id)
+        data = {
+            "version": version,
+            "items":
+                [{
+                    "rid": rid,
+                    "value": value
+                }]}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate(self, form_id, form_data_id, rid, version, method='POST'):
+        """
+        对报名数据进行评级
+        :param form_id:
+        :param form_data_id:
+        :param rid:
+        :param version:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_rate.format(formId=form_id, formDataId=form_data_id)
+        data = {"rid": rid, "version": version}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_overt_form_list(self, page_no=1, method='GET'):
+        """
+        获取首页公开表单列表
+        :param page_no: 分页页号
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_overt_form_list
+        params = {'pageNo': page_no}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_used(self, form_id, date=None, method='GET'):
+        """
+        获取表单预设名单中各名单的报名状态
+        :param form_id: 表单id
+        :param date: 日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_used.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_order_used(self, form_id, date=None, method='GET'):
+        """
+        按预设名单顺序获取表单中开启的预设名单报名状态
+        :param form_id: 表单id
+        :param date:周期id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_order_used.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_form_data_list(self, form_id, name, page_no, page_size, method='GET'):
+        """
+        预设名单详情列表
+        :param form_id:表单id
+        :param name:点击的姓名
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_form_data_list.format(formId=form_id)
+        params = {'name': name, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_form_name_list_template(self, name_list, method='POST'):
+        """
+        保存/更新预设名单模板
+        :param name_list:预设名单
+        :param method:put/post
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        response = self.request(url=url, json=name_list, method=method)
+        return response
+
+    def v1_form_name_list_template_delete(self, nlid, method='DELETE'):
+        """
+        删除预设名单模板
+        :param nlid:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        params = {'nlid': nlid}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_form_name_list_template_get(self, method='GET'):
+        """
+        获取预设名单模板列表
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_name_list_template
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_name_list_form_datas(self, form_id, name, page_no=1, page_size=10, method='GET'):
+        """
+        根据预设名单名字查询报名数据
+        :param form_id: 表单id
+        :param name: 姓名
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_form_datas.format(formId=form_id)
+        params = {'name': name, 'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_list_not_filled(self,form_id, date=None, method='GET'):
+        """
+        预设名单未填写名单列表
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_not_filled.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_name_list_filled_notify(self, form_id, date=None, method='GET'):
+        """
+        一键通知未填人员
+        :param form_id: 表单id
+        :param date: 日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_name_list_filled_notify.format(formId=form_id)
+        params = {'date': date}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_storage_space_regular_tips_ack(self, method='PUT'):
+        """
+        老用户空间限制提醒弹窗确认
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_storage_space_regular_tips_ack
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_storage_space_status(self, method='GET'):
+        """
+        获取当前用户的存储空间使用状态
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_storage_space_status
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_form_data_delete(self, form_id, form_data_id, method='POST'):
+        """
+        报名数据清理
+        :param form_id:表单id
+        :param form_data_id: 报名数据id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_data_delete.format(formId=form_id)
+        data = {"formDataIds": [form_data_id]}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_recycle_forms(self, page_no=1, page_size=20, method='GET'):
+        """
+        回收站列表
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_recycle_forms
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_recycle_form(self, form_id, method='POST'):
+        """
+        删除回收站/恢复回收站
+        :param form_id:
+        :param method:post/put
+        :return:
+        """
+        url = self.config.Url.v1_recycle_form
+        data = {"formIds": [form_id]}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_recycle_form_all(self, method='PUT'):
+        """
+        回收站一键恢复/回收站一键删除
+        :param method:put/delete
+        :return:
+        """
+        url = self.config.Url.v1_recycle_form_all
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_delete_form_data_dete(self, form_id, start, end, method='DELETE'):
+        """
+        按日期批量硬删除报名数据
+        :param form_id:表单id
+        :param start: 开始日期
+        :param end: 结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_delete_form_data_dete.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_date_count(self, form_id, start, end, method='GET'):
+        """
+        按日期查询报名数据条数
+        :param form_id: 表单id
+        :param start: 开始日期
+        :param end: 结束日期
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_date_count.format(formId=form_id)
+        params = {'startTime': start, 'endTime': end}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_open_api_sign_up_developer(self, phone, method='POST'):
+        """
+        注册开发者
+        :param phone: 手机号
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_open_api_sign_up_developer
+        data = {"phone": phone}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_developer(self, method='GET'):
+        """
+        获取开发者信息
+        :return:
+        """
+        url = self.config.Url.v1_developer
+        response = self.request(url=url, method=method)
+        return response
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
 
+    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    # data =  {"templateName":"测试1","originData":"1\n2\n3\n4\n5","value":[{"name":"1"},{"name":"2"},{"name":"3"},{"name":"4"},{"name":"5"}]}
+    api.v1_date_count('1402424183579213824', '20230101', '20230117')
+    # api.v1_name_order_used('1399571737637724160')
+    # api.v1_form_rate_config_get('1402424183579213824')
+    # api.v1_form_comment_delete('1402424183579213824', '1402424243989774336', '1402812279739678720')
+    # api.v1_form_comment_post('1402424183579213824', '1402424243989774336')
+    # api.user_get_export_times('1402424183579213824')
+    # api.user_add_export_times('1402424183579213824', '1072705609905737732', '3')
+    # api.v1_export_attachment_url('1402424183579213824')
+    # api.v1_form_id_sign_up_delete('1402424183579213824', '1402424243989774336')
+    # api.v1_form_id_page_style('1402424183579213824', 'true', 'false', 'true')
+    # api.v1_form_id_vote_cid('1402424183579213824', '1402424184908808193')
+    # api.v1_form_data_owner('1384304617603624961','1','20')
+    # api.v3_form_id_patched_times('1399845645831200769')
+    # api.v3_form_id_patch_status('1392584316372353024', '20230110')
+    # api.v1_finish_page_banner()
+    # api.v1_end_forms()
+    # api.v1_end_forms_delete()
+    # data = {'formIds': ['1401769529656729600', '1401767851578613760']}
+    # data = ['1401769529656729600', '1401767851578613760']
+    # api.v1_delete_forms(data)
+    # api.v1_form_id_participant_check('1399571737637724160', "张三", '20230110')
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
     # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')
@@ -900,23 +1358,23 @@ if __name__ == '__main__':
     # api.v3_form_id_form_datas(form_id='1116127305559703552')
     # api.v1_from_catalog('1384304617603624961')
     # api.v1_manager_froms(params={"pageNo":'1', "pageSize":'20'})
-    data ={
-  "addition": "true",
-  "modify": "true",
-  "cancel": "true",
-  "comment": "true"
-}
-    config={
-  "active": "true",
-  "sunday": "1",
-  "monday": "1",
-  "tuesday": "1",
-  "wednesday": "1",
-  "thursday": "1",
-  "friday": "1",
-  "saturday": "1",
-  "timeOfDay": "1"
-}
+#     data ={
+#   "addition": "true",
+#   "modify": "true",
+#   "cancel": "true",
+#   "comment": "true"
+# }
+#     config={
+#   "active": "true",
+#   "sunday": "1",
+#   "monday": "1",
+#   "tuesday": "1",
+#   "wednesday": "1",
+#   "thursday": "1",
+#   "friday": "1",
+#   "saturday": "1",
+#   "timeOfDay": "1"
+# }
     # api.v1_form_inform(form_id='1382804799016534017', config=data)
     # api.v1_form_inform_get(form_id='1382804799016534017')
     # v1_form_remind
