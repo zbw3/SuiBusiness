@@ -5,7 +5,7 @@
 # @Time   : 2020/8/5 16:18
 import pytest
 
-from ProductApi.MiniProgramForm.form.enum import FormStatus
+from ProductApi.MiniProgramForm.form.enum1 import FormStatus
 from test_cases.mp_form import create_form
 
 

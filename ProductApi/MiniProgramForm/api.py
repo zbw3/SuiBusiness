@@ -591,32 +591,34 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
-    def v1_name_list(self, form_id=None, value=None, method='POST'):
-        """
-        提交预设名单
-        :param form_id:表单id，新建表单时不传，修改表单时传
-        :param value:名单数组
-        :param method:请求方式：POST:创建预设名单，PUT：修改预设名单
-        :return:
-        """
-        url = self.config.Url.v1_name_list
-        data = {
-            'formId': form_id,
-            'value': value
-        }
-        response = self.request(url=url, method=method, json=data)
-        return response
+    """接口废弃"""
+    # def v1_name_list(self, form_id=None, value=None, method='POST'):
+    #     """
+    #     提交预设名单
+    #     :param form_id:表单id，新建表单时不传，修改表单时传
+    #     :param value:名单数组
+    #     :param method:请求方式：POST:创建预设名单，PUT：修改预设名单
+    #     :return:
+    #     """
+    #     url = self.config.Url.v1_name_list
+    #     data = {
+    #         'formId': form_id,
+    #         'value': value
+    #     }
+    #     response = self.request(url=url, method=method, json=data)
+    #     return response
 
-    def v1_namelist(self, nlid, method='GET'):
-        """
-        获取预设名单
-        :param nlid:预设名单ID
-        :param method:
-        :return:
-        """
-        url = self.config.Url.v1_namelist.format(nlid=nlid)
-        response = self.request(url=url, method=method)
-        return response
+    """接口废弃"""
+    # def v1_namelist(self, nlid, method='GET'):
+    #     """
+    #     获取预设名单
+    #     :param nlid:预设名单ID
+    #     :param method:
+    #     :return:
+    #     """
+    #     url = self.config.Url.v1_namelist.format(nlid=nlid)
+    #     response = self.request(url=url, method=method)
+    #     return response
 
     def v1_export_url_name_list_nlid(self, nlid, startTime=None, endTime=None, method='GET'):
         """
@@ -1328,6 +1330,29 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 if __name__ == '__main__':
     os.environ['env'] = 'test'
 
+    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    # data =  {"templateName":"测试1","originData":"1\n2\n3\n4\n5","value":[{"name":"1"},{"name":"2"},{"name":"3"},{"name":"4"},{"name":"5"}]}
+    api.v1_date_count('1402424183579213824', '20230101', '20230117')
+    # api.v1_name_order_used('1399571737637724160')
+    # api.v1_form_rate_config_get('1402424183579213824')
+    # api.v1_form_comment_delete('1402424183579213824', '1402424243989774336', '1402812279739678720')
+    # api.v1_form_comment_post('1402424183579213824', '1402424243989774336')
+    # api.user_get_export_times('1402424183579213824')
+    # api.user_add_export_times('1402424183579213824', '1072705609905737732', '3')
+    # api.v1_export_attachment_url('1402424183579213824')
+    # api.v1_form_id_sign_up_delete('1402424183579213824', '1402424243989774336')
+    # api.v1_form_id_page_style('1402424183579213824', 'true', 'false', 'true')
+    # api.v1_form_id_vote_cid('1402424183579213824', '1402424184908808193')
+    # api.v1_form_data_owner('1384304617603624961','1','20')
+    # api.v3_form_id_patched_times('1399845645831200769')
+    # api.v3_form_id_patch_status('1392584316372353024', '20230110')
+    # api.v1_finish_page_banner()
+    # api.v1_end_forms()
+    # api.v1_end_forms_delete()
+    # data = {'formIds': ['1401769529656729600', '1401767851578613760']}
+    # data = ['1401769529656729600', '1401767851578613760']
+    # api.v1_delete_forms(data)
+    # api.v1_form_id_participant_check('1399571737637724160', "张三", '20230110')
     # api.v1_operation_forms(params={'tabId': "TUTORIAL_HELP"})
     # api.v1_operation_forms("TUTORIAL_HELP")
     # api.v1_complaint(form_id='1111513741679136768',reason=1,description="123",images=["https://oss.feidee.cn/oss/form_eb4a07ec97d6a07d_800X698.jpg",'https://oss.feidee.cn/oss/form_6b8754320b6ea286_495X401.gif','https://oss.feidee.cn/oss/form_927aaca78713bbaa_500X500.jpg','https://oss.feidee.cn/oss/form_2d89ac01d6d5d00b_500X500.jpg'],contact='')

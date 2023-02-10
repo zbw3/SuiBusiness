@@ -1,5 +1,5 @@
 import pytest
-from ProductApi.MiniProgramForm.form.enum import OperationFormType, TemplatesTabId
+from ProductApi.MiniProgramForm.form.enum1 import OperationFormType, TemplatesTabId
 
 @pytest.mark.skip(reason='1.14.0版本已弃用运营帖分类')
 def test_get_operation_forms(user1):
