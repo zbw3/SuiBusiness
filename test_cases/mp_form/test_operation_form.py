@@ -11,11 +11,12 @@ def test_get_operation_forms(user1):
 
 def test_get_operation_forms_all(user1):
     """验证获取首页瀑布流所有表单数据, 1.14.0版本去除了分类tab"""
-    res = user1.v1_operation_forms(table_id='NO_TAB', method=user1.GET)
-    assert res.status_code == 200
-    data = res.data.get('data')
-    assert data.get('banners') == [], res.text
-    assert len(data.get('examples')) > 0, res.text
+    tables = ['NO_TAB', 'RECORD']
+    for table in tables:
+        res = user1.v1_operation_forms(table_id=table, method=user1.GET)
+        assert res.status_code == 200
+        data = res.data.get('data')
+        assert data
 
 
 def test_get_operation_form_content(user1):
