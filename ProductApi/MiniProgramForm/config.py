@@ -58,6 +58,12 @@ class Test:
         v1_login2 = ('https://hostname', '/v1/login2')
         """
         v1_login_test = '/v1/login_test'
+
+        v1_operation_position = '/v1/operation_position'
+        # v1_config = '/v1/config'
+        v1_config = 'https://qun-oss1.feidee.cn/TCNF/config.json'
+        wx_mp_link = "/wx_mp_link"
+
         v1_creation_forms = '/v1/creation_forms'
         v1_participation_forms = '/v1/participation_forms'
         # v1_examples = '/v1/examples'   已废弃
@@ -90,9 +96,6 @@ class Test:
         v1_form_managers_form_id = '/v1/form/managers/{formId}'
         v1_form_manager_poster = '/v1/form/manager/poster'
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
-        v1_operation_position = '/v1/operation_position'
-        # v1_config = '/v1/config'
-        v1_config = 'https://qun-oss1.feidee.cn/TCNF/config.json'
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'

@@ -1320,6 +1320,15 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def wx_mp_link(self,method="GET"):
+        """
+        获取全部公众号链接配置
+        :return:
+        """
+        url = self.config.Url.wx_mp_link
+        response = self.request(url=url,method=method)
+        return response
+
 
 
 
@@ -1329,10 +1338,10 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-
-    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    api = FormApi(fuid='1158967843388129280', print_results=True)  # 1056011177739419657   1072705609905737732
     # data =  {"templateName":"测试1","originData":"1\n2\n3\n4\n5","value":[{"name":"1"},{"name":"2"},{"name":"3"},{"name":"4"},{"name":"5"}]}
-    api.v1_date_count('1402424183579213824', '20230101', '20230117')
+    # api.v1_date_count('1402424183579213824', '20230101', '20230117')
+    api.wx_mp_link()
     # api.v1_name_order_used('1399571737637724160')
     # api.v1_form_rate_config_get('1402424183579213824')
     # api.v1_form_comment_delete('1402424183579213824', '1402424243989774336', '1402812279739678720')
