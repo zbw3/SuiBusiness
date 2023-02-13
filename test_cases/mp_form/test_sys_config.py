@@ -17,7 +17,7 @@ def test_v1_config(user1):
 def test_wx_mp_link(user1):
     response = user1.wx_mp_link(method=user1.GET)
     assert response.status_code == 200,response.text
-    assert response.data.get("data")
+    assert response.data.get("data"),response.text
 
 def test_operation_position(user1):
     response = user1.v1_operation_position(method=user1.GET)
