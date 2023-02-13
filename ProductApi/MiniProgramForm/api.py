@@ -166,11 +166,14 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_form
         response = self.request(url=url, method=method, json=data)
         if return_form_id:
-            creation_forms = self.v1_creation_forms({'pageNo': 1, 'pageSize': 5})
-            if creation_forms.status_code != 200:
-                raise Exception('创建表单后获取表单 id 失败')
-            form_ids = jmespath.search('@.data.creations.*[*].formId[]', creation_forms.data)
-            response.form_id = form_ids[0]
+            # creation_forms = self.v1_creation_forms({'pageNo': 1, 'pageSize': 5})
+            # print('我发布的列表数据：',creation_forms.data)
+            # if creation_forms.status_code != 200:
+            #     raise Exception('创建表单后获取表单 id 失败')
+            # form_ids = jmespath.search('@.data.creations.*[*].formId[]', creation_forms.data)
+            # response.form_id = form_ids[0]
+            # 通过headers中获取创建的formId
+            response.form_id = response.headers.get('formId')
         return response
 
     def v1_form_form_id(self, form_id, data=None, method='GET'):

@@ -141,3 +141,4 @@ def test_put_seller_remarks(user1, create_order):
 
 if __name__ == '__main__':
     pytest.main()
+    # pytest.main('-vs','test_order.py')

@@ -9,6 +9,7 @@ import pytest
 
 def test_get_creation_forms(user1):
     """验证【我的】——我创建的表单列表获取正确性"""
+    """20230210徐雪霞备注：由于数据库分库，目前返回的分页条数和请求的分页数对不上"""
     params = {'pageNo': 1, 'pageSize': 20}
     res = user1.v1_creation_forms(params=params, method=user1.GET)
     assert res.status_code == 200
