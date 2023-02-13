@@ -131,6 +131,50 @@ class LOCATION:
             "longitude": lon
         }
 
+class VIDEO:
+    """正文视频"""
+    def __init__(
+            self,
+            duration: str = "",
+            name: str = "",
+            size: str = "",
+            frame_url: str = "",
+            tag: str = "",
+            time: str = "",
+            url: str = ""
+    ):
+        self.value = {
+            "durationMs": duration,
+            "fileName": name,
+            "fileSize": size,
+            "frameUrl": frame_url,
+            "tag": tag,
+            "uploadTime": time,
+            "url": url
+
+        }
+
+class AUDIO:
+    """正文视频"""
+    def __init__(
+            self,
+            duration: str = "",
+            name: str = "",
+            size: str = "",
+            tag: str = "",
+            time: str = "",
+            url: str = ""
+    ):
+        self.value = {
+            "durationMs": duration,
+            "fileName": name,
+            "fileSize": size,
+            "tag": tag,
+            "uploadTime": time,
+            "url": url
+
+        }
+
 
 class LinkContent:
     ''' 公众号链接 '''
@@ -303,9 +347,19 @@ class Form:
             Content(ContentType.FILE, content=File(name, size, status, tag, time, url).value)
         )
 
-    def add_video(self, btn_name, main_title,vice_title, vid, ws_id):
+    def add_ws(self, btn_name, main_title, vice_title, vid, ws_id):
         self._add_content(
-            Content(ContentType.WS_LINK, content=WS_LINK(btn_name, main_title,vice_title, vid, ws_id).value)
+            Content(ContentType.WS_LINK, content=WS_LINK(btn_name, main_title, vice_title, vid, ws_id).value)
+        )
+
+    def add_video(self, duration, name, size, frame_url, tag, time, url):
+        self._add_content(
+            Content(ContentType.VIDEO, content=VIDEO(duration, name, size, frame_url, tag, time, url).value)
+        )
+
+    def add_audio(self, duration, name, size, tag, time, url):
+        self._add_content(
+            Content(ContentType.AUDIO, content=AUDIO(duration, name, size, tag, time, url).value)
         )
 
     def add_applet(self, appid, btn_name, main_title, path, vice_title):

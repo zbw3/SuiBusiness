@@ -42,6 +42,8 @@ class ContentType(Enum):
     FILE = 'FILE'
     WS_LINK = 'WS_LINK'
     APPLET = 'APPLET'
+    VIDEO = 'VIDEO'
+    AUDIO = 'AUDIO'
 
 
 
