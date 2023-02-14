@@ -1326,10 +1326,162 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.wx_mp_link
-        response = self.request(url=url,method=method)
+        response = self.request(url=url, method=method)
         return response
 
     # 群组相关
+    def v1_group(self, name, type, method='POST'):
+        """
+        新增群组
+        :param name: 群组名称
+        :param type: 群组类型
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group
+        data = {'groupName': name, 'groupType': type}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_get_group_member(self, group_id, page_no=1, method='GET'):
+        """
+        获取群组成员列表
+        :param group_id: 群组id
+        :param page_no: 页码
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_member.format(groupId=group_id)
+        params = {"pageNo": page_no}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_group_operate_put(self, id, name, type, method='PUT'):
+        """
+        修改群组
+        :param id: 群组id
+        :param name: 群组name
+        :param type: 群组type
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_operate.format(groupId=id)
+        data = {'groupName': name, 'groupType': type}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+
+    def v1_group_operate(self, id, method='GET'):
+        """
+        修改群组
+        :param id: 群组id
+        :param method:GET/DELETE
+        :return:
+        """
+        url = self.config.Url.v1_group_operate.format(groupId=id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_delete_group_member(self, id, fuid, method='DELETE'):
+        """
+        移除群组成员
+        :param id: 群组id
+        :param fuid: 被移除成员fuid
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_member.format(groupId=id)
+        params = {'targetFuid': fuid}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_group_list(self, no=1, size=20, method='GET'):
+        """
+        个人群组列表
+        :param no:
+        :param size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_list
+        params = {'pageNo': no, "pageSize": size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_group_forms(self, id, size=10, last_form_id='',method='GET'):
+        """
+        群组内表单列表
+        :param id:群组id
+        :param size:
+        :param last_form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_forms.format(groupId=id)
+        params = {'pageSize': size, 'lastFormId': last_form_id}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_add_admin(self, id, fuid, method='POST'):
+        """
+        增加超级管理员
+        :param id: 群组id
+        :param fuid: 被加管理员fuid
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_admin.format(groupId=id)
+        data = {"targetFuid": fuid}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_remove_admin(self, id, fuid, method='DELETE'):
+        """
+        撤除超级管理员
+        :param id: 群组id
+        :param fuid: 被移除管理员fuid
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_admin.format(groupId=id)
+        params = {"targetFuid": fuid}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_group_invite(self, id, method='GET'):
+        """
+        生成群组邀请码
+        :param id:群组id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_invite.format(groupId=id)
+        response = self.request(url=url, method=method)
+        return response
+
+    def v1_join_group(self, id, pwd, method='POST'):
+        """
+        用户加入群组
+        :param id: 群组id
+        :param pwd:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_join_group.format(groupId=id)
+        data = {'invitePassword': pwd}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_quit_group(self, id, method='POST'):
+        """
+        用户退出群组
+        :param id: 群组id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_quit_group.format(groupId=id)
+        response = self.request(url=url, method=method)
+        return response
 
 
 
