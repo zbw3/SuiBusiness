@@ -161,6 +161,18 @@ class Test:
         v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'
         v1_developer = '/openapi/v1/developer'
 
+        #群组相关
+        v1_group_member = '/v1/group_member/{groupId}'   # get/delete
+        v1_group = '/v1/group'
+        v1_group_operate = '/v1/group/{groupId}'  #/get/put/delete
+        v1_group_admin = '/v1/group_member/super_admin/{groupId}' #post/delete
+        v1_group_list ='/v1/group/group_list'
+        v1_group_forms = '/v1/group/forms/{groupId}'
+        v1_group_invite = '/v1/group/invite_token/{groupId}'
+        v1_join_group = '/v1/group/join/{groupId}'
+        v1_quit_group = '/v1/group/quit/{groupId}'
+
+
 
 
 

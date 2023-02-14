@@ -1329,6 +1329,8 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url,method=method)
         return response
 
+    # 群组相关
+
 
 
 
