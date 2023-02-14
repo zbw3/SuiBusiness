@@ -164,7 +164,7 @@ class Test:
         #群组相关
         v1_group_member = '/v1/group_member/{groupId}'   # get/delete
         v1_group = '/v1/group'
-        v1_group_operate = '/v1/group/{groupId}'  #/get/put/delete
+        v1_group_operate = '/v1/group/{groupId}'  #/put/delete
         v1_group_admin = '/v1/group_member/super_admin/{groupId}' #post/delete
         v1_group_list ='/v1/group/group_list'
         v1_group_forms = '/v1/group/forms/{groupId}'
