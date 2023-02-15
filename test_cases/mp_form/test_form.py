@@ -46,4 +46,4 @@ def test_put_form(user1, default_activity_form, default_shopping_form):
 
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(["test_cases/mp_form/test_form.py::test_put_form"])
