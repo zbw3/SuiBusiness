@@ -265,6 +265,7 @@ class Form:
         self.TITLE = None
         self.CONTENTS = []
         self.CATALOGS = []
+        self.groupId = ''
         self.form_api = FormApi()
 
         self.now = datetime.now()
@@ -308,7 +309,8 @@ class Form:
             "title": self.TITLE or f'[{self.TYPE.value}]-测试表单-{time.strftime("%T")}',
             "contents": self.CONTENTS,
             "catalogs": self.CATALOGS,
-            "config": self.CONFIG
+            "config": self.CONFIG,
+            'groupId': self.groupId
         }
 
     @property
@@ -321,6 +323,14 @@ class Form:
 
     def set_cover(self, img_url):
         self.COVER = img_url
+
+    def set_group_id(self, id: str):
+        """
+        设置表单关联群组id
+        :param id:
+        :return:
+        """
+        self.groupId = id
 
     def add_text(self, text: str):
         self._add_content(

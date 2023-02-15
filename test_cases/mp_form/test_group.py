@@ -4,6 +4,7 @@
 # @Time   : 2023/02/14 15:09
 
 import pytest
+from test_cases.mp_form import verify_post_form
 
 def test_group(user1):
     """验证【创建群组】接口"""
@@ -53,6 +54,7 @@ def test_join_group(user1,user2):
     assert len(res3.data.get('data')) > 0
 
 def test_group_member(user1,user2):
+    """验证【群组成员列表】接口"""
     res1 = user1.v1_group('test_group', 'ORDINARY_GROUP', method=user1.POST)
     group_id = res1.data.get('data')['groupId']
     res2 = user1.v1_group_invite(group_id, method=user1.GET)
@@ -80,6 +82,45 @@ def test_remove_group_member(user1,user2):
     fuid = user2.v1_join_group(group_id, pwd, method=user2.POST).data.get('data')['fuid']
     res3 = user1.v1_delete_group_member(group_id, fuid, method=user1.DELETE)
     assert res3.status_code == 200
+
+def test_group_forms(user1,default_activity_form):
+    """验证【群组内表单列表】接口"""
+    res1 = user1.v1_group('test_group', 'ORDINARY_GROUP', method=user1.POST)
+    group_id = res1.data.get('data')['groupId']
+    default_activity_form.set_title('群组内表单')
+    default_activity_form.set_group_id(group_id)
+    verify_post_form(user1, default_activity_form)
+    assert len(user1.v1_group_forms(group_id).data.get('data')['formList']) == 1
+
+def test_group_list(user1):
+    """验证【（个人）群组列表】接口"""
+    user1.v1_group('test_group', 'ORDINARY_GROUP', method=user1.POST)
+    res = user1.v1_group_list()
+    assert res.status_code == 200, res.text
+
+def test_add_group_admin(user1,user2):
+    """验证【添加管理员】接口"""
+    res1 = user1.v1_group('test_group', 'ORDINARY_GROUP', method=user1.POST)
+    group_id = res1.data.get('data')['groupId']
+    res2 = user1.v1_group_invite(group_id, method=user1.GET)
+    pwd = res2.data.get('data')['invitePassword']
+    fuid = user2.v1_join_group(group_id, pwd, method=user2.POST).data.get('data')['fuid']
+    res = user1.v1_add_admin(group_id, fuid)
+    assert res.status_code == 200
+
+
+def test_remove_group_admin(user1,user2):
+    """验证【移除管理员】接口"""
+    res1 = user1.v1_group('test_group', 'ORDINARY_GROUP', method=user1.POST)
+    group_id = res1.data.get('data')['groupId']
+    res2 = user1.v1_group_invite(group_id, method=user1.GET)
+    pwd = res2.data.get('data')['invitePassword']
+    fuid = user2.v1_join_group(group_id, pwd, method=user2.POST).data.get('data')['fuid']
+    user1.v1_add_admin(group_id, fuid)
+    res = user1.v1_remove_admin(group_id, fuid)
+    assert res.status_code == 200
+
+
 
 if __name__ == '__main__':
     pytest.main()
