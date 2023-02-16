@@ -90,6 +90,7 @@ class Test:
         v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
         v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
         v1_templates_lit = '/v1/templates/list'
+        v1_templates = '/v1/templates'
         v1_form_manager_invitation_code = '/v1/form/manager/invitation_code'
         v1_form_manager = '/v1/form/manager'
         v1_form_manager_form_id = '/v1/form/manager/{formId}'

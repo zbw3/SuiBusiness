@@ -35,12 +35,22 @@ def test_get_operation_form_content(user1):
         assert res.data.get('data'), res.text
 
 
+def test_templates(user1):
+    res = user1.v1_templates(method=user1.GET)
+    assert res.status_code == 200,res.text
+    assert len(res.data.get('data')) > 0 ,res.data.get('data')
+
+
 def test_templates_list(user1):
     """获取模板中心表单列表"""
     for tab_id in TemplatesTabId:
         res = user1.v1_templates_lit(tab_id.value, method=user1.GET)
         assert res.status_code == 200, res.text
+
         assert res.data.get('data'), res.text
+
+
+
 
 
 if __name__ == '__main__':
