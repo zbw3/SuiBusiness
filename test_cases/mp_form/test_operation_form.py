@@ -20,7 +20,7 @@ def test_get_operation_forms_all(user1):
 
 
 def test_get_operation_form_content(user1):
-    """验证运营贴详情（OPERATION、NORMAL、TEMPLATE、OFFICIAL_ACCOUNT）"""
+    """验证获取运营贴详情页/获取模板详情页/获取公众号文章内容（OPERATION、NORMAL、TEMPLATE、OFFICIAL_ACCOUNT）"""
     res1 = user1.v1_operation_forms("NO_TAB", method=user1.GET)
     forms = res1.data.get('data').get('examples')
     api_map = {

@@ -33,6 +33,7 @@ class UserFuid:
     user1 = _Fuid(test='1072705609905737732', uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973
     user2 = _Fuid(test='1072705609905737732', uat='1028083468632055816').fuid  # moco
     user3 = _Fuid(test='1072705609905737732', uat='').fuid  # ksw
+    user4 = _Fuid(test='1158967843388129280', uat='1028083468632055816').fuid
     kong_si_wen = _Fuid(test='1072705375733551112', uat='').fuid  # ksw    1072705609905737732    summer  1072705375733551112
     jiang_duan = _Fuid(test='1056011177739419657', uat='').fuid  # 蒋端
     zhou_ying = _Fuid(test='1027314905029545986', uat='').fuid  # 周莹
@@ -59,10 +60,35 @@ class Test:
         """
         v1_login_test = '/v1/login_test'
 
-        v1_operation_position = '/v1/operation_position'
-        # v1_config = '/v1/config'
+        # 运营表单相关接口
+        v1_operation_forms = '/v1/operation_forms'
+        v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
+        v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
+        v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
+        v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
+        v1_templates_lit = '/v1/templates/list'
+        v1_templates = '/v1/templates'
+
+        #系统配置相关的接口
+        # v1_config = '/v1/config'  #已废弃
         v1_config = 'https://qun-oss1.feidee.cn/TCNF/config.json'
         wx_mp_link = "/wx_mp_link"
+        v1_operation_position = '/v1/operation_position'   #已废弃，相关内容已在/v1/config 接口中返回
+
+        # 获取首页公开表单列表
+        v1_overt_form_list = '/v1/overt_form/list'
+
+        #群组相关
+        v1_group_member = '/v1/group_member/{groupId}'   # get/delete
+        v1_group = '/v1/group'
+        v1_group_operate = '/v1/group/{groupId}'  #/put/delete
+        v1_group_admin = '/v1/group_member/super_admin/{groupId}' #post/delete
+        v1_group_list ='/v1/group/group_list'
+        v1_group_forms = '/v1/group/forms/{groupId}'
+        v1_group_invite = '/v1/group/invite_token/{groupId}'
+        v1_join_group = '/v1/group/join/{groupId}'
+        v1_quit_group = '/v1/group/quit/{groupId}'
+
 
         v1_creation_forms = '/v1/creation_forms'
         v1_participation_forms = '/v1/participation_forms'
@@ -84,19 +110,11 @@ class Test:
         v2_form_id_cycle_participant = '/v2/{formId}/cycle/participant'
         v2_form_id_cycle_ranking = '/v2/{formId}/cycle/ranking'
         v1_form_id_participant_fuid = '/v1/{formId}/participant/{fuid}'
-
-        v1_operation_forms = '/v1/operation_forms'
-        v1_form_operation_operation_operation_form_id = '/v1/form_operation/operation/{operationFormId}'
-        v1_form_operation_form_operation_form_id = '/v1/form_operation/form/{operationFormId}'
-        v1_form_operation_template_operation_form_id = '/v1/form_operation/template/{operationFormId}'
-        v1_templates_lit = '/v1/templates/list'
-        v1_templates = '/v1/templates'
         v1_form_manager_invitation_code = '/v1/form/manager/invitation_code'
         v1_form_manager = '/v1/form/manager'
         v1_form_manager_form_id = '/v1/form/manager/{formId}'
         v1_form_managers_form_id = '/v1/form/managers/{formId}'
         v1_form_manager_poster = '/v1/form/manager/poster'
-        v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_complaint = '/v1/complaint'
         v1_comlpaint_reason = '/v1/complaint/reason'
         v1_map_location_info = 'v1/map/location_info'
@@ -141,8 +159,6 @@ class Test:
         v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
         v1_form_rate_config = '/v1/form/{formId}/rateConfig'
         v1_form_rate = '/v1/form/{formId}/rate/{formDataId}'
-        v1_overt_form_list = '/v1/overt_form/list'
-
         v1_name_used = '/v1/{formId}/name_list/used'
         v1_name_order_used = '/v1/{formId}/name_list/ordered_used'
         v1_name_form_data_list = 'v1/form/{formId}/nameListFormDataList'
@@ -162,16 +178,7 @@ class Test:
         v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'
         v1_developer = '/openapi/v1/developer'
 
-        #群组相关
-        v1_group_member = '/v1/group_member/{groupId}'   # get/delete
-        v1_group = '/v1/group'
-        v1_group_operate = '/v1/group/{groupId}'  #/put/delete
-        v1_group_admin = '/v1/group_member/super_admin/{groupId}' #post/delete
-        v1_group_list ='/v1/group/group_list'
-        v1_group_forms = '/v1/group/forms/{groupId}'
-        v1_group_invite = '/v1/group/invite_token/{groupId}'
-        v1_join_group = '/v1/group/join/{groupId}'
-        v1_quit_group = '/v1/group/quit/{groupId}'
+
 
 
 

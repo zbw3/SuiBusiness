@@ -19,6 +19,7 @@ def test_wx_mp_link(user1):
     assert response.status_code == 200,response.text
     assert response.data.get("data"),response.text
 
+@pytest.mark.skip(reason='已弃用,返回的相关内容在config 接口')
 def test_operation_position(user1):
     response = user1.v1_operation_position(method=user1.GET)
     assert response.status_code == 200, response.text
