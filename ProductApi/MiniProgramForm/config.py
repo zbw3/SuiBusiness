@@ -196,8 +196,9 @@ class Uat:
 class Production(Uat):
     HOSTNAME = MiniProgramForm.PROD
 
-    class Url:
-        v1_config = 'https://qunoss1.qun100.con/PCNF/config.json'
+    class Url(Test.Url):
+        pass
+        # v1_config = 'https://qunoss1.qun100.con/PCNF/config.json'
 
 
 # 上传图片接口是否使用缓存的 URL
