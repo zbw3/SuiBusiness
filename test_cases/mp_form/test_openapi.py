@@ -9,9 +9,10 @@
 import pytest
 
 
-def test_signup_developer(user1,phone="13265448701"):
+def test_signup_developer(user1,phone="13265484102"):
     """
     注册成为开发者接口的测试用例
+
     :param user1:
     :param phone: 注册开发者的手机号
     :return:

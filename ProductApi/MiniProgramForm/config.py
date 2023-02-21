@@ -78,6 +78,10 @@ class Test:
         # 获取首页公开表单列表
         v1_overt_form_list = '/v1/overt_form/list'
 
+        # 开放api
+        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'   #注册为开发者
+        v1_developer = '/openapi/v1/developer'    #获取开发者信息
+
         #群组相关
         v1_group_member = '/v1/group_member/{groupId}'   # get/delete
         v1_group = '/v1/group'
@@ -175,9 +179,7 @@ class Test:
         v1_recycle_form_all = '/v1/recycle/form/all'
         v1_delete_form_data_dete = '/v1/delete/{formId}/form_data/date'
         v1_date_count = '/v1/delete/{formId}/form_data/date_count'
-        # 开放api
-        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'   #注册为开发者
-        v1_developer = '/openapi/v1/developer'    #获取开发者信息
+
         #注销
         v1_user_logout = '/v1/user/logout'
 
