@@ -2,17 +2,19 @@
 # -*- coding:utf-8 -*-
 # @Time: 2023/2/17 10:17
 
-
+"""
+公开表单相关接口的测试用例
+"""
 import pytest
 
 
-def test_v1_overt_form_list(user4):
+def test_v1_overt_form_list(user1):
     """
     /v1/overt_form/list	获取首页公开表单列表
     :param user1:
     :return:s
     """
-    response = user4.v1_overt_form_list(method=user4.GET)
+    response = user1.v1_overt_form_list(method=user1.GET)
     assert response.status_code == 200,response.text
     assert len(response.data.get("data").get("overtFormList")) > 0 ,response.text
 

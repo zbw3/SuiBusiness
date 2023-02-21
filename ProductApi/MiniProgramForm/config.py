@@ -175,9 +175,11 @@ class Test:
         v1_recycle_form_all = '/v1/recycle/form/all'
         v1_delete_form_data_dete = '/v1/delete/{formId}/form_data/date'
         v1_date_count = '/v1/delete/{formId}/form_data/date_count'
-        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'
-        v1_developer = '/openapi/v1/developer'
-
+        # 开放api
+        v1_open_api_sign_up_developer = '/openapi/v1/signupDeveloper'   #注册为开发者
+        v1_developer = '/openapi/v1/developer'    #获取开发者信息
+        #注销
+        v1_user_logout = '/v1/user/logout'
 
 
 

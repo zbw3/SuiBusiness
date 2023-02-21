@@ -3,6 +3,10 @@
 # @Author : ksw
 # @Time   : 2023/02/14 15:09
 
+"""
+群组相关接口的测试用例
+"""
+
 import pytest
 from test_cases.mp_form import verify_post_form
 
