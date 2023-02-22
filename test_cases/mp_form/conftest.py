@@ -95,11 +95,15 @@ def generate_default_form(title=None, is_shopping=False):
     # form.add_name_list("预设姓名",{"NAME_LIST":{"active":False,"content":""},"NOT_ALLOW_REPEAT":{"active":False},"NAME_LIST_FILL_TYPE":{"active":True,"content":"RADIO_CHOOSE"},"AUTO_FILL":{"active":False}})
     form.add_file('打印机安装教程.docx', '505837', '1', 's90_a120_e150', '1675392261105',
                   'https://qun-oss1.feidee.cn/YjE4/262d6aaeqSl05C18SHH.docx')
-    form.add_video('点击查看', '帮助视频', '如何导出数据',
+    form.add_ws('点击查看', '帮助视频', '如何导出数据',
                    'export/UzFfAgtgekIEAQAAAAAAp5gQSgdaAgAAAAstQy6ubaLX4KHWvLEZgBPEwoNISy9LJI2BzNPgMJqp1efnPIuv7liHjPjwehUD',
                    'sphXQ1FVHVywsWi')
     form.add_applet('wx2eec5fb00157a603', '点此查询', '健康码查询', 'fangkongfuwu/pages/healthCode/step_1/index', '国家政务服务平台')
     form.add_location('广东省深圳市南山区科技南十二路6号', 22.535923004150391, 113.95622253417972)
+    form.add_video('11000', '视频.mp4', '1026278', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH_img.jpg',
+                   's90_a120_e150', '1675665656347', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH.mp4')
+    form.add_audio('599317', '123.m4a', '11217049', 's90_a120_e150', '1675664528982',
+                   'https://qun-oss2.feidee.cn/ZjY1/12f71bcaqSm5mu1cK6N.m4a')
 
     if is_shopping:
         form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
