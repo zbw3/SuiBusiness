@@ -37,7 +37,7 @@ def post_form_data(form_api: FormApi, form_id: str):
     :return: response
     """
     post_form_data = PostFormData(form_api, form_id).data
-    res = form_api.v1_form_id_form_data(form_id, post_form_data, method=form_api.POST)
+    res = form_api.v2_form_id_form_data(form_id, post_form_data, method=form_api.POST)
     return res
 
 
@@ -135,7 +135,7 @@ def test_form_id_cycle_ranking(user1, user2, form_ids):
     for form_id in form_ids:
         verify_post_form_data(user1,user2,form_id)
         verify_cancel_form_data(user2, form_id)
-        response = user1.v1_form_id_cycle_ranking(form_id)
+        response = user1.v2_form_id_cycle_ranking(form_id)
         assert response.status_code == 200,response.text
         assert response.data.get("data")[0].get('fuid') == FormApi.USER.user1 and response.data.get("data")[0].get('days') == 1
         assert response.data.get("data")[1].get('fuid') == FormApi.USER.user2 and response.data.get("data")[1].get('days') == 0

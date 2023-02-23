@@ -110,7 +110,7 @@ class Test:
         v1_order_form_id_order_id_remarks = '/v1/order/{formId}/{orderId}/remarks'
         v1_statistic_analysis_form_id = '/v1/statistic/analysis/{formId}'
         v1_statistic_detail_form_id = '/v1/statistic/detail/{formId}'
-        v1_form_id_cycle_form_datas = '/v1/{formId}/cycle/form_datas'
+        v1_form_id_cycle_form_datas = '/v2/{formId}/cycle/form_datas'  # v1变v2
         v2_form_id_cycle_participant = '/v2/{formId}/cycle/participant'
         v2_form_id_cycle_ranking = '/v2/{formId}/cycle/ranking'
         v1_form_id_participant_fuid = '/v1/{formId}/participant/{fuid}'

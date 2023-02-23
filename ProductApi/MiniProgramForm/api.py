@@ -539,7 +539,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
-        url = self.config.Url.v1_form_id_cycle_ranking.format(formId=form_id)
+        url = self.config.Url.v2_form_id_cycle_ranking.format(formId=form_id)  # v1变v2
         params = {'formId': form_id, 'pageNo': page_no, 'pageSize': page_size, 'startTime': start_time,
                   'endTime': end_time}
         response = self.request(url=url, method=method, params=params)
@@ -1492,7 +1492,6 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_quit_group.format(groupId=id)
         response = self.request(url=url, method=method)
         return response
-
 
 
 

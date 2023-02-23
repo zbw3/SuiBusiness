@@ -178,7 +178,7 @@ class PutFormData(PostFormData):
 
     def __init__(self, form_api: FormApi, form_id):
         super().__init__(form_api, form_id)
-        self.form_data = form_api.v1_form_id_form_data(form_id).data.get('data')
+        self.form_data = form_api.v2_form_id_form_data(form_id).data.get('data')
         if self.form_data:
             self.fid = self.form_data[0]['fid']
         else:
