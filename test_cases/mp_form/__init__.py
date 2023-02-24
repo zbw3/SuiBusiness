@@ -112,7 +112,7 @@ def create_form_data(form_api: FormApi, form_id: str) -> int:
     :return: sequence
     """
     post_form_data = PostFormData(form_api, form_id).data
-    res = form_api.v2_form_id_form_data(form_id, post_form_data, method=form_api.POST)
+    res = form_api.v1_form_id_form_data(form_id, post_form_data, method=form_api.POST)
     # assert res.status_code == 200
     print(res)
     return res.data.get('data', {}).get('sequence')
@@ -131,7 +131,7 @@ def create_numerous_form_data(*form_api: FormApi, form_id: str, number: int):
 
 
 def get_form_data(form_api: FormApi, form_id: str, index=0) -> dict:
-    res = form_api.v2_form_id_form_data(form_id, method=form_api.GET)
+    res = form_api.v1_form_id_form_data(form_id, method=form_api.GET)
     assert res.status_code == 200
     form_datas = res.data.get('data')
     if form_datas:
@@ -154,7 +154,7 @@ def verify_put_form_data(form_api, form_id: str):
 
 
     put_form_data = PutFormData(form_api, form_id).data
-    res = form_api.v2_form_id_form_data(form_id, put_form_data, method=form_api.PUT)
+    res = form_api.v1_form_id_form_data(form_id, put_form_data, method=form_api.PUT)
     assert res.status_code == 204
     modified_form_data = get_form_data(form_api, form_id)
 
@@ -169,7 +169,7 @@ def verify_cancel_form_data(form_api: FormApi, form_id: str):
 
     form_data_id = get_form_data(form_api, form_id)['fid']
 
-    res = form_api.v2_form_id_form_data(form_id, form_data_id=form_data_id, method=form_api.DELETE)
+    res = form_api.v1_form_id_form_data(form_id, form_data_id=form_data_id, method=form_api.DELETE)
     assert res.status_code == 204
 
     deleted_form_data = get_form_data(form_api, form_id)

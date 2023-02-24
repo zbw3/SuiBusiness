@@ -224,7 +224,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, json=data)
         return response
 
-    def v2_form_id_form_data(self, form_id, data=None, form_data_id=None, method='GET'):
+    def v1_form_id_form_data(self, form_id, data=None, form_data_id=None, method='GET'):
         """
         获取我的接龙、提交接龙、修改接龙、取消接龙
         :param form_id:
@@ -233,7 +233,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method: GET | POST | PUT | DELETE
         :return:
         """
-        url = self.config.Url.v2_form_id_form_data.format(formId=form_id)
+        url = self.config.Url.v1_form_id_form_data.format(formId=form_id)
         params = {'formDataId': form_data_id} if form_data_id else None
         response = self.request(url=url, method=method, params=params, json=data)
         return response
