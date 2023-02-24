@@ -28,6 +28,7 @@ faker = "*"
 mitmproxy = "*"
 tabulate = "*"
 mitmdump = "*"
+allure-pytest = "*"
 
 [dev-packages]
 pillow = "*"
