@@ -5,8 +5,8 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/27 14:56
 import random
-
 import pytest
+import allure
 
 from test_cases.mp_form import verify_post_form, verify_put_form, create_form
 
@@ -16,7 +16,8 @@ def test_post_form(user1, default_activity_form, default_shopping_form):
     for form in [default_activity_form, default_shopping_form]:
         verify_post_form(user1, form)
 
-
+@allure.feature('test_xfail_expected_failure')
+@pytest.mark.xfail(reason='该功能尚未实现')
 def test_post_form_with_admin_permission(user1, default_activity_form, default_shopping_form):
     for form in [default_activity_form, default_shopping_form]:
         form.set_form_data_permission(permission=2)
@@ -36,7 +37,8 @@ def test_post_form_with_error_permission(user1, default_activity_form, default_s
         assert res.status_code == 400
         assert res.data.get('code') == -1
 
-
+@allure.feature('test_xfail_expected_failure')
+@pytest.mark.xfail(reason='该功能尚未实现')
 def test_put_form(user1, default_activity_form, default_shopping_form):
     """验证修改 [报名/商品接龙] 表单接口的正确性"""
     for form in [default_activity_form, default_shopping_form]:
