@@ -78,17 +78,17 @@ def generate_default_form(title=None, is_shopping=False):
     # 添加文字
     form.add_text(POETRY_1)
     # 添加大图
-    form.add_large_img(abspath('./images/2340x1463.jpg'))
+    # form.add_large_img(abspath('./images/5.jpg'))
     # 添加文字
     form.add_text(POETRY_2)
     # 添加大图
-    form.add_large_img(abspath('./images/2560x1600.jpg'))
+    # form.add_large_img(abspath('./images/6.jpg'))
     # 添加小图
-    form.add_small_imgs([
-        abspath('./images/600x600.jpg'),
-        abspath('./images/730x365.jpg'),
-        abspath('./images/757x402.jpg'),
-    ])
+    # form.add_small_imgs([
+    #     abspath('./images/1.jpg'),
+    #     abspath('./images/3.jpg'),
+    #     abspath('./images/4.jpg'),
+    # ])
     # 添加复制区
     form.add_copy_area('前10名加威信，送蓝牙耳机，前20名加威信 送飞科剃须刀，速度速度', 'RfbJerOpM2cv6tY')
     form.add_article_link('公众号链接', 'https://mp.weixin.qq.com/s/yjfVz1iYpkjHVYT089yL0w')
@@ -100,15 +100,15 @@ def generate_default_form(title=None, is_shopping=False):
                    'sphXQ1FVHVywsWi')
     form.add_applet('wx2eec5fb00157a603', '点此查询', '健康码查询', 'fangkongfuwu/pages/healthCode/step_1/index', '国家政务服务平台')
     form.add_location('广东省深圳市南山区科技南十二路6号', 22.535923004150391, 113.95622253417972)
-    form.add_video('11000', '视频.mp4', '1026278', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH_img.jpg',
-                   's90_a120_e150', '1675665656347', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH.mp4')
-    form.add_audio('599317', '123.m4a', '11217049', 's90_a120_e150', '1675664528982',
-                   'https://qun-oss2.feidee.cn/ZjY1/12f71bcaqSm5mu1cK6N.m4a')
+    # form.add_video('11000', '视频.mp4', '1026278', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH_img.jpg',
+    #                's90_a120_e150', '1675665656347', 'https://qun-oss1.feidee.cn/NGRk/d19de08cqSmIF32JwfH.mp4')
+    # form.add_audio('599317', '123.m4a', '11217049', 's90_a120_e150', '1675664528982',
+    #                'https://qun-oss2.feidee.cn/ZjY1/12f71bcaqSm5mu1cK6N.m4a')
 
     if is_shopping:
-        form.add_goods('葡萄', '10', abspath('./images/grape.jpg'))
-        form.add_goods('西瓜', '2', abspath('./images/watermelon.jpg'))
-        form.add_goods('草莓', '8', abspath('./images/strawberry.jpg'))
+        form.add_goods('葡萄', '10', '')
+        form.add_goods('西瓜', '2', '')
+        form.add_goods('草莓', '8', '')
 
     # 添加填写项
     form.add_text_question('姓名')

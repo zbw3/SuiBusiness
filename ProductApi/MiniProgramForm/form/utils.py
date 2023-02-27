@@ -33,6 +33,10 @@ class RandomImageUrl:
     def mini(self):
         return get_img_url(f'https://picsum.photos/{randint(50, 80)}/{randint(50, 80)}')
 
+    @property
+    def img(self, i):
+        return get_image_url(i)
+
 
 def _image_hash(image):
     """将图片路径与环境信息 hash"""
@@ -74,6 +78,13 @@ def get_img_url(image):
         return url
     else:
         raise Exception(f'图片上传失败: {res.text}')
+
+def get_image_url(i):
+    form_api = FormApi()
+    form_api.set_logger_level(form_api.INFO)
+    form_api.logger.info('图片上传中...')
+    res = form_api.oss_request(i)
+    return res
 
 
 class CustomProvider(BaseProvider):

@@ -184,6 +184,9 @@ class Test:
         #注销
         v1_user_logout = '/v1/user/logout'
 
+        """上传图片"""
+        v2_image_pre_upload = '/v2/image/pre_upload'
+
 
 
 

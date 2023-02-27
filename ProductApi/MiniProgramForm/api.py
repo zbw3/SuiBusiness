@@ -8,6 +8,9 @@ import mimetypes
 import os
 import threading
 import time
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+import random
+
 
 import jmespath
 
@@ -16,6 +19,7 @@ from ProductApi.base import ApiBase, Response
 import urllib3
 
 urllib3.disable_warnings()
+path = 'E:\SuiBusiness\test_cases\mp_form\images'
 
 
 class SingletonMetaClass(type):
@@ -154,6 +158,59 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         files = {'file': (name, fp, content_type)}
         response = self.request(url=url, method=method, files=files)
         return response
+
+    def v2_pre_upload_image(self, file_num, method='GET'):
+        url = self.config.Url.v2_image_pre_upload
+        param = {"fileNum": file_num}
+        r = self.request(url, params=param, verify=False,  method=method)
+        result = r.json()
+        new_result = {}
+        new_result["host"] = result["data"]["aliSign"]["host"]
+        new_result["filenames"] = result["data"]["filenames"]
+        new_result["accessid"] = result["data"]["aliSign"]["accessid"]
+        new_result["policy"] = result["data"]["aliSign"]["policy"]
+        new_result["signature"] = result["data"]["aliSign"]["signature"]
+        new_result["prefix"] = result["data"]["aliSign"]["prefix"]
+        return new_result
+
+    def oss_request(self, i, method='POST'):
+        sign = self.v2_pre_upload_image(2)
+        oss_url = sign["host"] + "/"
+        oss_url_l = []
+        headers = {
+
+            "Authorization": self.authorized_hearders,
+            "content-type": "multipart/form-data; boundary=1661410466636"
+
+        }
+
+        multipart_encoder = MultipartEncoder(
+            fields={
+                "OSSAccessKeyId": sign["accessid"],
+                "key": sign["prefix"] + i + ".jpg",
+                "policy": sign["policy"],
+                "signature": sign["signature"],
+                # "file": (f"{random.randint(3, 5)}.jpg", open(rf" E:/SuiBusiness/test_cases/mp_form/images/{random.randint(3, 5)}.jpg", "rb"), "image/jpg")
+
+                "file": (f"{random.randint(3, 5)}.jpg",
+                         open(f"./images/{random.randint(3, 5)}.jpg", "rb"), "image/jpg")
+            })
+        headers['Content-Type'] = multipart_encoder.content_type
+
+        # 请求头必须包含Content-Type: multipart/form-data; boundary=${bound}
+        # 这里也可以自定义boundary
+        r = self.request(oss_url, data=multipart_encoder, headers=headers, verify=False, method=method)
+        img_url = oss_url + sign["prefix"] + i + ".png"
+        for i in sign["filenames"]:
+            oss_url_l.append(img_url)
+        # print(img_url+"==============================")
+
+        print(oss_url_l)
+        return oss_url
+
+
+
+
 
     def v1_form(self, data, return_form_id=False, method='POST'):
         """
@@ -1501,10 +1558,20 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1158967843388129280', print_results=True)  # 1056011177739419657   1072705609905737732
+    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    # api.v1_group_forms('1414696509808533505')
+    # api.v1_remove_admin('1414696509808533505','1056011177739419657')
+    # api.v1_group_invite('1414696509808533505')
+    # api.v1_quit_group('1414696509808533505')
+    api.oss_request('2')
+    # api.v1_group('putong1','ORDINARY_GROUP')
+    # api.v1_group_operate('1414701649106001921','DELETE')
+    # api.v1_delete_group_member('1414696509808533505', '1056011177739419657')
+    # api.v1_group_list()
+    # api.v1_group_operate_put('1414701649106001921','bumenqun','SECTORAL_GROUP')
     # data =  {"templateName":"测试1","originData":"1\n2\n3\n4\n5","value":[{"name":"1"},{"name":"2"},{"name":"3"},{"name":"4"},{"name":"5"}]}
     # api.v1_date_count('1402424183579213824', '20230101', '20230117')
-    api.v1_templates()
+    # api.v1_templates()
     # api.v1_name_order_used('1399571737637724160')
     # api.v1_form_rate_config_get('1402424183579213824')
     # api.v1_form_comment_delete('1402424183579213824', '1402424243989774336', '1402812279739678720')

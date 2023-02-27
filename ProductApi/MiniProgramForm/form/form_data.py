@@ -35,6 +35,7 @@ class CatalogsData:
         self.SELLER_REMARKS = None
 
 
+
 class PostFormData:
     RandomImage = RandomImageUrl()
 
@@ -111,9 +112,14 @@ class PostFormData:
         for item in catalogs.QUESTION.DATE:
             data.append({'type': item['type'], 'cid': item['cid'], 'value': self.faker.date()})
 
+        # for item in catalogs.QUESTION.IMAGE:
+        #     data.append({'type': item['type'], 'cid': item['cid'],
+        #                  'value': [self.RandomImage.small for _ in range(random.randint(0, 1))]})
+
         for item in catalogs.QUESTION.IMAGE:
+            print("++++++++++++++++++++",self.RandomImage.img('1'))
             data.append({'type': item['type'], 'cid': item['cid'],
-                         'value': [self.RandomImage.small for _ in range(random.randint(0, 1))]})
+                         'value': self.RandomImage.img('1')})
 
         for item in catalogs.QUESTION.RADIO:
             selected_option_cid = random.choice([form_catalog['cid'] for form_catalog in item['formCatalogs'] if
