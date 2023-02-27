@@ -117,9 +117,8 @@ class PostFormData:
         #                  'value': [self.RandomImage.small for _ in range(random.randint(0, 1))]})
 
         for item in catalogs.QUESTION.IMAGE:
-            print("++++++++++++++++++++",self.RandomImage.img('1'))
             data.append({'type': item['type'], 'cid': item['cid'],
-                         'value': self.RandomImage.img('1')})
+                         'value': self.RandomImage.img})
 
         for item in catalogs.QUESTION.RADIO:
             selected_option_cid = random.choice([form_catalog['cid'] for form_catalog in item['formCatalogs'] if

@@ -47,8 +47,7 @@ class UserFuid:
 
 class Test:
     HOSTNAME = MiniProgramForm.TEST
-    # APP_ID = 'wx1e766c9a00355017'
-    APP_ID = 'wx360dab2014391b23' #test1对应的app_ID
+    APP_ID = 'wx1e766c9a00355017'
     DUFAULT_FUID = '1026957780256297009'
 
     # APP_ID = 'wxc67f6d90678e1fe4'  # 已废弃的 UAT

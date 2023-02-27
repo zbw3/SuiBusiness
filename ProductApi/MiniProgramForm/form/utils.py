@@ -34,8 +34,8 @@ class RandomImageUrl:
         return get_img_url(f'https://picsum.photos/{randint(50, 80)}/{randint(50, 80)}')
 
     @property
-    def img(self, i):
-        return get_image_url(i)
+    def img(self):
+        return get_image_url('1')
 
 
 def _image_hash(image):
@@ -104,4 +104,4 @@ class CustomProvider(BaseProvider):
 
 if __name__ == '__main__':
     USE_LOCAL_CACHE_URL = False
-    print(get_img_url(f'https://picsum.photos/512/20'))
+    print(get_image_url('2'))

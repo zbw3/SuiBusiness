@@ -174,7 +174,8 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         return new_result
 
     def oss_request(self, i, method='POST'):
-        sign = self.v2_pre_upload_image(2)
+        sign = self.v2_pre_upload_image(i)
+        print("sign_________", sign["filenames"][0])
         oss_url = sign["host"] + "/"
         oss_url_l = []
         headers = {
@@ -187,26 +188,23 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         multipart_encoder = MultipartEncoder(
             fields={
                 "OSSAccessKeyId": sign["accessid"],
-                "key": sign["prefix"] + i + ".jpg",
+                "key": sign["prefix"] + sign["filenames"][0] + ".jpg",
                 "policy": sign["policy"],
                 "signature": sign["signature"],
-                # "file": (f"{random.randint(3, 5)}.jpg", open(rf" E:/SuiBusiness/test_cases/mp_form/images/{random.randint(3, 5)}.jpg", "rb"), "image/jpg")
-
                 "file": (f"{random.randint(3, 5)}.jpg",
-                         open(f"./images/{random.randint(3, 5)}.jpg", "rb"), "image/jpg")
+                         open(f"E:\SuiBusiness\ProductApi\MiniProgramForm\images\{random.randint(3, 5)}.jpg", "rb"), "image/jpg")
             })
         headers['Content-Type'] = multipart_encoder.content_type
 
         # 请求头必须包含Content-Type: multipart/form-data; boundary=${bound}
         # 这里也可以自定义boundary
         r = self.request(oss_url, data=multipart_encoder, headers=headers, verify=False, method=method)
-        img_url = oss_url + sign["prefix"] + i + ".png"
-        for i in sign["filenames"]:
+        for n in sign["filenames"]:
+            img_url = oss_url + sign["prefix"] + n + ".jpg"
             oss_url_l.append(img_url)
-        # print(img_url+"==============================")
 
         print(oss_url_l)
-        return oss_url
+        return img_url
 
 
 
@@ -1563,7 +1561,7 @@ if __name__ == '__main__':
     # api.v1_remove_admin('1414696509808533505','1056011177739419657')
     # api.v1_group_invite('1414696509808533505')
     # api.v1_quit_group('1414696509808533505')
-    api.oss_request('2')
+    api.oss_request('1')
     # api.v1_group('putong1','ORDINARY_GROUP')
     # api.v1_group_operate('1414701649106001921','DELETE')
     # api.v1_delete_group_member('1414696509808533505', '1056011177739419657')
