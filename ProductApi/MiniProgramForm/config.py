@@ -30,7 +30,7 @@ class _Fuid:
 
 
 class UserFuid:
-    user1 = _Fuid(test='1072705609905737732', uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973
+    user1 = _Fuid(test='1399533209253732353', uat='1032048209218088973').fuid  # ksw    1072705609905737732,uat:1074099735163650048    summer  1072705375733551112，uat:1032048209218088973
     user2 = _Fuid(test='1072705609905737732', uat='1028083468632055816').fuid  # moco
     user3 = _Fuid(test='1072705609905737732', uat='').fuid  # ksw
     user4 = _Fuid(test='1158967843388129280', uat='1028083468632055816').fuid
@@ -43,11 +43,12 @@ class UserFuid:
     chen_qi_lin = _Fuid(test='1040792416132530202', uat='').fuid  # 陈琦琳
     # user1 = _Fuid(test='1053828831317590037', uat='').fuid  # 已废弃的 UAT 用户
     # user2 = _Fuid(test='1059901948376911929', uat='').fuid  # 已废弃的 UAT 用户
+    zhicheng_li = _Fuid(test='1399533209253732353', uat='1032048209218088973').fuid # 志成
 
 
 class Test:
     HOSTNAME = MiniProgramForm.TEST
-    APP_ID = 'wx1e766c9a00355017'
+    APP_ID = 'wxa7d2f05c2d700699'
     DUFAULT_FUID = '1026957780256297009'
 
     # APP_ID = 'wxc67f6d90678e1fe4'  # 已废弃的 UAT
@@ -186,6 +187,9 @@ class Test:
 
         """上传图片"""
         v2_image_pre_upload = '/v2/image/pre_upload'
+
+        # 流量主广告配置
+        v1_wx_advertise = '/v1/wx_advertise'
 
 
 

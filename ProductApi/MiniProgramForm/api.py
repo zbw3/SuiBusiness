@@ -1548,6 +1548,15 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def v1_wx_advertise(self,method='GET'):
+        """
+        流量主广告配置
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_wx_advertise
+        response = self.request(url=url,method=method)
+        return response
 
 
 
