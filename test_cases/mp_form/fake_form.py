@@ -17,13 +17,13 @@ from test_cases.mp_form import verify_post_form, create_form, create_form_data, 
 
 def test_create_normal_activity_form(user1, default_activity_form):
     """创建正常进行中的 [活动接龙] 表单"""
-    default_activity_form.set_title('进行中-含填写项')
+    default_activity_form.set_title('auto-cycle-patch')
     # default_activity_form.set_duration_time("2020-11-21 14:39:00", "2020-12-21 14:39:00")
     #
     # default_activity_form.set_limit("90")
     # default_activity_form.set_per_limit("10")
 
-    default_activity_form.set_cycle(127, 800, 1800)
+    default_activity_form.set_cycle(True, 127, 800, 1800)
     verify_post_form(user1, default_activity_form)
 
 
