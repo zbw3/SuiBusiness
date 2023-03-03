@@ -8,7 +8,7 @@ import pytest
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData
-from test_cases.mp_form import verify_post_form_data, verify_put_form_data, verify_cancel_form_data, create_form
+from test_cases.mp_form import verify_post_form_data, verify_post_form_patch_data, verify_put_form_data, verify_cancel_form_data, create_form
 import time
 from datetime import datetime, timedelta
 
@@ -57,6 +57,13 @@ def test_post_form_data(user1, user2, form_ids):
     """验证提交接龙数据"""
     for form in form_ids:
         verify_post_form_data(user1, user2, form)
+
+def test_post_form_patch_data(user1, user2, default_activity_form):
+    """验证提交补卡数据"""
+    default_activity_form.set_cycle(True, 127, 800, 2300)
+    default_activity_form.set_duration_time(start=default_activity_form.now_offset(days=-1))
+    form_ids = create_form(user1, default_activity_form)
+    verify_post_form_patch_data(user1, user2, form_ids)
 
 
 def test_put_form_data(user2, form_ids):

@@ -7,6 +7,7 @@
 import random
 from collections import namedtuple
 from contextlib import contextmanager
+import datetime
 
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData, PutFormData
@@ -117,6 +118,20 @@ def create_form_data(form_api: FormApi, form_id: str) -> int:
     print(res)
     return res.data.get('data', {}).get('sequence')
 
+def create_form_patch_data(form_api: FormApi, form_id: str) -> int:
+    """
+    :param form_api:
+    :param form_id:
+    :return: sequence
+    """
+
+    post_form_data = PostFormData(form_api, form_id).patch_data
+    res = form_api.v1_form_id_form_data(form_id, post_form_data, method=form_api.POST)
+    # assert res.status_code == 200
+    print(res)
+    return res.data.get('data', {}).get('sequence')
+
+
 
 def create_numerous_form_data(*form_api: FormApi, form_id: str, number: int):
     """
@@ -145,6 +160,14 @@ def verify_post_form_data(user1: FormApi, user2: FormApi, form_id: str):
     assert sequence == 1
 
     sequence = create_form_data(user2, form_id)
+    assert sequence == 2
+
+
+def verify_post_form_patch_data(user1: FormApi, user2: FormApi, form_id: str):
+    sequence = create_form_patch_data(user1, form_id)
+    assert sequence == 1
+
+    sequence = create_form_patch_data(user2, form_id)
     assert sequence == 2
 
 
