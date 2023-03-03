@@ -9,6 +9,8 @@ import pytest
 from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form import PostFormData
 from test_cases.mp_form import verify_post_form_data, verify_put_form_data, verify_cancel_form_data, create_form
+import time
+from datetime import datetime, timedelta
 
 
 @pytest.fixture()
@@ -133,12 +135,20 @@ def test_cancel_form_id_cycle_form_datas(user1,user2, form_ids):
 def test_form_id_cycle_ranking(user1, user2, form_ids):
     """"循环表单排行榜获取"""
     for form_id in form_ids:
-        verify_post_form_data(user1,user2,form_id)
+        verify_post_form_data(user1, user2, form_id)
         verify_cancel_form_data(user2, form_id)
         response = user1.v2_form_id_cycle_ranking(form_id)
-        assert response.status_code == 200,response.text
-        assert response.data.get("data")[0].get('fuid') == FormApi.USER.user1 and response.data.get("data")[0].get('days') == 1
-        assert response.data.get("data")[1].get('fuid') == FormApi.USER.user2 and response.data.get("data")[1].get('days') == 0
+        assert response.status_code == 200, response.text
+        """总排行"""
+        assert response.data.get("data")["list"][0].get('fuid') == FormApi.USER.user1 and response.data.get("data")["list"][0].get('days') == 1
+        assert response.data.get("data")["list"][1].get('fuid') == FormApi.USER.user2 and response.data.get("data")["list"][1].get('days') == 0
+        """区间排行"""
+        start = datetime.now().strftime('%Y-%m-%d %T')
+        end = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d %T')
+        response2 = user1.v2_form_id_cycle_ranking(form_id, 1, 20, start, end,)
+        assert response2.data.get("data")["list"][0].get('fuid') == FormApi.USER.user1 and response2.data.get("data")["list"][0].get('days') == 1
+
+        assert response2.data.get("data")["list"][1].get('fuid') == FormApi.USER.user2 and response2.data.get("data")["list"][1].get('days') == 0
 
 
 def test_query_form_id_cycle_form_datas(user1, user2, form_ids):
