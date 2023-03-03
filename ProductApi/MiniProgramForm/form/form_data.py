@@ -10,6 +10,7 @@ from ProductApi.MiniProgramForm.api import FormApi
 from ProductApi.MiniProgramForm.form.enum1 import CatalogType, RoleType, CatalogStatus
 from ProductApi.MiniProgramForm.form.utils import RandomImageUrl, CustomProvider
 from faker import Faker
+import datetime
 
 
 class QuestionsData:
@@ -177,6 +178,11 @@ class PostFormData:
     @property
     def data(self):
         return {'fid': '', 'catalogs': self._form_data_catalogs, 'formVersion': self.version}
+
+    @property
+    def patch_data(self):
+        yes = (datetime.datetime.now() + datetime.timedelta(days=-1)).strftime('%Y%m%d')
+        return {'fid': '', 'patch': True, 'patchDate': yes, 'catalogs': self._form_data_catalogs, 'formVersion': self.version}
 
 
 class PutFormData(PostFormData):
