@@ -537,10 +537,11 @@ class Form:
     def set_per_limit(self, per_limit: int):
         self.CONFIG['perLimit'] = per_limit
 
-    def set_cycle(self, frequency, start: int, end: int):
+    def set_cycle(self, patch, frequency, start: int, end: int):
         self.CONFIG['cycle']['frequency'] = frequency
         self.CONFIG['cycle']['effectiveTime'][0]['startTime'] = start
         self.CONFIG['cycle']['effectiveTime'][0]['endTime'] = end
+        self.CONFIG['cycle']['allowPatch'] = patch
 
     def set_allow_modify(self, allow_modify: bool):
         self.CONFIG['allowModify'] = allow_modify
