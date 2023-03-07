@@ -1009,6 +1009,20 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, params=params)
         return response
 
+    def v1_form_like_get(self, form_id, form_data_id, page_no=1, page_size=20, method='GET'):
+        """
+        分页获取表单数据点赞记录
+        :param form_id:
+        :param form_data_id:
+        :param page_no: 页码
+        :param page_size: 每页记录数
+        :return:
+        """
+        url = self.config.Url.v1_form_like.format(formId=form_id, formDataId=form_data_id)
+        params = {'pageNo': page_no, 'pageSize': page_size}
+        response = self.request(url=url, method=method, params=params)
+        return response
+
     def v1_form_comment_post(self, form_id, form_data_id, author='年', type='TEXT', value='22223333', method='POST'):
         """
         新增评论
@@ -1140,6 +1154,33 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url = self.config.Url.v1_form_rate.format(formId=form_id, formDataId=form_data_id)
         data = {"rid": rid, "version": version}
+        response = self.request(url=url, method=method, json=data)
+        return response
+
+    def v1_form_rate_revise(self, form_id,method='GET'):
+        """
+        获取评级配置和订正功能开关
+        :param form_id:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_rate_revise.format(formId=form_id)
+        params = {}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_formdata_attach(self, form_id, form_data_id, rid, version, method='POST'):
+        """
+         评论、评级、标签整合接口
+        :param form_id:
+        :param form_data_id:
+        :param rid:
+        :param version:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_form_attach.format(formId=form_id, formDataId=form_data_id)
+        data = {"formDataRateDto":{"version":version,"rid":rid},"stateLabelDto":{"stateLabelEnum":"REVISE_PASS"}}
         response = self.request(url=url, method=method, json=data)
         return response
 

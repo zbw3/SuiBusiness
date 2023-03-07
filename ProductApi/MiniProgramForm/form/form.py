@@ -261,7 +261,7 @@ class Form:
         if _type:
             self.TYPE = _type
 
-        self.COVER = 'https://resources.sui.com/fed/wechat/statistics-tools/templates/bg_banner.png?v1'
+        self.COVER = 'https://resources.sui.com/fed/wechat/statistics-tools/templates/bg_banner.png'
         self.TITLE = None
         self.CONTENTS = []
         self.CATALOGS = []

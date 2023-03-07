@@ -101,7 +101,7 @@ class Test:
         v1_image = '/v1/image'
         v1_form = '/v1/form'
         v1_form_form_id = '/v1/form/{formId}'  # 已弃用
-        v3_form_form_id = '/v1/form/{formId}'
+        v3_form_form_id = '/v3/form/{formId}'
         v2_form_id_form_data = '/v2/{formId}/form_data'
         v1_form_id_form_data = '/v1/{formId}/form_data'
         v3_form_id_form_datas = '/v3/{formId}/form_datas'
@@ -157,14 +157,6 @@ class Test:
         user_export_times = '/user/privilege/hasExportTimes'
         user_add_export_times = '/user/privilege/addExportTimes'
         user_get_export_times = '/user/privilege/getExportTimes'
-        v1_form_like = '/v1/form/{formId}/like/{formDataId}'
-        v1_form_comment_post = '/v1/form/{formId}/comment/{formDataId}'
-        v1_form_comment_delete = '/v1/form/{formId}/comment/{formDataId}'
-        v1_form_last_comment = '/v1/form/{formId}/userLastComment'
-        v1_form_comment_page_get = '/v1/form/{formId}/comment/{formDataId}'
-        v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
-        v1_form_rate_config = '/v1/form/{formId}/rateConfig'
-        v1_form_rate = '/v1/form/{formId}/rate/{formDataId}'
         v1_name_used = '/v1/{formId}/name_list/used'
         v1_name_order_used = '/v1/{formId}/name_list/ordered_used'
         v1_name_form_data_list = 'v1/form/{formId}/nameListFormDataList'
@@ -190,6 +182,26 @@ class Test:
 
         # 流量主广告配置
         v1_wx_advertise = '/v1/wx_advertise'
+
+        # 点赞 评论 评级 相关
+        v1_form_like = '/v1/form/{formId}/like/{formDataId}'
+        v1_form_comment_post = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_comment_delete = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_last_comment = '/v1/form/{formId}/userLastComment'
+        v1_form_comment_page_get = '/v1/form/{formId}/comment/{formDataId}'
+        v1_form_comment_rate_remark = '/v1/form/{formId}/likeCommentRateRemark'
+        v1_form_rate_config = '/v1/form/{formId}/rateConfig'
+        v1_form_rate = '/v1/form/{formId}/rate/{formDataId}'
+        v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
+        v1_form_attach = '/v1/formData/attach/{formId}/{formDataId}'
+        v1_rate_revise = '/v1/form/{formId}/rateAndReviseConfig'
+
+
+
+
+
+
+
 
 
 
