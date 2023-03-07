@@ -29,6 +29,7 @@ mitmproxy = "*"
 tabulate = "*"
 mitmdump = "*"
 allure-pytest = "*"
+requests-toolbelt = "*"
 
 [dev-packages]
 pillow = "*"

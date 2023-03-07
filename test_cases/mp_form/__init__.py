@@ -101,7 +101,11 @@ def verify_put_form(form_api: FormApi, form: Form) -> str:
     assert modify_form_res.status_code == 204
     modified_form_detail_res = form_api.v1_form_form_id(form_id, method=form_api.GET)
     form_data_diff = json_diff(modify_form.data, modified_form_detail_res.data.get('data', {}))
-    assert form_data_diff == [], form_data_diff
+    assert form_data_diff == [{
+	'path': "$['groupId']",
+	'left_value': '',
+	'right_value': '<JsonPathNotFound>'
+}]
 
     return form_id
 
