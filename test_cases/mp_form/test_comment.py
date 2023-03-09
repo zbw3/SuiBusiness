@@ -5,6 +5,7 @@
 # @Time   :2023/2/28 15:45:00
 """
 点赞 评论 评级 相关
+!!! 注意：其他接口依赖test_form_comment用例生成对应的form_id,form_data_id,fid
 """
 import pytest
 import pickle
@@ -113,8 +114,8 @@ def test_form_like_comment_rate_remark(user1):
     :return:
     """
     form_id, form_data_id, fid= get_txt_data()
-    page_comment = user1.v3_like_comment_rate_remark(form_id, form_data_id)
-    assert page_comment.status_code == 200
+    comment_rate_remark_response = user1.v3_like_comment_rate_remark(form_id, form_data_id)
+    assert comment_rate_remark_response.status_code == 200
 
 def test_form_rate_config_post(user1):
     """
@@ -127,11 +128,6 @@ def test_form_rate_config_post(user1):
     rate = "优秀"
     rate_config = user1.v1_form_rate_config_post(form_id,rate)
     assert rate_config.status_code == 200
-    rid = rate_config.json()['data']['items'][0]['rid']
-    # 将form_id、form_data_id保存起来，供后续使用
-    with open('./test.txt', 'wb') as f:
-        data = {'form_id': form_id, 'form_data_id': form_data_id, 'fid': fid, 'rid': rid}
-        pickle.dump(data, f)
 
 def test_form_rate_config_get(user1):
     """
@@ -216,6 +212,17 @@ def test_formdata_attach(user1):
     version = rate_revise_config.json()['data']['formDataRateConfig']['version']
     page_comment = user1.v1_formdata_attach(form_id,form_data_id,rid,version)
     assert page_comment.status_code == 200
+
+def test_form_quick_comments(user1):
+    """
+    获取用户对某个表单的最后一次评论
+    :param user1:
+    :param default_activity_form:
+    :return:
+    """
+    form_id,form_data_id,fid = get_txt_data()
+    last_comment = user1.v1_form_quick_comments(form_id)
+    assert last_comment.status_code == 204
 
 if __name__ == '__main__':
     pytest.main(['-vs', 'test_comment.py'])
