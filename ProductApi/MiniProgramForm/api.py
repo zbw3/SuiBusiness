@@ -1184,6 +1184,12 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method, json=data)
         return response
 
+    def v1_form_quick_comments(self, form_id, method='PUT'):
+        url = self.config.Url.v1_quick_comments.format(formId=form_id)
+        data = ["点对点21","非常棒，继续努力加油！","不错哦，继续努力！","加油，继续努力！","很棒，继续坚持！","完成得很好！","点赞，棒棒哒～","赞一个！","进步很大哦，继续努力，看好你！"]
+        response = self.request(url=url, method=method,json= data)
+        return response
+
     def v1_overt_form_list(self, page_no=1, method='GET'):
         """
         获取首页公开表单列表
@@ -1606,7 +1612,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    api = FormApi(fuid='1399529436212834304', print_results=True)  # 1056011177739419657   1072705609905737732
     # api.v1_group_forms('1414696509808533505')
     # api.v1_remove_admin('1414696509808533505','1056011177739419657')
     # api.v1_group_invite('1414696509808533505')

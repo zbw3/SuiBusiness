@@ -195,6 +195,7 @@ class Test:
         v3_like_comment_rate_remark = '/v3/form/{formId}/likeCommentRateRemark'
         v1_form_attach = '/v1/formData/attach/{formId}/{formDataId}'
         v1_rate_revise = '/v1/form/{formId}/rateAndReviseConfig'
+        v1_quick_comments = '/v1/form/{formId}/quickComments'
 
 
 
