@@ -9,7 +9,7 @@ import os
 import pytest
 
 from ProductApi.MiniProgramForm.api import FormApi
-from ProductApi.MiniProgramForm.form import CreateShoppingForm, CreateActivityForm
+from ProductApi.MiniProgramForm.form import CreateShoppingForm, CreateActivityForm,PostFormData
 from ProductApi.MiniProgramForm.form.form import Option
 from ProductApi.MiniProgramForm.form.poetry_and_future import POETRY_1, POETRY_2
 
@@ -53,6 +53,33 @@ def zhou_ying():
 def hu_fei():
     return FormApi(fuid=FormApi.USER.hu_fei)
 
+
+@pytest.fixture(scope='session')
+def default_formId_dataId_commentId():
+    """
+    创建默认表单、提交一条数据、增加一条评论并且返回对应的id
+    :return:
+    """
+    user1 =  FormApi(fuid=FormApi.USER.user1)
+    form = generate_default_form('Amy表单')
+    # 创建表单
+    form_response = user1.v1_form(form.data,return_form_id=True)
+    form_id = form_response.form_id
+
+    # 提交记录
+    post_form_data = PostFormData(user1, form_id).data
+    form_data_response = user1.v1_form_id_form_data(form_id, post_form_data, method=user1.POST)
+    assert form_data_response.status_code == 200, form_data_response.text
+    form_data_id = form_data_response.json()['data']['fid']
+
+    # 增加评论
+    comment_response = user1.v1_form_comment_post(form_id, form_data_id)
+    assert comment_response.status_code == 200
+    fid = comment_response.json()['data']['fid']
+    comment_response.form_id = form_id
+    comment_response.form_data_id = form_data_id
+    comment_response.fid = fid
+    return comment_response
 
 @pytest.fixture(scope='function')
 def default_activity_form():
