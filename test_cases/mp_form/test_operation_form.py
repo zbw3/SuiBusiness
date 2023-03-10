@@ -51,10 +51,17 @@ def test_templates_list(user1):
     for tab_id in TemplatesTabId:
         res = user1.v1_templates_lit(tab_id.value, method=user1.GET)
         assert res.status_code == 200, res.text
-
         assert res.data.get('data'), res.text
 
 
+def test_operation_words(user1):
+    """
+    获取文字运营位，展示在管理弹窗上
+    :param user1:
+    :return:
+    """
+    res = user1.v1_operation_words(method=user1.GET)
+    assert res.status_code == 200,res.text
 
 
 

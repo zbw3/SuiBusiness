@@ -69,6 +69,7 @@ class Test:
         v1_form_operation_official_account_form_id = '/v1/form_operation/official_account/{operationFormId}'
         v1_templates_lit = '/v1/templates/list'
         v1_templates = '/v1/templates'
+        v1_operation_words = '/v1/operation_words'   #查询文字运营位
 
         #系统配置相关的接口
         # v1_config = '/v1/config'  #已废弃
