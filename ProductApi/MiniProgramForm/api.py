@@ -1202,7 +1202,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, params=params, method=method)
         return response
 
-    def v1_name_used(self, form_id, date=None, method='GET'):
+    def v1_name_list_used(self, form_id, date=None, method='GET'):
         """
         获取表单预设名单中各名单的报名状态
         :param form_id: 表单id
@@ -1210,7 +1210,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :param method:
         :return:
         """
-        url = self.config.Url.v1_name_used.format(formId=form_id)
+        url = self.config.Url.v1_name_list_used.format(formId=form_id)
         params = {'date': date}
         response = self.request(url=url, params=params, method=method)
         return response
