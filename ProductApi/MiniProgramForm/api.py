@@ -469,6 +469,13 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
+    def v1_operation_words(self,method='GET'):
+        url = self.config.Url.v1_operation_words
+        response = self.request(url=url,method=method)
+        return response
+
+
+
     def v1_form_manager_invitation_code(self, form_id, method='GET'):
         """
         生成表单管理员邀请码
@@ -1617,7 +1624,7 @@ if __name__ == '__main__':
     # api.v1_remove_admin('1414696509808533505','1056011177739419657')
     # api.v1_group_invite('1414696509808533505')
     # api.v1_quit_group('1414696509808533505')
-    api.oss_request('1')
+    api.v1_operation_words()
     # api.v1_group('putong1','ORDINARY_GROUP')
     # api.v1_group_operate('1414701649106001921','DELETE')
     # api.v1_delete_group_member('1414696509808533505', '1056011177739419657')
