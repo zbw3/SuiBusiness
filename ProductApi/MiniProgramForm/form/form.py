@@ -211,8 +211,7 @@ class Catalog:
             overt: bool = True,
             used: bool = False,
             status: int = 1,
-            config={"NAME_LIST":{"active":False,"content":""},"NOT_ALLOW_REPEAT":{"active":False},"NAME_LIST_FILL_TYPE":{"active":True,"content":"RADIO_CHOOSE"},"AUTO_FILL":{"active":False}}
-    ):
+            config=None):
         self.type_ = type_
         self.must = must
         self.overt = overt
@@ -238,6 +237,7 @@ class Catalog:
             "type": self.type_.value,
             "catalogType": self.catalog_type.value,
             "status": self.status,
+            "config": self.config,
             **diff[self.catalog_type]
         }
 
@@ -506,9 +506,8 @@ class Form:
                 form_catalogs=[FormCatalog(title)]
             )
         )
-
     """添加预设名单"""
-    def add_name_list(self, title,config, must=False, overt=True):
+    def add_name_list(self, title, config, must=True, overt=False):
         self._add_catalog(
             Catalog(
                 type_=ContentType.WORD,

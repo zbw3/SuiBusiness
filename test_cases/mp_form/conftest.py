@@ -5,7 +5,7 @@
 # @Email  : mailmzb@qq.com
 # @Time   : 2020/7/27 14:55
 import os
-
+import json
 import pytest
 
 from ProductApi.MiniProgramForm.api import FormApi
@@ -61,7 +61,7 @@ def default_formId_dataId_commentId():
     :return:
     """
     user1 =  FormApi(fuid=FormApi.USER.user1)
-    form = generate_default_form('Amy表单')
+    form = generate_default_form('Amy表单',is_namelist=True)
     # 创建表单
     form_response = user1.v1_form(form.data,return_form_id=True)
     form_id = form_response.form_id
@@ -91,7 +91,7 @@ def default_shopping_form():
     return generate_default_form('果霸商城', is_shopping=True)
 
 
-def generate_default_form(title=None, is_shopping=False):
+def generate_default_form(title=None, is_shopping=False,is_namelist=False):
     """
     ver: 1.5.0
     update time: 2020/8/4
@@ -136,6 +136,11 @@ def generate_default_form(title=None, is_shopping=False):
         form.add_goods('葡萄', '10', '')
         form.add_goods('西瓜', '2', '')
         form.add_goods('草莓', '8', '')
+
+    if is_namelist:
+        title = '新增预设名单'
+        catalog_config = {"NAME_LIST":{"active":True,"content":{"value":[{"name":"徐雪霞","status":0},{"name":"秦卓珈","status":0},{"name":"韩一芳","status":0}],"originData":"徐雪霞、秦卓珈、韩一芳","nameLimit":1},"rows":3},"NOT_ALLOW_REPEAT":{"active":True},"NAME_LIST_FILL_TYPE":{"active":True,"content":"RADIO_CHOOSE"},"AUTO_FILL":{"active":False}}
+        form.add_name_list(title,catalog_config)
 
     # 添加填写项
     form.add_text_question('姓名')
