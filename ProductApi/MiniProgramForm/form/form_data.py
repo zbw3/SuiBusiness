@@ -95,6 +95,9 @@ class PostFormData:
 
         for item in catalogs.QUESTION.WORD:
             value = self.info.get(self._get_catalog_title(item), lambda: self.faker.sentence(nb_words=25))()
+            # 如果有预设名单，则填入预设名单的值
+            if 'NAME_LIST' in item['config']:
+                value = item['config']['NAME_LIST']['content']['value'][0]['name']
             data.append({'type': item['type'], 'cid': item['cid'], 'value': value})
 
 
