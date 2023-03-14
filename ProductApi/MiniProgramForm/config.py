@@ -198,6 +198,10 @@ class Test:
         v1_rate_revise = '/v1/form/{formId}/rateAndReviseConfig'
         v1_quick_comments = '/v1/form/{formId}/quickComments'
 
+        # 用户相关接口
+        v1_user_info = '/v1/user/info'  # 用户信息接口
+        v1_userInfo = '/v1/userInfo'  # 更新用户信息
+
 
 
 
