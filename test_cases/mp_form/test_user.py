@@ -26,7 +26,12 @@ def test_v1_userinfo(user1):
     :param user1:
     :return:
     """
-    res = user1.v1_userinfo(nickname='百威', avatar_url='https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKYvA15PvbH51SWh6BLgNm7swSGYtMxxicHVjm4PagjYtbGno3ljamv7jOTgicpKJDYS5mjyrAFb0wQ/132')
+    data = {'nickName': '百威', 'avatarUrl': 'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKYvA15PvbH51SWh6BLgNm7swSGYtMxxicHVjm4PagjYtbGno3ljamv7jOTgicpKJDYS5mjyrAFb0wQ/132'}
+    res = user1.v1_userinfo(nickname=data['nickName'], avatar_url='')
+    assert res.status_code == 204
+    res = user1.v1_userinfo(nickname='', avatar_url=data['avatarUrl'])
+    assert res.status_code == 204
+    res = user1.v1_userinfo(nickname=data['nickName'], avatar_url=data['avatarUrl'])
     assert res.status_code == 204
 
 
