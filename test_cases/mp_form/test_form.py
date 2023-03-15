@@ -46,8 +46,10 @@ def test_get_creation_forms(user1):
 
     params = {'pageNo': 1, 'pageSize': 20}
     res = user1.v1_creation_forms(params=params, method=user1.GET)
-    assert res.status_code == 200
     return res
+    assert res.status_code == 200
+
+
 
     """20230210徐雪霞备注：由于数据库分库，目前返回的分页条数和请求的分页数对不上"""
     # forms = res.data.get('data', {}).get('participationForms')
@@ -64,6 +66,7 @@ def test_get_participation_forms(user1):
     params = {'pageNo': 1, 'pageSize': 20}
     res = user1.v1_participation_forms(params=params, method=user1.GET)
     assert res.status_code == 200
+    return res
 
     forms = res.data.get('data', {}).get('participationForms')
     """20230210徐雪霞备注：由于数据库分库，目前返回的分页条数和请求的分页数对不上"""
