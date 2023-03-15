@@ -48,6 +48,7 @@ def test_get_creation_forms(user1):
     res = user1.v1_creation_forms(params=params, method=user1.GET)
     return res
     assert res.status_code == 200
+    return res
 
 
 
