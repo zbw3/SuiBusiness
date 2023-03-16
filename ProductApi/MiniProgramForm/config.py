@@ -210,7 +210,14 @@ class Test:
         # 用户相关接口
         v1_user_info = '/v1/user/info'  # 用户信息接口
         v1_userInfo = '/v1/userInfo'  # 更新用户信息
-
+        #导出
+        v1_pre_download_getDownloadVersion="/v1/pre_download/getDownloadVersion"
+        v1_export_form_excel = 'https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/excel'
+        v1_export_form_image_archive='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/image_archive'
+        v1_export_form_excel_image='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/excel_image'
+        v1_form_export_tasks='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/{form_id}/export_tasks'
+        user_privilege_getExportTimes='/user/privilege/getExportTimes'
+        v1_check_form_change='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/check/{form_id}/change'
 
 
 
