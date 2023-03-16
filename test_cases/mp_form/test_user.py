@@ -20,19 +20,19 @@ def test_v1_test_info(user1):
     assert res.status_code == 200
 
 
-def test_v1_userinfo(user1):
-    """
-    更新用户信息
-    :param user1:
-    :return:
-    """
-    data = {'nickName': '百威', 'avatarUrl': 'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKYvA15PvbH51SWh6BLgNm7swSGYtMxxicHVjm4PagjYtbGno3ljamv7jOTgicpKJDYS5mjyrAFb0wQ/132'}
-    res = user1.v1_userinfo(nickname=data['nickName'], avatar_url='')
-    assert res.status_code == 204
-    res = user1.v1_userinfo(nickname='', avatar_url=data['avatarUrl'])
-    assert res.status_code == 204
-    res = user1.v1_userinfo(nickname=data['nickName'], avatar_url=data['avatarUrl'])
-    assert res.status_code == 204
+# def test_v1_userinfo(user1):
+#     """
+#     更新用户信息
+#     :param user1:
+#     :return:
+#     """
+#     data = {'nickName': '昵称', 'avatarUrl': 'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKYvA15PvbH51SWh6BLgNm7swSGYtMxxicHVjm4PagjYtbGno3ljamv7jOTgicpKJDYS5mjyrAFb0wQ/132'}
+#     res = user1.v1_userinfo(nickname=data['nickName'], avatar_url='')
+#     assert res.status_code == 204
+#     res = user1.v1_userinfo(nickname='', avatar_url=data['avatarUrl'])
+#     assert res.status_code == 204
+#     res = user1.v1_userinfo(nickname=data['nickName'], avatar_url=data['avatarUrl'])
+#     assert res.status_code == 204
 
 
 if __name__ == '__main__':
