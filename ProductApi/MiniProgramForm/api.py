@@ -1601,39 +1601,53 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_quit_group.format(groupId=id)
         response = self.request(url=url, method=method)
         return response
-    def v1_export_formid_excel(self,formid,headers,data,method):
+    def v1_pre_download_getDownloadVersion(self,params,method):
+        """获取下载版本"""
+        url=self.config.Url.v1_pre_download_getDownloadVersion
+        response=self.request(url=url,params=params,method=method)
+        return response
+
+    def v1_export_form_excel(self,formid,headers,data,method):
         """
         导出excel数据
-        form_id:表单id
+        formid:表单id
         """
-        url="https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/"+formid+"/excel"
+        url=self.config.Url.v1_export_form_excel.format(form_id=formid)
         response=self.request(url=url,headers=headers,json=data,method=method)
         return response
-    def v1_export_formid_image_archive(self,formid,headers,data,method):
+    def v1_export_form_image_archive(self,formid,headers,data,method):
         """导出富媒体文件
-        form_id:表单id
+        formid:表单id
         """
-        url="https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/"+formid+"/image_archive"
+        url=self.config.Url.v1_export_form_image_archive.format(form_id=formid)
         response=self.request(url=url,headers=headers,json=data,method=method)
         return response
-    def v1_export_formid_excel_image(self,formid,headers,data,method):
+    def v1_export_form_excel_image(self,formid,headers,data,method):
         """导出带图的excel文件
-        form_id:表单id
+        formid:表单id
         """
-        url="https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/"+formid+"/excel_image"
+        url=self.config.Url.v1_export_form_excel_image.format(form_id=formid)
         response=self.request(url=url,headers=headers,json=data,method=method)
         return response
-    def v1_formid_export_tasks(self,formid,headers,params,method):
+    def v1_form_export_tasks(self,formid,headers,params,method):
         """
         获取导出文件url
-        form_id:表单id
+        formid:表单id
         """
-        url="https://cloudformdownload.feidee.cn/sui-form-download-api/v1/"+formid+"/export_tasks"
-
+        url=self.config.Url.v1_form_export_tasks.format(form_id=formid)
         response=self.request(url=url,headers=headers,params=params,method=method)
         return response
 
-
+    def user_privilege_getExportTimes(self,params,method):
+        """获取导出次数"""
+        url=self.config.Url.user_privilege_getExportTimes
+        response=self.request(url=url,params=params,method=method)
+        return response
+    def v1_check_form_change(self,formid,headers,method):
+        """检查表单更改"""
+        url=self.config.Url.v1_check_form_change.format(form_id=formid)
+        response=self.request(url=url,headers=headers,method=method)
+        return response
 
     def v1_wx_advertise(self,method='GET'):
         """
