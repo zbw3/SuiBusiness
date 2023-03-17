@@ -1601,11 +1601,18 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         url = self.config.Url.v1_quit_group.format(groupId=id)
         response = self.request(url=url, method=method)
         return response
+    #导出
     def v1_pre_download_getDownloadVersion(self,params,method):
         """获取下载版本"""
         url=self.config.Url.v1_pre_download_getDownloadVersion
         response=self.request(url=url,params=params,method=method)
         return response
+    def user_privilege_hasExportTimes(self,params,method):
+        """查看用户是否有导出次数"""
+        url=self.config.Url.user_privilege_hasExportTimes
+        response=self.request(url=url,params=params,method=method)
+        return response
+
 
     def v1_export_form_excel(self,formid,headers,data,method):
         """
@@ -1614,6 +1621,12 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         """
         url=self.config.Url.v1_export_form_excel.format(form_id=formid)
         response=self.request(url=url,headers=headers,json=data,method=method)
+        return response
+
+    def v1_form_cancel_export_task(self,formid,taskid,headers,method):
+        """取消导出任务"""
+        url=self.config.Url.v1_form_cancel_export_task.format(form_id=formid,task_id=taskid)
+        response=self.request(url=url,headers=headers,method=method)
         return response
     def v1_export_form_image_archive(self,formid,headers,data,method):
         """导出富媒体文件

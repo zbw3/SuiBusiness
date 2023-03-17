@@ -212,7 +212,9 @@ class Test:
         v1_userInfo = '/v1/userInfo'  # 更新用户信息
         #导出
         v1_pre_download_getDownloadVersion="/v1/pre_download/getDownloadVersion"
+        user_privilege_hasExportTimes = 'user/privilege/hasExportTimes'
         v1_export_form_excel = 'https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/excel'
+        v1_form_cancel_export_task='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/{form_id}/cancel/export_task/{task_id}'
         v1_export_form_image_archive='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/image_archive'
         v1_export_form_excel_image='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/export/{form_id}/excel_image'
         v1_form_export_tasks='https://cloudformdownload.feidee.cn/sui-form-download-api/v1/{form_id}/export_tasks'
