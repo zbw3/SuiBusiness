@@ -1471,6 +1471,45 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, params=params, method=method)
         return response
 
+    def v1_put_group_member(self, group_id, fuid, nick, method='PUT'):
+        """
+        修改群成员信息
+        :param group_id: 群组id
+        :param fuid: fuid
+        :param nick:群昵称
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_member.format(groupId=group_id)
+        data = {"targetFuid": fuid, "groupNickname": nick}
+        response = self.request(url=url, json=data, method=method)
+        return response
+
+    def v1_group_unsubscribe_list(self, group_id, page_no=1, page_size=20, method='GET'):
+        """
+        未关注公众号群成员列表
+        :param group_id:群组id
+        :param page_no:
+        :param page_size:
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_unsubscribe_list.format(groupId=group_id)
+        params = {"pageNo": page_no, 'pageSize': page_size}
+        response = self.request(url=url, params=params, method=method)
+        return response
+
+    def v1_group_member_info(self, group_id, method='GET'):
+        """
+        获取群成员基本信息
+        :param group_id: 群组id
+        :param method:
+        :return:
+        """
+        url = self.config.Url.v1_group_member_info.format(groupId=group_id)
+        response = self.request(url=url, method=method)
+        return response
+
     def v1_group_operate_put(self, id, name, type, method='PUT'):
         """
         修改群组
@@ -1686,7 +1725,8 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 
 if __name__ == '__main__':
     os.environ['env'] = 'test'
-    api = FormApi(fuid='1399529436212834304', print_results=True)  # 1056011177739419657   1072705609905737732
+    api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
+    api.v1_group_member_info('1427081156110520321')
     # api.v1_group_forms('1414696509808533505')
     # api.v1_remove_admin('1414696509808533505','1056011177739419657')
     # api.v1_group_invite('1414696509808533505')
