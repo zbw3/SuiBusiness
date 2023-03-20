@@ -294,6 +294,7 @@ class Form:
             }
         }
 
+
     @property
     def data(self):
         if self.TYPE == FormType.SHOPPING:
@@ -554,6 +555,8 @@ class Form:
         :return:
         """
         self.CONFIG['formDataPermission'] = permission
+
+
 
     def clear_contents(self):
         """清空表单内容项 文字 大图 小图"""
