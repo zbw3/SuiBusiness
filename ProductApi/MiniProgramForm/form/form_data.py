@@ -38,7 +38,7 @@ class CatalogsData:
 
 
 class PostFormData:
-    RandomImage = RandomImageUrl()
+    # RandomImage = RandomImageUrl()
 
     def __init__(self, form_api: FormApi, form_id):
         self.form_detail_data = form_api.v1_form_form_id(form_id).data['data']
@@ -120,9 +120,9 @@ class PostFormData:
         #     data.append({'type': item['type'], 'cid': item['cid'],
         #                  'value': [self.RandomImage.small for _ in range(random.randint(0, 1))]})
 
-        # for item in catalogs.QUESTION.IMAGE:
-        #     data.append({'type': item['type'], 'cid': item['cid'],
-        #                  'value': self.RandomImage.img})
+        for item in catalogs.QUESTION.IMAGE:
+            data.append({'type': item['type'], 'cid': item['cid'],
+                         'value': ['https://qun-oss1.feidee.cn/static/4903898c943a4a36856af510ce855a29.png', 'https://qun-oss1.feidee.cn/static/9e07984a92754a1e8dfe65defb5d427f.png', 'https://qun-oss1.feidee.cn/static/08ed813946df4cdaa396a726c44b8222.jpg', 'https://qun-oss1.feidee.cn/static/08ed813946df4cdaa396a726c44b8222.jpg', 'https://qun-oss1.feidee.cn/static/ace4bdc4a68d43f780baa68ce8b852e5.png']})
 
         for item in catalogs.QUESTION.RADIO:
             selected_option_cid = random.choice([form_catalog['cid'] for form_catalog in item['formCatalogs'] if
