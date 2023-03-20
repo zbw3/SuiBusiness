@@ -94,6 +94,11 @@ class Test:
         v1_group_invite = '/v1/group/invite_token/{groupId}'
         v1_join_group = '/v1/group/join/{groupId}'
         v1_quit_group = '/v1/group/quit/{groupId}'
+        # v1_group_member_put = '/v1/group_member/{groupId}'
+        v1_group_unsubscribe_list = '/v1/group/unsubscribe_list/{groupId}'
+        v1_group_member_info = '/v1/group_member/{groupId}/member_info'
+
+
 
 
         v1_creation_forms = '/v1/creation_forms'
