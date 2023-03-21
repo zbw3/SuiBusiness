@@ -1351,16 +1351,17 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, json=data, method=method)
         return response
 
-    def v1_recycle_forms(self, page_no=1, page_size=20, method='GET'):
+    def v1_recycle_forms(self, group_id, page_no, page_size, method='GET'):
         """
         回收站列表
         :param page_no:
         :param page_size:
+        :param group_id:判断是否为群组回收站
         :param method:
         :return:
         """
-        url = self.config.Url.v1_recycle_forms
-        params = {'pageNo': page_no, 'pageSize': page_size}
+        url = self.config.Url.v1_recycle_forms.format(groupId=group_id)
+        params = {'groupId': group_id, 'pageNo': page_no, 'pageSize': page_size}
         response = self.request(url=url, params=params, method=method)
         return response
 
