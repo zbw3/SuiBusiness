@@ -213,11 +213,10 @@ def get_invitation_code(releaser: FormApi, form: Form):
     response = releaser.v1_form_manager_invitation_code(form_id, method=releaser.GET)
     assert response.status_code == 200, response.text
     assert Env().is_test, f'仅支持在测试环境中测试，当前环境为：${Env().cur_env.value}'
-    code_str: str = response.data.get('data', {}).get('codeStr')
+    code_str: str = response.data.get('data', {}).get('code')
     assert code_str
-    fid, code = code_str.split(',')
-    invitation = namedtuple('invitation', ['response', 'fid', 'code', 'form_id'])
-    return invitation(response, fid, code, form_id)
+    invitation = namedtuple('invitation', ['code', 'form_id'])
+    return invitation(code_str, form_id)
 
 
 def is_user_in_managers_list(form_id, releaser: FormApi, user: FormApi):
