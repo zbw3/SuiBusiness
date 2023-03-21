@@ -735,17 +735,16 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, method=method)
         return response
 
-    def v1_form_inform(self, form_id, config, method='PUT'):
+    def v1_form_inform_input(self, form_id, addition: bool, modify: bool, cancel: bool, comment: bool, method='PUT'):
         """
         配置表单公众号通知，仅发布者和管理员可以配置
-        :param form_id:
-        :param config:
+        :param form_id:表单id
         :param method:
         :return:
         """
         url = self.config.Url.v1_from_inform.format(formId=form_id)
-        # params = {'config': config}
-        response = self.request(url=url, method=method, json=config)
+        data = {"addition": addition, "modify": modify, "cancel": cancel, "comment": comment}
+        response = self.request(url=url, method=method, json=data)
         return response
 
     def v1_form_inform_get(self, form_id, method='GET'):
@@ -756,10 +755,11 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_from_inform.format(formId=form_id)
-        response = self.request(url=url, method='GET')
+        response = self.request(url=url, method=method)
         return response
 
-    def v1_form_remind(self, form_id, config, method='PUT'):
+    def v1_form_remind(self, form_id, active, timeOfDay=800, monday=1, tuesday=1, wednesday=1, thursday=1, friday=1,
+                       saturday=1, sunday=1, method='PUT'):
         """
         配置表单公众号通知，仅发布者和管理员可以配置
         :param form_id:
@@ -768,8 +768,9 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_form_id_remind.format(formId=form_id)
-        # params = {'config': config}
-        response = self.request(url=url, method=method, json=config)
+        data = {"active": active, "timeOfDay": timeOfDay, "monday": monday, "tuesday": tuesday, "wednesday":
+            wednesday, "thursday": thursday, "friday": friday, "saturday": saturday, "sunday": sunday}
+        response = self.request(url=url, method=method, json=data)
         return response
 
     def v1_form_remind_get(self, form_id, method='GET'):
@@ -780,7 +781,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         :return:
         """
         url = self.config.Url.v1_form_id_remind.format(formId=form_id)
-        response = self.request(url=url, method='GET')
+        response = self.request(url=url, method=method)
         return response
 
     def v3_form_id_patch_status(self, form_id, date=None, method='GET'):
@@ -1727,7 +1728,7 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
 if __name__ == '__main__':
     os.environ['env'] = 'test'
     api = FormApi(fuid='1072705609905737732', print_results=True)  # 1056011177739419657   1072705609905737732
-    api.v1_group_member_info('1427081156110520321')
+    api.v1_form_inform_input('1427017994717614081', True, True, True, True)
     # api.v1_group_forms('1414696509808533505')
     # api.v1_remove_admin('1414696509808533505','1056011177739419657')
     # api.v1_group_invite('1414696509808533505')
