@@ -1366,26 +1366,30 @@ class FormApi(ApiBase, metaclass=SingletonMetaClass):
         response = self.request(url=url, params=params, method=method)
         return response
 
-    def v1_recycle_form(self, form_id, method='POST'):
+    def v1_recycle_form(self, group_id, form_id, method='POST'):
         """
         删除回收站/恢复回收站
+        :param group_id:检验是否为群组回收站
         :param form_id:
         :param method:post/put
         :return:
         """
-        url = self.config.Url.v1_recycle_form
+        url = self.config.Url.v1_recycle_form.format(groupId=group_id)
+        params = {'groupId': group_id}
         data = {"formIds": [form_id]}
-        response = self.request(url=url, json=data, method=method)
+        response = self.request(url=url, params=params, json=data, method=method)
         return response
 
-    def v1_recycle_form_all(self, method='PUT'):
+    def v1_recycle_form_all(self, group_id, method='PUT'):
         """
         回收站一键恢复/回收站一键删除
+        :param group_id:检验是否为群组回收站
         :param method:put/delete
         :return:
         """
-        url = self.config.Url.v1_recycle_form_all
-        response = self.request(url=url, method=method)
+        url = self.config.Url.v1_recycle_form_all.format(groupId=group_id)
+        params = {'groupId': group_id}
+        response = self.request(url=url, params=params, method=method)
         return response
 
     def v1_delete_form_data_dete(self, form_id, start, end, method='DELETE'):

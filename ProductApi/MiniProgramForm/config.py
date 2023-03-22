@@ -182,6 +182,7 @@ class Test:
         v1_storage_space_regular_tips_ack = '/v1/storage_space/regular_tips_ack'  # 已废弃
         v1_storage_space_status = '/v1/storage_space/status'  #已废弃
 
+        # 数据清理
         v1_form_data_delete = '/v1/delete/{formId}/form_data'
         v1_recycle_forms = '/v1/recycle/forms'
         v1_recycle_form = '/v1/recycle/form'
